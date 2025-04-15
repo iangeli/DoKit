@@ -1,13 +1,10 @@
 PODS:
-  - DoraemonKit/Core (3.1.4)
-  - DoraemonKit/WithGPS (3.1.4):
-    - DoraemonKit/Core
-  - DoraemonKit/WithLoad (3.1.4):
+  - DoraemonKit/Core (3.1.5)
+  - DoraemonKit/WithLoad (3.1.5):
     - DoraemonKit/Core
 
 DEPENDENCIES:
   - DoraemonKit/Core (from `..`)
-  - DoraemonKit/WithGPS (from `..`)
   - DoraemonKit/WithLoad (from `..`)
 
 EXTERNAL SOURCES:
@@ -15,8 +12,8 @@ EXTERNAL SOURCES:
     :path: ".."
 
 SPEC CHECKSUMS:
-  DoraemonKit: 240aaeb82df93be9d8d8b8a905ab4b133ef2d358
+  DoraemonKit: 70d2c62735a4341b8c786272b445e323aef2681a
 
-PODFILE CHECKSUM: f758db3362505dde3cc9e95bd326e2ae941f6072
+PODFILE CHECKSUM: d2cd26940f618edccb694e17dc9aa9afa53dbefb
 
 COCOAPODS: 1.16.2

@@ -140,8 +140,10 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonCPUPlugin];
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonMemoryPlugin];
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonANRPlugin];
-    [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonUIProfilePlugin];
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonTimeProfilePlugin];
+#if DoraemonWithUIProfile
+    [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonUIProfilePlugin];
+#endif
 #if DoraemonWithLoad
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonMethodUseTimePlugin];
 #endif
@@ -150,8 +152,10 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonColorPickPlugin];
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonViewCheckPlugin];
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonViewAlignPlugin];
-    [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonViewMetricsPlugin];
     [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonHierarchyPlugin];
+#if DoraemonWithViewMetrics
+    [self addPluginWithPluginType:DoraemonManagerPluginType_DoraemonViewMetricsPlugin];
+#endif
 }
 
 - (void)initEntry:(CGPoint) startingPosition{

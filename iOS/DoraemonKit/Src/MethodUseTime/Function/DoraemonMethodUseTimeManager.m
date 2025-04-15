@@ -7,7 +7,7 @@
 
 #import "DoraemonMethodUseTimeManager.h"
 #import "DoraemonCacheManager.h"
-#import <DoraemonLoadAnalyze/DoraemonLoadAnalyze.h>
+#import "DoraemonLoadAnalyze.h"
 #import "DoraemonDefine.h"
 
 @implementation DoraemonMethodUseTimeManager

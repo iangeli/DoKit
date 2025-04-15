@@ -7,7 +7,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DoraemonKit'
-  s.version          = '3.1.4'
+  s.version          = '3.1.5'
   s.summary          = 'iOS tools'
 
 # This description is used to generate tags and improve search results.
@@ -39,7 +39,17 @@ iOS tools
     }
   end
 
-  s.subspec 'WithGPS' do |ss| 
+  s.subspec 'WithLoad' do |ss| 
+    ss.source_files = 'iOS/DoraemonKit/Src/MethodUseTime/**/*{.h,.m,.mm}'
+    ss.pod_target_xcconfig = {
+      'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) DoraemonWithLoad'
+    }
+    ss.dependency 'DoraemonKit/Core'
+  end
+
+  # below has swizzle
+
+  s.subspec 'WithGPS' do |ss|
     ss.source_files = 'iOS/DoraemonKit/Src/GPS/**/*{.h,.m}'
     ss.pod_target_xcconfig = {
       'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) DoraemonWithGPS'
@@ -47,15 +57,20 @@ iOS tools
     ss.dependency 'DoraemonKit/Core'
   end
 
-  s.subspec 'WithLoad' do |ss| 
-    ss.source_files = 'iOS/DoraemonKit/Src/MethodUseTime/**/*{.h,.m}'
+  s.subspec 'WithUIProfile' do |ss|
+    ss.source_files = 'iOS/DoraemonKit/Src/UIProfile/**/*{.h,.m}'
     ss.pod_target_xcconfig = {
-      'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) DoraemonWithLoad'
+      'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) DoraemonWithUIProfile'
     }
     ss.dependency 'DoraemonKit/Core'
-    # https://guides.cocoapods.org/syntax/podspec.html#vendored_frameworks
-    # TODO(ChasonTang): Should change to vendored_framework?
-    ss.vendored_frameworks = 'iOS/DoraemonKit/Framework/*.framework'
+  end
+
+  s.subspec 'WithViewMetrics' do |ss|
+    ss.source_files = 'iOS/DoraemonKit/Src/ViewMetrics/**/*{.h,.m}'
+    ss.pod_target_xcconfig = {
+      'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) DoraemonWithViewMetrics'
+    }
+    ss.dependency 'DoraemonKit/Core'
   end
 
 end
