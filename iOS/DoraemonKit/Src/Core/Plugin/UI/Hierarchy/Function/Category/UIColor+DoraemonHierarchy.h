@@ -10,13 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIColor (DoraemonHierarchy)
-
 - (NSString *)doraemon_HexString;
 
 - (NSString *)doraemon_description;
 
 - (NSString *_Nullable)doraemon_systemColorName;
-
 @end
 
 NS_ASSUME_NONNULL_END

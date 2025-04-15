@@ -13,13 +13,11 @@
 static NSString * const kDoraemonDemoUrlProtocol2Key = @"doraemon_demo_url_protocol_2_key";
 
 @interface DoraemonDemoURLProtocol2()
-
 @property (nonatomic, strong) NSURLConnection *connection;
 
 @end
 
 @implementation DoraemonDemoURLProtocol2
-
 + (BOOL)canInitWithTask:(NSURLSessionTask *)task {
     NSURLRequest *request = task.currentRequest;
     NSLog(@"22222 == canInitWithTask");

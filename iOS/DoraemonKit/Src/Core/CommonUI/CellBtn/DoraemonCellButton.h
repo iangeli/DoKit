@@ -8,13 +8,10 @@
 #import <UIKit/UIKit.h>
 
 @protocol DoraemonCellButtonDelegate<NSObject>
-
 - (void)cellBtnClick:(id)sender;
-
 @end
 
 @interface DoraemonCellButton : UIView
-
 @property (nonatomic, weak) id<DoraemonCellButtonDelegate> delegate;
 
 - (void)renderUIWithTitle:(NSString *)title;
@@ -24,5 +21,4 @@
 - (void)needTopLine;
 
 - (void)needDownLine;
-
 @end

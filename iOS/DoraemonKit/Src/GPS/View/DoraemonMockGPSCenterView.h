@@ -7,12 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface DoraemonMockGPSCenterView : UIView
-
 - (void)renderUIWithGPS:(NSString *)gps;
 
 - (void)hiddenGPSInfo:(BOOL)hidden;
-
 @end
 

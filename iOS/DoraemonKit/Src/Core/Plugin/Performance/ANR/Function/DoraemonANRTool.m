@@ -9,13 +9,12 @@
 #import "DoraemonANRTool.h"
 
 @implementation DoraemonANRTool
-
 + (void)saveANRInfo:(NSDictionary *)info {
     if ([info isKindOfClass:[NSDictionary class]] && (info.count > 0)) {
         NSFileManager *manager = [NSFileManager defaultManager];
         NSString *anrDirectory = [self anrDirectory];
         if (anrDirectory && [manager fileExistsAtPath:anrDirectory]) {
-            // 获取 ANR 保存的路径
+            
             NSString *anrPath = [anrDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"ANR %@.plist", info[@"title"]]];
             [info writeToFile:anrPath atomically:YES];
         }
@@ -33,5 +32,4 @@
     
     return directory;
 }
-
 @end

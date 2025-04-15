@@ -9,5 +9,4 @@
 #import "DoraemonXAxis.h"
 
 @implementation DoraemonXAxis
-
 @end

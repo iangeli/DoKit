@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonAppSettingPlugin
-
 - (void)pluginDidLoad {
     [DoraemonUtil openAppSetting];
     [[DoraemonHomeWindow shareInstance] hide];
 }
-
 @end

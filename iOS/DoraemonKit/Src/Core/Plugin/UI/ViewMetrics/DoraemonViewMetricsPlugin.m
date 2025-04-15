@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonViewMetricsPlugin
-
 - (void)pluginDidLoad{
     DoraemonMetricsViewController *vc = [[DoraemonMetricsViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

@@ -9,13 +9,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface DoraemonOscillogramWindowManager : NSObject
-
 + (DoraemonOscillogramWindowManager *)shareInstance;
 
 - (void)resetLayout;
-
 @end
 
 NS_ASSUME_NONNULL_END

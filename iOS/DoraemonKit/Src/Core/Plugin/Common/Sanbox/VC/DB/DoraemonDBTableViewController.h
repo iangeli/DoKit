@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonDBTableViewController : DoraemonBaseViewController
-
 @end
 
 NS_ASSUME_NONNULL_END

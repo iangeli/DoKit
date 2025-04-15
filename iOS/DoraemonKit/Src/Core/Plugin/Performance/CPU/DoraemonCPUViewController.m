@@ -8,25 +8,21 @@
 #import "DoraemonCPUViewController.h"
 #import "DoraemonCacheManager.h"
 #import "DoraemonCPUOscillogramWindow.h"
-#import "Doraemoni18NUtil.h"
 #import "DoraemonCPUOscillogramViewController.h"
 #import "DoraemonCellSwitch.h"
 #import "DoraemonDefine.h"
 
 @interface DoraemonCPUViewController ()<DoraemonSwitchViewDelegate, DoraemonOscillogramWindowDelegate>
-
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
-
 @end
 
 @implementation DoraemonCPUViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"CPU检测");
+    self.title = @"CPU monitor";
     
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"CPU检测开关") switchOn:[[DoraemonCacheManager sharedInstance] cpuSwitch]];
+    [_switchView renderUIWithTitle:@"CPU monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] cpuSwitch]];
     [_switchView needTopLine];
     [_switchView needDownLine];
     _switchView.delegate = self;
@@ -50,7 +46,6 @@
 
 #pragma mark -- DoraemonOscillogramWindowDelegate
 - (void)doraemonOscillogramWindowClosed {
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"CPU检测开关") switchOn:[[DoraemonCacheManager sharedInstance] cpuSwitch]];
+    [_switchView renderUIWithTitle:@"CPU monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] cpuSwitch]];
 }
-
 @end

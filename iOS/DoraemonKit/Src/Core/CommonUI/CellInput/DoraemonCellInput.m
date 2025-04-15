@@ -9,15 +9,12 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonCellInput()
-
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *topLine;
 @property (nonatomic, strong) UIView *downLine;
-
 @end
 
 @implementation DoraemonCellInput
-
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -59,5 +56,4 @@
     _downLine.hidden = NO;
     _downLine.frame = CGRectMake(0, self.doraemon_height-0.5, self.doraemon_width, 0.5);
 }
-
 @end

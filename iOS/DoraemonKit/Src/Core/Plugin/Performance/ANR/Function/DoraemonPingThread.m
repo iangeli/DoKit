@@ -11,43 +11,22 @@
 #import "DoraemonBacktraceLogger.h"
 
 @interface DoraemonPingThread()
-
-/**
- *  应用是否在活跃状态
- */
 @property (nonatomic, assign) BOOL isApplicationInActive;
 
-/**
- *  控制ping主线程的信号量
- */
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
 
-/**
- *  卡顿阈值
- */
 @property (nonatomic, assign) double threshold;
 
-/**
- *  卡顿回调
- */
 @property (nonatomic, copy) DoraemonANRTrackerBlock handler;
 
-/**
- *  主线程是否阻塞
- */
 @property (nonatomic, assign,getter=isMainThreadBlock) BOOL mainThreadBlock;
-/**
- *  判断是否需要上报
- */
+
 @property (nonatomic, copy) NSString *reportInfo;
-/**
- *  每一次ping开始的时间,上报延迟时间统计
- */
+
 @property (nonatomic, assign) double startTimeValue;
 @end
 
 @implementation DoraemonPingThread
-
 - (instancetype)initWithThreshold:(double)threshold
                           handler:(DoraemonANRTrackerBlock)handler {
     self = [super init];
@@ -69,7 +48,7 @@
 }
 
 - (void)main {
-    //判断是否需要上报
+    
     __weak typeof(self) weakSelf = self;
     void (^ verifyReport)(void) = ^() {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -79,7 +58,7 @@
                 double duration = (responseTimeValue - strongSelf.startTimeValue)*1000;
                 strongSelf.handler(@{
                                      @"title": [DoraemonUtil dateFormatNow].length > 0 ? [DoraemonUtil dateFormatNow] : @"",
-                                     @"duration": [NSString stringWithFormat:@"%.0f",duration],//单位ms
+                                     @"duration": [NSString stringWithFormat:@"%.0f",duration],
                                      @"content": strongSelf.reportInfo
                                      });
             }
@@ -103,7 +82,7 @@
             }
             dispatch_semaphore_wait(self.semaphore, dispatch_time(DISPATCH_TIME_NOW, 5.0 * NSEC_PER_SEC));
             {
-                //卡顿超时情况;
+                
                 verifyReport();
             }
         } else {
@@ -120,5 +99,4 @@
 - (void)applicationDidEnterBackground {
     _isApplicationInActive = NO;
 }
-
 @end

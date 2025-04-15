@@ -14,15 +14,12 @@
 #define kTextHeight         30
 
 @interface DoraemonUIProfileWindow ()
-
 @property (nonatomic, strong) UILabel *lbText;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, assign) CGRect storedFrame;
-
 @end
 
 @implementation DoraemonUIProfileWindow
-
 + (instancetype)sharedInstance
 {
     static DoraemonUIProfileWindow *sharedInstance = nil;
@@ -38,16 +35,12 @@
 {
     self = [super init];
     if (self) {
-        #if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-            if (@available(iOS 13.0, *)) {
-                for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-                    if (windowScene.activationState == UISceneActivationStateForegroundActive){
-                        self.windowScene = windowScene;
-                        break;
-                    }
-                }
+        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
+            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+                self.windowScene = windowScene;
+                break;
             }
-        #endif
+        }
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderWidth = 2;
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -81,11 +74,8 @@
 }
 
 - (void)pan:(UIPanGestureRecognizer *)sender{
-    //1、获得拖动位移
     CGPoint offsetPoint = [sender translationInView:sender.view];
-    //2、清空拖动位移
     [sender setTranslation:CGPointZero inView:sender.view];
-    //3、重新设置控件位置
     UIView *panView = sender.view;
     CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
     CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
@@ -141,5 +131,4 @@
     }
     return _textView;
 }
-
 @end

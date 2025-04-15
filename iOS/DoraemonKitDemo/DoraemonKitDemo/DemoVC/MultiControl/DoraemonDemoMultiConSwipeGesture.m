@@ -17,7 +17,6 @@
 @end
 
 @implementation DoraemonDemoMultiConSwipeGesture
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"滑动手势");

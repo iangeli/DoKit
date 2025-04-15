@@ -12,11 +12,9 @@
 #import <sqlite3.h>
 
 @interface DoraemonDemoSanboxViewController ()
-
 @end
 
 @implementation DoraemonDemoSanboxViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"沙盒测试Demo");

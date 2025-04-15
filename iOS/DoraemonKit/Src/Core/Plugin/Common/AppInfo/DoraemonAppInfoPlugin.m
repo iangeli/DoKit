@@ -10,10 +10,8 @@
 #import "DoraemonAppInfoViewController.h"
 
 @implementation DoraemonAppInfoPlugin
-
 - (void)pluginDidLoad{
     DoraemonAppInfoViewController *vc = [[DoraemonAppInfoViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

@@ -8,5 +8,4 @@
 #import "DoraemonBaseViewController.h"
 
 @interface DoraemonDeleteLocalDataViewController : DoraemonBaseViewController
-
 @end

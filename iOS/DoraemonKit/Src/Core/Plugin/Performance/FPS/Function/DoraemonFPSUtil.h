@@ -12,11 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^DoraemonFPSBlock)(NSInteger fps);
 
 @interface DoraemonFPSUtil : NSObject
-
 - (void)start;
 - (void)end;
 - (void)addFPSBlock:(DoraemonFPSBlock)block;
-
 @end
 
 NS_ASSUME_NONNULL_END

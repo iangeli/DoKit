@@ -9,7 +9,6 @@
 #import "DoraemonKitDemoi18Util.h"
 
 @implementation DoraemonKitDemoi18Util
-
 + (NSString *)localizedString:(NSString *)key {
     
     NSString *language = [[NSLocale preferredLanguages] firstObject];

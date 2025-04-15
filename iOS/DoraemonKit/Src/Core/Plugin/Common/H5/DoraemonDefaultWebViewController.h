@@ -10,9 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonDefaultWebViewController : DoraemonBaseViewController
-
 @property (nonatomic, copy) NSString *h5Url;
-
 @end
 
 NS_ASSUME_NONNULL_END

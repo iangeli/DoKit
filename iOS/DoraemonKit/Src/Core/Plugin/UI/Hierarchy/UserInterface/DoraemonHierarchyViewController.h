@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonHierarchyViewController : UIViewController
-
 @end
 
 NS_ASSUME_NONNULL_END

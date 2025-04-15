@@ -10,5 +10,4 @@
 #import <DoraemonKit/DoraemonStartPluginProtocol.h>
 
 @interface StartPlugin : NSObject<DoraemonStartPluginProtocol>
-
 @end

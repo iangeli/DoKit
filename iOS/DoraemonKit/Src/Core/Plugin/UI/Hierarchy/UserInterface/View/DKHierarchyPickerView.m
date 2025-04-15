@@ -4,15 +4,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DKHierarchyPickerView ()
-
 - (nullable NSArray<UIView *> *)viewForSelectionAtPoint:(CGPoint)tapPointInWindow;
-
 @end
 
 NS_ASSUME_NONNULL_END
 
 @implementation DKHierarchyPickerView
-
 #pragma mark - Over write
 
 - (void)viewDidUpdateOffset:(UIPanGestureRecognizer *)sender offset:(CGPoint)offsetPoint {
@@ -66,5 +63,4 @@ NS_ASSUME_NONNULL_END
     
     return subviewsAtPoint;
 }
-
 @end

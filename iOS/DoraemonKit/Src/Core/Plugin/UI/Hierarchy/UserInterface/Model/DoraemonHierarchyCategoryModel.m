@@ -8,7 +8,6 @@
 #import "DoraemonHierarchyCategoryModel.h"
 
 @implementation DoraemonHierarchyCategoryModel
-
 - (instancetype)initWithTitle:(NSString *)title items:(NSArray <DoraemonHierarchyCellModel *>*)items {
     if (self = [super init]) {
         _title = title;
@@ -16,5 +15,4 @@
     }
     return self;
 }
-
 @end

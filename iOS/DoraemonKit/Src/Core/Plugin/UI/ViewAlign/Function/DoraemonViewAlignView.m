@@ -14,22 +14,17 @@
 static CGFloat const kViewCheckSize = 62;
 
 @interface DoraemonViewAlignView()
-
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIView *horizontalLine;//水平线
-@property (nonatomic, strong) UIView *verticalLine;//垂直线
+@property (nonatomic, strong) UIView *horizontalLine;
+@property (nonatomic, strong) UIView *verticalLine;
 @property (nonatomic, strong) UILabel *leftLabel;
 @property (nonatomic, strong) UILabel *topLabel;
 @property (nonatomic, strong) UILabel *rightLabel;
 @property (nonatomic, strong) UILabel *bottomLabel;
 @property (nonatomic, strong) DoraemonVisualInfoWindow *infoWindow; 
-
 @end
 
-
-
 @implementation DoraemonViewAlignView
-
 -(instancetype)init{
     self = [super init];
     if (self) {
@@ -37,8 +32,7 @@ static CGFloat const kViewCheckSize = 62;
         self.backgroundColor = [UIColor clearColor];
         self.layer.zPosition = FLT_MAX;
         //self.userInteractionEnabled = NO;
-        
-        
+
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(DoraemonScreenWidth/2-kViewCheckSize/2, DoraemonScreenHeight/2-kViewCheckSize/2, kViewCheckSize, kViewCheckSize)];
         imageView.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_visual"];
         [self addSubview:imageView];
@@ -97,19 +91,15 @@ static CGFloat const kViewCheckSize = 62;
             infoWindowFrame = CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - kDoraemonSizeFrom750_Landscape(100) - kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - 2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(100));
         } 
         _infoWindow = [[DoraemonVisualInfoWindow alloc] initWithFrame:infoWindowFrame];
-        
-        
+
          [self configInfoLblText];
     }
     return self;
 }
 
 - (void)pan:(UIPanGestureRecognizer *)sender{
-    //1、获得拖动位移
     CGPoint offsetPoint = [sender translationInView:sender.view];
-    //2、清空拖动位移
     [sender setTranslation:CGPointZero inView:sender.view];
-    //3、重新设置控件位置
     UIView *panView = sender.view;
     CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
     CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
@@ -147,9 +137,8 @@ static CGFloat const kViewCheckSize = 62;
 }
 
 - (void)configInfoLblText {
-    _infoWindow.infoText = [NSString stringWithFormat:DoraemonLocalizedString(@"位置：左%@  右%@  上%@  下%@"), _leftLabel.text, _rightLabel.text, _topLabel.text, _bottomLabel.text];
+    _infoWindow.infoText = [NSString stringWithFormat:@"Position: left:%@  right:%@  top:%@  bottom:%@", _leftLabel.text, _rightLabel.text, _topLabel.text, _bottomLabel.text];
 }
- 
 
 - (void)show {
     _infoWindow.hidden = NO;
@@ -160,5 +149,4 @@ static CGFloat const kViewCheckSize = 62;
     _infoWindow.hidden = YES;
     self.hidden = YES;
 }
-
 @end

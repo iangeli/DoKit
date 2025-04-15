@@ -9,7 +9,6 @@
 #import "DoraemonChartDataItem.h"
 
 @implementation DoraemonChartDataItem
-
 - (instancetype)initWithValue:(double)value
                          name:(NSString *)name
                         color:(UIColor *)color {
@@ -20,5 +19,4 @@
     }
     return self;
 }
-
 @end

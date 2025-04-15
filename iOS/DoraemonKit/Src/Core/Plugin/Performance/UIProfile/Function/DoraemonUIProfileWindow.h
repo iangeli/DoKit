@@ -10,12 +10,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonUIProfileWindow : UIWindow
-
 + (instancetype)sharedInstance;
 - (void)showWithDepthText:(NSString *)text
                detailInfo:(NSString *)detail;
 - (void)hide;
-
 @end
 
 NS_ASSUME_NONNULL_END

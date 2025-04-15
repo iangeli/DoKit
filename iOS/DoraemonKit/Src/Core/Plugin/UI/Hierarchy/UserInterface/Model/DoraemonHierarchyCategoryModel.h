@@ -12,13 +12,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonHierarchyCategoryModel : NSObject
-
 @property (nonatomic, strong, readonly, nullable) NSString *title;
 
 @property (nonatomic, strong, readonly) NSArray <DoraemonHierarchyCellModel *>*items;
 
 - (instancetype)initWithTitle:(NSString *_Nullable)title items:(NSArray <DoraemonHierarchyCellModel *>*)items;
-
 @end
 
 NS_ASSUME_NONNULL_END

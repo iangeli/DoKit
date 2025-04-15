@@ -8,11 +8,9 @@
 #import <Foundation/Foundation.h>
 
 @interface DoraemonViewCheckManager : NSObject
-
 + (DoraemonViewCheckManager *)shareInstance;
 
 - (void)show;
 
 - (void)hidden;
-
 @end

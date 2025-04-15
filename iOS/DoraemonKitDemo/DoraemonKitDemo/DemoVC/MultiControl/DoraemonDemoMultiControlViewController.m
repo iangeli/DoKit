@@ -20,13 +20,9 @@
 #import "DoraemonMCMessagePackager.h"
 #import "DoraemonDemoMultiSlideView.h"
 @interface DoraemonMCEventHandler1: DoraemonMCEventHandler
-
-
-
 @end
 
 @implementation DoraemonMCEventHandler1
-
 - (BOOL)handleEvent:(DoraemonMCMessage*)eventInfo {
     
     self.messageInfo = eventInfo;
@@ -44,13 +40,9 @@
 
 
 @interface DoraemonMCEventHandler2: DoraemonMCEventHandler
-
-
-
 @end
 
 @implementation DoraemonMCEventHandler2
-
 - (BOOL)handleEvent:(DoraemonMCMessage*)eventInfo {
     
     self.messageInfo = eventInfo;
@@ -71,7 +63,6 @@
 @end
 
 @implementation DoraemonDemoMultiControlViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"一机多控Demo");
@@ -200,7 +191,7 @@
 
 - (void)controlEvent3{
     DoraemonHealthAlertView *alertView = [[DoraemonHealthAlertView alloc] init];
-    [alertView renderUI:DoraemonLocalizedString(@"UIControl 点击事件 自定义Alertview") placeholder:@[] inputTip:@[DoraemonLocalizedString(@"测试用例名称"),DoraemonLocalizedString(@"测试人名称")] ok:DoraemonLocalizedString(@"提交") quit:DoraemonLocalizedString(@"丢弃") cancle:DoraemonLocalizedString(@"取消") okBlock:^{
+    [alertView renderUI:DoraemonLocalizedString(@"UIControl 点击事件 自定义Alertview") placeholder:@[] inputTip:@[DoraemonLocalizedString(@"Test case name"),DoraemonLocalizedString(@"Test person name")] ok:DoraemonLocalizedString(@"Submit") quit:DoraemonLocalizedString(@"Discard") cancle:DoraemonLocalizedString(@"Cancel") okBlock:^{
 
 
     } quitBlock:^{
@@ -213,7 +204,7 @@
 }
 
 - (void)showAlertMessage{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"当前设备为模拟器，不支持扫一扫功能"] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Tip" message:[NSString stringWithFormat:@"当前设备为模拟器，不支持扫一扫功能"] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     
     }];

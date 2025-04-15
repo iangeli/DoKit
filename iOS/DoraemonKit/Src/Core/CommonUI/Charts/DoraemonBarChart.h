@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) DoraemonXAxis *xAxis;
 @property (nonatomic, strong) DoraemonYAxis *yAxis;
 @property (nonatomic, assign) CGFloat barsSpacingRatio;
-
 @end
 
 NS_ASSUME_NONNULL_END

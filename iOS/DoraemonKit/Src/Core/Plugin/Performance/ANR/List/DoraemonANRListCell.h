@@ -10,9 +10,7 @@
 @class DoraemonSandboxModel;
 
 @interface DoraemonANRListCell : UITableViewCell
-
 - (void)renderCellWithData:(DoraemonSandboxModel *)model;
 
 + (CGFloat)cellHeight;
-
 @end

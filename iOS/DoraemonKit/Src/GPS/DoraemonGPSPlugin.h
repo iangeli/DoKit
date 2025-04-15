@@ -9,5 +9,4 @@
 #import "DoraemonPluginProtocol.h"
 
 @interface DoraemonGPSPlugin : NSObject<DoraemonPluginProtocol>
-
 @end

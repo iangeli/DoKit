@@ -9,11 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
-
 + (void)load{
     NSLog(@"ViewController call load");
 }

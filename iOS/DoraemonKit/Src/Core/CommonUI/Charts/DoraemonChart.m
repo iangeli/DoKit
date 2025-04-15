@@ -9,7 +9,6 @@
 #import "DoraemonChart.h"
 
 @implementation DoraemonChart
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -25,6 +24,4 @@
 }
 
 - (void)display {}
-
-
 @end

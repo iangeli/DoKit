@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonMemoryPlugin
-
 - (void)pluginDidLoad{
     DoraemonMemoryViewController *vc = [[DoraemonMemoryViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

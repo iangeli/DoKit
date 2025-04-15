@@ -12,15 +12,12 @@
 #import "UIImage+Doraemon.h"
 
 @interface DoraemonBaseBigTitleView()
-
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *closeBtn;
 @property (nonatomic, strong) UIView *downLine;
-
 @end
 
 @implementation DoraemonBaseBigTitleView
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -31,31 +28,22 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(32), titleLabelOffsetY, self.doraemon_width-kDoraemonSizeFrom750_Landscape(32)-closeBtnH, kDoraemonSizeFrom750_Landscape(67))];
         
         UIImage *closeImage = [UIImage doraemon_xcassetImageNamed:@"doraemon_close"];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            self.backgroundColor = [UIColor systemBackgroundColor];
-            
-            _titleLabel.textColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                    return [UIColor whiteColor];
-                } else {
-                    return [UIColor doraemon_colorWithString:@"#324456"];
-                }
-            }];
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                closeImage = [UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"];
+        self.backgroundColor = [UIColor systemBackgroundColor];
+
+        _titleLabel.textColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor whiteColor];
+            } else {
+                return [UIColor doraemon_colorWithString:@"#324456"];
             }
-        } else {
-#endif
-            _titleLabel.textColor = [UIColor doraemon_colorWithString:@"#324456"];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
+        }];
+        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            closeImage = [UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"];
         }
-#endif
-        
+
         _titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(48)];
         [self addSubview:_titleLabel];
-        
-        
+
         _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.doraemon_width-closeBtnH, offsetY, closeBtnH, closeBtnH)];
         _closeBtn.imageView.contentMode = UIViewContentModeCenter;
         [_closeBtn setImage:closeImage forState:UIControlStateNormal];
@@ -71,18 +59,14 @@
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    // trait发生了改变
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
-        if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"] forState:UIControlStateNormal];
-            } else {
-                [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close"] forState:UIControlStateNormal];
-            }
+    
+    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"] forState:UIControlStateNormal];
+        } else {
+            [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close"] forState:UIControlStateNormal];
         }
     }
-#endif
 }
 
 - (void)setTitle:(NSString *)title {
@@ -95,5 +79,4 @@
         [self.delegate bigTitleCloseClick];
     }
 }
-
 @end

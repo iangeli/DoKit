@@ -11,17 +11,14 @@
 #import "DoraemonMethodUseTimeManager.h"
 
 @interface DoraemonMethodUseTimeListViewController ()<UITableViewDelegate,UITableViewDataSource>
-
 @property (nonatomic, copy) NSArray *loadModelArray;
 @property (nonatomic, strong) UITableView *tableView;
-
 @end
 
 @implementation DoraemonMethodUseTimeListViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"Load耗时检测记录") ;
+    self.title = @"Load Results" ;
     
     _loadModelArray = [[DoraemonMethodUseTimeManager sharedInstance] fixLoadModelArray];
     
@@ -63,5 +60,4 @@
     [cell renderCellWithData:dic];
     return cell;
 }
-
 @end

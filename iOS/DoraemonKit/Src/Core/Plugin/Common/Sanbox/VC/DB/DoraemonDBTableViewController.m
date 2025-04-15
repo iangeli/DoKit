@@ -12,17 +12,13 @@
 #import "DoraemonDBShowView.h"
 
 @interface DoraemonDBTableViewController ()<UITableViewDelegate , UITableViewDataSource , DoraemonDBRowViewTypeDelegate>
-
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray *dataAtTable;
 @property (nonatomic, strong) DoraemonDBShowView *showView;
-
-
 @end
 
 @implementation DoraemonDBTableViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [DoraemonDBManager shareManager].tableName;
@@ -104,7 +100,7 @@
     [self showText:content];
 }
 
-#pragma mark -- 显示弹出文案
+#pragma mark 
 - (void)showText:(NSString *)content{
     if (self.showView) {
         [self.showView removeFromSuperview];
@@ -123,6 +119,4 @@
         [self.showView removeFromSuperview];
     }
 }
-
-
 @end

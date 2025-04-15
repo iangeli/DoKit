@@ -8,11 +8,9 @@
 #import <Foundation/Foundation.h>
 
 @interface DoraemonViewAlignManager : NSObject
-
 + (DoraemonViewAlignManager *)shareInstance;
 
 - (void)show;
 
 - (void)hidden;
-
 @end

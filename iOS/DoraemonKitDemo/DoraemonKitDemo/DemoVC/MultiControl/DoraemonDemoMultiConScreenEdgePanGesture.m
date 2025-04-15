@@ -15,7 +15,6 @@
 @end
 
 @implementation DoraemonDemoMultiConScreenEdgePanGesture
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"边缘手势");

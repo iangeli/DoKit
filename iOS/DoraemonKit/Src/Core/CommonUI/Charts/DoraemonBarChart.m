@@ -9,25 +9,17 @@
 #import "DoraemonBarChart.h"
 
 @implementation DoraemonBarChart
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            self.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                    return [UIColor secondarySystemBackgroundColor];
-                } else {
-                    return [UIColor whiteColor];
-                }
-            }];
-        } else {
-#endif
-            self.backgroundColor = [UIColor whiteColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        }
-#endif
+        self.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor secondarySystemBackgroundColor];
+            } else {
+                return [UIColor whiteColor];
+            }
+        }];
+
         self.xAxis = [[DoraemonXAxis alloc] init];
         self.yAxis = [[DoraemonYAxis alloc] init];
         self.yAxis.labelCount = 5;
@@ -82,8 +74,7 @@
     CGContextMoveToPoint(context, self.contentInset.left, self.contentInset.top);
     CGContextAddLineToPoint(context, self.contentInset.left, self.contentInset.top + yAxisHeight);
     CGContextStrokePath(context);
-    
-   
+
     CGFloat spacing = (yAxisHeight - self.yAxis.marginTop) / (self.yAxis.labels.count - 1);
 
     NSArray<NSString *> *labels = [self.yAxis.labels.reverseObjectEnumerator allObjects];
@@ -101,12 +92,8 @@
     for (NSUInteger i = 0; i < labels.count; i++) {
         CGFloat y = self.contentInset.top + self.yAxis.marginTop + spacing * i;
         NSString *text = labels[i];
-        UIColor *attColor = [UIColor blackColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            attColor = [UIColor labelColor];
-        }
-#endif
+        UIColor *attColor = [UIColor labelColor];
+
         NSDictionary *attributes = @{NSFontAttributeName: self.yAxis.axisLabelFont, NSForegroundColorAttributeName: attColor};
         CGSize size = [text sizeWithAttributes:attributes];
         
@@ -137,12 +124,7 @@
         [self.layer addSublayer:shapeLayer];
         
         NSString *value = [self.vauleFormatter stringFromNumber: [NSNumber numberWithDouble:item.value]];
-        UIColor *attColor = [UIColor blackColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            attColor = [UIColor labelColor];
-        }
-#endif
+        UIColor *attColor = [UIColor labelColor];
         NSDictionary *attributes = @{NSFontAttributeName: self.yAxis.axisLabelFont, NSForegroundColorAttributeName: attColor};
         CGSize valueLabelSize = [value sizeWithAttributes:attributes];
         CGFloat valueLabelOffSetX = (barWidth - valueLabelSize.width) / 2;
@@ -154,5 +136,4 @@
         [item.name drawInRect:descRect withAttributes:attributes];
     }
 }
-
 @end

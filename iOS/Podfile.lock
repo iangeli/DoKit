@@ -1,53 +1,22 @@
 PODS:
-  - DoraemonKit/Core (3.1.4):
-    - FMDB
-    - GCDWebServer
-    - GCDWebServer/WebDAV
-    - GCDWebServer/WebUploader
-  - DoraemonKit/Foundation (3.1.4):
-    - Mantle (~> 2.2)
-    - SocketRocket (~> 0.6)
-  - DoraemonKit/WithMultiControl (3.1.4):
+  - DoraemonKit/Core (3.1.4)
+  - DoraemonKit/WithGPS (3.1.4):
     - DoraemonKit/Core
-    - DoraemonKit/Foundation
-  - FMDB (2.7.5):
-    - FMDB/standard (= 2.7.5)
-  - FMDB/standard (2.7.5)
-  - GCDWebServer (3.5.4):
-    - GCDWebServer/Core (= 3.5.4)
-  - GCDWebServer/Core (3.5.4)
-  - GCDWebServer/WebDAV (3.5.4):
-    - GCDWebServer/Core
-  - GCDWebServer/WebUploader (3.5.4):
-    - GCDWebServer/Core
-  - Mantle (2.2.0):
-    - Mantle/extobjc (= 2.2.0)
-  - Mantle/extobjc (2.2.0)
-  - SocketRocket (0.6.0)
+  - DoraemonKit/WithLoad (3.1.4):
+    - DoraemonKit/Core
 
 DEPENDENCIES:
   - DoraemonKit/Core (from `..`)
-  - DoraemonKit/Foundation (from `..`)
-  - DoraemonKit/WithMultiControl (from `..`)
-
-SPEC REPOS:
-  trunk:
-    - FMDB
-    - GCDWebServer
-    - Mantle
-    - SocketRocket
+  - DoraemonKit/WithGPS (from `..`)
+  - DoraemonKit/WithLoad (from `..`)
 
 EXTERNAL SOURCES:
   DoraemonKit:
     :path: ".."
 
 SPEC CHECKSUMS:
-  DoraemonKit: 3965b14164a3c258922fc4328a2a019daa174a0a
-  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
-  Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
-  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  DoraemonKit: 240aaeb82df93be9d8d8b8a905ab4b133ef2d358
 
-PODFILE CHECKSUM: 37cdb31e583f5ea1422eac5cb58fcb564ea92c4a
+PODFILE CHECKSUM: f758db3362505dde3cc9e95bd326e2ae941f6072
 
 COCOAPODS: 1.16.2

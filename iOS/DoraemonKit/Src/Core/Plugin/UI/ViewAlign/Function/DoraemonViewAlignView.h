@@ -8,9 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraemonViewAlignView : UIView
-
 - (void)show;
 
 - (void)hide;
-
 @end

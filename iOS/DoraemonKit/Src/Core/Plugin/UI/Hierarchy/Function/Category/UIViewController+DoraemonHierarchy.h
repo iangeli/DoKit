@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (DoraemonHierarchy)
-
 - (UIViewController *_Nullable)doraemon_currentShowingViewController;
 
 - (void)doraemon_showAlertControllerWithMessage:(NSString *)message handler:(nullable void (^)(NSInteger action))handler;
@@ -18,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)doraemon_showActionSheetWithTitle:(NSString *)title actions:(NSArray *)actions currentAction:(nullable NSString *)currentAction completion:(nullable void (^)(NSInteger index))completion;
 
 - (void)doraemon_showTextFieldAlertControllerWithMessage:(NSString *)message text:(nullable NSString *)text handler:(nullable void (^)(NSString * _Nullable))handler;
-
 @end
 
 NS_ASSUME_NONNULL_END

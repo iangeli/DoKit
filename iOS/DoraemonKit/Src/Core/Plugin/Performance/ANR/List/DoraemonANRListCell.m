@@ -10,15 +10,11 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonANRListCell()
-
-
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *arrowImageView;
-
 @end
 
 @implementation DoraemonANRListCell
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -52,5 +48,4 @@
 + (CGFloat)cellHeight{
     return kDoraemonSizeFrom750_Landscape(104);
 }
-
 @end

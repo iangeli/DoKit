@@ -10,38 +10,33 @@
 #import "DoraemonSanboxDetailViewController.h"
 #import "DoraemonToastUtil.h"
 #import "UIView+Doraemon.h"
-#import "Doraemoni18NUtil.h"
 #import <QuickLook/QuickLook.h>
 #import "DoraemonDBManager.h"
 #import "DoraemonDBTableViewController.h"
 #import "DoraemonManager.h"
 
 @interface DoraemonSanboxDetailViewController ()<QLPreviewControllerDelegate,QLPreviewControllerDataSource,UITableViewDelegate,UITableViewDataSource>
-
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, copy) NSArray *tableNameArray;
 @property (nonatomic, strong) UITableView *dbTableNameTableView;
-
 @end
 
 @implementation DoraemonSanboxDetailViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"文件预览");
+    self.title = @"File Preview";
     
     if (self.filePath.length > 0) {
         NSString *path = self.filePath;
         if ([path hasSuffix:@".strings"] || [path hasSuffix:@".plist"]) {
-            // 文本文件
+            
             [self setContent:[[NSDictionary dictionaryWithContentsOfFile:path] description]];
         } else if ([path hasSuffix:@".DB"] || [path hasSuffix:@".db"] || [path hasSuffix:@".sqlite"] || [path hasSuffix:@".SQLITE"] || [self isSQLiteFile:self.filePath]) {
-            // 数据库文件
-            self.title = DoraemonLocalizedString(@"数据库预览");
+            
+            self.title = @"DB preview";
             [self browseDBTable];
         } else if ([[path lowercaseString] hasSuffix:@".webp"]) {
-            // webp文件
             DoraemonWebpHandleBlock block = [DoraemonManager shareInstance].webpHandleBlock;
             if (block) {
                 UIImage *img = [DoraemonManager shareInstance].webpHandleBlock(path);
@@ -50,14 +45,14 @@
                 [self setContent:@"webp need implement webpHandleBlock in DoraemonManager"];
             }
         } else {
-            // 其他文件 尝试使用 QLPreviewController 进行打开
+            
             QLPreviewController *previewController = [[QLPreviewController alloc] init];
             previewController.delegate = self;
             previewController.dataSource = self;
             [self presentViewController:previewController animated:YES completion:nil];
         }
     } else {
-        [DoraemonToastUtil showToast:DoraemonLocalizedString(@"文件不存在") inView:self.view];
+        [DoraemonToastUtil showToast:@"File not exist" inView:self.view];
     }
 }
 
@@ -73,17 +68,8 @@
     _textView.layer.borderColor = [UIColor grayColor].CGColor;
     _textView.layer.borderWidth = 2.0f;
     _textView.text = text;
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
         _textView.textColor = [UIColor labelColor];
         _textView.backgroundColor = [UIColor systemBackgroundColor];
-    } else {
-#endif
-        _textView.textColor = [UIColor blackColor];
-        _textView.backgroundColor = [UIColor whiteColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    }
-#endif
     [self.view addSubview:_textView];
 }
 
@@ -99,13 +85,13 @@
     CGFloat scaledImageWidth, scaledImageHeight;
     CGFloat x,y;
     CGFloat imageScale;
-    if (isPortrait) {//图片竖屏分量比较大
+    if (isPortrait) {
         imageScale = imageHeight / viewHeight;
         scaledImageHeight = viewHeight;
         scaledImageWidth = imageWidth / imageScale;
         x = (viewWidth - scaledImageWidth) / 2;
         y = 0;
-    }else{//图片横屏分量比较大
+    }else{
         imageScale = imageWidth / viewWidth;
         scaledImageWidth = viewWidth;
         scaledImageHeight = imageHeight / imageScale;
@@ -118,7 +104,6 @@
     [self.view addSubview:_imageView];
 }
 
-//浏览数据库中所有数据表
 - (void)browseDBTable{
     [DoraemonDBManager shareManager].dbPath = self.filePath;
     self.tableNameArray = [[DoraemonDBManager shareManager] tablesAtDB];
@@ -153,7 +138,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 #pragma mark - QLPreviewControllerDataSource, QLPreviewControllerDelegate
 - (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
     return 1;
@@ -180,5 +164,4 @@
         return NO;
     }
 }
-
 @end

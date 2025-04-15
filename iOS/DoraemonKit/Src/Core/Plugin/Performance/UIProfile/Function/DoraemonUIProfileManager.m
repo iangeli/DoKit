@@ -11,11 +11,9 @@
 #import "UIViewController+Doraemon.h"
 
 @interface DoraemonUIProfileManager ()
-
 @end
 
 @implementation DoraemonUIProfileManager
-
 + (instancetype)sharedInstance
 {
     static DoraemonUIProfileManager *sharedInstance = nil;
@@ -37,5 +35,4 @@
         [[DoraemonUIProfileWindow sharedInstance] hide];
     }
 }
-
 @end

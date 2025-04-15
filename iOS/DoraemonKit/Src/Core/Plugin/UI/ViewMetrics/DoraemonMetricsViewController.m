@@ -11,20 +11,17 @@
 #import "DoraemonViewMetricsConfig.h"
 
 @interface DoraemonMetricsViewController () <DoraemonSwitchViewDelegate>
-
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
-
 @end
 
 @implementation DoraemonMetricsViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = DoraemonLocalizedString(@"布局边框");
+    self.title = @"View Border";
     
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"布局边框开关") switchOn:[DoraemonViewMetricsConfig defaultConfig].enable];
+    [_switchView renderUIWithTitle:@"View border switch" switchOn:[DoraemonViewMetricsConfig defaultConfig].enable];
     [_switchView needTopLine];
     [_switchView needDownLine];
     _switchView.delegate = self;
@@ -40,5 +37,4 @@
     [DoraemonViewMetricsConfig defaultConfig].opened = YES;
     [DoraemonViewMetricsConfig defaultConfig].enable = on;
 }
-
 @end

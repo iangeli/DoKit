@@ -14,15 +14,12 @@
 #import "UIColor+Doraemon.h"
 
 @interface DoraemonSandBoxCell()
-
 @property (nonatomic, strong) UIImageView *fileTypeIcon;
 @property (nonatomic, strong) UILabel *fileTitleLabel;
 @property (nonatomic, strong) UILabel *fileSizeLabel;
-
 @end
 
 @implementation DoraemonSandBoxCell
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -63,7 +60,7 @@
     DoraemonUtil *util = [[DoraemonUtil alloc] init];
     [util getFileSizeWithPath:model.path];
     NSInteger fileSize = util.fileSize;
-    //将文件夹大小转换为 M/KB/B
+    
     NSString *fileSizeStr = nil;
     if (fileSize > 1024 * 1024){
         fileSizeStr = [NSString stringWithFormat:@"%.2fM",fileSize / 1024.00f /1024.00f];
@@ -83,5 +80,4 @@
 + (CGFloat)cellHeight{
     return 48.;
 }
-
 @end

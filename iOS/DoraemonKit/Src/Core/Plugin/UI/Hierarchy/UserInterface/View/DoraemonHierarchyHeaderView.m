@@ -9,13 +9,10 @@
 #import "UIView+Doraemon.h"
 
 @interface DoraemonHierarchyHeaderView ()
-
 @property (nonatomic, strong) UILabel *titleLabel;
-
 @end
 
 @implementation DoraemonHierarchyHeaderView
-
 - (instancetype)init {
     if (self = [super init]) {
         [self initUI];
@@ -50,5 +47,4 @@
     }
     return _titleLabel;
 }
-
 @end

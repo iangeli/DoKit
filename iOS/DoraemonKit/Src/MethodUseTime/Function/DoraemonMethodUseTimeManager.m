@@ -11,7 +11,6 @@
 #import "DoraemonDefine.h"
 
 @implementation DoraemonMethodUseTimeManager
-
 + (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
@@ -48,7 +47,7 @@
             allCost += cost;
         }
         NSDictionary *allDic = @{
-                                 @"name":DoraemonLocalizedString(@"总共耗时"),
+                                 @"name":@"Total cost",
                                  @"cost":@(allCost)
                                  };
         [loadModelArray insertObject:allDic atIndex:0];
@@ -73,10 +72,9 @@
         NSString *costTime = dic[@"cost"];
         [fixArrayForHealth addObject:@{
             @"className" : className,
-            @"costTime" : costTime//单位ms
+            @"costTime" : costTime
         }];
     }
     return [NSArray arrayWithArray:fixArrayForHealth];
 }
-
 @end

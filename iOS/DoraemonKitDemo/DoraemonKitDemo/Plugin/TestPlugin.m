@@ -10,7 +10,6 @@
 
 
 @implementation TestPlugin
-
 - (void)pluginDidLoad{
     NSLog(@"TestPlugin pluginDidLoad");
 }

@@ -9,14 +9,13 @@
 #import "DoraemonTimeProfilerCore.h"
 #include <objc/message.h>
 #include <sys/sysctl.h>
-#import "DoraemonHealthManager.h"
+
 #import "DoraemonDefine.h"
 
 static NSTimeInterval startTime;
 static NSTimeInterval stopTime;
 
 @implementation DoraemonTimeProfiler
-
 + (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
@@ -42,7 +41,6 @@ static NSTimeInterval stopTime;
     }
 }
 
-
 + (void)startRecord {
     startTime = [NSDate new].timeIntervalSince1970;
     dtp_hook_begin();
@@ -64,10 +62,8 @@ static NSTimeInterval stopTime;
     [self share:result];
 }
 
-/// 打印调用记录
 + (void)printRecords {
     NSString *result = [self getRecordsResult];
-    [DoraemonHealthManager sharedInstance].costDetail = result;
     NSLog(@"%@",result);
 }
 
@@ -88,7 +84,6 @@ static NSTimeInterval stopTime;
     
     return str;
 }
-
 
 + (void)appendRecord:(DoraemonTimeProfilerRecord *)record to:(NSMutableString *)str {
     [str appendFormat:@"%@\n", [record descriptionWithDepth]];
@@ -145,5 +140,4 @@ static NSTimeInterval stopTime;
 
 + (void)share:(NSString *)str {
 }
-
 @end

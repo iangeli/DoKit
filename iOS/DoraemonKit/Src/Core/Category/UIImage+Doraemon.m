@@ -9,7 +9,6 @@
 
 @class DoraemonManager;
 @implementation UIImage (Doraemon)
-
 + (nullable UIImage *)doraemon_imageNamed:(NSString *)name{
     if(name &&
        ![name isEqualToString:@""]){
@@ -52,7 +51,6 @@
     return nil;
 }
 
-//压缩图片尺寸 等比缩放 通过计算得到缩放系数
 - (nullable UIImage*)doraemon_scaledToSize:(CGSize)newSize{
     UIImage *sourceImage = self;
     UIImage *newImage = nil;
@@ -71,13 +69,13 @@
         CGFloat widthFactor = targetWidth / width;
         CGFloat heightFactor = targetHeight / height;
         if (widthFactor > heightFactor)
-            scaleFactor = widthFactor; // scale to fit height
+            scaleFactor = widthFactor;
         else
-            scaleFactor = heightFactor; // scale to fit width
+            scaleFactor = heightFactor;
         
         scaledWidth= width * scaleFactor;
         scaledHeight = height * scaleFactor;
-        // center the image
+
         if (widthFactor > heightFactor)
         {
             thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
@@ -115,5 +113,4 @@
     UIGraphicsEndImageContext();
     return image;
 }
-
 @end

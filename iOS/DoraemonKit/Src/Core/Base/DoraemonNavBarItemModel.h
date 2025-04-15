@@ -14,7 +14,6 @@ typedef NS_ENUM(NSUInteger, DoraemonNavBarItemType) {
 };
 
 @interface DoraemonNavBarItemModel : NSObject
-
 @property (nonatomic, assign) DoraemonNavBarItemType type;
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, strong) UIImage *image;
@@ -23,5 +22,4 @@ typedef NS_ENUM(NSUInteger, DoraemonNavBarItemType) {
 
 - (instancetype)initWithText:(NSString *)text color:(UIColor *)color selector:(SEL)selector;
 - (instancetype)initWithImage:(UIImage *)image selector:(SEL)selector;
-
 @end

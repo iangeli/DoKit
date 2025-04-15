@@ -15,7 +15,6 @@
 @end
 
 @implementation DoraemonNSUserDefaultsEditViewController
-
 - (instancetype)initWithModel: (DoraemonNSUserDefaultsModel *)model
 {
     self = [super init];
@@ -54,5 +53,4 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.valueTextView.text forKey:_model.key];
     [self.navigationController popViewControllerAnimated:true];
 }
-
 @end

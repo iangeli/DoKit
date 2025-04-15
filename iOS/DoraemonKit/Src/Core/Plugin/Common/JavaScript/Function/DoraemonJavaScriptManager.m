@@ -13,13 +13,10 @@
 #import "DoraemonJavaScriptViewController.h"
 
 @interface DoraemonJavaScriptManager ()
-
 @property (nonatomic, weak) id  webView;
-
 @end
 
 @implementation DoraemonJavaScriptManager
-
 + (DoraemonJavaScriptManager *)shareInstance{
     static dispatch_once_t once;
     static DoraemonJavaScriptManager *instance;
@@ -32,7 +29,7 @@
 - (void)show {
     NSArray *webViews = [DoraemonUtil getWebViews];
     
-    NSString *title = DoraemonLocalizedString(@"请选择WebView");
+    NSString *title = @"Select WebView";
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:title preferredStyle:UIAlertControllerStyleActionSheet];
     for (NSInteger i = 0; i < webViews.count; i++) {
         WKWebView *webView = webViews[i];
@@ -43,16 +40,16 @@
         [alert addAction:action];
     }
     if (webViews.count == 0) {
-        UIAlertAction *action = [UIAlertAction actionWithTitle:DoraemonLocalizedString(@"无可用的WebView") style:UIAlertActionStyleDestructive handler:nil];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"No Available WebView" style:UIAlertActionStyleDestructive handler:nil];
         action.enabled = NO;
         [alert addAction:action];
     }
     if (webViews.count == 1) {
-        //只有一个，则跳过选择
+        
         [self selectWebView:webViews.firstObject];
         return;
     }
-    [alert addAction:[UIAlertAction actionWithTitle:DoraemonLocalizedString(@"取消") style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIViewController.topViewControllerForKeyWindow presentViewController:alert animated:YES completion:nil];
     });
@@ -85,5 +82,4 @@
     }
 #pragma clang diagnostic pop
 }
-
 @end

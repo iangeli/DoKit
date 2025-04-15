@@ -11,7 +11,6 @@
 #import "DoraemonMCCommandGenerator.h"
 typedef void(^CommonActionBlock)(id);
 @interface DoraemonDemoMultiSlideView ()<UIGestureRecognizerDelegate>
-
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UIView *slideView;
 @property (nonatomic, strong) UIButton *slideButton;
@@ -22,7 +21,6 @@ typedef void(^CommonActionBlock)(id);
 @end
 
 @implementation DoraemonDemoMultiSlideView
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

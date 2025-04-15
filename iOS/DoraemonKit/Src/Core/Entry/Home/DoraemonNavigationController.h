@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonNavigationController : UINavigationController
-
 @end
 
 NS_ASSUME_NONNULL_END

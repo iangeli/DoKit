@@ -8,9 +8,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (DoraemonViewMetrics)
-
 - (void)doraemonMetricsRecursiveEnable:(BOOL)enable;
-
 @end
-
 

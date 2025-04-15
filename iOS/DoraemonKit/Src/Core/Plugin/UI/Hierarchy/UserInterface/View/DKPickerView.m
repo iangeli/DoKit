@@ -4,15 +4,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DKPickerView ()
-
 - (void)pickerViewInit;
-
 @end
 
 NS_ASSUME_NONNULL_END
 
 @implementation DKPickerView
-
 - (void)pickerViewInit {
     self.overflow = YES;
     self.backgroundColor = UIColor.clearColor;
@@ -36,5 +33,4 @@ NS_ASSUME_NONNULL_END
 
     return self;
 }
-
 @end

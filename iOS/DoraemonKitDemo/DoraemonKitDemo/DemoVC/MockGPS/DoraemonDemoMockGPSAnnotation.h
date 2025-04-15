@@ -10,7 +10,6 @@
 #import <MapKit/MapKit.h>
 
 @interface DoraemonDemoMockGPSAnnotation : NSObject<MKAnnotation>
-
 /* 必须创建的属性 */
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 /* 可选的属性 */

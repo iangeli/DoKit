@@ -9,16 +9,11 @@
 #import "DoraemonOscillogramWindowManager.h"
 #import "DoraemonDefine.h"
 
-
 @interface DoraemonOscillogramViewController ()
-
-//每秒运行一次
 @property (nonatomic, strong) NSTimer *secondTimer;
-
 @end
 
 @implementation DoraemonOscillogramViewController
-
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];

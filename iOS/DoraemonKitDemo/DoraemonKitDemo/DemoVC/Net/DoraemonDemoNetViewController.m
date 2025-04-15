@@ -20,8 +20,6 @@
 #import "DoraemonDemoURLProtocol2.h"
 
 @interface DoraemonDemoNetViewController ()<NSURLConnectionDataDelegate,NSURLSessionDelegate,UITableViewDataSource,UITableViewDelegate>
-
-
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *cellTitleArray;
 @property (nonatomic, strong) NSString *DoraemonDemoNetViewCellID;
@@ -32,7 +30,6 @@
 @end
 
 @implementation DoraemonDemoNetViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"网络测试Demo");

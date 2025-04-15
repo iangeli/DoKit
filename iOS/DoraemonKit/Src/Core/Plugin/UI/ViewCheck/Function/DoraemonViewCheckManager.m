@@ -9,15 +9,11 @@
 #import "DoraemonViewCheckView.h"
 #import "DoraemonDefine.h"
 
-
 @interface DoraemonViewCheckManager()
-
 @property (nonatomic, strong) DoraemonViewCheckView *viewCheckView;
-
 @end
 
 @implementation DoraemonViewCheckManager
-
 + (DoraemonViewCheckManager *)shareInstance{
     static dispatch_once_t once;
     static DoraemonViewCheckManager *instance;
@@ -60,5 +56,4 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     [[DoraemonUtil getKeyWindow] bringSubviewToFront:self.viewCheckView];
 }
-
 @end

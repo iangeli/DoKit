@@ -10,7 +10,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 @implementation DoraemonChartAxis
-
 - (instancetype)init
 {
     self = [super init];
@@ -32,5 +31,4 @@
     }
     return _vauleFormatter;
 }
-
 @end

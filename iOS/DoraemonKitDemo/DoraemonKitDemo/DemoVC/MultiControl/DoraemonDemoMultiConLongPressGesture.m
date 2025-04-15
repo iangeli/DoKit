@@ -10,13 +10,11 @@
 #import "UIView+Doraemon.h"
 #import "UIImage+Doraemon.h"
 @interface DoraemonDemoMultiConLongPressGesture ()
-
 @property (nonatomic, strong)UIImageView *imageview;
 
 @end
 
 @implementation DoraemonDemoMultiConLongPressGesture
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"长按事件");
@@ -45,8 +43,8 @@
 
 
 - (void)showAlertMessage{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否要删除图片"] preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Tip" message:[NSString stringWithFormat:@"是否要删除图片"] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     UIAlertAction *sureAction2 = [UIAlertAction actionWithTitle:@"同意" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

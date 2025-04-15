@@ -8,5 +8,4 @@
 #import "DoraemonNSUserDefaultsModel.h"
 
 @implementation DoraemonNSUserDefaultsModel
-
 @end

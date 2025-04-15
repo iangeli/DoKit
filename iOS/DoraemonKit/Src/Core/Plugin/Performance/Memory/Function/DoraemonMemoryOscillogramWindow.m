@@ -9,7 +9,6 @@
 #import "DoraemonMemoryOscillogramViewController.h"
 
 @implementation DoraemonMemoryOscillogramWindow
-
 + (DoraemonMemoryOscillogramWindow *)shareInstance{
     static dispatch_once_t once;
     static DoraemonMemoryOscillogramWindow *instance;
@@ -24,5 +23,4 @@
     self.rootViewController = vc;
     self.vc = vc;
 }
-
 @end

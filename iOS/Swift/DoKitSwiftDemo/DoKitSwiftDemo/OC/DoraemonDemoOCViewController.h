@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 //You cannot subclass a Swift class in Objective-C
 @interface DoraemonDemoOCViewController : UIViewController
-
 @end
 
 NS_ASSUME_NONNULL_END

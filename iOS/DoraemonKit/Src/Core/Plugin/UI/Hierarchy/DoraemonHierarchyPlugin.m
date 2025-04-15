@@ -10,14 +10,11 @@
 #import "DoraemonHierarchyHelper.h"
 #import "DoraemonHomeWindow.h"
 
-
 @implementation DoraemonHierarchyPlugin
-
 - (void)pluginDidLoad {
     DoraemonHierarchyWindow *window = [[DoraemonHierarchyWindow alloc] init];
     [DoraemonHierarchyHelper shared].window = window;
     [window show];
     [[DoraemonHomeWindow shareInstance] hide];
 }
-
 @end

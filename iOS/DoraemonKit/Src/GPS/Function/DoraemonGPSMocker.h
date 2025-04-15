@@ -8,9 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-//参考wander
 @interface DoraemonGPSMocker : NSObject
-
 + (DoraemonGPSMocker *)shareInstance;
 
 - (void)addLocationBinder:(id)binder delegate:(id)delegate;
@@ -20,5 +18,4 @@
 - (void)stopMockPoint;
 
 @property (nonatomic, assign) BOOL isMocking;
-
 @end

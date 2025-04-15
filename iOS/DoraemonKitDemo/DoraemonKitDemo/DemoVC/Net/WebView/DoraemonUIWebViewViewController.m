@@ -10,11 +10,9 @@
 
 
 @interface DoraemonUIWebViewViewController ()
-
 @end
 
 @implementation DoraemonUIWebViewViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     

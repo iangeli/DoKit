@@ -9,7 +9,6 @@
 #import "UIColor+Doraemon.h"
 
 @implementation UIColor (DoraemonHierarchy)
-
 - (NSString *)doraemon_HexString {
     int r = [self red] * 255.0;
     int g = [self green] * 255.0;
@@ -49,5 +48,4 @@
     }
     return desc;
 }
-
 @end

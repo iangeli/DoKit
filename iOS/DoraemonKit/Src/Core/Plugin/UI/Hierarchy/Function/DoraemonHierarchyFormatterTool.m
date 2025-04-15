@@ -10,15 +10,12 @@
 static DoraemonHierarchyFormatterTool *_instance = nil;
 
 @interface DoraemonHierarchyFormatterTool ()
-
 @property (nonatomic, strong) NSDateFormatter *formatter;
 
 @property (nonatomic, strong) NSNumberFormatter *numberFormatter;
-
 @end
 
 @implementation DoraemonHierarchyFormatterTool
-
 #pragma mark - Public
 + (NSString *)stringFromDate:(NSDate *)date {
     return [[self shared] stringFromDate:date];
@@ -81,5 +78,4 @@ static DoraemonHierarchyFormatterTool *_instance = nil;
     }
     return _numberFormatter;
 }
-
 @end

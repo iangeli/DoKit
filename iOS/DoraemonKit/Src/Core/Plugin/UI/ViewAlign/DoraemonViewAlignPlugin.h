@@ -9,5 +9,4 @@
 #import "DoraemonPluginProtocol.h"
 
 @interface DoraemonViewAlignPlugin : NSObject<DoraemonPluginProtocol>
-
 @end

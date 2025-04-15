@@ -10,15 +10,12 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonHierarchyDetailTitleCell ()
-
 @property (nonatomic, strong) UILabel *detailLabel;
 
 @property (nonatomic, strong) NSLayoutConstraint *detailLabelRightCons;
-
 @end
 
 @implementation DoraemonHierarchyDetailTitleCell
-
 #pragma mark - Over write
 - (void)initUI {
     [super initUI];
@@ -57,5 +54,4 @@
     }
     return _detailLabel;
 }
-
 @end

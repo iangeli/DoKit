@@ -72,8 +72,6 @@ typedef struct DoraemonStackFrameEntry{
 static mach_port_t main_thread_id;
 
 @implementation DoraemonBacktraceLogger
-
-
 + (void)load {
     main_thread_id = mach_thread_self();
 }
@@ -416,5 +414,4 @@ uintptr_t doraemon_segmentBaseOfImageIndex(const uint32_t idx) {
     }
     return 0;
 }
-
 @end

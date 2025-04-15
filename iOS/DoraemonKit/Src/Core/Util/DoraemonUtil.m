@@ -3,7 +3,7 @@
 //  DoraemonKit
 //
 //  Created by yixiang on 2017/12/11.
-//  Copyright © 2017年 yixiang. All rights reserved.
+//  Copyright © 2017 yixiang. All rights reserved.
 //
 
 #import "DoraemonUtil.h"
@@ -14,7 +14,6 @@
 #import "DoraemonDefine.h"
 
 @implementation DoraemonUtil
-
 - (instancetype)init{
     self = [super init];
     if (self) {
@@ -47,7 +46,6 @@
     return dateString;
 }
 
-// byte格式化为 B KB MB 方便流量查看
 + (NSString *)formatByte:(CGFloat)byte{
     double convertedValue = byte;
     int multiplyFactor = 0;
@@ -151,14 +149,13 @@
     return jsonString;
 }
 
-//获取某一条文件路径的文件大小
 - (void)getFileSizeWithPath:(NSString *)path{
     NSFileManager * fileManger = [NSFileManager defaultManager];
     BOOL isDir = NO;
     BOOL isExist = [fileManger fileExistsAtPath:path isDirectory:&isDir];
     if (isExist){
         if(isDir){
-            //文件夹
+            
             NSArray * dirArray = [fileManger contentsOfDirectoryAtPath:path error:nil];
             NSString * subPath = nil;
             for(NSString *str in dirArray) {
@@ -166,25 +163,24 @@
                 [self getFileSizeWithPath:subPath];
             }
         }else{
-            //文件
+            
             NSDictionary *dict = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
             NSInteger size = [dict[@"NSFileSize"] integerValue];
             _fileSize += size;
         }
     }else{
-        //不存在该文件path
-        DoKitLog(@"不存在该文件");
+        
+        DoKitLog(@"The file does not exist");
     }
 }
 
-//获取所有>1M的文件
 - (NSArray *)getBigSizeFileFormPath:(NSString *)path{
      NSFileManager * fileManger = [NSFileManager defaultManager];
      BOOL isDir = NO;
      BOOL isExist = [fileManger fileExistsAtPath:path isDirectory:&isDir];
      if (isExist){
          if(isDir){
-             //文件夹
+             
              NSArray * dirArray = [fileManger contentsOfDirectoryAtPath:path error:nil];
              NSString * subPath = nil;
              for(NSString *str in dirArray) {
@@ -192,22 +188,21 @@
                  [self getBigSizeFileFormPath:subPath];
              }
          }else{
-             //文件
+             
              NSDictionary *dict = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
              NSInteger size = [dict[@"NSFileSize"] integerValue];
-             if (size > 1024 * 1014) { //大于1M的内容被称为大文件
+             if (size > 1024 * 1014) { 
                  [_bigFileArray addObject:path];
              }
          }
      }else{
-         //不存在该文件path
+         
          DoKitLog(@"file not exist");
      }
      
      return nil;
 }
 
-//删除某一路径下的所有文件
 + (void)clearFileWithPath:(NSString *)path{
     NSFileManager *fm = [NSFileManager defaultManager];
     NSArray *files = [fm subpathsAtPath:path];
@@ -236,7 +231,6 @@
 + (void)openPlugin:(UIViewController *)vc {
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 
 + (UIViewController *)rootViewControllerForKeyWindow {
     return [UIViewController rootViewControllerForKeyWindow];
@@ -285,13 +279,7 @@
     NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
     if([[UIApplication sharedApplication] canOpenURL:url]) {
         NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        if (@available(iOS 10.0, *)) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-                
-            }];
-        } else {
-            [[UIApplication sharedApplication] openURL:url];
-        }
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler: nil];
     }
 }
 
@@ -309,7 +297,6 @@
     }
 
     if (keyWindow == nil) {
-        __block UIScene *scene = nil;
         [[UIApplication sharedApplication].connectedScenes enumerateObjectsUsingBlock:^(UIScene * _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:UIWindowScene.class]) {
                 if ([obj.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
@@ -326,7 +313,7 @@
 
 + (NSArray *)getWebViews {
     NSMutableArray *webViews = [NSMutableArray array];
-    // 查找当前window中的所有webView
+    
     [webViews addObjectsFromArray:[[self getKeyWindow] doraemon_findViewsForClass:WKWebView.class]];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -334,5 +321,4 @@
 #pragma clang diagnostic pop
     return webViews;
 }
-
 @end

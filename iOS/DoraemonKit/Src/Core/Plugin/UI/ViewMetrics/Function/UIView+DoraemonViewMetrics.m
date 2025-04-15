@@ -11,16 +11,11 @@
 #import <objc/runtime.h>
 #import "DoraemonDefine.h"
 
-
 @interface UIView ()
-
 @property (nonatomic ,strong) CALayer *metricsBorderLayer;
-
 @end
 
-
 @implementation UIView (DoraemonViewMetrics)
-
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -38,7 +33,7 @@
 
 - (void)doraemonMetricsRecursiveEnable:(BOOL)enable
 {
-    // 状态栏不显示元素边框
+    
     UIView * statusBarView =  [[UIApplication sharedApplication] valueForKey:@"_statusBar"];
     if(statusBarView && [self isDescendantOfView:statusBarView.window]){
         return;

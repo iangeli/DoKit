@@ -13,26 +13,22 @@
 #import "DoraemonCacheManager.h"
 #import "DoraemonToastUtil.h"
 #import "DoraemonGPSMocker.h"
-#import "Doraemoni18NUtil.h"
 #import "DoraemonMockGPSOperateView.h"
 #import "DoraemonMockGPSInputView.h"
 #import "DoraemonMockGPSCenterView.h"
 
 @interface DoraemonGPSViewController ()<MKMapViewDelegate,DoraemonMockGPSInputViewDelegate>
-
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) DoraemonMockGPSOperateView *operateView;
 @property (nonatomic, strong) DoraemonMockGPSInputView *inputView;
 @property (nonatomic, strong) DoraemonMockGPSCenterView *mapCenterView;
-
 @end
 
 @implementation DoraemonGPSViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"Mock GPS");
+    self.title = @"Mock GPS";
     
     [self initUI];
 }
@@ -50,10 +46,9 @@
     _inputView = [[DoraemonMockGPSInputView alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(6), _operateView.doraemon_bottom+kDoraemonSizeFrom750_Landscape(17), self.view.doraemon_width-2*kDoraemonSizeFrom750_Landscape(6), kDoraemonSizeFrom750_Landscape(170))];
     _inputView.delegate = self;
     [self.view addSubview:_inputView];
-    
-    //获取定位服务授权
+
     [self requestUserLocationAuthor];
-    //初始化地图
+    
     MKMapView *mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, self.view.doraemon_height-self.bigTitleView.doraemon_bottom)];
     mapView.mapType = MKMapTypeStandard;
     mapView.delegate = self;
@@ -77,7 +72,6 @@
         [[DoraemonGPSMocker shareInstance] stopMockPoint];
     }
 }
-    
 
 - (void)switchAction:(id)sender{
     UISwitch *switchButton = (UISwitch*)sender;
@@ -99,7 +93,7 @@
 #pragma mark - DoraemonMockGPSInputViewDelegate
 - (void)inputViewOkClick:(NSString *)gps{
     if (![[DoraemonCacheManager sharedInstance] mockGPSSwitch]) {
-        [DoraemonToastUtil showToast:DoraemonLocalizedString(@"mock开关没有打开") inView:self.view];
+        [DoraemonToastUtil showToast:@"switch is not open" inView:self.view];
         return;
     }
     NSArray *array = [gps componentsSeparatedByString:@" "];
@@ -107,18 +101,18 @@
         NSString *longitudeValue = array[0];
         NSString *latitudeValue = array[1];
         if (longitudeValue.length==0 || latitudeValue.length==0) {
-            [DoraemonToastUtil showToast:DoraemonLocalizedString(@"经纬度不能为空") inView:self.view];
+            [DoraemonToastUtil showToast:@"Please enter longitude and latitude" inView:self.view];
             return;
         }
         
         CGFloat longitude = [longitudeValue floatValue];
         CGFloat latitude = [latitudeValue floatValue];
         if (longitude < -180 || longitude > 180) {
-            [DoraemonToastUtil showToast:DoraemonLocalizedString(@"经度不合法") inView:self.view];
+            [DoraemonToastUtil showToast:@"Invalid longitude" inView:self.view];
             return;
         }
         if (latitude < -90 || latitude > 90){
-            [DoraemonToastUtil showToast:DoraemonLocalizedString(@"纬度不合法") inView:self.view];
+            [DoraemonToastUtil showToast:@"Invalid latitude" inView:self.view];
             return;
         }
         
@@ -133,13 +127,12 @@
         CLLocation *loc = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
         [[DoraemonGPSMocker shareInstance] mockPoint:loc];
     }else{
-        [DoraemonToastUtil showToast:DoraemonLocalizedString(@"格式不正确") inView:self.view];
+        [DoraemonToastUtil showToast:@"Invalid format" inView:self.view];
         return;
     }
     
 }
 
-//如果没有获得定位授权，获取定位授权请求
 - (void)requestUserLocationAuthor{
     self.locationManager = [[CLLocationManager alloc] init];
     if ([CLLocationManager locationServicesEnabled]) {
@@ -161,6 +154,4 @@
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:centerCoordinate.latitude longitude:centerCoordinate.longitude];
     [[DoraemonGPSMocker shareInstance] mockPoint:loc];
 }
-
-
 @end

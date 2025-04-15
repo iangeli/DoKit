@@ -6,7 +6,6 @@
 #import "DoraemonHierarchyFormatterTool.h"
 
 @interface DKHierarchyInfoView ()
-
 @property (nonatomic, strong, nullable) UIView *selectedView;
 
 @property (nonatomic, strong) UIButton *closeButton;
@@ -34,11 +33,9 @@
 @property (nonatomic, assign) CGFloat actionContentViewHeight;
 
 - (void)hierarchyInfoViewInit;
-
 @end
 
 @implementation DKHierarchyInfoView
-
 - (void)updateSelectedView:(UIView *)selectedView {
 
     UIView *view = selectedView;
@@ -381,5 +378,4 @@
     }
     return _moreButton;
 }
-
 @end

@@ -9,11 +9,9 @@
 #import "DoraemonYAxis.h"
 
 @interface DoraemonYAxis()
-
 @end
 
 @implementation DoraemonYAxis
-
 - (instancetype)init
 {
     self = [super init];
@@ -34,7 +32,7 @@
     for (NSNumber *value in self.values) {
         maxValueY = MAX([value doubleValue], maxValueY);
     }
-    // 防止出现y轴最大值小于label个数
+    
     double range = MAX(maxValueY, self.labelCount - 1);
     double rawInterval = range / (self.labelCount - 1);
     double interval = roundedToNextSignficant(rawInterval);
@@ -60,5 +58,4 @@ double roundedToNextSignficant(double number) {
     double shifted = roundf(number * magnitude);
     return shifted / magnitude;
 }
-
 @end

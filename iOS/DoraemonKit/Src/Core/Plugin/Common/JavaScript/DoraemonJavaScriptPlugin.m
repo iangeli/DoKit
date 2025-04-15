@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonJavaScriptPlugin
-
 - (void)pluginDidLoad {
     [[DoraemonHomeWindow shareInstance] hide];
     [[DoraemonJavaScriptManager shareInstance] show];
 }
-
 @end

@@ -11,11 +11,9 @@
 #import "DoraemonManager.h"
 
 @interface DoraemonDemoCommonViewController ()
-
 @end
 
 @implementation DoraemonDemoCommonViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"通用测试Demo");

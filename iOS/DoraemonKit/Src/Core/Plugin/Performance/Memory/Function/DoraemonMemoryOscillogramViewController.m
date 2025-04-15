@@ -14,17 +14,15 @@
 #import "DoraemonMemoryOscillogramWindow.h"
 
 @interface DoraemonMemoryOscillogramViewController ()
-
 @end
 
 @implementation DoraemonMemoryOscillogramViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
 - (NSString *)title{
-    return DoraemonLocalizedString(@"内存检测");
+    return @"Memory monitor";
 }
 
 - (NSString *)lowValue{
@@ -40,18 +38,14 @@
     [[DoraemonMemoryOscillogramWindow shareInstance] hide];
 }
 
-//每一秒钟采样一次内存使用率
 - (void)doSecondFunction{
     NSUInteger useMemoryForApp = [DoraemonMemoryUtil useMemoryForApp];
     NSUInteger totalMemoryForDevice = [self deviceMemory];
     
-    // 0~totalMemoryForDevice   对应 高度0~_oscillogramView.doraemon_height
     [self.oscillogramView addHeightValue:useMemoryForApp*self.oscillogramView.doraemon_height/totalMemoryForDevice andTipValue:[NSString stringWithFormat:@"%zi",useMemoryForApp]];
 }
 
 - (NSUInteger)deviceMemory {
     return 1000;
 }
-
-
 @end

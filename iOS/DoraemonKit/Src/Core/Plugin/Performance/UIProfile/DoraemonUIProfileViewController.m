@@ -12,20 +12,17 @@
 #import "DoraemonHomeWindow.h"
 
 @interface DoraemonUIProfileViewController () <DoraemonSwitchViewDelegate>
-
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
-
 @end
 
 @implementation DoraemonUIProfileViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = DoraemonLocalizedString(@"UI层级");
+    self.title = @"UI Hierarchy";
     
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750(104))];
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"UI层级检查开关") switchOn:[DoraemonUIProfileManager sharedInstance].enable];
+    [_switchView renderUIWithTitle:@"UI Hierarchy switch" switchOn:[DoraemonUIProfileManager sharedInstance].enable];
     [_switchView needTopLine];
     [_switchView needDownLine];
     _switchView.delegate = self;
@@ -41,5 +38,4 @@
     [DoraemonUIProfileManager sharedInstance].enable = on;
     [[DoraemonHomeWindow shareInstance] hide];
 }
-
 @end

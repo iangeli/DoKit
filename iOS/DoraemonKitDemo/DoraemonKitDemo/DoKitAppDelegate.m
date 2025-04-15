@@ -23,11 +23,9 @@
 #endif
 
 @interface DoKitAppDelegate ()
-
 @end
 
 @implementation DoKitAppDelegate
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //[DoraemonTimeProfiler startRecord];
@@ -41,13 +39,13 @@
     for (int i=0; i<10; i++) {
         //DDLogInfo(@"点击添加埋点11111");
     }
-    [[DoraemonManager shareInstance] addPluginWithTitle:DoraemonDemoLocalizedString(@"测试插件") icon:@"doraemon_default" desc:DoraemonDemoLocalizedString(@"测试插件") pluginName:@"TestPlugin" atModule:DoraemonDemoLocalizedString(@"业务工具")];
+    [[DoraemonManager shareInstance] addPluginWithTitle:DoraemonDemoLocalizedString(@"测试插件") icon:@"doraemon_default" desc:DoraemonDemoLocalizedString(@"测试插件") pluginName:@"TestPlugin" atModule:DoraemonDemoLocalizedString(@"Customize")];
 
-    [[DoraemonManager shareInstance] addPluginWithTitle:DoraemonDemoLocalizedString(@"block方式加入插件") icon:@"doraemon_default" desc:@"测试插件" pluginName:@"pluginName" atModule:DoraemonDemoLocalizedString(@"业务工具") handle:^(NSDictionary *itemData) {
+    [[DoraemonManager shareInstance] addPluginWithTitle:DoraemonDemoLocalizedString(@"block方式加入插件") icon:@"doraemon_default" desc:@"测试插件" pluginName:@"pluginName" atModule:DoraemonDemoLocalizedString(@"Customize") handle:^(NSDictionary *itemData) {
         NSLog(@"handle block plugin");
     }];
     
-    [[DoraemonManager shareInstance] addPluginWithTitle:@"自定图标" image:[UIImage imageNamed:@"zhaoliyin"] desc:@"自定义图标" pluginName:@"自定图标" atModule:DoraemonDemoLocalizedString(@"业务工具") handle:nil];
+    [[DoraemonManager shareInstance] addPluginWithTitle:@"自定图标" image:[UIImage imageNamed:@"zhaoliyin"] desc:@"自定义图标" pluginName:@"自定图标" atModule:DoraemonDemoLocalizedString(@"Customize") handle:nil];
 
     //测试 a49842eeebeb1989b3f9565eb12c276b
     //线上 749a0600b5e48dd77cf8ee680be7b1b7
@@ -75,7 +73,7 @@
     }];
     // 例子：移除 GPS Mock
 //    [[DoraemonManager shareInstance] installWithCustomBlock:^{
-//        [[DoraemonManager shareInstance] removePluginWithPluginName:@"DoraemonGPSPlugin" atModule:@"常用工具"];
+//        [[DoraemonManager shareInstance] removePluginWithPluginName:@"DoraemonGPSPlugin" atModule:@"Common"];
 //    }];
 
     for (int i=0; i<10; i++) {

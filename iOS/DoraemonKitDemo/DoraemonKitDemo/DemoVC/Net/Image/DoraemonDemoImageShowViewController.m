@@ -11,13 +11,11 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DoraemonDemoImageShowViewController ()
-
 @property (nonatomic, strong) UIImageView *imageView;
 
 @end
 
 @implementation DoraemonDemoImageShowViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setOriginalImage:_image];

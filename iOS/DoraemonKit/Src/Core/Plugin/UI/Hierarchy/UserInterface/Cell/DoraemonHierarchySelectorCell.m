@@ -8,11 +8,9 @@
 #import "DoraemonHierarchySelectorCell.h"
 
 @implementation DoraemonHierarchySelectorCell
-
 #pragma mark - Over write
 - (void)initUI {
     [super initUI];
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
-
 @end

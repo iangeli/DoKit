@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^DoraemonDemoMemoryLeakModelBlock)(void);
 
 @interface DoraemonDemoMemoryLeakModel : NSObject
-
 - (void)addBlock:(DoraemonDemoMemoryLeakModelBlock)block;
 
 - (void)install;

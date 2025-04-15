@@ -3,7 +3,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DKMoveView : UIView
-
 @property (nonatomic, assign, getter=isOverflow) BOOL overflow;
 
 // assign
@@ -20,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)viewWillUpdateOffset:(UIPanGestureRecognizer *)sender offset:(CGPoint)offsetPoint;
 
 - (void)viewDidUpdateOffset:(UIPanGestureRecognizer *)sender offset:(CGPoint)offsetPoint;
-
 @end
 
 NS_ASSUME_NONNULL_END

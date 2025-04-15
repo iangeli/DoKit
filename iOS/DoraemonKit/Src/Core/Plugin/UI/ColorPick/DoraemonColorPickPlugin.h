@@ -9,5 +9,4 @@
 #import "DoraemonPluginProtocol.h"
 
 @interface DoraemonColorPickPlugin : NSObject<DoraemonPluginProtocol>
-
 @end

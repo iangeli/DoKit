@@ -10,13 +10,11 @@
 #import "DoraemonDemoMemoryLeakModel.h"
 
 @interface DoraemonDemoMemoryLeakView()
-
 @property (nonatomic, strong) DoraemonDemoMemoryLeakModel *model;
 
 @end
 
 @implementation DoraemonDemoMemoryLeakView
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

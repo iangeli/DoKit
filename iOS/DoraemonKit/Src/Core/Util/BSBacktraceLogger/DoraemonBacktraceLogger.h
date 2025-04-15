@@ -14,12 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 #define DoraemonBSLOG_ALL NSLog(@"%@",[BSBacktraceLogger bs_backtraceOfAllThread]);
 
 @interface DoraemonBacktraceLogger : NSObject
-
 + (NSString *)doraemon_backtraceOfAllThread;
 + (NSString *)doraemon_backtraceOfCurrentThread;
 + (NSString *)doraemon_backtraceOfMainThread;
 + (NSString *)doraemon_backtraceOfNSThread:(NSThread *)thread;
-
 @end
 
 NS_ASSUME_NONNULL_END

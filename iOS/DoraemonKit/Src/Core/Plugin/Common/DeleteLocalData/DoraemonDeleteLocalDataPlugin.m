@@ -10,10 +10,8 @@
 #import "DoraemonDeleteLocalDataViewController.h"
 
 @implementation DoraemonDeleteLocalDataPlugin
-
 - (void)pluginDidLoad{
     DoraemonDeleteLocalDataViewController *vc = [[DoraemonDeleteLocalDataViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

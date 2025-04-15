@@ -13,23 +13,20 @@
 #import "DoraemonJavaScriptManager.h"
 
 @interface DoraemonJavaScriptDetailViewController ()
-
 @property (nonatomic, weak) UITextView  *textView;
-
 @end
 
 @implementation DoraemonJavaScriptDetailViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = DoraemonLocalizedString(@"脚本执行");
+    self.title = @"Execute Script";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(runScript)];
     UIEdgeInsets edge = UIEdgeInsetsMake(10, 10, 0, 10);
     CGFloat width = self.view.bounds.size.width - edge.left - edge.right;
     CGFloat height = self.view.bounds.size.height - edge.top - edge.bottom;
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(edge.left, edge.top + IPHONE_NAVIGATIONBAR_HEIGHT, width, 30)];
-    titleLabel.text = DoraemonLocalizedString(@"JS代码");
+    titleLabel.text = @"JS Code";
     
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(edge.left, CGRectGetMaxY(titleLabel.frame) + edge.top, width, height - 200)];
     textView.layer.borderWidth = 1 / UIScreen.mainScreen.scale;
@@ -51,12 +48,11 @@
 - (void)runScript {
     NSString *value = self.textView.text;
     if (value.length == 0) {
-        [DoraemonToastUtil showToastBlack:@"脚本不能为空" inView:self.view];
+        [DoraemonToastUtil showToastBlack:@"Code can not be empty" inView:self.view];
         return;
     }
     [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:value forKey:self.key];
     [DoraemonManager.shareInstance hiddenHomeWindow];
     [DoraemonJavaScriptManager.shareInstance evalJavaScript:value];
 }
-
 @end

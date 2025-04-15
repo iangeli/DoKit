@@ -12,7 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonHierarchyTitleCell : UITableViewCell
-
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 
 @property (nonatomic, strong, readonly) NSLayoutConstraint *titleLabelBottomCons;
@@ -20,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) DoraemonHierarchyCellModel *model;
 
 - (void)initUI;
-
 @end
 
 NS_ASSUME_NONNULL_END

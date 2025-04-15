@@ -28,7 +28,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
 @end
 
 @implementation DoraemonQRScanView
-
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor blackColor];
@@ -72,8 +71,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         if ([self.dataOutput.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
             self.dataOutput.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
         }
-     
-        // 获取光线强弱
+
         self.videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
         [self.videoDataOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
         
@@ -123,7 +121,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
         return;
     }
     [self.session stopRunning];
-    // 自动开启手电筒后，在执行了stopRunning时系统会关闭手电筒，这时重新打开手电筒，效果会闪一下，PM宫赫可接受，观察几个版本
+    
     if (self.device.torchMode == AVCaptureTorchModeOn) {
         [self.device lockForConfiguration:nil];
         [self.device setTorchMode:AVCaptureTorchModeOn];
@@ -132,24 +130,23 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     [self showScanLine:NO];
 }
 
-
 - (BOOL)statusCheck{
     if (![DoraemonQRScanView isCameraAvailable]){
-        [DoraemonAlertUtil handleAlertActionWithVC:[self doraemon_viewController] text:DoraemonLocalizedString(@"设备无相机——设备无相机功能，无法进行扫描")  okBlock:^{
+        [DoraemonAlertUtil handleAlertActionWithVC:[self doraemon_viewController] text:@"Device without camera"  okBlock:^{
             
         }];
         return NO;
     }
     
     if (![DoraemonQRScanView isRearCameraAvailable] && ![DoraemonQRScanView isFrontCameraAvailable]) {
-        [DoraemonAlertUtil handleAlertActionWithVC:[self doraemon_viewController] text:DoraemonLocalizedString(@"设备相机错误——无法启用相机，请检查")  okBlock:^{
+        [DoraemonAlertUtil handleAlertActionWithVC:[self doraemon_viewController] text:@"Device camera error"  okBlock:^{
             
         }];
         return NO;
     }
     
     if (![self isCameraAuthStatusCorrect]) {
-        [DoraemonAlertUtil handleAlertActionWithVC:[self doraemon_viewController] text:DoraemonLocalizedString(@"相机权限未开启，请到「设置-隐私-相机」中允许DoKit访问您的相机")  okBlock:^{
+        [DoraemonAlertUtil handleAlertActionWithVC:[self doraemon_viewController] text:@"Camera permission is not open"  okBlock:^{
             [DoraemonUtil openAppSetting];
         } cancleBlock:^{
             if(self.unopenCameraAuth){
@@ -218,12 +215,10 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     [self.scanLine.layer addAnimation:animation forKey:scanLineAnimationName];
 }
 
-
 - (void)removeScanLineAnimation{
     [self.scanLine.layer removeAnimationForKey:scanLineAnimationName];
     self.scanLine.hidden = YES;
 }
-
 
 #pragma mark - bezierPath
 
@@ -254,7 +249,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     [lineBezierPath addLineToPoint:(CGPoint){leftUpPoint.x + halfLineLong,leftUpPoint.y}];
     lineLayer.path = lineBezierPath.CGPath;
     [self.layer addSublayer:lineLayer];
-    
 
     CGPoint leftDownPoint = (CGPoint){self.scanRect.origin.x + spacing,self.scanRect.origin.y + self.scanRect.size.height - spacing};
     [lineBezierPath moveToPoint:(CGPoint){leftDownPoint.x,leftDownPoint.y - halfLineLong}];
@@ -284,8 +278,7 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     if (metadataObjects.count == 0) {
         return;
     }
-    
-    // 停止扫描
+
     [self stopScanning];
     
     NSString *result = [metadataObjects.firstObject stringValue];
@@ -316,7 +309,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     }
     return _scanRect;
 }
-
 
 - (UIView *)middleView{
     if (!_middleView) {
@@ -355,7 +347,6 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     return _scanLine;
 }
 
-
 - (UIColor *)cornerLineColor{
     if (!_cornerLineColor) {
         _cornerLineColor = [UIColor doraemon_orange];
@@ -376,5 +367,4 @@ static NSString *const scanLineAnimationName = @"scanLineAnimation";
     }
     return _scanLineColor;
 }
-
 @end

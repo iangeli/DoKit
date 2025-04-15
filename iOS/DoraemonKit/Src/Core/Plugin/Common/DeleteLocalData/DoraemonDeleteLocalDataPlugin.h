@@ -8,7 +8,5 @@
 #import <Foundation/Foundation.h>
 #import "DoraemonPluginProtocol.h"
 
-
 @interface DoraemonDeleteLocalDataPlugin : NSObject<DoraemonPluginProtocol>
-
 @end

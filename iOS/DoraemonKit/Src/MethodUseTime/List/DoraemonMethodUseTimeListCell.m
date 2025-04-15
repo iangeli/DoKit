@@ -9,14 +9,11 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonMethodUseTimeListCell()
-
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *rightLabel;
-
 @end
 
 @implementation DoraemonMethodUseTimeListCell
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -42,7 +39,6 @@
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.minimumScaleFactor = 0.1;
 
-    
     CGFloat cost = [dic[@"cost"] floatValue];
     NSString *costString = [NSString stringWithFormat:@"%.3fms",cost];
     self.rightLabel.text = costString;
@@ -54,7 +50,4 @@
 + (CGFloat)cellHeight{
     return kDoraemonSizeFrom750_Landscape(104);
 }
-
-
-
 @end

@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonHierarchyFormatterTool : NSObject
-
 /**
  Format date use style.
 
@@ -42,7 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
  @return Format string.
  */
 + (NSString *)stringFromFrame:(CGRect)frame;
-
 @end
 
 NS_ASSUME_NONNULL_END

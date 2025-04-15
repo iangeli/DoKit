@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonColorPickInfoWindow : UIWindow
-
 + (DoraemonColorPickInfoWindow *)shareInstance;
 
 - (void)show;
@@ -18,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)hide;
 
 - (void)setCurrentColor:(NSString *)hexColor;
-
 @end
 
 NS_ASSUME_NONNULL_END

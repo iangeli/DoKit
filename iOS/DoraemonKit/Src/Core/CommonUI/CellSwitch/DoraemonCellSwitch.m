@@ -9,15 +9,12 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonCellSwitch()
-
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *topLine;
 @property (nonatomic, strong) UIView *downLine;
-
 @end
 
 @implementation DoraemonCellSwitch
-
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -69,6 +66,4 @@
         [_delegate changeSwitchOn:on sender:sender];
     }
 }
-
-
 @end

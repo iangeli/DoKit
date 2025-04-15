@@ -16,22 +16,19 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonHierarchyDetailViewController ()
-
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 
 @property (nonatomic, strong) NSMutableArray *objectDatas;
 
 @property (nonatomic, strong) NSMutableArray *sizeDatas;
-
 @end
 
 @implementation DoraemonHierarchyDetailViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSAssert(self.selectView, @"SelectView can't be nil");
     
-    [self setTitle:DoraemonLocalizedString(@"UI结构")];
+    [self setTitle:@"UI Structure"];
     self.objectDatas = [[NSMutableArray alloc] init];
     self.sizeDatas = [[NSMutableArray alloc] init];
     
@@ -113,5 +110,4 @@
     }
     return _segmentedControl;
 }
-
 @end

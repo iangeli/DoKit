@@ -15,11 +15,9 @@
 #endif
 
 @interface DoraemonDemoLoggerViewController ()
-
 @end
 
 @implementation DoraemonDemoLoggerViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"日志测试Demo");

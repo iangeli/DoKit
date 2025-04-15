@@ -9,11 +9,9 @@
 #import "DoraemonDefine.h"
 
 @implementation DoraemonPoint
-
 @end
 
 @interface DoraemonOscillogramView()<UIScrollViewDelegate>
-
 @property (nonatomic, assign) CGFloat kStartX;
 
 @property (nonatomic, strong) NSMutableArray *pointList;
@@ -27,11 +25,9 @@
 
 @property (nonatomic, strong) CAShapeLayer *lineLayer;
 @property (nonatomic, strong) UILabel       *tipLabel;
-
 @end
 
 @implementation DoraemonOscillogramView
-
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -203,8 +199,4 @@
     _pointList = [NSMutableArray array];
     _tipLabel.hidden = YES;
 }
-
-
-
-
 @end

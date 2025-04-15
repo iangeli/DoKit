@@ -10,7 +10,6 @@
 static DoraemonHierarchyHelper *_instance = nil;
 
 @implementation DoraemonHierarchyHelper
-
 + (instancetype)shared {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -58,5 +57,4 @@ static DoraemonHierarchyHelper *_instance = nil;
     
     return [NSArray arrayWithArray:results];
 }
-
 @end

@@ -9,16 +9,13 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonMockGPSCenterView()
-
 @property (nonatomic, strong) UIView *circleView;
 @property (nonatomic, strong) UIImageView *locationIconView;
 @property (nonatomic, strong) UILabel *gpsLabel;
 @property (nonatomic, strong) UIImageView *arrowImageView;
-
 @end
 
 @implementation DoraemonMockGPSCenterView
-
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -69,5 +66,4 @@
     }
     return hitView;
 }
-
 @end

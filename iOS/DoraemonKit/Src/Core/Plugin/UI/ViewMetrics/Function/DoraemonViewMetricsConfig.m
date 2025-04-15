@@ -9,7 +9,6 @@
 #import "UIView+DoraemonViewMetrics.h"
 
 @implementation DoraemonViewMetricsConfig
-
 + (instancetype)defaultConfig
 {
     static DoraemonViewMetricsConfig *sharedInstance = nil;
@@ -39,5 +38,4 @@
         [window doraemonMetricsRecursiveEnable:enable];
     }
 }
-
 @end

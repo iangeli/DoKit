@@ -8,7 +8,6 @@
 #import "DoraemonTimeProfilerRecord.h"
 
 @implementation DoraemonTimeProfilerRecord
-
 - (NSString *)descriptionWithDepth {
     NSMutableString *str = [NSMutableString new];
     [str appendFormat:@"%2d| ",(int)_callDepth];
@@ -27,5 +26,4 @@
     [str appendFormat:@"%s[%@ %@]", (_isClassMethod ? "+" : "-"), _className, _methodName];
     return str;
 }
-
 @end

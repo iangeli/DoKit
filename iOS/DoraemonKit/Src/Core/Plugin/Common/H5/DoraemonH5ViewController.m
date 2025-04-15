@@ -9,39 +9,27 @@
 #import "UIView+Doraemon.h"
 #import "DoraemonToastUtil.h"
 #import "DoraemonDefine.h"
-#import "Doraemoni18NUtil.h"
 #import "DoraemonDefaultWebViewController.h"
 #import "DoraemonManager.h"
 #import "DoraemonQRCodeViewController.h"
 #import "DoraemonCacheManager.h"
 
 @interface DoraemonH5ViewController () <UITableViewDelegate, UITableViewDataSource>
-
 @property (nonatomic, strong) UITextView *h5UrlTextView;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic, strong) UIButton *jumpBtn;
-/// 扫码跳转
+
 @property (nonatomic, strong) UIButton *scanJumpBtn;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
 @end
 
 @implementation DoraemonH5ViewController
-
 #pragma mark - Life Cycle Methods
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"H5任意门");
-    
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
+    self.title = @"Browser";
         self.view.backgroundColor = [UIColor systemBackgroundColor];
-    } else {
-#endif
-        self.view.backgroundColor = [UIColor whiteColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    }
-#endif
     
     _h5UrlTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom + kDoraemonSizeFrom750_Landscape(32), self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(358))];
     _h5UrlTextView.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(32)];
@@ -57,7 +45,7 @@
     
     _jumpBtn = [[UIButton alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(30), self.view.doraemon_height-kDoraemonSizeFrom750_Landscape(30 + 100), self.view.doraemon_width-2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(100))];
     _jumpBtn.backgroundColor = [UIColor doraemon_colorWithHexString:@"#337CC4"];
-    [_jumpBtn setTitle:DoraemonLocalizedString(@"点击跳转") forState:UIControlStateNormal];
+    [_jumpBtn setTitle:@"Click to jump" forState:UIControlStateNormal];
     [_jumpBtn addTarget:self action:@selector(jump) forControlEvents:UIControlEventTouchUpInside];
     _jumpBtn.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(8);
     [self.view addSubview:_jumpBtn];
@@ -67,8 +55,7 @@
     self.tableView.frame = CGRectMake(0, _lineView.doraemon_bottom + kDoraemonSizeFrom750_Landscape(32), self.view.doraemon_width, _jumpBtn.doraemon_top - _lineView.doraemon_bottom - kDoraemonSizeFrom750_Landscape(32));
     
     [self.view bringSubviewToFront:_jumpBtn];
-    
-    // 监听键盘的显示和隐藏
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -91,7 +78,7 @@
 #pragma mark - Target Methods
 - (void)clickScan {
     if ([DoraemonAppInfoUtil isSimulator]) {
-        [DoraemonToastUtil showToastBlack:DoraemonLocalizedString(@"模拟器不支持扫码功能") inView:self.view];
+        [DoraemonToastUtil showToastBlack:@"The simulator does not support scanning" inView:self.view];
         return;
     }
     
@@ -108,12 +95,12 @@
 
 - (void)jump {
     if (_h5UrlTextView.text.length == 0) {
-        [DoraemonToastUtil showToastBlack:DoraemonLocalizedString(@"链接不能为空") inView:self.view];
+        [DoraemonToastUtil showToastBlack:@"url can not be nil" inView:self.view];
         return;
     }
     
     if (![NSURL URLWithString:_h5UrlTextView.text]) {
-        [DoraemonToastUtil showToastBlack:DoraemonLocalizedString(@"h5链接有误") inView:self.view];
+        [DoraemonToastUtil showToastBlack:@"The h5 link is incorrect" inView:self.view];
         return;
     }
     
@@ -130,9 +117,9 @@
 }
 
 #pragma mark - NSNotification
-// 当键盘出现或改变时调用（调整view位置，适应键盘高度，即：让view在键盘上）
+
 - (void)keyboardWillShow:(NSNotification *)aNotification {
-    // 获取键盘的高度
+    
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
@@ -151,7 +138,6 @@
     }];
 }
 
-// 当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     NSDictionary *userInfo = [aNotification userInfo];
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
@@ -199,7 +185,7 @@
     UIButton *clearButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
     clearButton.frame = CGRectMake((self.view.doraemon_width - kDoraemonSizeFrom750_Landscape(300))/2, kDoraemonSizeFrom750_Landscape(40), kDoraemonSizeFrom750_Landscape(300), kDoraemonSizeFrom750_Landscape(33));
 //    clearButton.backgroundColor = [UIColor orangeColor];
-    [clearButton setTitle:DoraemonLocalizedString(@"清除搜索历史") forState:(UIControlStateNormal)];
+    [clearButton setTitle:@"Clear search history" forState:(UIControlStateNormal)];
     [clearButton setTitleColor:[UIColor doraemon_colorWithHex:0x999999 andAlpha:1] forState:UIControlStateNormal];
     clearButton.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)];
     [clearButton addTarget:self action:@selector(clearRecord) forControlEvents:(UIControlEventTouchUpInside)];
@@ -213,7 +199,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return DoraemonLocalizedString(@"删除");
+    return @"Delete";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -222,15 +208,12 @@
     [self.tableView reloadData];
 }
 
-
-/// 清除记录
 - (void)clearRecord {
     [[DoraemonCacheManager sharedInstance] clearAllH5historicalRecord];
     self.dataSource = [[DoraemonCacheManager sharedInstance] h5historicalRecord];
     [self.tableView reloadData];
 }
 
-/// 地址修正
 - (NSString *)urlCorrectionWithURL:(NSString *)URL {
     if (!URL || URL.length <= 0) { return URL; }
     
@@ -276,5 +259,4 @@
     }
     return _scanJumpBtn;
 }
-
 @end

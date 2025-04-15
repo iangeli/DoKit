@@ -9,5 +9,4 @@
 #import "DoraemonPluginProtocol.h"
 
 @interface DoraemonSandboxPlugin : NSObject<DoraemonPluginProtocol>
-
 @end

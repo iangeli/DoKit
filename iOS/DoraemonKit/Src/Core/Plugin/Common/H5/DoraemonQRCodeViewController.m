@@ -10,30 +10,18 @@
 #import "DoraemonDefine.h"
 #import "DoraemonQRScanView.h"
 
-
 @interface DoraemonQRCodeViewController ()<DoraemonQRScanDelegate>
-
 @property (nonatomic, strong) DoraemonQRScanView *scanView;
-
 @end
 @implementation DoraemonQRCodeViewController
-
 - (void)leftNavBackClick:(id)clickView {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
         self.view.backgroundColor = [UIColor systemBackgroundColor];
-    } else {
-#endif
-       self.view.backgroundColor = [UIColor whiteColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    }
-#endif
-    self.title = DoraemonLocalizedString(@"扫描二维码");
+    self.title = @"QR Scanning";
     
 }
 
@@ -64,7 +52,6 @@
     }
 }
 
-
 #pragma mark -- DoraemonQRScanDelegate
 - (void)scanView:(DoraemonQRScanView *)scanView pickUpMessage:(NSString *)message{
     if(message.length>0){
@@ -79,5 +66,4 @@
 - (void)scanView:(DoraemonQRScanView *)scanView aroundBrightness:(NSString *)brightnessValue{
     
 }
-
 @end

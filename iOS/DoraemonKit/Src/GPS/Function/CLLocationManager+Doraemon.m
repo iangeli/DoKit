@@ -10,7 +10,6 @@
 #import <objc/runtime.h>
 
 @implementation CLLocationManager (Doraemon)
-
 - (void)doraemon_swizzleLocationDelegate:(id)delegate {
     if (delegate) {
         [self doraemon_swizzleLocationDelegate:[DoraemonGPSMocker shareInstance]];
@@ -35,5 +34,4 @@
         [self doraemon_swizzleLocationDelegate:delegate];
     }
 }
-
 @end

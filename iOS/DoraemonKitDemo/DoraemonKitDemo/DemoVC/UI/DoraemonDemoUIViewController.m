@@ -11,14 +11,12 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonDemoUIViewController ()
-
 @property (nonatomic, strong) UIView *redView;
 @property (nonatomic, strong) UILabel *titleLabelAAA;
 
 @end
 
 @implementation DoraemonDemoUIViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"视觉测试Demo");

@@ -9,7 +9,6 @@
 #import "DoraemonDefine.h"
 
 @implementation UIViewController (DoraemonHierarchy)
-
 - (UIViewController *)doraemon_currentShowingViewController {
     
     UIViewController *vc = self;
@@ -82,5 +81,4 @@
         [self presentViewController:alert animated:YES completion:nil];
     });
 }
-
 @end

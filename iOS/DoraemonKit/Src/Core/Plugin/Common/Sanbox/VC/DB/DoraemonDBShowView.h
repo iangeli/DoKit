@@ -10,9 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonDBShowView : UIView
-
 - (void)showText:(NSString *)text;
-
 @end
 
 NS_ASSUME_NONNULL_END

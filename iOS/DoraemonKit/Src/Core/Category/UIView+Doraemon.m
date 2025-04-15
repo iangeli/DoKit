@@ -11,7 +11,6 @@
 #define Doraemon_PIXEL_INTEGRAL(pointValue)      (round(pointValue * Doraemon_SCREEN_SCALE) / Doraemon_SCREEN_SCALE)
 
 @implementation UIView (Doraemon)
-
 @dynamic doraemon_x, doraemon_y, doraemon_width, doraemon_height, doraemon_origin, doraemon_size;
 
 // Setters
@@ -134,5 +133,4 @@
     }
     return result;
 }
-
 @end

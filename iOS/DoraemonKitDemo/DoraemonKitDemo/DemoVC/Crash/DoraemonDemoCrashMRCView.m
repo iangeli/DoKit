@@ -9,7 +9,6 @@
 #import "DoraemonDemoCrashMRCView.h"
 
 @implementation DoraemonDemoCrashMRCView
-
 - (instancetype)init {
     self = [super init];
     if (self) {

@@ -10,16 +10,13 @@
 #import "CLLocationManager+Doraemon.h"
 
 @interface DoraemonGPSMocker()<CLLocationManagerDelegate>
-
 @property (nonatomic, strong) NSMapTable *locationMonitor;
 @property (nonatomic,strong) CLLocation *oldLocation;
 @property (nonatomic, strong) CLLocation *pointLocation;
 @property (nonatomic,strong) NSTimer *simTimer;
-
 @end
 
 @implementation DoraemonGPSMocker
-
 + (void)load {
     [[DoraemonGPSMocker shareInstance] swizzleCLLocationMangagerDelegate];
 }
@@ -41,7 +38,6 @@
     }
     return self;
 }
-
 
 - (void)addLocationBinder:(id)binder delegate:(id)delegate{
     NSString *binderKey = [NSString stringWithFormat:@"%p_binder",binder];
@@ -99,7 +95,7 @@
 }
 
 #pragma mark - CLLocationManagerDelegate
-// 这个过期接口不能删掉，防止应用方实现了这个方法
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{

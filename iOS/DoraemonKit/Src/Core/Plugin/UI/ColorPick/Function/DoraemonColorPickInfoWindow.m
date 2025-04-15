@@ -10,7 +10,6 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonColorPickInfoController: UIViewController
-
 @end
 
 @implementation DoraemonColorPickInfoController
@@ -23,13 +22,10 @@
 @end
 
 @interface DoraemonColorPickInfoWindow () <DoraemonColorPickInfoViewDelegate>
-
 @property (nonatomic, strong) DoraemonColorPickInfoView *pickInfoView;
-
 @end
 
 @implementation DoraemonColorPickInfoWindow
-
 #pragma mark - Lifecycle
 
 + (DoraemonColorPickInfoWindow *)shareInstance{
@@ -50,16 +46,12 @@
     }
     
     if (self) {
-        #if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-            if (@available(iOS 13.0, *)) {
                 for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
                     if (windowScene.activationState == UISceneActivationStateForegroundActive){
                         self.windowScene = windowScene;
                         break;
                     }
                 }
-            }
-        #endif
         self.backgroundColor = [UIColor clearColor];
         self.windowLevel = UIWindowLevelAlert;
         if (!self.rootViewController) {
@@ -96,11 +88,8 @@
 #pragma mark - Actions
 
 - (void)pan:(UIPanGestureRecognizer *)sender{
-    //1、获得拖动位移
     CGPoint offsetPoint = [sender translationInView:sender.view];
-    //2、清空拖动位移
     [sender setTranslation:CGPointZero inView:sender.view];
-    //3、重新设置控件位置
     UIView *panView = sender.view;
     CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
     CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
@@ -120,6 +109,4 @@
 - (void)closePlugin:(NSNotification *)notification{
     [self hide];
 }
-
-
 @end

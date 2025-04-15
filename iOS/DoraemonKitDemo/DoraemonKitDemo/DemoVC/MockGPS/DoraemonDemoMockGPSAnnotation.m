@@ -9,5 +9,4 @@
 #import "DoraemonDemoMockGPSAnnotation.h"
 
 @implementation DoraemonDemoMockGPSAnnotation
-
 @end

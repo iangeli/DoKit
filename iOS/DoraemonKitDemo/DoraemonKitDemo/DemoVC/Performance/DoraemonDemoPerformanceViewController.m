@@ -29,7 +29,6 @@
 @end
 
 @implementation DoraemonDemoPerformanceViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"性能测试Demo");

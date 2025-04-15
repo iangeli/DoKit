@@ -8,7 +8,5 @@
 #import "DoraemonOscillogramWindow.h"
 
 @interface DoraemonFPSOscillogramWindow : DoraemonOscillogramWindow
-
 + (DoraemonFPSOscillogramWindow *)shareInstance;
-
 @end

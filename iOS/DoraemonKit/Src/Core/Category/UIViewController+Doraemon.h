@@ -8,11 +8,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (Doraemon)
-
 // safe area inset
 - (UIEdgeInsets)safeAreaInset;
 
-// 默认采用view frame | 调整刘海屏 | 支持转向调整
 - (CGRect) fullscreen;
 
 // key window root vc
@@ -22,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIViewController *)topViewControllerForKeyWindow;
 
 + (UIViewController *)rootViewControllerForDoraemonHomeWindow;
-
 @end
 
 NS_ASSUME_NONNULL_END

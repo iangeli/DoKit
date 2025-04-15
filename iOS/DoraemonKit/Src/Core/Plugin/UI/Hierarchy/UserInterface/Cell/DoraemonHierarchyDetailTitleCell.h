@@ -10,11 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonHierarchyDetailTitleCell : DoraemonHierarchyTitleCell
-
 @property (nonatomic, strong, readonly) UILabel *detailLabel;
 
 @property (nonatomic, strong, readonly) NSLayoutConstraint *detailLabelRightCons;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonJavaScriptViewController : DoraemonBaseViewController
-
 @end
 
 NS_ASSUME_NONNULL_END

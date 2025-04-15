@@ -11,13 +11,11 @@
 #import <DoraemonKit/DoraemonNavBarItemModel.h>
 
 @interface DoraemonDemoBaseViewController ()
-
 @property (nonatomic, strong) DoraemonNavBarItemModel *leftModel;
 
 @end
 
 @implementation DoraemonDemoBaseViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];

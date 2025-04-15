@@ -10,28 +10,21 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonDefaultWebViewController ()
-
-/** WebView */
 @property (nonatomic, strong) WKWebView *webView;
-/** 进度条 */
 @property (nonatomic, strong) UIProgressView *progressView;
-
 @end
 
 @implementation DoraemonDefaultWebViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"Doraemon内置浏览器");
-    
-    
+    self.title = @"Doraemon Built-in browser";
+
     [self.view addSubview:self.webView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.h5Url]]];
     
     [self.view addSubview:self.progressView];
     [self.view bringSubviewToFront:self.progressView];
-    
-    // 监听加载进度
+
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
 }
 
@@ -39,9 +32,8 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    // 加载进度条
+    
     if ([@"estimatedProgress" isEqualToString:keyPath]) {
         self.progressView.alpha = 1.0;
         NSLog(@"loding Progress: %lf", self.webView.estimatedProgress);
@@ -69,10 +61,9 @@
 - (UIProgressView *)progressView {
     if (!_progressView) {
         _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0.0, IPHONE_NAVIGATIONBAR_HEIGHT, DoraemonScreenWidth, 1.0)];
-        _progressView.tintColor = [UIColor doraemon_blue];      // 进度条颜色
-        _progressView.trackTintColor = [UIColor whiteColor];    // 进度条背景色
+        _progressView.tintColor = [UIColor doraemon_blue];      
+        _progressView.trackTintColor = [UIColor whiteColor];    
     }
     return _progressView;
 }
-
 @end

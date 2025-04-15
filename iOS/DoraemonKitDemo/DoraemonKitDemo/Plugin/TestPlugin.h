@@ -10,5 +10,4 @@
 #import <DoraemonKit/DoraemonPluginProtocol.h>
 
 @interface TestPlugin : NSObject<DoraemonPluginProtocol>
-
 @end

@@ -10,11 +10,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonMethodUseTimeListCell : UITableViewCell
-
 - (void)renderCellWithData:(NSDictionary *)dic;
 
 + (CGFloat)cellHeight;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,7 +9,6 @@
 #include <mach/mach.h>
 
 @implementation DoraemonMemoryUtil
-
 + (NSInteger)useMemoryForApp{
     task_vm_info_data_t vmInfo;
     mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
@@ -25,9 +24,7 @@
     }
 }
 
-//设备总的内存
 + (NSInteger)totalMemoryForDevice{
     return (NSInteger)([NSProcessInfo processInfo].physicalMemory/1024/1024);
 }
-
 @end

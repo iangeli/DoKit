@@ -10,11 +10,9 @@
 #import <WebKit/WebKit.h>
 
 @interface DoraemonWKWebViewViewController ()
-
 @end
 
 @implementation DoraemonWKWebViewViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     

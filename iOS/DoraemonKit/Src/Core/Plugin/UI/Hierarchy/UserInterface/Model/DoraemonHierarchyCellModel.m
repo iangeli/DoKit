@@ -12,7 +12,6 @@
 #import "DoraemonDefine.h"
 
 @implementation DoraemonHierarchyCellModel
-
 - (instancetype)initWithTitle:(NSString *)title flag:(BOOL)flag {
     return [self initWithTitle:title detailTitle:nil flag:flag];
 }
@@ -54,5 +53,4 @@
         _cellClass = NSStringFromClass(block ? DoraemonHierarchySelectorCell.class : DoraemonHierarchyDetailTitleCell.class);
     }
 }
-
 @end

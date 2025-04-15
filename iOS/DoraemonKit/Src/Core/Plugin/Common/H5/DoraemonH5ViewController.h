@@ -8,5 +8,4 @@
 #import "DoraemonBaseViewController.h"
 
 @interface DoraemonH5ViewController : DoraemonBaseViewController
-
 @end

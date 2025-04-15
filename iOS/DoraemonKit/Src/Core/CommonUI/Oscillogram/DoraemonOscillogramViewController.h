@@ -9,7 +9,6 @@
 #import "DoraemonOscillogramView.h"
 
 @interface DoraemonOscillogramViewController : UIViewController
-
 @property (nonatomic, strong) DoraemonOscillogramView *oscillogramView;
 @property (nonatomic, strong) UIButton *closeBtn;
 
@@ -20,5 +19,4 @@
 - (void)startRecord;
 - (void)endRecord;
 - (void)doSecondFunction;
-
 @end

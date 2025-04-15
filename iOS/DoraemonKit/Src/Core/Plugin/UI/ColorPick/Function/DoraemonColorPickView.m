@@ -11,14 +11,11 @@
 #import "UIColor+Doraemon.h"
 
 @interface DoraemonColorPickView()
-
 @property (nonatomic, strong) UIImageView *circleView;
 @property (nonatomic, strong) UILabel *colorLabel;
-
 @end
 
 @implementation DoraemonColorPickView
-
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -71,5 +68,4 @@
     _circleView.layer.borderColor = [UIColor doraemon_colorWithHexString:hexColor].CGColor;
     _colorLabel.text = hexColor;
 }
-
 @end

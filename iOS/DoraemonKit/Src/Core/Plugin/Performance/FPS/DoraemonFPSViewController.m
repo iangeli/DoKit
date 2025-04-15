@@ -13,19 +13,16 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonFPSViewController ()<DoraemonSwitchViewDelegate, DoraemonOscillogramWindowDelegate>
-
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
-
 @end
 
 @implementation DoraemonFPSViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"帧率检测");
+    self.title = @"FPS monitor";
     
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"帧率检测开关") switchOn:[[DoraemonCacheManager sharedInstance] fpsSwitch]];
+    [_switchView renderUIWithTitle:@"FPS monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] fpsSwitch]];
     [_switchView needTopLine];
     [_switchView needDownLine];
     _switchView.delegate = self;
@@ -33,11 +30,9 @@
     [[DoraemonFPSOscillogramWindow shareInstance] addDelegate:self];
 }
 
-
 - (BOOL)needBigTitleView{
     return YES;
 }
-
 
 #pragma mark -- DoraemonSwitchViewDelegate
 - (void)changeSwitchOn:(BOOL)on sender:(id)sender{
@@ -51,7 +46,6 @@
 
 #pragma mark -- DoraemonOscillogramWindowDelegate
 - (void)doraemonOscillogramWindowClosed {
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"帧率检测开关") switchOn:[[DoraemonCacheManager sharedInstance] fpsSwitch]];
+    [_switchView renderUIWithTitle:@"FPS monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] fpsSwitch]];
 }
-
 @end

@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonEnumDescription : NSObject
-
 + (NSString *_Nullable)lineBreakModeDescription:(NSLineBreakMode)mode;
 
 + (NSArray <NSString *>*)lineBreaks;
@@ -129,7 +128,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray <NSString *>*)layoutAttributes;
 
 + (NSString *_Nullable)layoutRelationDescription:(NSLayoutRelation)relation;
-
 @end
 
 NS_ASSUME_NONNULL_END

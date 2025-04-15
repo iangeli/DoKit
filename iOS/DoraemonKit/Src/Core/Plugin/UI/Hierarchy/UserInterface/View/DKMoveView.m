@@ -3,7 +3,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DKMoveView ()
-
 @property (nonatomic, assign) BOOL moved;
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
@@ -13,13 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)handleGesture:(nullable UIGestureRecognizer *)gestureRecognizer;
 
 - (void)changeFrameWithPoint:(CGPoint)point;
-
 @end
 
 NS_ASSUME_NONNULL_END
 
 @implementation DKMoveView
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     [self moveViewInit];
@@ -79,7 +76,6 @@ NS_ASSUME_NONNULL_END
     }
 
     if (!CGRectIsNull(self.movableRect)) {
-        // movableRect 指的是以 DKMoveView 父视图作为坐标系
         if (!CGRectContainsPoint(self.movableRect, center)) {
             if (center.x < self.movableRect.origin.x) {
                 center.x = self.movableRect.origin.x;
@@ -111,5 +107,4 @@ NS_ASSUME_NONNULL_END
 - (BOOL)isMovable {
     return self.panGestureRecognizer.enabled;
 }
-
 @end

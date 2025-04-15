@@ -8,9 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraemonViewCheckView : UIView
-
 - (void)hide;
 
 - (void)show;
-
 @end

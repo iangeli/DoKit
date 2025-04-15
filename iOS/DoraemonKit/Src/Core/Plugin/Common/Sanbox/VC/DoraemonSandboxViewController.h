@@ -8,5 +8,4 @@
 #import "DoraemonBaseViewController.h"
 
 @interface DoraemonSandboxViewController : DoraemonBaseViewController
-
 @end

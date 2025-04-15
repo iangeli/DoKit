@@ -9,11 +9,9 @@
 #import "DoraemonDBRowView.h"
 
 @interface DoraemonDBCell()
-
 @end
 
 @implementation DoraemonDBCell
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -31,5 +29,4 @@
 - (void)renderCellWithArray:(NSArray *)array{
     _rowView.dataArray = array;
 }
-
 @end

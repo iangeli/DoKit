@@ -8,5 +8,4 @@
 #import "DoraemonBaseViewController.h"
 
 @interface DoraemonANRViewController : DoraemonBaseViewController
-
 @end

@@ -9,13 +9,10 @@
 #import "DoraemonHierarchyCellModel.h"
 
 @interface DoraemonHierarchySwitchCell ()
-
 @property (nonatomic, strong) UISwitch *swit;
-
 @end
 
 @implementation DoraemonHierarchySwitchCell
-
 #pragma mark - Over write
 - (void)initUI {
     [super initUI];
@@ -53,5 +50,4 @@
     }
     return _swit;
 }
-
 @end

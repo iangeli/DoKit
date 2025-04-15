@@ -13,7 +13,6 @@
 #if kUnicodeReadable
 
 @implementation NSDictionary (DoraemonUnicodeReadable)
-
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level {
     NSMutableString *desc = [NSMutableString string];
     
@@ -28,8 +27,7 @@
     }
     
     [desc appendString:@"{\n"];
-    
-    // 遍历数组,self就是当前的数组
+
     for (id key in self.allKeys) {
         id obj = [self objectForKey:key];
         
@@ -40,12 +38,12 @@
                    || [obj isKindOfClass:[NSSet class]]) {
             [desc appendFormat:@"%@\t%@ = %@;\n", tab, key, [obj descriptionWithLocale:locale indent:level + 1]];
         } else if ([obj isKindOfClass:[NSData class]]) {
-            // 如果是NSData类型，尝试去解析结果，以打印出可阅读的数据
+            
             NSError *error = nil;
             NSObject *result =  [NSJSONSerialization JSONObjectWithData:obj
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:&error];
-            // 解析成功
+            
             if (error == nil && result != nil) {
                 if ([result isKindOfClass:[NSDictionary class]]
                     || [result isKindOfClass:[NSArray class]]
@@ -77,12 +75,9 @@
     
     return desc;
 }
-
 @end
 
-
 @implementation NSArray (DoraemonUnicodeReadable)
-
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level {
     NSMutableString *desc = [NSMutableString string];
     
@@ -106,12 +101,12 @@
         } else if ([obj isKindOfClass:[NSString class]]) {
             [desc appendFormat:@"%@\t\"%@\",\n", tab, obj];
         } else if ([obj isKindOfClass:[NSData class]]) {
-            // 如果是NSData类型，尝试去解析结果，以打印出可阅读的数据
+            
             NSError *error = nil;
             NSObject *result =  [NSJSONSerialization JSONObjectWithData:obj
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:&error];
-            // 解析成功
+            
             if (error == nil && result != nil) {
                 if ([result isKindOfClass:[NSDictionary class]]
                     || [result isKindOfClass:[NSArray class]]
@@ -149,12 +144,9 @@
         return [desc stringByReplacingOccurrencesOfString:@",\n" withString:@"\n" options:NSBackwardsSearch range:range];
     }
 }
-
 @end
 
-
 @implementation NSSet (DoraemonUnicodeReadable)
-
 - (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level {
     NSMutableString *desc = [NSMutableString string];
     
@@ -178,12 +170,12 @@
         } else if ([obj isKindOfClass:[NSString class]]) {
             [desc appendFormat:@"%@\t\"%@\",\n", tab, obj];
         } else if ([obj isKindOfClass:[NSData class]]) {
-            // 如果是NSData类型，尝试去解析结果，以打印出可阅读的数据
+            
             NSError *error = nil;
             NSObject *result =  [NSJSONSerialization JSONObjectWithData:obj
                                                                 options:NSJSONReadingMutableContainers
                                                                   error:&error];
-            // 解析成功
+            
             if (error == nil && result != nil) {
                 if ([result isKindOfClass:[NSDictionary class]]
                     || [result isKindOfClass:[NSArray class]]
@@ -221,7 +213,6 @@
         return [desc stringByReplacingOccurrencesOfString:@",\n" withString:@"\n" options:NSBackwardsSearch range:range];
     }
 }
-
 @end
 
 #endif

@@ -7,27 +7,22 @@
 
 #import "DoraemonViewCheckView.h"
 #import "DoraemonDefine.h"
-#import "Doraemoni18NUtil.h"
 #import "DoraemonVisualInfoWindow.h"
 #import <objc/runtime.h>
-
 
 static CGFloat const kViewCheckSize = 62;
 
 @interface DoraemonViewCheckView()
-
-@property (nonatomic, strong) UIView *viewBound;//当前需要探测的view的边框
-@property (nonatomic, strong) DoraemonVisualInfoWindow *infoWindow;//顶部被探测到的view的信息显示的UIwindow
+@property (nonatomic, strong) UIView *viewBound;
+@property (nonatomic, strong) DoraemonVisualInfoWindow *infoWindow;
 
 @property (nonatomic, assign) CGFloat left;
 @property (nonatomic, assign) CGFloat top;
 @property (nonatomic, strong) NSMutableArray *arrViewHit;
 @property (nonatomic, strong) UIView *oldView;
-
 @end
 
 @implementation DoraemonViewCheckView
-
 -(instancetype)init{
     self = [super init];
     if (self) {
@@ -149,7 +144,7 @@ static CGFloat const kViewCheckSize = 62;
 
 -(NSMutableAttributedString *)viewInfo:(UIView *)view{
     if (view) {
-        //获取属性名
+        
         UIView *tempView = view;
         NSString *ivarName = nil;
         while(tempView != nil && tempView != self.doraemon_viewController.view) {
@@ -170,30 +165,29 @@ static CGFloat const kViewCheckSize = 62;
         NSMutableString *showString = [[NSMutableString alloc] init];
         NSString *tempString = nil;
         if (ivarName) {
-            tempString = [NSString stringWithFormat:@"%@:%@(%@)",DoraemonLocalizedString(@"控件名称"),NSStringFromClass([view class]),ivarName];
+            tempString = [NSString stringWithFormat:@"%@:%@(%@)",@"Widget",NSStringFromClass([view class]),ivarName];
         }else{
-            tempString = [NSString stringWithFormat:@"%@:%@",DoraemonLocalizedString(@"控件名称"),NSStringFromClass([view class])];
+            tempString = [NSString stringWithFormat:@"%@:%@",@"Widget",NSStringFromClass([view class])];
         }
         NSLog(@"tempString == %@",tempString);
         [showString appendString:tempString];
         
-        tempString = [NSString stringWithFormat:DoraemonLocalizedString(@"\n控件位置：左%0.1lf  上%0.1lf  宽%0.1lf  高%0.1lf"),view.frame.origin.x,view.frame.origin.y,view.frame.size.width,view.frame.size.height];
+        tempString = [NSString stringWithFormat:@"\nposition：left%0.1lf  top%0.1lf  width%0.1lf  height%0.1lf",view.frame.origin.x,view.frame.origin.y,view.frame.size.width,view.frame.size.height];
         [showString appendString:tempString];
         
         if([view isKindOfClass:[UILabel class]]){
             UILabel *vLabel = (UILabel *)view;
-            tempString = [NSString stringWithFormat:DoraemonLocalizedString(@"\n背景颜色：%@  字体颜色：%@  字体大小：%.f"),[self hexFromUIColor:vLabel.backgroundColor],[self hexFromUIColor:vLabel.textColor],vLabel.font.pointSize];
+            tempString = [NSString stringWithFormat:@"\nbackgroundColor：%@  fontColor：%@  fontSize：%.f",[self hexFromUIColor:vLabel.backgroundColor],[self hexFromUIColor:vLabel.textColor],vLabel.font.pointSize];
             [showString appendString:tempString];
         }else if ([view isMemberOfClass:[UIView class]]) {
-            tempString = [NSString stringWithFormat:DoraemonLocalizedString(@"\n背景颜色：%@"),[self hexFromUIColor:view.backgroundColor]];
+            tempString = [NSString stringWithFormat:@"\nbackgroundColor：%@",[self hexFromUIColor:view.backgroundColor]];
             [showString appendString:tempString];
         }
         
         NSString *string = [NSString stringWithFormat:@"%@",showString];
-        // 行间距
+        
         NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
         style.lineSpacing = kDoraemonSizeFrom750_Landscape(12);
-        
 
         style.lineBreakMode = NSLineBreakByTruncatingTail;
         
@@ -246,19 +240,17 @@ static CGFloat const kViewCheckSize = 62;
     
     if (CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor)) != kCGColorSpaceModelRGB) {
         //return [NSString stringWithFormat:@"#FFFFFF"];
-        return @"单色色彩空间模式";
+        return @"Monochrome color space mode";
     }
     
     int alpha = (int)((CGColorGetComponents(color.CGColor))[3]*255.0);
     NSString *hex = [NSString stringWithFormat:@"#%02X%02X%02X", (int)((CGColorGetComponents(color.CGColor))[0]*255.0),
                      (int)((CGColorGetComponents(color.CGColor))[1]*255.0),
                      (int)((CGColorGetComponents(color.CGColor))[2]*255.0)];
-    if (alpha < 255) {//存在透明度
+    if (alpha < 255) {
         hex = [NSString stringWithFormat:@"%@ alpha:%.2f",hex,(CGColorGetComponents(color.CGColor))[3]];
     }
-    
-    
+
     return hex;
 }
-
 @end

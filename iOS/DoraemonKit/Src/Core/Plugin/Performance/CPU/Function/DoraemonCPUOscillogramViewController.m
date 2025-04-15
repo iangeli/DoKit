@@ -13,18 +13,15 @@
 #import "DoraemonCPUOscillogramWindow.h"
 
 @interface DoraemonCPUOscillogramViewController ()
-
-
 @end
 
 @implementation DoraemonCPUOscillogramViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
 - (NSString *)title{
-    return DoraemonLocalizedString(@"CPU检测");
+    return @"CPU monitor";
 }
 
 - (NSString *)lowValue{
@@ -40,7 +37,6 @@
     [[DoraemonCPUOscillogramWindow shareInstance] hide];
 }
 
-//每一秒钟采样一次cpu使用率
 - (void)doSecondFunction{
     CGFloat cpuUsage = [DoraemonCPUUtil cpuUsageForApp];
     if (cpuUsage * 100 > 100) {
@@ -48,8 +44,6 @@
     }else{
         cpuUsage = cpuUsage * 100;
     }
-    // 0~100   对应 高度0~_oscillogramView.doraemon_height
     [self.oscillogramView addHeightValue:cpuUsage*self.oscillogramView.doraemon_height/100. andTipValue:[NSString stringWithFormat:@"%.f",cpuUsage]];
 }
-
 @end

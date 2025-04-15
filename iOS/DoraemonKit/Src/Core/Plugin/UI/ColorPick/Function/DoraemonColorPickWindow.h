@@ -8,11 +8,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraemonColorPickWindow : UIWindow
-
 + (DoraemonColorPickWindow *)shareInstance;
 
 - (void)show;
 
 - (void)hide;
-
 @end

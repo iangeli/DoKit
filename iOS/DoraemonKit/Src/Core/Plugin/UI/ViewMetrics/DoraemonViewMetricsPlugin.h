@@ -9,6 +9,5 @@
 #import "DoraemonPluginProtocol.h"
 
 @interface DoraemonViewMetricsPlugin : NSObject <DoraemonPluginProtocol>
-
 @end
 

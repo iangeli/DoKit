@@ -12,13 +12,10 @@
 #import "DoraemonNavigationController.h"
 
 @interface DoraemonHomeWindow()
-
 - (void)openPlugin:(UIViewController *)vc;
-
 @end
 
 @implementation DoraemonHomeWindow
-
 + (DoraemonHomeWindow *)shareInstance{
     static dispatch_once_t once;
     static DoraemonHomeWindow *instance;
@@ -34,16 +31,12 @@
         self.windowLevel = UIWindowLevelStatusBar - 1.f;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;
-        #if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-            if (@available(iOS 13.0, *)) {
-                for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-                    if (windowScene.activationState == UISceneActivationStateForegroundActive){
-                        self.windowScene = windowScene;
-                        break;
-                    }
-                }
+        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
+            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+                self.windowScene = windowScene;
+                break;
             }
-        #endif
+        }
     }
     return self;
 }
@@ -90,5 +83,4 @@
 + (void)openPlugin:(UIViewController *)vc{
     [[self shareInstance] openPlugin:vc];
 }
-
 @end

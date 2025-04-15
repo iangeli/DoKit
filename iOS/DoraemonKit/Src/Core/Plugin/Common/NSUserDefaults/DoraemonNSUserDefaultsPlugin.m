@@ -14,5 +14,4 @@
     DoraemonNSUserDefaultsViewController *vc = [[DoraemonNSUserDefaultsViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

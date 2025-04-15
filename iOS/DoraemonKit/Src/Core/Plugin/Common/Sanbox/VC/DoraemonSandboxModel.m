@@ -8,5 +8,4 @@
 #import "DoraemonSandboxModel.h"
 
 @implementation DoraemonSandboxModel
-
 @end

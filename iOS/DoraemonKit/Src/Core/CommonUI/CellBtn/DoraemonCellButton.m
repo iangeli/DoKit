@@ -9,17 +9,14 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonCellButton()
-
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *rightLabel;
 @property (nonatomic, strong) UIView *topLine;
 @property (nonatomic, strong) UIView *downLine;
 @property (nonatomic, strong) UIImageView *arrowImageView;
-
 @end
 
 @implementation DoraemonCellButton
-
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -83,5 +80,4 @@
         [_delegate cellBtnClick:self];
     }
 }
-
 @end

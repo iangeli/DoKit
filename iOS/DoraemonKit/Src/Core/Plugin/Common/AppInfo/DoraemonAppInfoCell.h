@@ -8,9 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraemonAppInfoCell : UITableViewCell
-
 - (void)renderUIWithData:(NSDictionary *)data;
 
 + (CGFloat)cellHeight;
-
 @end

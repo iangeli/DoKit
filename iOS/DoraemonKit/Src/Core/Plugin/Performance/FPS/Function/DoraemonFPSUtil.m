@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraemonFPSUtil()
-
 @property (nonatomic, strong) CADisplayLink *link;
 @property (nonatomic, assign) NSUInteger count;
 @property (nonatomic, assign) NSTimeInterval lastTime;
@@ -19,7 +18,6 @@
 @end
 
 @implementation DoraemonFPSUtil
-
 - (instancetype)init{
     self = [super init];
     if (self) {
@@ -72,5 +70,4 @@
 - (void)addFPSBlock:(void(^)(NSInteger fps))block{
     self.block = block;
 }
-
 @end

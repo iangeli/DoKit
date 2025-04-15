@@ -19,7 +19,6 @@
 NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHierarchyChangeNotificationName";
 
 @implementation NSObject (DoraemonHierarchy)
-
 #pragma mark - Public
 - (NSArray <DoraemonHierarchyCategoryModel *>*)doraemon_hierarchyCategoryModels {
     
@@ -283,11 +282,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     [attribute replaceCharactersInRange:NSMakeRange(0, string.length) withString:newString];
     [self setValue:string forKey:key];
 }
-
 @end
 
 @implementation UIView (DoraemonHierarchy)
-
 #pragma mark - Public
 - (NSArray <DoraemonHierarchyCategoryModel *>*)doraemon_sizeHierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
@@ -485,22 +482,18 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     DoraemonHierarchyCellModel *model15 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Trait Collection" detailTitle:nil] noneInsets];
     [settings addObject:model15];
     
-    if (@available(iOS 12.0, *)) {
-        DoraemonHierarchyCellModel *model16 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[DoraemonEnumDescription userInterfaceStyleDescription:self.traitCollection.userInterfaceStyle]] noneInsets];
-        [settings addObject:model16];
-    }
-    
+    DoraemonHierarchyCellModel *model16 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[DoraemonEnumDescription userInterfaceStyleDescription:self.traitCollection.userInterfaceStyle]] noneInsets];
+    [settings addObject:model16];
+
     DoraemonHierarchyCellModel *model17 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[@"Vertical" stringByAppendingFormat:@" %@",[DoraemonEnumDescription userInterfaceSizeClassDescription:self.traitCollection.verticalSizeClass]]] noneInsets];
     [settings addObject:model17];
     
     DoraemonHierarchyCellModel *model18 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[@"Horizontal" stringByAppendingFormat:@" %@",[DoraemonEnumDescription userInterfaceSizeClassDescription:self.traitCollection.horizontalSizeClass]]] noneInsets];
     [settings addObject:model18];
-    
-    if (@available(iOS 10.0, *)) {
-        DoraemonHierarchyCellModel *model19 = [[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[DoraemonEnumDescription traitEnvironmentLayoutDirectionDescription:self.traitCollection.layoutDirection]];
-        [settings addObject:model19];
-    }
-    
+
+    DoraemonHierarchyCellModel *model19 = [[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[DoraemonEnumDescription traitEnvironmentLayoutDirectionDescription:self.traitCollection.layoutDirection]];
+    [settings addObject:model19];
+
     DoraemonHierarchyCategoryModel *model = [[DoraemonHierarchyCategoryModel alloc] initWithTitle:@"View" items:settings];
     
     NSMutableArray *models = [[NSMutableArray alloc] initWithArray:[super doraemon_hierarchyCategoryModels]];
@@ -549,11 +542,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     [string appendFormat:@" @ %@",[DoraemonHierarchyFormatterTool formatNumber:@(constraint.priority)]];
     return string;
 }
-
 @end
 
 @implementation UILabel (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -657,11 +648,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIControl (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     
@@ -714,11 +703,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIButton (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     
     __weak typeof(self) weakSelf = self;
@@ -832,11 +819,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIImageView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     
@@ -865,11 +850,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UITextField (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     
@@ -1030,11 +1013,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UISegmentedControl (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     
@@ -1061,9 +1042,7 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
         }];
     };
     [settings addObject:model3];
-    
-#ifdef __IPHONE_13_0
-    if (@available(iOS 13.0, *)) {
+
         DoraemonHierarchyCellModel *model4 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Large title" detailTitle:[self doraemon_hierarchyTextDescription:self.largeContentTitle]] noneInsets];
         model4.block = ^{
             [weakSelf doraemon_showTextAlertAndAutomicSetWithKeyPath:@"largeContentTitle"];
@@ -1072,9 +1051,7 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
         
         DoraemonHierarchyCellModel *model5 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Image" detailTitle: [self doraemon_hierarchyImageDescription:self.largeContentImage]] noneInsets];
         [settings addObject:model5];
-    }
-#endif
-    
+
     DoraemonHierarchyCellModel *model6 = [[DoraemonHierarchyCellModel alloc] initWithTitle:@"Selected" detailTitle:[self isEnabledForSegmentAtIndex:self.selectedSegmentIndex] ? @"Enabled" : @"Not Enabled"];
     [settings addObject:model6];
     
@@ -1101,11 +1078,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UISlider (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -1169,11 +1144,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UISwitch (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -1207,11 +1180,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIActivityIndicatorView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -1224,11 +1195,7 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
             if (index <= UIActivityIndicatorViewStyleGray) {
                 weakSelf.activityIndicatorViewStyle = index;
             } else {
-                #if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-                if (@available(iOS 13.0, *)) {
                     weakSelf.activityIndicatorViewStyle = index + (UIActivityIndicatorViewStyleMedium - UIActivityIndicatorViewStyleGray - 1);
-                }
-                #endif
             }
 #pragma clang diagnostic pop
         }];
@@ -1273,11 +1240,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIProgressView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -1324,11 +1289,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIPageControl (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -1391,11 +1354,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIStepper (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     
     __weak typeof(self)weakSelf = self;
@@ -1457,11 +1418,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIScrollView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     
@@ -1578,11 +1537,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UITableView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -1621,17 +1578,15 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     
     DoraemonHierarchyCellModel *model8 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[self doraemon_hierarchyInsetsLeftRightDescription:self.separatorInset]] noneInsets];
     [settings addObject:model8];
-    
-    if (@available(iOS 11.0, *)) {
-        DoraemonHierarchyCellModel *model9 = [[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[DoraemonEnumDescription tableViewSeparatorInsetReferenceDescription:self.separatorInsetReference]];
-        model9.block = ^{
-            [weakSelf doraemon_showActionSheetWithActions:[DoraemonEnumDescription tableViewSeparatorInsetReferences] currentAction:[DoraemonEnumDescription tableViewSeparatorInsetReferenceDescription:weakSelf.separatorInsetReference] completion:^(NSInteger index) {
-                weakSelf.separatorInsetReference = index;
-            }];
-        };
-        [settings addObject:model9];
-    }
-    
+
+    DoraemonHierarchyCellModel *model9 = [[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:[DoraemonEnumDescription tableViewSeparatorInsetReferenceDescription:self.separatorInsetReference]];
+    model9.block = ^{
+        [weakSelf doraemon_showActionSheetWithActions:[DoraemonEnumDescription tableViewSeparatorInsetReferences] currentAction:[DoraemonEnumDescription tableViewSeparatorInsetReferenceDescription:weakSelf.separatorInsetReference] completion:^(NSInteger index) {
+            weakSelf.separatorInsetReference = index;
+        }];
+    };
+    [settings addObject:model9];
+
     DoraemonHierarchyCellModel *model10 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Selection" detailTitle:self.allowsSelection ? @"Allowed" : @"Disabled" flag:self.allowsSelection] noneInsets];
     model10.changePropertyBlock = ^(id  _Nullable obj) {
         weakSelf.allowsSelection = [obj boolValue];
@@ -1715,11 +1670,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UITableViewCell (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -1799,11 +1752,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UICollectionView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     NSMutableArray *settings = [[NSMutableArray alloc] init];
     
@@ -1829,11 +1780,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UICollectionReusableView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     NSMutableArray *settings = [[NSMutableArray alloc] init];
     
@@ -1850,11 +1799,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UITextView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     
@@ -1953,40 +1900,36 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     };
     [settings addObject:model12];
     
-    if (@available(iOS 10.0, *)) {
-        DoraemonHierarchyCellModel *model13 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Shipment Tracking Number" flag:self.dataDetectorTypes & UIDataDetectorTypeShipmentTrackingNumber] noneInsets];
-        model13.changePropertyBlock = ^(id  _Nullable obj) {
-            if ([obj boolValue]) {
-                weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes | UIDataDetectorTypeShipmentTrackingNumber;
-            } else {
-                weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes & ~UIDataDetectorTypeShipmentTrackingNumber;
-            }
-        };
-        [settings addObject:model13];
-        
-        DoraemonHierarchyCellModel *model14 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Flight Number" flag:self.dataDetectorTypes & UIDataDetectorTypeFlightNumber] noneInsets];
-        model14.changePropertyBlock = ^(id  _Nullable obj) {
-            if ([obj boolValue]) {
-                weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes | UIDataDetectorTypeFlightNumber;
-            } else {
-                weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes & ~UIDataDetectorTypeFlightNumber;
-            }
-        };
-        [settings addObject:model14];
-        
-        DoraemonHierarchyCellModel *model15 = [[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Lookup Suggestion" flag:self.dataDetectorTypes & UIDataDetectorTypeLookupSuggestion];
-        model15.changePropertyBlock = ^(id  _Nullable obj) {
-            if ([obj boolValue]) {
-                weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes | UIDataDetectorTypeLookupSuggestion;
-            } else {
-                weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes & ~UIDataDetectorTypeLookupSuggestion;
-            }
-        };
-        [settings addObject:model15];
-    } else {
-        [model12 normalInsets];
-    }
-    
+    DoraemonHierarchyCellModel *model13 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Shipment Tracking Number" flag:self.dataDetectorTypes & UIDataDetectorTypeShipmentTrackingNumber] noneInsets];
+    model13.changePropertyBlock = ^(id  _Nullable obj) {
+        if ([obj boolValue]) {
+            weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes | UIDataDetectorTypeShipmentTrackingNumber;
+        } else {
+            weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes & ~UIDataDetectorTypeShipmentTrackingNumber;
+        }
+    };
+    [settings addObject:model13];
+
+    DoraemonHierarchyCellModel *model14 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Flight Number" flag:self.dataDetectorTypes & UIDataDetectorTypeFlightNumber] noneInsets];
+    model14.changePropertyBlock = ^(id  _Nullable obj) {
+        if ([obj boolValue]) {
+            weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes | UIDataDetectorTypeFlightNumber;
+        } else {
+            weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes & ~UIDataDetectorTypeFlightNumber;
+        }
+    };
+    [settings addObject:model14];
+
+    DoraemonHierarchyCellModel *model15 = [[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Lookup Suggestion" flag:self.dataDetectorTypes & UIDataDetectorTypeLookupSuggestion];
+    model15.changePropertyBlock = ^(id  _Nullable obj) {
+        if ([obj boolValue]) {
+            weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes | UIDataDetectorTypeLookupSuggestion;
+        } else {
+            weakSelf.dataDetectorTypes = weakSelf.dataDetectorTypes & ~UIDataDetectorTypeLookupSuggestion;
+        }
+    };
+    [settings addObject:model15];
+
     DoraemonHierarchyCellModel *model16 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Capitalization" detailTitle:[DoraemonEnumDescription textAutocapitalizationTypeDescription:self.autocapitalizationType]] noneInsets];
     model16.block = ^{
         [weakSelf doraemon_showActionSheetWithActions:[DoraemonEnumDescription textAutocapitalizationTypes] currentAction:[DoraemonEnumDescription textAutocapitalizationTypeDescription:weakSelf.autocapitalizationType] completion:^(NSInteger index) {
@@ -2051,11 +1994,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIDatePicker (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -2108,11 +2049,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UIPickerView (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     NSMutableArray *settings = [[NSMutableArray alloc] init];
     
@@ -2129,11 +2068,9 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     }
     return [models copy];
 }
-
 @end
 
 @implementation UINavigationBar (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self)weakSelf = self;
     
@@ -2153,16 +2090,14 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
         [weakSelf doraemon_postHierarchyChangeNotification];
     };
     [settings addObject:model2];
-    
-    if (@available(iOS 11.0, *)) {
-        DoraemonHierarchyCellModel *model3 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Prefers Large Titles" flag:self.prefersLargeTitles] noneInsets];
-        model3.changePropertyBlock = ^(id  _Nullable obj) {
-            weakSelf.prefersLargeTitles = [obj boolValue];
-            [weakSelf doraemon_postHierarchyChangeNotification];
-        };
-        [settings addObject:model3];
-    }
-    
+
+    DoraemonHierarchyCellModel *model3 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:nil detailTitle:@"Prefers Large Titles" flag:self.prefersLargeTitles] noneInsets];
+    model3.changePropertyBlock = ^(id  _Nullable obj) {
+        weakSelf.prefersLargeTitles = [obj boolValue];
+        [weakSelf doraemon_postHierarchyChangeNotification];
+    };
+    [settings addObject:model3];
+
     DoraemonHierarchyCellModel *model4 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Bar Tint" detailTitle:[self doraemon_hierarchyColorDescription:self.barTintColor]] noneInsets];
     model4.block = ^{
         [weakSelf doraemon_showColorAlertAndAutomicSetWithKeyPath:@"barTintColor"];
@@ -2211,24 +2146,22 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
     DoraemonHierarchyCellModel *model12 = [[DoraemonHierarchyCellModel alloc] initWithTitle:@"Shadow Offset" detailTitle:[self doraemon_hierarchySizeDescription:shadow.shadowOffset]];
     [settings addObject:model12];
     
-    if (@available(iOS 11.0, *)) {
-        DoraemonHierarchyCellModel *model13 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Large Title Attr." detailTitle:nil] noneInsets];
-        [settings addObject:model13];
-        
-        DoraemonHierarchyCellModel *model14 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Title Font" detailTitle:[self doraemon_hierarchyColorDescription:self.largeTitleTextAttributes[NSFontAttributeName]]] noneInsets];
-        if (self.largeTitleTextAttributes[NSFontAttributeName]) {
-            model14.block = ^{
-                __block UIFont *font = weakSelf.largeTitleTextAttributes[NSFontAttributeName];
-                if (!font) {
-                    return;
-                }
-                [weakSelf doraemon_showTextFieldAlertWithText:[NSString stringWithFormat:@"%@",[DoraemonHierarchyFormatterTool formatNumber:@(font.pointSize)]] handler:^(NSString * _Nullable newText) {
-                    NSMutableDictionary *attributes = [[NSMutableDictionary alloc] initWithDictionary:weakSelf.largeTitleTextAttributes];
-                    attributes[NSFontAttributeName] = [font fontWithSize:[newText doubleValue]];
-                    weakSelf.largeTitleTextAttributes = [attributes copy];
-                }];
-            };
-        }
+    DoraemonHierarchyCellModel *model13 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Large Title Attr." detailTitle:nil] noneInsets];
+    [settings addObject:model13];
+
+    DoraemonHierarchyCellModel *model14 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Title Font" detailTitle:[self doraemon_hierarchyColorDescription:self.largeTitleTextAttributes[NSFontAttributeName]]] noneInsets];
+    if (self.largeTitleTextAttributes[NSFontAttributeName]) {
+        model14.block = ^{
+            __block UIFont *font = weakSelf.largeTitleTextAttributes[NSFontAttributeName];
+            if (!font) {
+                return;
+            }
+            [weakSelf doraemon_showTextFieldAlertWithText:[NSString stringWithFormat:@"%@",[DoraemonHierarchyFormatterTool formatNumber:@(font.pointSize)]] handler:^(NSString * _Nullable newText) {
+                NSMutableDictionary *attributes = [[NSMutableDictionary alloc] initWithDictionary:weakSelf.largeTitleTextAttributes];
+                attributes[NSFontAttributeName] = [font fontWithSize:[newText doubleValue]];
+                weakSelf.largeTitleTextAttributes = [attributes copy];
+            }];
+        };
         [settings addObject:model14];
         
         DoraemonHierarchyCellModel *model15 = [[[DoraemonHierarchyCellModel alloc] initWithTitle:@"Title Color" detailTitle:[self doraemon_hierarchyColorDescription:self.largeTitleTextAttributes[NSForegroundColorAttributeName]]] noneInsets];
@@ -2260,7 +2193,6 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
 @end
 
 @implementation UIToolbar (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     
@@ -2301,7 +2233,6 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
 @end
 
 @implementation UITabBar (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -2370,7 +2301,6 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
 @end
 
 @implementation UISearchBar (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     __weak typeof(self) weakSelf = self;
     NSMutableArray *settings = [[NSMutableArray alloc] init];
@@ -2503,7 +2433,6 @@ NSNotificationName const DoraemonHierarchyChangeNotificationName = @"DoraemonHie
 @end
 
 @implementation UIWindow (DoraemonHierarchy)
-
 - (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels {
     NSMutableArray *settings = [[NSMutableArray alloc] init];
     

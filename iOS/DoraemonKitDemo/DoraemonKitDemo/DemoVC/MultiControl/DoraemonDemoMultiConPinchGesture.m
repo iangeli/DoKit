@@ -10,7 +10,6 @@
 #import "UIView+Doraemon.h"
 #import "UIImage+Doraemon.h"
 @interface DoraemonDemoMultiConPinchGesture ()
-
 @property (nonatomic, strong)UIImageView *imageview;
 @property (nonatomic,strong) UIView * backgroundView;
 @property (nonatomic) BOOL isLargeView;
@@ -20,7 +19,6 @@
 
 
 @implementation DoraemonDemoMultiConPinchGesture
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"长安事件");

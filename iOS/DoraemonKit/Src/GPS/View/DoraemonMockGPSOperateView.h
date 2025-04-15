@@ -7,10 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface DoraemonMockGPSOperateView : UIView
-
 @property (nonatomic, strong) UISwitch *switchView;
-
 @end
 

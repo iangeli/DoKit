@@ -13,7 +13,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonHierarchyHelper : NSObject
-
 + (instancetype _Nonnull)shared;
 
 // DoraemonHierarchyWindow isn't a shared instance, so we need a object onwer it when show, and free it when hide.
@@ -24,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray <UIWindow *>*)allWindows;
 
 - (NSArray <UIWindow *>*)allWindowsIgnorePrefix:(NSString *_Nullable)prefix;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,5 +9,4 @@
 #import "DoraemonPluginProtocol.h"
 
 @interface DoraemonAppInfoPlugin : NSObject<DoraemonPluginProtocol>
-
 @end

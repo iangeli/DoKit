@@ -1,33 +1,24 @@
-//
-//  DoraemonPieChart.m
-//  DoraemonKit
-//
-//  Created by 0xd on 2019/9/25.
-//  Copyright © 2019 000. All rights reserved.
-//
+    //
+    //  DoraemonPieChart.m
+    //  DoraemonKit
+    //
+    //  Created by 0xd on 2019/9/25.
+    //  Copyright © 2019 000. All rights reserved.
+    //
 
 #import "DoraemonPieChart.h"
 
 @implementation DoraemonPieChart
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            self.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                    return [UIColor secondarySystemBackgroundColor];
-                } else {
-                    return [UIColor whiteColor];
-                }
-            }];
-        } else {
-#endif
-            self.backgroundColor = [UIColor whiteColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        }
-#endif
+        self.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [UIColor secondarySystemBackgroundColor];
+            } else {
+                return [UIColor whiteColor];
+            }
+        }];
         self.itemDescriptionFont =  [UIFont systemFontOfSize:11];
         self.itemDescriptionTextColor = [UIColor whiteColor];
         self.innerCircleRadiusRatio = 0.3;
@@ -58,7 +49,7 @@
     [self.items enumerateObjectsUsingBlock:^(DoraemonChartDataItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
         CGFloat currentAngle = item.value / sum * M_PI * 2;
         CGFloat startAngle = lastestEndAngle;
-
+        
         CGFloat endAngle = startAngle + currentAngle;
         
         CAShapeLayer *shapeLayer = [self shapeLayerRadius:outerCircleRadius
@@ -67,7 +58,7 @@
                                                 fillColor:item.color
                                                startAngle:startAngle
                                                  endAngle:endAngle
-                                                    name:item.name
+                                                     name:item.name
                                                   precent:item.value / sum * 100];
         [self.layer addSublayer:shapeLayer];
         lastestEndAngle = endAngle;
@@ -81,9 +72,9 @@
                          fillColor:(UIColor *)fillColor
                         startAngle:(CGFloat)startAngle
                           endAngle:(CGFloat)endAngle
-                             name:(NSString *)name
+                              name:(NSString *)name
                            precent:(CGFloat)precent {
-
+    
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:center];
     [path addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
@@ -100,7 +91,7 @@
     NSString *precentText = [[self.vauleFormatter stringFromNumber:[NSNumber numberWithDouble:precent]] stringByAppendingString:@"%"];
     textLayer.string = [precentText stringByAppendingFormat:@"\n%@",name];
     textLayer.contentsScale = [UIScreen mainScreen].scale;
-    // 计算文字中心点
+        
     CGFloat textCenterAngle = startAngle + (endAngle - startAngle) / 2;
     CGSize textLayerSize = textLayer.preferredFrameSize;
     CGFloat textLayerOriginX = cos(textCenterAngle) * (radius + innerCircleRadius) / 2 + center.x - textLayerSize.width / 2;
@@ -120,5 +111,4 @@
     shape.fillColor = [UIColor whiteColor].CGColor;
     [self.layer addSublayer:shape];
 }
-
 @end

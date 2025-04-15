@@ -10,11 +10,9 @@
 #import "DoraemonManager.h"
 
 @interface DoraemonNavigationController ()
-
 @end
 
 @implementation DoraemonNavigationController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -33,5 +31,4 @@
     // Pass the selected object to the new view controller.
 }
 */
-
 @end

@@ -8,7 +8,6 @@
 #import "DoraemonEnumDescription.h"
 
 @implementation DoraemonEnumDescription
-
 + (NSString *)lineBreakModeDescription:(NSLineBreakMode)mode {
     switch (mode) {
         case NSLineBreakByWordWrapping:
@@ -212,10 +211,7 @@
 
 + (NSArray <NSString *>*)controlContentHorizontalAlignments {
     NSMutableArray *alignments = [[NSMutableArray alloc] init];
-    UIControlContentHorizontalAlignment max = UIControlContentHorizontalAlignmentFill;
-    if (@available(iOS 11.0, *)) {
-        max = UIControlContentHorizontalAlignmentTrailing;
-    }
+    UIControlContentHorizontalAlignment max = UIControlContentHorizontalAlignmentTrailing;
     for (UIControlContentHorizontalAlignment i = UIControlContentHorizontalAlignmentCenter; i <= max; i++) {
         NSString *alignment = [self controlContentHorizontalAlignmentDescription:i];
         if (alignment) {
@@ -239,10 +235,8 @@
             return @"Info Dark";
         case UIButtonTypeContactAdd:
             return @"Contact Add";
-#ifdef __IPHONE_13_0
         case UIButtonTypeClose:
             return @"Close";
-#endif
         default:
             break;
     }
@@ -399,10 +393,7 @@
 
 + (NSArray <NSString *>*)keyboardTypes {
     NSMutableArray *types = [[NSMutableArray alloc] init];
-    UIKeyboardType max = UIKeyboardTypeWebSearch;
-    if (@available(iOS 10.0, *)) {
-        max = UIKeyboardTypeASCIICapableNumberPad;
-    }
+    UIKeyboardType max = UIKeyboardTypeASCIICapableNumberPad;
     for (UIKeyboardType i = UIKeyboardTypeDefault; i <= max; i++) {
         NSString *type = [self keyboardTypeDescription:i];
         if (type) {
@@ -467,10 +458,7 @@
 
 + (NSArray <NSString *>*)returnKeyTypes {
     NSMutableArray *types = [[NSMutableArray alloc] init];
-    UIReturnKeyType max = UIReturnKeyEmergencyCall;
-    if (@available(iOS 9.0, *)) {
-        max = UIReturnKeyContinue;
-    }
+    UIReturnKeyType max = UIReturnKeyContinue;
     for (UIReturnKeyType i = UIReturnKeyDefault; i <= max; i++) {
         NSString *type = [self returnKeyTypeDescription:i];
         if (type) {
@@ -482,12 +470,10 @@
 
 + (NSString *)activityIndicatorViewStyleDescription:(UIActivityIndicatorViewStyle)style {
     switch (style) {
-#ifdef __IPHONE_13_0
         case UIActivityIndicatorViewStyleMedium:
             return @"Medium";
         case UIActivityIndicatorViewStyleLarge:
             return @"Large";
-#endif
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         case UIActivityIndicatorViewStyleWhiteLarge:
@@ -505,12 +491,7 @@
     NSMutableArray *styles = [[NSMutableArray alloc] init];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSArray *actions = @[@(UIActivityIndicatorViewStyleWhiteLarge),@(UIActivityIndicatorViewStyleWhite),@(UIActivityIndicatorViewStyleGray)];
-#ifdef __IPHONE_13_0
-    if (@available(iOS 13.0, *)) {
-        actions = @[@(UIActivityIndicatorViewStyleMedium),@(UIActivityIndicatorViewStyleLarge),@(UIActivityIndicatorViewStyleWhiteLarge),@(UIActivityIndicatorViewStyleWhite),@(UIActivityIndicatorViewStyleGray)];
-    }
-#endif
+    NSArray *actions = @[@(UIActivityIndicatorViewStyleMedium),@(UIActivityIndicatorViewStyleLarge),@(UIActivityIndicatorViewStyleWhiteLarge),@(UIActivityIndicatorViewStyleWhite),@(UIActivityIndicatorViewStyleGray)];
 #pragma clang diagnostic pop
     for (NSNumber *num in actions) {
         NSString *style = [self activityIndicatorViewStyleDescription:[num integerValue]];
@@ -573,6 +554,11 @@
             return @"Dismiss on drag";
         case UIScrollViewKeyboardDismissModeInteractive:
             return @"Dismiss interactively";
+        case UIScrollViewKeyboardDismissModeOnDragWithAccessory:
+            return @"Dismiss on drag with accessory";
+        case UIScrollViewKeyboardDismissModeInteractiveWithAccessory:
+            return @"Dismiss interactive with accessory";
+            break;
     }
     return nil;
 }
@@ -594,10 +580,8 @@
             return @"Plain";
         case UITableViewStyleGrouped:
             return @"Grouped";
-#ifdef __IPHONE_13_0
         case UITableViewStyleInsetGrouped:
             return @"Inset Grouped";
-#endif
     }
     return nil;
 }
@@ -876,5 +860,4 @@
             return nil;
     }
 }
-
 @end

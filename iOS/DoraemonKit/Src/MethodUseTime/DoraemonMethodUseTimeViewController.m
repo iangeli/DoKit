@@ -9,33 +9,29 @@
 #import "DoraemonCellSwitch.h"
 #import "UIView+Doraemon.h"
 #import "DoraemonCellButton.h"
-#import "Doraemoni18NUtil.h"
 #import "DoraemonMethodUseTimeManager.h"
 #import "DoraemonMethodUseTimeListViewController.h"
 #import "DoraemonDefine.h"
 
 @interface DoraemonMethodUseTimeViewController ()<DoraemonSwitchViewDelegate,DoraemonCellButtonDelegate>
-
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
 @property (nonatomic, strong) DoraemonCellButton *cellBtn;
-
 @end
 
 @implementation DoraemonMethodUseTimeViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"Load耗时");
+    self.title = @"Load";
     
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, 53)];
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"Load耗时检测开关") switchOn:[DoraemonMethodUseTimeManager sharedInstance].on];
+    [_switchView renderUIWithTitle:@"Load switch" switchOn:[DoraemonMethodUseTimeManager sharedInstance].on];
     [_switchView needTopLine];
     [_switchView needDownLine];
     _switchView.delegate = self;
     [self.view addSubview:_switchView];
     
     _cellBtn = [[DoraemonCellButton alloc] initWithFrame:CGRectMake(0, _switchView.doraemon_bottom, self.view.doraemon_width, 53)];
-    [_cellBtn renderUIWithTitle:DoraemonLocalizedString(@"查看检测记录")];
+    [_cellBtn renderUIWithTitle:@"View monitor records"];
     _cellBtn.delegate = self;
     [_cellBtn needDownLine];
     [self.view addSubview:_cellBtn];
@@ -63,5 +59,4 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-
 @end

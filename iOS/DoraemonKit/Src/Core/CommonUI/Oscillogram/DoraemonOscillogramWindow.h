@@ -10,18 +10,14 @@
 #import "DoraemonOscillogramViewController.h"
 
 @protocol DoraemonOscillogramWindowDelegate <NSObject>
-
 - (void)doraemonOscillogramWindowClosed;
-
 @end
 
 @interface DoraemonOscillogramWindow : UIWindow
-
 + (DoraemonOscillogramWindow *)shareInstance;
 
 @property (nonatomic, strong) DoraemonOscillogramViewController *vc;
 
-//需要子类重写
 - (void)addRootVc;
 
 - (void)show;
@@ -31,5 +27,4 @@
 - (void)addDelegate:(id<DoraemonOscillogramWindowDelegate>) delegate;
 
 - (void)removeDelegate:(id<DoraemonOscillogramWindowDelegate>)delegate;
-
 @end

@@ -9,20 +9,15 @@
 #import "DoraemonFPSOscillogramWindow.h"
 #import "DoraemonCPUOscillogramWindow.h"
 #import "DoraemonMemoryOscillogramWindow.h"
-#import "DoraemonNetFlowOscillogramWindow.h"
 #import "DoraemonDefine.h"
 
 @interface DoraemonOscillogramWindowManager()
-
 @property (nonatomic, strong) DoraemonFPSOscillogramWindow *fpsWindow;
 @property (nonatomic, strong) DoraemonCPUOscillogramWindow *cpuWindow;
 @property (nonatomic, strong) DoraemonMemoryOscillogramWindow *memoryWindow;
-@property (nonatomic, strong) DoraemonNetFlowOscillogramWindow *netflowWindow;
-
 @end
 
 @implementation DoraemonOscillogramWindowManager
-
 + (DoraemonOscillogramWindowManager *)shareInstance{
     static dispatch_once_t once;
     static DoraemonOscillogramWindowManager *instance;
@@ -37,7 +32,6 @@
         _fpsWindow = [DoraemonFPSOscillogramWindow shareInstance];
         _cpuWindow = [DoraemonCPUOscillogramWindow shareInstance];
         _memoryWindow = [DoraemonMemoryOscillogramWindow shareInstance];
-        _netflowWindow = [DoraemonNetFlowOscillogramWindow shareInstance];
     }
     return self;
 }
@@ -67,10 +61,5 @@
         offsetY += _memoryWindow.doraemon_height+kDoraemonSizeFrom750_Landscape(4);
     }
     
-    if (!_netflowWindow.hidden) {
-        _netflowWindow.frame = CGRectMake(0, offsetY, width, height);
-    }
-    
 }
-
 @end

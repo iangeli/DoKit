@@ -14,13 +14,11 @@
 #import "DoraemonWKWebViewViewController.h"
 
 @interface DoraemonDemoImageViewController ()
-
 @property (nonatomic, copy) NSString *picUrl;
 
 @end
 
 @implementation DoraemonDemoImageViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"图片测试");

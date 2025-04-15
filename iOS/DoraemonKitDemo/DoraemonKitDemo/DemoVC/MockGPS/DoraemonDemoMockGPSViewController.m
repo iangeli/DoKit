@@ -13,7 +13,6 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonDemoMockGPSViewController ()<MKMapViewDelegate,CLLocationManagerDelegate>
-
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) DoraemonDemoMockGPSAnnotation *annotation;
 
@@ -22,7 +21,6 @@
 @end
 
 @implementation DoraemonDemoMockGPSViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"模拟位置");

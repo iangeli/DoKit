@@ -9,6 +9,5 @@
 #import "DoraemonDemoBaseViewController.h"
 
 @interface DoraemonDemoCommonViewController : DoraemonDemoBaseViewController
-
 @end
 

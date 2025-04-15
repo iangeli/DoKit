@@ -3,7 +3,7 @@
 //  DoraemonKit
 //
 //  Created by yixiang on 2017/12/11.
-//  Copyright © 2017年 yixiang. All rights reserved.
+//  Copyright © 2017 yixiang. All rights reserved.
 //
 
 #import "DoraemonEntryWindow.h"
@@ -13,31 +13,21 @@
 #import "DoraemonDefine.h"
 #import "DoraemonHomeWindow.h"
 #import "DoraemonStatusBarViewController.h"
-#import "DoraemonBuriedPointManager.h"
 
 @interface DoraemonEntryWindow()
-
 @property (nonatomic, strong) UIButton *entryBtn;
 @property (nonatomic, assign) CGFloat kEntryViewSize;
 @property (nonatomic) CGPoint startingPosition;
 @property (nonatomic, strong) UILabel *entryBtnBlingTextLabel;
-
 @end
 
 @implementation DoraemonEntryWindow
-
 - (UIButton *)entryBtn {
     if (!_entryBtn) {
         _entryBtn = [[UIButton alloc] initWithFrame:self.bounds];
         _entryBtn.backgroundColor = [UIColor clearColor];
         UIImage *image = [UIImage doraemon_xcassetImageNamed:@"doraemon_logo"];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                image = [UIImage doraemon_xcassetImageNamed:@"doraemon_logo_dark"];
-            }
-        }
-#endif
+
         [_entryBtn setImage:image forState:UIControlStateNormal];
         _entryBtn.layer.cornerRadius = 20.;
         [_entryBtn addTarget:self action:@selector(entryClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -48,18 +38,14 @@
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    // trait发生了改变
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
-        if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                [self.entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_logo_dark"] forState:UIControlStateNormal];
-            } else {
-                [self.entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_logo"] forState:UIControlStateNormal];
-            }
+
+    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            [self.entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_logo_dark"] forState:UIControlStateNormal];
+        } else {
+            [self.entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_logo"] forState:UIControlStateNormal];
         }
     }
-#endif
 }
 
 - (instancetype)initWithStartPoint:(CGPoint)startingPosition{
@@ -78,25 +64,19 @@
     
     self = [super initWithFrame:CGRectMake(x, y, _kEntryViewSize, _kEntryViewSize)];
     if (self) {
-        #if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-            if (@available(iOS 13.0, *)) {
-                UIScene *scene = [[UIApplication sharedApplication].connectedScenes anyObject];
-                if (scene) {
-                    self.windowScene = (UIWindowScene *)scene;
-                }
-            }
-        #endif
+        UIScene *scene = [[UIApplication sharedApplication].connectedScenes anyObject];
+        if (scene) {
+            self.windowScene = (UIWindowScene *)scene;
+        }
+
         self.backgroundColor = [UIColor clearColor];
         self.windowLevel = UIWindowLevelStatusBar + 100.f;
         self.layer.masksToBounds = YES;
-        
-        // 统一使用 DoraemonStatusBarViewController
-        // 对系统的版本处理放入 DoraemonStatusBarViewController 类中
+
         if (!self.rootViewController) {
             self.rootViewController = [[DoraemonStatusBarViewController alloc] init];
         }
 
-        
         [self.rootViewController.view addSubview:self.entryBtn];
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
         [self addGestureRecognizer:pan];
@@ -120,13 +100,9 @@
     [_entryBtn addTarget:self action:@selector(entryClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-/**
- 进入工具主面板
- */
 - (void)entryClick:(UIButton *)btn{
     if ([DoraemonHomeWindow shareInstance].hidden) {
         [[DoraemonHomeWindow shareInstance] show];
-        DoKitBP(@"dokit_sdk_home_ck_entry")
     }else{
         [[DoraemonHomeWindow shareInstance] hide];
     }
@@ -141,11 +117,8 @@
 }
 
 - (void)normalMode: (UIPanGestureRecognizer *)panGestureRecognizer{
-    //1、获得拖动位移
     CGPoint offsetPoint = [panGestureRecognizer translationInView:panGestureRecognizer.view];
-    //2、清空拖动位移
     [panGestureRecognizer setTranslation:CGPointZero inView:panGestureRecognizer.view];
-    //3、重新设置控件位置
     UIView *panView = panGestureRecognizer.view;
     CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
     CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
@@ -180,10 +153,7 @@
         {
             CGPoint location = panView.center;
             CGFloat centerX;
-            CGFloat safeBottom = 0;
-            if (@available(iOS 11.0, *)) {
-               safeBottom = self.safeAreaInsets.bottom;
-            }
+            CGFloat safeBottom = self.safeAreaInsets.bottom;
             CGFloat centerY = MAX(MIN(location.y, CGRectGetMaxY([UIScreen mainScreen].bounds)-safeBottom), [UIApplication sharedApplication].statusBarFrame.size.height);
             if(location.x > CGRectGetWidth([UIScreen mainScreen].bounds)/2.f)
             {

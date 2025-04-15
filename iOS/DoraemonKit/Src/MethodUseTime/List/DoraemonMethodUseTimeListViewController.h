@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonMethodUseTimeListViewController : DoraemonBaseViewController
-
 @end
 
 NS_ASSUME_NONNULL_END

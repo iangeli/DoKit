@@ -11,17 +11,14 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonJavaScriptViewController ()<UITableViewDelegate, UITableViewDataSource>
-
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *items;
-
 @end
 
 @implementation DoraemonJavaScriptViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"脚本列表");
+    self.title = @"Script List";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewScript)];
     self.items = [NSMutableArray array];
@@ -85,18 +82,17 @@
 
 - (void)loadScriptData {
     [self.items removeAllObjects];
-    //读取历史数据
+    
     NSArray *scriptItems = [DoraemonCacheManager.sharedInstance jsHistoricalRecord];
     if (!scriptItems) {
-        //添加内置脚本
-        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//安装vConsole\nimport('https://unpkg.com/vconsole').then(() => {\n    new window.VConsole()\n})" forKey:@"vConsole"];
-        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//重新加载\nlocation.reload()" forKey:@"Reload"];
-        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//后退\nhistory.go(-1)" forKey:@"Back"];
-        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//前进\nhistory.go(1)" forKey:@"Forward"];
         
+        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//isntall vConsole\nimport('https://unpkg.com/vconsole').then(() => {\n    new window.VConsole()\n})" forKey:@"vConsole"];
+        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//reload \nlocation.reload()" forKey:@"Reload"];
+        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//back \nhistory.go(-1)" forKey:@"Back"];
+        [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//forward \nhistory.go(1)" forKey:@"Forward"];
+
         scriptItems = [DoraemonCacheManager.sharedInstance jsHistoricalRecord];
     }
     [self.items addObjectsFromArray:scriptItems];
 }
-
 @end

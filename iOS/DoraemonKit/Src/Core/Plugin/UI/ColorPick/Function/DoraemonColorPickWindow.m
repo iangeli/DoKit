@@ -19,18 +19,14 @@
 static CGFloat const kColorPickWindowSize = 150;
 
 @interface DoraemonColorPickWindow()
-
-// 这里先屏蔽掉，先使用layer自带的圆圈
 //@property (nonatomic, strong) DoraemonColorPickView *colorPickView;
 
 @property (nonatomic, strong) DoraemonColorPickMagnifyLayer *magnifyLayer;
 
 @property (nonatomic, strong) UIImage *screenShotImage;
-
 @end
 
 @implementation DoraemonColorPickWindow
-
 #pragma mark - Lifecycle
 
 + (DoraemonColorPickWindow *)shareInstance {
@@ -45,16 +41,14 @@ static CGFloat const kColorPickWindowSize = 150;
 - (instancetype)init {
     self = [super initWithFrame:CGRectMake(DoraemonScreenWidth/2-kColorPickWindowSize/2, DoraemonScreenHeight/2-kColorPickWindowSize/2, kColorPickWindowSize, kColorPickWindowSize)];
     if (self) {
-        #if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-            if (@available(iOS 13.0, *)) {
+
                 for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
                     if (windowScene.activationState == UISceneActivationStateForegroundActive){
                         self.windowScene = windowScene;
                         break;
                     }
                 }
-            }
-        #endif
+      
         self.backgroundColor = [UIColor clearColor];
         self.windowLevel = UIWindowLevelStatusBar + 1.f;
         if (!self.rootViewController) {
@@ -152,15 +146,12 @@ static CGFloat const kColorPickWindowSize = 150;
 
 - (void)pan:(UIPanGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        // 开始拖动的时候更新屏幕快照
+        
         [self updateScreeShotImage];
     }
     
-    //1、获得拖动位移
     CGPoint offsetPoint = [sender translationInView:sender.view];
-    //2、清空拖动位移
     [sender setTranslation:CGPointZero inView:sender.view];
-    //3、重新设置控件位置
     UIView *panView = sender.view;
     CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
     CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
@@ -203,5 +194,4 @@ static CGFloat const kColorPickWindowSize = 150;
     }
     return _magnifyLayer;
 }
-
 @end

@@ -8,7 +8,5 @@
 #import "DoraemonBaseViewController.h"
 
 @interface DoraemonSanboxDetailViewController : DoraemonBaseViewController
-
 @property (nonatomic, copy) NSString *filePath;
-
 @end

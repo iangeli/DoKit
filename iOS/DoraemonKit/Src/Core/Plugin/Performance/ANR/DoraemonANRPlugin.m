@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonANRPlugin
-
 - (void)pluginDidLoad{
     DoraemonANRViewController *vc = [[DoraemonANRViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

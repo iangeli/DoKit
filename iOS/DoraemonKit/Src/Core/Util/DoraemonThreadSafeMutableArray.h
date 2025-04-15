@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonThreadSafeMutableArray : NSMutableArray
-
 - (instancetype)init;
 - (instancetype)initWithCapacity:(NSUInteger)numItems;
 - (instancetype)initWithArray:(NSArray *)array;
@@ -33,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeAllObjects;
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;
 - (NSUInteger)indexOfObject:(id)anObject;
-
 @end
 
 NS_ASSUME_NONNULL_END

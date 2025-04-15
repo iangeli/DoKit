@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonDBManager : NSObject
-
 + (DoraemonDBManager *)shareManager;
 
 @property (nonatomic, copy) NSString *dbPath;
@@ -18,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray *)tablesAtDB;
 - (NSArray *)dataAtTable;
-
 @end
 
 NS_ASSUME_NONNULL_END

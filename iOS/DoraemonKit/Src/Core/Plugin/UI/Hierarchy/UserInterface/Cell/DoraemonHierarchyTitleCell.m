@@ -10,15 +10,12 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonHierarchyTitleCell ()
-
 @property (nonatomic, strong) UILabel *titleLabel;
 
 @property (nonatomic, strong) NSLayoutConstraint *titleLabelBottomCons;
-
 @end
 
 @implementation DoraemonHierarchyTitleCell
-
 #pragma mark - Life cycle
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -58,5 +55,4 @@
     }
     return _titleLabel;
 }
-
 @end

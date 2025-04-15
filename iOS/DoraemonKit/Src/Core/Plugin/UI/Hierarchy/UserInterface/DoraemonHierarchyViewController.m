@@ -17,7 +17,6 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonHierarchyViewController ()<DKHierarchyViewDelegate, DKHierarchyInfoViewDelegate>
-
 @property (nonatomic, strong) UIView *borderView;
 
 @property (nonatomic, strong) DKHierarchyPickerView *pickerView;
@@ -27,11 +26,9 @@
 @property (nonatomic, strong) NSMutableSet *observeViews;
 
 @property (nonatomic, strong) NSMutableDictionary *borderViews;
-
 @end
 
 @implementation DoraemonHierarchyViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
@@ -244,5 +241,4 @@
     }
     return _borderView;
 }
-
 @end

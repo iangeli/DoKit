@@ -9,5 +9,4 @@
 #import "DoraemonDemoBaseViewController.h"
 
 @interface DoraemonDemoMockGPSViewController : DoraemonDemoBaseViewController
-
 @end

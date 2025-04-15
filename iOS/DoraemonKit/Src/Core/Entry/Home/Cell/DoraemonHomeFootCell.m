@@ -8,7 +8,6 @@
 #import "DoraemonHomeFootCell.h"
 
 @implementation DoraemonHomeFootCell
-
 - (UILabel *)title {
     if (!_title) {
         _title = [UILabel new];
@@ -29,5 +28,4 @@
     [super layoutSubviews];
     self.title.frame = UIEdgeInsetsInsetRect(self.bounds, UIEdgeInsetsMake(0, 15, 0, 15));
 }
-
 @end

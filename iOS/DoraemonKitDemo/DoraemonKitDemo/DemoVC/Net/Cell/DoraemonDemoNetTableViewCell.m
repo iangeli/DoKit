@@ -10,13 +10,11 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonDemoNetTableViewCell()
-
 @property (nonatomic, strong) UIButton *button;
 
 @end
 
 @implementation DoraemonDemoNetTableViewCell
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){

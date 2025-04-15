@@ -9,11 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- * DoraemonHomeEntry | 新主界面入口
- */
 @interface DoraemonHomeViewController : DoraemonBaseViewController
-
 @end
 
 NS_ASSUME_NONNULL_END

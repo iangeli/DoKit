@@ -11,11 +11,9 @@
 #import "DoraemonColorPickInfoWindow.h"
 
 @implementation DoraemonColorPickPlugin
-
 - (void)pluginDidLoad {
     [[DoraemonColorPickWindow shareInstance] show];
     [[DoraemonColorPickInfoWindow shareInstance] show];
     [[DoraemonHomeWindow shareInstance] hide];
 }
-
 @end

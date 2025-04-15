@@ -7,11 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface DoraemonColorPickView : UIView
-
 - (void)setCurrentImage:(UIImage *)image;
 
 - (void)setCurrentColor:(NSString *)hexColor;
-
 @end

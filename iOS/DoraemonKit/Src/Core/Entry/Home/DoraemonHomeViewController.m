@@ -17,8 +17,6 @@
 #import "DoraemonHomeFootCell.h"
 #import "DoraemonHomeCloseCell.h"
 #import "UIViewController+Doraemon.h"
-#import "DoraemonBuriedPointManager.h"
-#import "DoraemonSettingViewController.h"
 #import "DoraemonCacheManager.h"
 
 static NSString *DoraemonHomeCellID = @"DoraemonHomeCellID";
@@ -27,30 +25,15 @@ static NSString *DoraemonHomeFootCellID = @"DoraemonHomeFootCellID";
 static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 
 @interface DoraemonHomeViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
-
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
-
 @end
 
 @implementation DoraemonHomeViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"DoKit";
-    [self setLeftNavBarItems:nil];
-    [self setRightNavTitle:DoraemonLocalizedString(@"设置")];
-    
-    
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
-        self.view.backgroundColor = [UIColor tertiarySystemBackgroundColor];
-    } else {
-#endif
-        self.view.backgroundColor = [UIColor whiteColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    }
-#endif
+    self.view.backgroundColor = [UIColor tertiarySystemBackgroundColor];
     NSMutableArray *dataArray = [[DoraemonCacheManager sharedInstance] allKitShowManagerData];
     _dataArray = dataArray;
     [self.view addSubview:self.collectionView];
@@ -62,11 +45,6 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
     [super viewDidLayoutSubviews];
 
     self.collectionView.frame = [self fullscreen];
-}
-
-- (void)rightNavTitleClick:(id)clickView{
-    DoraemonSettingViewController *vc = [[DoraemonSettingViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)kitManagerUpdate:(NSNotification *)aNotification {
@@ -83,15 +61,7 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
     if (!_collectionView) {
         UICollectionViewFlowLayout *fl = [[UICollectionViewFlowLayout alloc] init];
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:fl];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            _collectionView.backgroundColor = [UIColor systemBackgroundColor];
-        } else {
-#endif
-            _collectionView.backgroundColor = [UIColor whiteColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        }
-#endif
+        _collectionView.backgroundColor = [UIColor systemBackgroundColor];
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -178,29 +148,20 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
         view = head;
     } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         DoraemonHomeFootCell *foot = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DoraemonHomeFootCellID forIndexPath:indexPath];
-        UIColor *dyColor;
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            __weak typeof(self) weakSelf = self;
-            dyColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-                    return [UIColor doraemon_colorWithString:@"#F4F5F6"];
+        __weak typeof(self) weakSelf = self;
+        UIColor *dyColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+                return [UIColor doraemon_colorWithString:@"#F4F5F6"];
+            } else {
+                if (indexPath.section >= weakSelf.dataArray.count) {
+                    return [UIColor systemBackgroundColor];
                 } else {
-                    if (indexPath.section >= weakSelf.dataArray.count) {
-                        return [UIColor systemBackgroundColor];
-                    } else {
-                        return [UIColor doraemon_colorWithString:@"#353537"];
-                    }
+                    return [UIColor doraemon_colorWithString:@"#353537"];
                 }
-            }];
-        } else {
-#endif
-            dyColor = [UIColor doraemon_colorWithString:@"#F4F5F6"];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        }
-#endif
+            }
+        }];
         if (indexPath.section >= self.dataArray.count) {
-            NSString *str = DoraemonLocalizedString(@"当前版本");
+            NSString *str = @"Current Version";
             NSString *last = [NSString stringWithFormat:@"%@：V%@", str, DoKitVersion];
             foot.title.text = last;
             foot.title.textColor = [UIColor doraemon_colorWithString:@"#999999"];
@@ -220,7 +181,7 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if (section < _dataArray.count)
-        return UIEdgeInsetsMake(0, kDoraemonSizeFrom750_Landscape(24), kDoraemonSizeFrom750_Landscape(24), kDoraemonSizeFrom750_Landscape(24));//分别为上、左、下、右
+        return UIEdgeInsetsMake(0, kDoraemonSizeFrom750_Landscape(24), kDoraemonSizeFrom750_Landscape(24), kDoraemonSizeFrom750_Landscape(24));
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
@@ -232,7 +193,6 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
         NSDictionary *itemData = pluginArray[indexPath.row];
         NSString *pluginName = itemData[@"pluginName"];
         if(pluginName){
-            DoKitBP(itemData[@"buriedPoint"])
             Class pluginClass = NSClassFromString(pluginName);
             id<DoraemonPluginProtocol> plugin = [[pluginClass alloc] init];
             if ([plugin respondsToSelector:@selector(pluginDidLoad)]) {
@@ -249,6 +209,4 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
         }
     }
 }
-
-
 @end

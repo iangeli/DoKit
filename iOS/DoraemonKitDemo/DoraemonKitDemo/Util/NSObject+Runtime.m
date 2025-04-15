@@ -10,7 +10,6 @@
 #import <objc/runtime.h>
 
 @implementation NSObject (Runtime)
-
 + (void)swizzleClassMethodWithOriginSel:(SEL)oriSel swizzledSel:(SEL)swiSel {
     Class cls = object_getClass(self);
     

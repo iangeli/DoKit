@@ -13,7 +13,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonKitDemoi18Util : NSObject
-
 + (NSString *)localizedString:(NSString *)key;
 
 @end

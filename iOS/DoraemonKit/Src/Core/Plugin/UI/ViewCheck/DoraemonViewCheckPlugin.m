@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonViewCheckPlugin
-
 - (void)pluginDidLoad{
     [[DoraemonViewCheckManager shareInstance] show];
     [[DoraemonHomeWindow shareInstance] hide];
 }
-
 @end

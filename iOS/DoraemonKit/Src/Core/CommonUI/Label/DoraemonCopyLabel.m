@@ -8,14 +8,12 @@
 #import "DoraemonCopyLabel.h"
 
 @implementation DoraemonCopyLabel
-
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self pressAction];
     }
     return self;
 }
-
 
 - (void)pressAction {
     self.userInteractionEnabled = YES;
@@ -24,12 +22,10 @@
     [self addGestureRecognizer:longPress];
 }
 
-// 使label能够成为响应事件
 - (BOOL)canBecomeFirstResponder {
      return YES;
  }
 
-// 控制响应的方法
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
      return action == @selector(customCopy:);
 }
@@ -47,5 +43,4 @@
     [[UIMenuController sharedMenuController] setTargetRect:CGRectMake(0, 0, 100, 20) inView:self];
     [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
 }
-
 @end

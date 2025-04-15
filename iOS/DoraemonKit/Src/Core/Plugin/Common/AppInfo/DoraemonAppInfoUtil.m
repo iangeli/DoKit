@@ -28,7 +28,6 @@
 #define IOS8 ([[[UIDevice currentDevice] systemVersion] doubleValue] >=8.0 ? YES : NO)
 
 @implementation DoraemonAppInfoUtil
-
 + (NSString *)appName
 {
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
@@ -117,14 +116,12 @@
     if (UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPhone) {
         return iPhoneXSeries;
     }
-    
-    if (@available(iOS 11.0, *)) {
-        UIWindow *mainWindow = [DoraemonUtil getKeyWindow];
-        if (mainWindow.safeAreaInsets.bottom > 0.0) {
-            iPhoneXSeries = YES;
-        }
+
+    UIWindow *mainWindow = [DoraemonUtil getKeyWindow];
+    if (mainWindow.safeAreaInsets.bottom > 0.0) {
+        iPhoneXSeries = YES;
     }
-    
+
     return iPhoneXSeries;
 }
 
@@ -166,8 +163,8 @@
 
 + (NSString *)cameraAuthority{
     NSString *authority = @"";
-    NSString *mediaType = AVMediaTypeVideo;//读取媒体类型
-    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
+    NSString *mediaType = AVMediaTypeVideo;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
     switch (authStatus) {
         case AVAuthorizationStatusNotDetermined:
             authority = @"NotDetermined";
@@ -189,8 +186,8 @@
 
 + (NSString *)audioAuthority{
     NSString *authority = @"";
-    NSString *mediaType = AVMediaTypeAudio;//读取媒体类型
-    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
+    NSString *mediaType = AVMediaTypeAudio;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
     switch (authStatus) {
         case AVAuthorizationStatusNotDetermined:
             authority = @"NotDetermined";
@@ -212,51 +209,24 @@
 
 + (NSString *)photoAuthority{
     NSString *authority = @"";
-    #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0 //iOS 8.0以下使用AssetsLibrary.framework
-    ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
-    switch (status) {
-        case ALAuthorizationStatusNotDetermined:    //用户还没有选择
-        {
-            authority = @"NotDetermined";
-        }
-            break;
-        case ALAuthorizationStatusRestricted:       //家长控制
-        {
-            authority = @"Restricted";
-        }
-            break;
-        case ALAuthorizationStatusDenied:           //用户拒绝
-        {
-            authority = @"Denied";
-        }
-            break;
-        case ALAuthorizationStatusAuthorized:       //已授权
-        {
-            authority = @"Authorized";
-        }
-            break;
-        default:
-            break;
-    }
-    #else   //iOS 8.0以上使用Photos.framework
     PHAuthorizationStatus current = [PHPhotoLibrary authorizationStatus];
     switch (current) {
-        case PHAuthorizationStatusNotDetermined:    //用户还没有选择(第一次)
+        case PHAuthorizationStatusNotDetermined:    
         {
             authority = @"NotDetermined";
         }
             break;
-        case PHAuthorizationStatusRestricted:       //家长控制
+        case PHAuthorizationStatusRestricted:       
         {
             authority = @"Restricted";
         }
             break;
-        case PHAuthorizationStatusDenied:           //用户拒绝
+        case PHAuthorizationStatusDenied:           
         {
             authority = @"Denied";
         }
             break;
-        case PHAuthorizationStatusAuthorized:       //已授权
+        case PHAuthorizationStatusAuthorized:       
         {
             authority = @"Authorized";
         }
@@ -264,54 +234,28 @@
         default:
             break;
     }
-    #endif
     return authority;
 }
 
 + (NSString *)addressAuthority{
     NSString *authority = @"";
-    if (@available(iOS 9.0, *)) {//iOS9.0之后
-        CNAuthorizationStatus authStatus = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
-        switch (authStatus) {
-            case CNAuthorizationStatusAuthorized:
-                authority = @"Authorized";
-                break;
-            case CNAuthorizationStatusDenied:
-            {
-                authority = @"Denied";
-            }
-                break;
-            case CNAuthorizationStatusNotDetermined:
-            {
-                authority = @"NotDetermined";
-            }
-                break;
-            case CNAuthorizationStatusRestricted:
-                authority = @"Restricted";
-                break;
-        }
-    }else{//iOS9.0之前
-        ABAuthorizationStatus authorStatus = ABAddressBookGetAuthorizationStatus();
-        switch (authorStatus) {
-            case kABAuthorizationStatusAuthorized:
-                authority = @"Authorized";
-                break;
-            case kABAuthorizationStatusDenied:
-            {
-                authority = @"Denied";
-            }
-                break;
-            case kABAuthorizationStatusNotDetermined:
-            {
-                authority = @"NotDetermined";
-            }
-                break;
-            case kABAuthorizationStatusRestricted:
-                authority = @"Restricted";
-                break;
-            default:
-                break;
-        }
+    CNAuthorizationStatus authStatus = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    switch (authStatus) {
+        case CNAuthorizationStatusAuthorized:
+            authority = @"Authorized";
+            break;
+        case CNAuthorizationStatusDenied:
+            authority = @"Denied";
+            break;
+        case CNAuthorizationStatusNotDetermined:
+            authority = @"NotDetermined";
+            break;
+        case CNAuthorizationStatusRestricted:
+            authority = @"Restricted";
+            break;
+        case CNAuthorizationStatusLimited:
+            authority = @"Limited";
+            break;
     }
     return authority;
 }
@@ -364,9 +308,6 @@
     return @"";
 }
 
-
-
-#pragma mark 设备是否模拟器
 + (NSString *)deviceIdentifier {
     struct utsname systemInfo;
     uname(&systemInfo);
@@ -378,7 +319,6 @@
     return [identifier isEqualToString:@"i386"] || [identifier isEqualToString:@"x86_64"];
 }
 
-//获取设备当前网络IP地址
 + (NSString *)getIPAddress:(BOOL)preferIPv4
 {
     NSArray *searchArray = preferIPv4 ?
@@ -395,7 +335,6 @@
     return address ? address : @"0.0.0.0";
 }
 
-//获取所有相关IP信息
 + (NSDictionary *)getIPAddresses
 {
     NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];

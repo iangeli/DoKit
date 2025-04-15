@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIColor *color;
 
-
 - (instancetype)initWithValue:(double)value
                          name:(NSString *)name
                         color:(UIColor *)color;

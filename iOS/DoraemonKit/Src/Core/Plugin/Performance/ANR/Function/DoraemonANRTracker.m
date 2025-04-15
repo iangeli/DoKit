@@ -8,20 +8,11 @@
 #import "DoraemonANRTracker.h"
 #import "sys/utsname.h"
 
-/**
- *  主线程卡顿监控看门狗类
- */
 @interface DoraemonANRTracker()
-
-/**
- *  用于Ping主线程的线程实例
- */
 @property (nonatomic, strong) DoraemonPingThread *pingThread;
-
 @end
 
 @implementation DoraemonANRTracker
-
 - (instancetype)init
 {
     self = [super init];
@@ -60,5 +51,4 @@
 {
     [self.pingThread cancel];
 }
-
 @end

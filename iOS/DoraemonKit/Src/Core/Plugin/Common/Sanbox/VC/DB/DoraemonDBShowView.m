@@ -9,13 +9,10 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonDBShowView()
-
 @property (nonatomic, strong) UITextView *displayTextView;
-
 @end
 
 @implementation DoraemonDBShowView
-
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -24,11 +21,7 @@
         _displayTextView.editable = NO;
         _displayTextView.textAlignment = NSTextAlignmentCenter;
         _displayTextView.backgroundColor = [UIColor doraemon_black_2];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-        if (@available(iOS 13.0, *)) {
-            _displayTextView.textColor = [UIColor labelColor];
-        }
-#endif
+        _displayTextView.textColor = [UIColor labelColor];
         [self addSubview:_displayTextView];
     }
     return self;
@@ -45,5 +38,4 @@
         strongSelf.displayTextView.text = text;
     }];
 }
-
 @end

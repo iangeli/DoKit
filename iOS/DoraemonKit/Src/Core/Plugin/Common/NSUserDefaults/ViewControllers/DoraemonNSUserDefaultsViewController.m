@@ -11,7 +11,6 @@
 #import "DoraemonNSUserDefaultsEditViewController.h"
 
 @interface DoraemonNSUserDefaultsViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-
 @property (nonatomic, strong) NSMutableArray<DoraemonNSUserDefaultsModel *> *modelList;
 @property (nonatomic, strong) NSMutableArray<DoraemonNSUserDefaultsModel *> *searchList;
 @property (nonatomic, strong, readonly) NSMutableArray<DoraemonNSUserDefaultsModel *> *dataArray;
@@ -26,7 +25,6 @@
 @end
 
 @implementation DoraemonNSUserDefaultsViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -35,12 +33,8 @@
     [self buildSearchUI];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, self.view.doraemon_height - IPHONE_NAVIGATIONBAR_HEIGHT) style:UITableViewStylePlain];
-    if (@available(iOS 13.0, *)) {
         self.tableView.backgroundColor = [UIColor systemBackgroundColor];
-    } else {
-        self.tableView.backgroundColor = [UIColor whiteColor];
-    }
-    // 该方式退出键盘（系统键盘）时会在底部卡顿一下
+    
     //self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -54,11 +48,7 @@
     UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0.0, 0.0, searchTextFieldWidth, 30.0)];
     searchTextField.placeholder = @"Search Key";
     searchTextField.layer.cornerRadius = 15.0;
-    if (@available(iOS 13.0, *)) {
-        searchTextField.backgroundColor = [UIColor systemBackgroundColor];
-    } else {
-        searchTextField.backgroundColor = [UIColor whiteColor];
-    }
+    searchTextField.backgroundColor = [UIColor systemBackgroundColor];
     searchTextField.delegate = self;
     searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     searchTextField.returnKeyType = UIReturnKeySearch;

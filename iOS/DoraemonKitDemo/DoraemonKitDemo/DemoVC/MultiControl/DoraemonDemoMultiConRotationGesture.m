@@ -10,13 +10,11 @@
 #import "UIView+Doraemon.h"
 #import "UIImage+Doraemon.h"
 @interface DoraemonDemoMultiConRotationGesture ()
-
 @property (nonatomic, strong)UIImageView *imageview;
 
 @end
 
 @implementation DoraemonDemoMultiConRotationGesture
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"旋转手势");

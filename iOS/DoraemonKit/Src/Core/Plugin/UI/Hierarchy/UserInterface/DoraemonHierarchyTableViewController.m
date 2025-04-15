@@ -14,17 +14,14 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonHierarchyTableViewController ()
-
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, assign) UITableViewStyle style;
 
 @property (nonatomic, strong) NSMutableArray <DoraemonHierarchyCategoryModel *>*dataArray;
-
 @end
 
 @implementation DoraemonHierarchyTableViewController
-
 #pragma mark - Life cycle
 - (instancetype)init
 {
@@ -109,9 +106,7 @@
         [_tableView registerClass:[DoraemonHierarchySwitchCell class] forCellReuseIdentifier:NSStringFromClass([DoraemonHierarchySwitchCell class])];
         [_tableView registerClass:[DoraemonHierarchyDetailTitleCell class] forCellReuseIdentifier:NSStringFromClass([DoraemonHierarchyDetailTitleCell class])];
         [_tableView registerClass:[DoraemonHierarchySelectorCell class] forCellReuseIdentifier:NSStringFromClass([DoraemonHierarchySelectorCell class])];
-        if (@available(iOS 11.0, *)) {
-            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
-        }
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
     }
     return _tableView;
 }
@@ -122,5 +117,4 @@
     }
     return _dataArray;
 }
-
 @end

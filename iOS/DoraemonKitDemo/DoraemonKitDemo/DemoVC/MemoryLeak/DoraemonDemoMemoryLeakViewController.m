@@ -12,14 +12,12 @@
 #import "DoraemonKitDemoi18Util.h"
 
 @interface DoraemonDemoMemoryLeakViewController ()
-
 @property (nonatomic, strong) DoraemonDemoMemoryLeakModel *model;
 @property (nonatomic, strong) DoraemonDemoMemoryLeakView *testview;
 
 @end
 
 @implementation DoraemonDemoMemoryLeakViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"内存泄漏测试");

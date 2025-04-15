@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonThreadSafeMutableDictionary<KeyType, ObjectType> : NSMutableDictionary
-
 - (instancetype)init;
 - (instancetype)initWithCapacity:(NSUInteger)numItems;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
@@ -25,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)allValues;
 - (void)removeObjectForKey:(id)aKey;
 - (void)removeAllObjects;
-
 @end
 
 NS_ASSUME_NONNULL_END

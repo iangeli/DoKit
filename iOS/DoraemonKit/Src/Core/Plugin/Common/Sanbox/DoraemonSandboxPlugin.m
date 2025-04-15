@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonSandboxPlugin
-
 - (void)pluginDidLoad{
     DoraemonSandboxViewController *vc = [[DoraemonSandboxViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

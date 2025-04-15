@@ -55,5 +55,4 @@ int doraemon_rebind_symbols_image(void *header,
 }
 #endif //__cplusplus
 
-
 #endif /* doraemon_fishhook_h */

@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonDemoNetTableViewCell : UITableViewCell
-
 - (void)renderUIWithTitle:(NSString *)title;
 
 @end

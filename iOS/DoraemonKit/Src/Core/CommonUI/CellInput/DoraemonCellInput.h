@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonCellInput : UIView
-
 @property (nonatomic, strong) UITextField *textField;
 
 - (void)renderUIWithTitle:(NSString *)title;
@@ -20,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)needTopLine;
 
 - (void)needDownLine;
-
 @end
 
 NS_ASSUME_NONNULL_END

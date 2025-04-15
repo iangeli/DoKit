@@ -9,7 +9,6 @@
 #import <objc/runtime.h>
 
 @implementation NSObject (Doraemon)
-
 + (void)doraemon_swizzleClassMethodWithOriginSel:(SEL)oriSel swizzledSel:(SEL)swiSel {
     Class cls = object_getClass(self);
     
@@ -39,5 +38,4 @@
         method_exchangeImplementations(oriMethod, swizzledMethod);
     }
 }
-
 @end

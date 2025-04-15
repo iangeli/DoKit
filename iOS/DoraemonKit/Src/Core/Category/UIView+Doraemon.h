@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (Doraemon)
-
 /** View's X Position */
 @property (nonatomic, assign) CGFloat   doraemon_x;
 
@@ -48,6 +47,5 @@
 - (UIViewController *)doraemon_viewController;
 
 - (NSArray *)doraemon_findViewsForClass:(Class)clazz;
-
 @end
 

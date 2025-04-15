@@ -20,14 +20,12 @@ typedef struct Test
 }Test;
 
 @interface DoraemonDemoCrashViewController ()
-
 @property (nonatomic, strong) UIButton *uncaughtExceptionBtn;
 @property (nonatomic, strong) UIButton *signalExceptionBtn;
 
 @end
 
 @implementation DoraemonDemoCrashViewController
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad {

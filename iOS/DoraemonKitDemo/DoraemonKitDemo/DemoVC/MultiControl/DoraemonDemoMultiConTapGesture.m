@@ -14,7 +14,6 @@
 @end
 
 @implementation DoraemonDemoMultiConTapGesture
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = DoraemonDemoLocalizedString(@"点击手势");

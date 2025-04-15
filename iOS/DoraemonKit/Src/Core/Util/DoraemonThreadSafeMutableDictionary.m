@@ -13,11 +13,9 @@
     pthread_mutex_t _safeThreadDictionaryMutex;
     pthread_mutexattr_t _safeThreadDictionaryMutexAttr;
 }
-
 @end
 
 @implementation DoraemonThreadSafeMutableDictionary
-
 - (instancetype)initCommon
 {
     self = [super init];
@@ -226,5 +224,4 @@
     pthread_mutex_destroy(&_safeThreadDictionaryMutex);
     pthread_mutexattr_destroy(&_safeThreadDictionaryMutexAttr);
 }
-
 @end

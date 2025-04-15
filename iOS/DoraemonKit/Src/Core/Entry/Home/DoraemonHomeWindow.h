@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraemonHomeWindow : UIWindow
-
 @property (nonatomic, strong) UINavigationController *nav;
 
 + (DoraemonHomeWindow *)shareInstance;
@@ -18,5 +17,4 @@
 
 - (void)show;
 - (void)hide;
-
 @end

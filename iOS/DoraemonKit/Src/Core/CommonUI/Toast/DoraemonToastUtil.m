@@ -10,9 +10,7 @@
 #import "UIView+Doraemon.h"
 #import "DoraemonDefine.h"
 
-
 @implementation DoraemonToastUtil
-
 + (void)showToast:(NSString *)text inView:(UIView *)superView {
     if (!superView) {
         return;
@@ -22,15 +20,8 @@
     label.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(14)];
     label.text = text;
     [label sizeToFit];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
-        label.textColor = [UIColor labelColor];
-    } else {
-#endif
-        label.textColor = [UIColor blackColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    }
-#endif
+    label.textColor = [UIColor labelColor];
+
     label.frame = CGRectMake(superView.doraemon_width/2-label.doraemon_width/2, superView.doraemon_height/2-label.doraemon_height/2, label.doraemon_width, label.doraemon_height);
     [superView addSubview:label];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -51,18 +42,11 @@
     paragraphStyle.alignment = NSTextAlignmentCenter;
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
-    label.attributedText = [[NSAttributedString alloc] initWithString:DoraemonLocalizedString(text) attributes:attributes];
+    label.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
     label.numberOfLines = 0;
     CGSize size = [label sizeThatFits:CGSizeMake(superView.doraemon_width-50, CGFLOAT_MAX)];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    if (@available(iOS 13.0, *)) {
-        label.backgroundColor = [UIColor labelColor];
-    } else {
-#endif
-        label.backgroundColor = [UIColor blackColor];
-#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
-    }
-#endif
+    label.backgroundColor = [UIColor labelColor];
+
     CGFloat padding = kDoraemonSizeFrom750_Landscape(37);
     label.frame = CGRectMake(superView.doraemon_width/2-size.width/2 - padding, superView.doraemon_height/2-size.height/2 - padding, size.width + padding*2, size.height + padding*2);
     label.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(8);
@@ -74,5 +58,4 @@
     });
     
 }
-
 @end

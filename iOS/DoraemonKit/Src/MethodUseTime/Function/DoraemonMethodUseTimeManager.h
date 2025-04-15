@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonMethodUseTimeManager : NSObject
-
 + (instancetype)sharedInstance;
 
 @property (nonatomic, assign) BOOL on;
@@ -18,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)fixLoadModelArray;
 
 - (NSArray *)fixLoadModelArrayForHealth;
-
 @end
 
 NS_ASSUME_NONNULL_END

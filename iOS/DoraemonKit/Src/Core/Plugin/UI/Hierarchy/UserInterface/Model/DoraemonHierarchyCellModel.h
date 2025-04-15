@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonHierarchyCellModel : NSObject
-
 @property (nonatomic, copy, nullable, readonly) NSString *title;
 
 @property (nonatomic, copy, readonly) NSString *cellClass;
@@ -47,7 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (DoraemonHierarchyCellModel *)normalInsets;
 
 - (DoraemonHierarchyCellModel *)noneInsets;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,10 +10,8 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonUIProfilePlugin
-
 - (void)pluginDidLoad{
     DoraemonUIProfileViewController *vc = [[DoraemonUIProfileViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }
-
 @end

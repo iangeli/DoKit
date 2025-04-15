@@ -8,5 +8,4 @@
 #import "DoraemonOscillogramViewController.h"
 
 @interface DoraemonMemoryOscillogramViewController : DoraemonOscillogramViewController
-
 @end

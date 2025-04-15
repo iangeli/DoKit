@@ -9,15 +9,11 @@
 #import "DoraemonDefine.h"
 #import "DoraemonViewAlignView.h"
 
-
 @interface DoraemonViewAlignManager()
-
 @property (nonatomic, strong) DoraemonViewAlignView *alignView;
-
 @end
 
 @implementation DoraemonViewAlignManager
-
 + (DoraemonViewAlignManager *)shareInstance{
     static dispatch_once_t once;
     static DoraemonViewAlignManager *instance;
@@ -63,5 +59,4 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     [[DoraemonUtil getKeyWindow] bringSubviewToFront:self.alignView];
 }
-
 @end

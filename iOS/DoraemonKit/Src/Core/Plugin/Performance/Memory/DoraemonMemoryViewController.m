@@ -13,19 +13,16 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonMemoryViewController ()<DoraemonSwitchViewDelegate, DoraemonOscillogramWindowDelegate>
-
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
-
 @end
 
 @implementation DoraemonMemoryViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"内存检测");
+    self.title = @"Memory monitor";
     
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"内存检测开关") switchOn:[[DoraemonCacheManager sharedInstance] memorySwitch]];
+    [_switchView renderUIWithTitle:@"Memory monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] memorySwitch]];
     [_switchView needTopLine];
     [_switchView needDownLine];
     _switchView.delegate = self;
@@ -49,7 +46,6 @@
 
 #pragma mark -- DoraemonOscillogramWindowDelegate
 - (void)doraemonOscillogramWindowClosed {
-    [_switchView renderUIWithTitle:DoraemonLocalizedString(@"内存检测开关") switchOn:[[DoraemonCacheManager sharedInstance] memorySwitch]];
+    [_switchView renderUIWithTitle:@"Memory monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] memorySwitch]];
 }
-
 @end

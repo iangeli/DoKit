@@ -14,17 +14,14 @@
 #import "DoraemonDefine.h"
 
 @interface DoraemonANRListViewController ()<UITableViewDelegate,UITableViewDataSource>
-
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray *anrArray;
-
 @end
 
 @implementation DoraemonANRListViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = DoraemonLocalizedString(@"卡顿列表");
+    self.title = @"ANR List";
     
     [self loadANRData];
     
@@ -37,7 +34,7 @@
 
 #pragma mark ANRData
 - (void)loadANRData {
-    // 获取 ANR 目录
+    
     NSFileManager *manager = [NSFileManager defaultManager];
     NSString *anrDirectory = [DoraemonANRTool anrDirectory];
     
@@ -52,33 +49,27 @@
     if ([filePath isKindOfClass:[NSString class]] && (filePath.length > 0)) {
         targetPath = filePath;
     }
-    
-    // 该目录下面的内容信息
+
     NSError *error = nil;
     NSArray *paths = [fm contentsOfDirectoryAtPath:targetPath error:&error];
-    
-    // 对paths按照创建时间的降序进行排列
+
     NSArray *sortedPaths = [paths sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         if ([obj1 isKindOfClass:[NSString class]] && [obj2 isKindOfClass:[NSString class]]) {
-            // 获取文件完整路径
+            
             NSString *firstPath = [targetPath stringByAppendingPathComponent:obj1];
             NSString *secondPath = [targetPath stringByAppendingPathComponent:obj2];
-            
-            // 获取文件信息
+
             NSDictionary *firstFileInfo = [[NSFileManager defaultManager] attributesOfItemAtPath:firstPath error:nil];
             NSDictionary *secondFileInfo = [[NSFileManager defaultManager] attributesOfItemAtPath:secondPath error:nil];
-            
-            // 获取文件创建时间
+
             id firstData = [firstFileInfo objectForKey:NSFileCreationDate];
             id secondData = [secondFileInfo objectForKey:NSFileCreationDate];
-            
-            // 按照创建时间降序排列
+
             return [secondData compare:firstData];
         }
         return NSOrderedSame;
     }];
-    
-    // 构造数据源
+
     NSMutableArray *files = [NSMutableArray array];
     [sortedPaths enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[NSString class]]) {
@@ -167,7 +158,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return DoraemonLocalizedString(@"删除");
+    return @"Delete";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -176,5 +167,4 @@
         [self deleteByDoraemonSandboxModel:model];
     }
 }
-
 @end
