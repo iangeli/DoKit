@@ -107,7 +107,7 @@ void removeViewController(UIViewController *viewController, BOOL isAnimated) {
                     [UIApplication.sharedApplication openURL:settingUrl options:@{} completionHandler:nil];
                 } else {
                     if ([UIApplication.sharedApplication canOpenURL:settingUrl]) {
-                        [UIApplication.sharedApplication openURL:settingUrl];
+                        [UIApplication.sharedApplication openURL:settingUrl options:@{} completionHandler:nil];
                     }
                 }
             }];

@@ -296,17 +296,30 @@
 }
 
 + (UIWindow *)getKeyWindow{
-    UIWindow *keyWindow = nil;
-    if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(window)]) {
-        keyWindow = [[UIApplication sharedApplication].delegate window];
-    }else{
-        NSArray *windows = [UIApplication sharedApplication].windows;
-        for (UIWindow *window in windows) {
-            if (!window.hidden) {
-                keyWindow = window;
-                break;
+    __block UIWindow *keyWindow = nil;
+
+    for (UIWindowScene *scene in UIApplication.sharedApplication.connectedScenes) {
+        if (scene.activationState == UISceneActivationStateForegroundActive) {
+            if ([scene.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
+                id<UIWindowSceneDelegate> delegate = (id<UIWindowSceneDelegate>)scene.delegate;
+                keyWindow = delegate.window;
             }
+            break;
         }
+    }
+
+    if (keyWindow == nil) {
+        __block UIScene *scene = nil;
+        [[UIApplication sharedApplication].connectedScenes enumerateObjectsUsingBlock:^(UIScene * _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:UIWindowScene.class]) {
+                if ([obj.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
+                    id<UIWindowSceneDelegate> delegate = (id<UIWindowSceneDelegate>)obj.delegate;
+                    keyWindow = delegate.window;
+                    *stop = true;
+                }
+
+            }
+        }];
     }
     return keyWindow;
 }
