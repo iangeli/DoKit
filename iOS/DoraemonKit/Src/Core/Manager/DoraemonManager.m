@@ -14,6 +14,7 @@
 #import "DoraemonHomeWindow.h"
 #import "DoraemonHomeWindow.h"
 #import "DoraemonANRManager.h"
+#import "DoraemonOscillogramWindowManager.h"
 
 #if DoraemonWithGPS
 #import "DoraemonGPSMocker.h"
@@ -101,10 +102,6 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
 
     [self initEntry:self.startingPosition];
 
-    [[DoraemonCacheManager sharedInstance] saveFpsSwitch:NO];
-    [[DoraemonCacheManager sharedInstance] saveCpuSwitch:NO];
-    [[DoraemonCacheManager sharedInstance] saveMemorySwitch:NO];
-
 #if DoraemonWithGPS
     
     if ([[DoraemonCacheManager sharedInstance] mockGPSSwitch]) {
@@ -160,10 +157,14 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
 
 - (void)initEntry:(CGPoint) startingPosition{
     _entryWindow = [[DoraemonEntryWindow alloc] initWithStartPoint:startingPosition];
-    [_entryWindow show];
+
     if(_autoDock){
         [_entryWindow setAutoDock:YES];
     }
+}
+
+- (void)checkStatus {
+    [DoraemonOscillogramWindowManager.shareInstance checkStatus];
 }
 
 - (void)addStartPlugin:(NSString *)pluginName{

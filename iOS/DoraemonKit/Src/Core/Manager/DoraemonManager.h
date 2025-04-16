@@ -64,6 +64,8 @@ typedef NS_ENUM(NSUInteger, DoraemonManagerPluginType) {
 @property (nonatomic, copy) DoraemonH5DoorBlock h5DoorBlock;
 @property (nonatomic, copy) DoraemonWebpHandleBlock webpHandleBlock;
 
+- (void)checkStatus;
+
 - (void)addPluginWithTitle:(NSString *)title icon:(NSString *)iconName desc:(NSString *)desc pluginName:(NSString *)entryName atModule:(NSString *)moduleName;
 - (void)addPluginWithTitle:(NSString *)title icon:(NSString *)iconName desc:(NSString *)desc pluginName:(NSString *)entryName atModule:(NSString *)moduleName handle:(void(^)(NSDictionary *itemData))handleBlock;
 

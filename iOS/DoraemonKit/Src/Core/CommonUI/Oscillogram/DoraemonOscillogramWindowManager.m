@@ -10,6 +10,7 @@
 #import "DoraemonCPUOscillogramWindow.h"
 #import "DoraemonMemoryOscillogramWindow.h"
 #import "DoraemonDefine.h"
+#import "DoraemonCacheManager.h"
 
 @interface DoraemonOscillogramWindowManager()
 @property (nonatomic, strong) DoraemonFPSOscillogramWindow *fpsWindow;
@@ -34,6 +35,18 @@
         _memoryWindow = [DoraemonMemoryOscillogramWindow shareInstance];
     }
     return self;
+}
+
+- (void)checkStatus {
+    if ([DoraemonCacheManager sharedInstance].fpsSwitch) {
+        [[DoraemonFPSOscillogramWindow shareInstance] show];
+    }
+    if ([DoraemonCacheManager sharedInstance].cpuSwitch) {
+        [[DoraemonCPUOscillogramWindow shareInstance] show];
+    }
+    if ([DoraemonCacheManager sharedInstance].memorySwitch) {
+        [[DoraemonMemoryOscillogramWindow shareInstance] show];
+    }
 }
 
 - (void)resetLayout{

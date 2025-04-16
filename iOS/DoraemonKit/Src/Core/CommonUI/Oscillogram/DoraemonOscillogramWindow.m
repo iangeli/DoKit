@@ -43,6 +43,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.userInteractionEnabled = false;
         self.windowLevel = UIWindowLevelStatusBar + 2.f;
         self.backgroundColor = [UIColor doraemon_colorWithHex:0x000000 andAlpha:0.33];
         self.layer.masksToBounds = YES;

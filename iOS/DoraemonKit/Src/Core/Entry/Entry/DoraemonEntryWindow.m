@@ -59,6 +59,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.windowLevel = UIWindowLevelStatusBar + 100.f;
         self.layer.masksToBounds = YES;
+        self.hidden = YES;
 
         if (!self.rootViewController) {
             self.rootViewController = [[DoraemonStatusBarViewController alloc] init];

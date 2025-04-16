@@ -26,6 +26,11 @@ private class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         DoraemonManager.shareInstance().install()
 
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            DoraemonManager.shareInstance().showDoraemon()
+            DoraemonManager.shareInstance().checkStatus()
+        }
+
         return true
     }
 

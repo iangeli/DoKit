@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DoraemonOscillogramWindowManager : NSObject
 + (DoraemonOscillogramWindowManager *)shareInstance;
-
+- (void)checkStatus;
 - (void)resetLayout;
 @end
 
