@@ -223,7 +223,7 @@
     if (!_closeButton) {
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_closeButton addTarget:self action:@selector(closeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_closeButton setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close"] forState:UIControlStateNormal];
+        [_closeButton setImage:[UIImage systemImageNamed:@"xmark"] forState:UIControlStateNormal];
     }
     return _closeButton;
 }

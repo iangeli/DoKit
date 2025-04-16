@@ -42,18 +42,6 @@
     [self addSubview:self.closeBtn];
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-
-        if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"] forState:UIControlStateNormal];
-            } else {
-                [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close"] forState:UIControlStateNormal];
-            }
-        }
-}
-
 #pragma mark - Layout
 
 - (void)layoutSubviews {
@@ -123,10 +111,7 @@
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] init];
-        UIImage *closeImage = [UIImage doraemon_xcassetImageNamed:@"doraemon_close"];
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                closeImage = [UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"];
-            }
+        UIImage *closeImage = [UIImage systemImageNamed:@"xmark"];
         [_closeBtn setBackgroundImage:closeImage forState:UIControlStateNormal];
         [_closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }

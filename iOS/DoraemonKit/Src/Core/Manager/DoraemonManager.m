@@ -179,7 +179,6 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
     [self addPluginWithTitle:model.title icon:model.icon desc:model.desc pluginName:model.pluginName atModule:model.atModule];
 }
 
-// out 1
 - (void)addPluginWithTitle:(NSString *)title icon:(NSString *)iconName desc:(NSString *)desc pluginName:(NSString *)entryName atModule:(NSString *)moduleName{
     NSMutableDictionary *pluginDic = [self foundGroupWithModule:moduleName];
     pluginDic[@"key"] = [NSString stringWithFormat:@"%@-%@-%@-%@",moduleName,title,iconName,desc];
@@ -190,7 +189,6 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
     pluginDic[@"show"] = @1;
 }
 
-// out 2
 - (void)addPluginWithTitle:(NSString *)title icon:(NSString *)iconName desc:(NSString *)desc pluginName:(NSString *)entryName atModule:(NSString *)moduleName handle:(void (^)(NSDictionary *))handleBlock
 {
     NSMutableDictionary *pluginDic = [self foundGroupWithModule:moduleName];
@@ -290,6 +288,12 @@ typedef void (^DoraemonPerformanceBlock)(NSDictionary *);
 }
 
 - (void)showDoraemon{
+    if (_entryWindow.windowScene == nil) {
+        UIScene *scene = [[UIApplication sharedApplication].connectedScenes anyObject];
+        if (scene) {
+            _entryWindow.windowScene = (UIWindowScene *)scene;
+        }
+    }
     if (_entryWindow.hidden) {
         _entryWindow.hidden = NO;
     }

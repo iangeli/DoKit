@@ -39,7 +39,7 @@
     _h5UrlTextView.keyboardAppearance = UIKeyboardAppearanceDark;
     _h5UrlTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 //    _h5UrlTextView.backgroundColor = [UIColor purpleColor];
-    _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, _h5UrlTextView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(1))];
+    _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, _h5UrlTextView.doraemon_bottom, self.view.doraemon_width, 1)];
     _lineView.backgroundColor = [UIColor doraemon_line];
     [self.view addSubview:_lineView];
     
@@ -68,11 +68,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Override Methods
-- (BOOL)needBigTitleView {
-    return YES;
 }
 
 #pragma mark - Target Methods

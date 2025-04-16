@@ -32,28 +32,16 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 @implementation DoraemonHomeViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"DoKit";
+    self.title = @"Home";
     self.view.backgroundColor = [UIColor tertiarySystemBackgroundColor];
-    NSMutableArray *dataArray = [[DoraemonCacheManager sharedInstance] allKitShowManagerData];
-    _dataArray = dataArray;
+    _dataArray = [DoraemonManager shareInstance].dataArray;
     [self.view addSubview:self.collectionView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kitManagerUpdate:) name:DoraemonKitManagerUpdateNotification object:nil];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
     self.collectionView.frame = [self fullscreen];
-}
-
-- (void)kitManagerUpdate:(NSNotification *)aNotification {
-    _dataArray = [[DoraemonCacheManager sharedInstance] allKitShowManagerData];
-    [self.collectionView reloadData];
-}
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -- UICollectionView
@@ -91,11 +79,7 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    if (section < _dataArray.count) {
-        return CGSizeMake(DoraemonScreenWidth, kDoraemonSizeFrom750_Landscape(24));
-    } else {
-        return CGSizeMake(DoraemonScreenWidth, kDoraemonSizeFrom750_Landscape(80));
-    }
+    return CGSizeMake(DoraemonScreenWidth, kDoraemonSizeFrom750_Landscape(24));
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
@@ -160,16 +144,6 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
                 }
             }
         }];
-        if (indexPath.section >= self.dataArray.count) {
-            NSString *str = @"Current Version";
-            NSString *last = [NSString stringWithFormat:@"%@：V%@", str, DoKitVersion];
-            foot.title.text = last;
-            foot.title.textColor = [UIColor doraemon_colorWithString:@"#999999"];
-            foot.title.textAlignment = NSTextAlignmentCenter;
-            foot.title.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)]; // kDoraemonSizeFrom750
-        } else {
-            foot.title.text = nil;
-        }
         foot.backgroundColor = dyColor;
         view = foot;
     }else{

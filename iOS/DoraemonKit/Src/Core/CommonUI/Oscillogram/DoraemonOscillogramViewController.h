@@ -10,7 +10,6 @@
 
 @interface DoraemonOscillogramViewController : UIViewController
 @property (nonatomic, strong) DoraemonOscillogramView *oscillogramView;
-@property (nonatomic, strong) UIButton *closeBtn;
 
 - (NSString *)title;
 - (NSString *)lowValue;

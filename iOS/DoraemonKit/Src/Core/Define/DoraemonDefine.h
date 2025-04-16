@@ -17,11 +17,6 @@
 #import "DoraemonAlertUtil.h"
 #import "DoraemonUtil.h"
 
-#define DoKitVersion @"3.0.8"
-#define DoKitKbChange(x) x * 1000
-
-//#define DoKit_OpenLog
-
 #ifdef DoKit_OpenLog
 #define DoKitLog(...) NSLog(@"DoKitLog -> %s\n %@ \n\n",__func__,[NSString stringWithFormat:__VA_ARGS__]);
 #else
@@ -49,17 +44,9 @@
 #define IPHONE_NAVIGATIONBAR_HEIGHT  (IS_IPHONE_X_Series ? 88 : 64)
 #define IPHONE_STATUSBAR_HEIGHT      (IS_IPHONE_X_Series ? 44 : 20)
 #define IPHONE_SAFEBOTTOMAREA_HEIGHT (IS_IPHONE_X_Series ? 34 : 0)
-#define IPHONE_TOPSENSOR_HEIGHT      (IS_IPHONE_X_Series ? 32 : 0)
 
-#define STRING_IS_BLANK(str) (str==nil ||![str isKindOfClass:[NSString class]]|| [str length]<1)
 #define STRING_NOT_NULL(str) ((str==nil)?@"":str)
-#define DICTIONARY_IS_EMPTY(dic) ((dic)==nil || ![(dic) isKindOfClass:[NSDictionary class]] || (dic).count < 1)
-#define ARRAY_IS_NULL(array) ((array)==nil || ![(array) isKindOfClass:[NSArray class]] || ([array count]) < 1)
-#define ARRAY_IS_EMPTY(array) ((array)==nil || ![(array) isKindOfClass:[NSArray class]] || (array).count < 1)
-#define STRING_DEFAULT_BLANK(str) ((str==nil)?@"":str)
 
 #define DoraemonClosePluginNotification @"DoraemonClosePluginNotification"
-#define DoraemonQuickOpenLogVCNotification @"DoraemonQuickOpenLogVCNotification"
-#define DoraemonKitManagerUpdateNotification @"DoraemonKitManagerUpdateNotification"
 
 #endif /* DoraemonDefine_h */

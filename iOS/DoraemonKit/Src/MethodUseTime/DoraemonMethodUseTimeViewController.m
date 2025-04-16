@@ -23,7 +23,7 @@
     [super viewDidLoad];
     self.title = @"Load";
     
-    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, 53)];
+    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, 53)];
     [_switchView renderUIWithTitle:@"Load switch" switchOn:[DoraemonMethodUseTimeManager sharedInstance].on];
     [_switchView needTopLine];
     [_switchView needDownLine];
@@ -35,10 +35,6 @@
     _cellBtn.delegate = self;
     [_cellBtn needDownLine];
     [self.view addSubview:_cellBtn];
-}
-
-- (BOOL)needBigTitleView{
-    return YES;
 }
 
 #pragma mark -- DoraemonSwitchViewDelegate

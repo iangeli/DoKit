@@ -287,10 +287,11 @@
     __block UIWindow *keyWindow = nil;
 
     for (UIWindowScene *scene in UIApplication.sharedApplication.connectedScenes) {
-        if (scene.activationState == UISceneActivationStateForegroundActive) {
-            if ([scene.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
-                id<UIWindowSceneDelegate> delegate = (id<UIWindowSceneDelegate>)scene.delegate;
-                keyWindow = delegate.window;
+        if ([scene isKindOfClass:UIWindowScene.class] && scene.activationState == UISceneActivationStateForegroundActive) {
+            if (@available(iOS 15.0, *)) {
+                keyWindow = scene.keyWindow;
+            } else {
+                keyWindow = scene.windows.firstObject;
             }
             break;
         }
@@ -299,12 +300,12 @@
     if (keyWindow == nil) {
         [[UIApplication sharedApplication].connectedScenes enumerateObjectsUsingBlock:^(UIScene * _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:UIWindowScene.class]) {
-                if ([obj.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]) {
-                    id<UIWindowSceneDelegate> delegate = (id<UIWindowSceneDelegate>)obj.delegate;
-                    keyWindow = delegate.window;
-                    *stop = true;
+                if (@available(iOS 15.0, *)) {
+                    keyWindow = ((UIWindowScene *)obj).keyWindow;
+                } else {
+                    keyWindow = ((UIWindowScene *)obj).windows.firstObject;
                 }
-
+                *stop = true;
             }
         }];
     }

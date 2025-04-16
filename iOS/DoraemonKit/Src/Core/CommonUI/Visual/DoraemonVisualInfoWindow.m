@@ -19,18 +19,6 @@
     [self initUI];
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-            [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"] forState:UIControlStateNormal];
-        } else {
-            [self.closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close"] forState:UIControlStateNormal];
-        }
-    }
-}
-
 - (void)initUI {
     self.view.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
         if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -47,10 +35,7 @@
         CGFloat closeHeight = kDoraemonSizeFrom750_Landscape(44);
         self.closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(viewSize.width - closeWidth - kDoraemonSizeFrom750_Landscape(16), kDoraemonSizeFrom750_Landscape(16), closeWidth, closeHeight)];
         
-        UIImage *closeImage = [UIImage doraemon_xcassetImageNamed:@"doraemon_close"];
-        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-            closeImage = [UIImage doraemon_xcassetImageNamed:@"doraemon_close_dark"];
-        }
+        UIImage *closeImage = [UIImage systemImageNamed:@"xmark"];
 
         [self.closeBtn setBackgroundImage:closeImage forState:UIControlStateNormal];
         [self.closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];

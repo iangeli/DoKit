@@ -12,47 +12,24 @@
 + (DoraemonCacheManager *)sharedInstance;
 
 - (void)saveMockGPSSwitch:(BOOL)on;
-
 - (BOOL)mockGPSSwitch;
 
 - (void)saveMockCoordinate:(CLLocationCoordinate2D)coordinate;
-
 - (CLLocationCoordinate2D)mockCoordinate;
 
 - (void)saveFpsSwitch:(BOOL)on;
-
 - (BOOL)fpsSwitch;
 
 - (void)saveCpuSwitch:(BOOL)on;
-
 - (BOOL)cpuSwitch;
 
 - (void)saveMemorySwitch:(BOOL)on;
-
 - (BOOL)memorySwitch;
 
-- (void)saveAllTestSwitch:(BOOL)on;
-
-- (BOOL)allTestSwitch;
-
-- (void)saveLargeImageDetectionSwitch:(BOOL)on;
-
-- (BOOL)largeImageDetectionSwitch;
-
-- (void)saveSubThreadUICheckSwitch:(BOOL)on;
-
-- (BOOL)subThreadUICheckSwitch;
-
 - (void)saveMethodUseTimeSwitch:(BOOL)on;
-
 - (BOOL)methodUseTimeSwitch;
 
-- (void)saveStartTimeSwitch:(BOOL)on;
-
-- (BOOL)startTimeSwitch;
-
 - (void)saveANRTrackSwitch:(BOOL)on;
-
 - (BOOL)anrTrackSwitch;
 
 - (NSArray<NSString *> *)h5historicalRecord;
@@ -65,17 +42,4 @@
 - (void)saveJsHistoricalRecordWithText:(NSString *)text forKey:(NSString *)key;
 - (void)clearJsHistoricalRecordWithKey:(NSString *)key;
 
-- (void)saveStartClass : (NSString *)startClass;
-- (NSString *)startClass;
-
-- (void)saveMemoryLeak:(BOOL)on;
-- (BOOL)memoryLeak;
-
-- (void)saveMemoryLeakAlert:(BOOL)on;
-- (BOOL)memoryLeakAlert;
-
-- (void)saveKitManagerData:(NSMutableArray *)dataArray;
-- (NSMutableArray *)kitManagerData;
-- (NSMutableArray *)kitShowManagerData;
-- (NSMutableArray *)allKitShowManagerData;
 @end

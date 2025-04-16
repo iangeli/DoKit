@@ -35,10 +35,7 @@
     _contentLabel.attributedText = attrStr;
     
     CGSize fontSize = [_contentLabel sizeThatFits:CGSizeMake(self.view.doraemon_width-40, MAXFLOAT)];
-    _contentLabel.frame = CGRectMake(20, self.bigTitleView.doraemon_bottom, fontSize.width, fontSize.height);
+    _contentLabel.frame = CGRectMake(20, IPHONE_NAVIGATIONBAR_HEIGHT, fontSize.width, fontSize.height);
 }
 
-- (BOOL)needBigTitleView{
-    return YES;
-}
 @end

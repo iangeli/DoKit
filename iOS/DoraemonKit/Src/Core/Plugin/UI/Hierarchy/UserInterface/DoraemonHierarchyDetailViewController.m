@@ -47,10 +47,6 @@
 }
 
 #pragma mark - Over write
-- (BOOL)needBigTitleView {
-    return YES;
-}
-
 - (void)leftNavBackClick:(id)clickView {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

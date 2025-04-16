@@ -27,15 +27,8 @@
     [self.view addSubview:titleLabel];
     [titleLabel sizeToFit];
     titleLabel.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(20), kDoraemonSizeFrom750_Landscape(10), titleLabel.doraemon_width, titleLabel.doraemon_height);
-    
-    UIButton *closeBtn = [[UIButton alloc] init];
-    [closeBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close_white"] forState:UIControlStateNormal];
-    closeBtn.frame = CGRectMake((kInterfaceOrientationPortrait ? DoraemonScreenWidth : DoraemonScreenHeight)-kDoraemonSizeFrom750_Landscape(80), 0, kDoraemonSizeFrom750_Landscape(80), kDoraemonSizeFrom750_Landscape(80));
-    [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:closeBtn];
-    _closeBtn = closeBtn;
-    
-    _oscillogramView = [[DoraemonOscillogramView alloc] initWithFrame:CGRectMake(0, titleLabel.doraemon_bottom+kDoraemonSizeFrom750_Landscape(12), (kInterfaceOrientationPortrait ? DoraemonScreenWidth : DoraemonScreenHeight), kDoraemonSizeFrom750_Landscape(184))];
+
+    _oscillogramView = [[DoraemonOscillogramView alloc] initWithFrame:CGRectMake(0, titleLabel.doraemon_bottom, CGRectGetWidth(self.view.frame), 60 - titleLabel.doraemon_bottom)];
     _oscillogramView.backgroundColor = [UIColor clearColor];
     [_oscillogramView setLowValue:[self lowValue]];
     [_oscillogramView setHightValue:[self highValue]];
@@ -52,9 +45,6 @@
 
 - (NSString *)highValue{
     return @"100";
-}
-
-- (void)closeBtnClick{
 }
 
 - (void)startRecord{

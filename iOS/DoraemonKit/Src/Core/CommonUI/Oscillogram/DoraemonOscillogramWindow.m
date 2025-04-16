@@ -58,16 +58,17 @@
     return self;
 }
 
-- (void)addRootVc{
-   
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    CGSize sz = self.frame.size;
+    CGPoint pt = self.vc.oscillogramView.frame.origin;
+    self.vc.oscillogramView.frame = CGRectMake(pt.x, pt.y, sz.width, sz.height - pt.y);
 }
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-    
-    if (CGRectContainsPoint(self.vc.closeBtn.frame, point)) {
-        return [super pointInside:point withEvent:event];
-    }
-    return NO;
+
+- (void)addRootVc{
+   
 }
 
 - (void)show{

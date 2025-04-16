@@ -35,22 +35,6 @@
     [self loadPath:_currentDirModel.path];
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-        if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                self.leftModel.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back_dark"];
-            } else {
-                self.leftModel.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back"];
-            }
-        }
-}
-
-- (BOOL)needBigTitleView {
-    return YES;
-}
-
 - (void)initData {
     _dataArray = @[];
     _rootPath = NSHomeDirectory();
@@ -75,20 +59,17 @@
         model.type = DoraemonSandboxFileTypeRoot;
         self.tableView.frame = CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, self.view.doraemon_height-self.bigTitleView.doraemon_bottom);
         self.bigTitleView.hidden = NO;
-        self.navigationController.navigationBarHidden = YES;
+//        self.navigationController.navigationBarHidden = YES;
         [self setLeftNavBarItems:nil];
     }else{
         model.name = @"Back";
         model.type = DoraemonSandboxFileTypeBack;
         self.bigTitleView.hidden = YES;
-        self.navigationController.navigationBarHidden = NO;
+//        self.navigationController.navigationBarHidden = NO;
         self.tableView.frame = CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, self.view.doraemon_height-IPHONE_NAVIGATIONBAR_HEIGHT);
         NSString *dirTitle =  [fm displayNameAtPath:targetPath];
         self.title = dirTitle;
-        UIImage *image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back"];
-            if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back_dark"];
-            }
+        UIImage *image = [UIImage systemImageNamed:@"chevron.backward"];
         self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
         
         [self setLeftNavBarItems:@[self.leftModel]];

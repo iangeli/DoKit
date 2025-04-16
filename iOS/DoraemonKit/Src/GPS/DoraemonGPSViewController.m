@@ -33,12 +33,8 @@
     [self initUI];
 }
 
-- (BOOL)needBigTitleView{
-    return YES;
-}
-
 - (void)initUI{
-    _operateView = [[DoraemonMockGPSOperateView alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(6), self.bigTitleView.doraemon_bottom+kDoraemonSizeFrom750_Landscape(24), self.view.doraemon_width-2*kDoraemonSizeFrom750_Landscape(6), kDoraemonSizeFrom750_Landscape(124))];
+    _operateView = [[DoraemonMockGPSOperateView alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(6), IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width-2*kDoraemonSizeFrom750_Landscape(6), kDoraemonSizeFrom750_Landscape(124))];
     _operateView.switchView.on = [[DoraemonCacheManager sharedInstance] mockGPSSwitch];
     [self.view addSubview:_operateView];
     [_operateView.switchView addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];

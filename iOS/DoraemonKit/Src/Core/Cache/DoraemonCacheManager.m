@@ -10,25 +10,15 @@
 #import "DoraemonDefine.h"
 #import "DoraemonManager.h"
 
-static NSString * const kDoraemonLoggerSwitchKey = @"doraemon_env_key";
-static NSString * const kDoraemonMockGPSSwitchKey = @"doraemon_mock_gps_key";
-static NSString * const kDoraemonMockCoordinateKey = @"doraemon_mock_coordinate_key";
-static NSString * const kDoraemonFpsKey = @"doraemon_fps_key";
-static NSString * const kDoraemonCpuKey = @"doraemon_cpu_key";
-static NSString * const kDoraemonMemoryKey = @"doraemon_memory_key";
-static NSString * const kDoraemonNetFlowKey = @"doraemon_netflow_key";
-static NSString * const kDoraemonSubThreadUICheckKey = @"doraemon_sub_thread_ui_check_key";
-static NSString * const kDoraemonMethodUseTimeKey = @"doraemon_method_use_time_key";
-static NSString * const kDoraemonLargeImageDetectionKey = @"doraemon_large_image_detection_key";
-static NSString * const kDoraemonH5historicalRecord = @"doraemon_historical_record";
-static NSString * const kDoraemonJsHistoricalRecord = @"doraemon_js_historical_record";
-static NSString * const kDoraemonStartTimeKey = @"doraemon_start_time_key";
-static NSString * const kDoraemonStartClassKey = @"doraemon_start_class_key";
-static NSString * const kDoraemonANRTrackKey = @"doraemon_anr_track_key";
-static NSString * const kDoraemonMemoryLeakKey = @"doraemon_memory_leak_key";
-static NSString * const kDoraemonMemoryLeakAlertKey = @"doraemon_memory_leak_alert_key";
-static NSString * const kDoraemonAllTestKey = @"doraemon_allTest_window_key";
-#define kDoraemonKitManagerKey [NSString stringWithFormat:@"%@_doraemon_kit_manager_key",DoKitVersion]
+static NSString * const kDoraemonMockGPSSwitchKey = @"ud_mock_gps_key";
+static NSString * const kDoraemonMockCoordinateKey = @"ud_mock_coordinate_key";
+static NSString * const kDoraemonFpsKey = @"ud_fps_key";
+static NSString * const kDoraemonCpuKey = @"ud_cpu_key";
+static NSString * const kDoraemonMemoryKey = @"ud_memory_key";
+static NSString * const kDoraemonMethodUseTimeKey = @"ud_method_use_time_key";
+static NSString * const kDoraemonH5historicalRecord = @"ud_historical_record";
+static NSString * const kDoraemonJsHistoricalRecord = @"ud_js_historical_record";
+static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
 
 @interface DoraemonCacheManager()
 @property (nonatomic, strong) NSUserDefaults *defaults;
@@ -116,33 +106,6 @@ static NSString * const kDoraemonAllTestKey = @"doraemon_allTest_window_key";
     return [_defaults boolForKey:kDoraemonMemoryKey];
 }
 
-- (void)saveAllTestSwitch:(BOOL)on{
-    [_defaults setBool:on forKey:kDoraemonAllTestKey];
-    [_defaults synchronize];
-}
-
-- (BOOL)allTestSwitch{
-    return [_defaults boolForKey:kDoraemonAllTestKey];
-}
-
-- (void)saveLargeImageDetectionSwitch:(BOOL)on{
-    [_defaults setBool:on forKey:kDoraemonLargeImageDetectionKey];
-    [_defaults synchronize];
-}
-
-- (BOOL)largeImageDetectionSwitch{
-    return [_defaults boolForKey: kDoraemonLargeImageDetectionKey];
-}
-
-- (void)saveSubThreadUICheckSwitch:(BOOL)on{
-    [_defaults setBool:on forKey:kDoraemonSubThreadUICheckKey];
-    [_defaults synchronize];
-}
-
-- (BOOL)subThreadUICheckSwitch{
-    return [_defaults boolForKey:kDoraemonSubThreadUICheckKey];
-}
-
 - (void)saveMethodUseTimeSwitch:(BOOL)on{
     [_defaults setBool:on forKey:kDoraemonMethodUseTimeKey];
     [_defaults synchronize];
@@ -150,15 +113,6 @@ static NSString * const kDoraemonAllTestKey = @"doraemon_allTest_window_key";
 
 - (BOOL)methodUseTimeSwitch{
     return [_defaults boolForKey:kDoraemonMethodUseTimeKey];
-}
-
-- (void)saveStartTimeSwitch:(BOOL)on {
-    [_defaults setBool:on forKey:kDoraemonStartTimeKey];
-    [_defaults synchronize];
-}
-
-- (BOOL)startTimeSwitch{
-    return [_defaults boolForKey:kDoraemonStartTimeKey];
 }
 
 - (void)saveANRTrackSwitch:(BOOL)on {
@@ -281,154 +235,4 @@ static NSString * const kDoraemonAllTestKey = @"doraemon_allTest_window_key";
     [_defaults synchronize];
 }
 
-- (void)saveStartClass : (NSString *)startClass {
-    [_defaults setObject:startClass forKey:kDoraemonStartClassKey];
-    [_defaults synchronize];
-}
-
-- (NSString *)startClass {
-    NSString *startClass = [_defaults objectForKey:kDoraemonStartClassKey];
-    return startClass;
-}
-
-- (void)saveMemoryLeak:(BOOL)on{
-    [_defaults setBool:on forKey:kDoraemonMemoryLeakKey];
-    [_defaults synchronize];
-}
-- (BOOL)memoryLeak{
-    if (_firstReadMemoryLeakOn) {
-        return _memoryLeakOn;
-    }
-    _firstReadMemoryLeakOn = YES;
-    _memoryLeakOn = [_defaults boolForKey:kDoraemonMemoryLeakKey];
-     
-    return _memoryLeakOn;
-}
-
-- (void)saveMemoryLeakAlert:(BOOL)on{
-    [_defaults setBool:on forKey:kDoraemonMemoryLeakAlertKey];
-    [_defaults synchronize];
-}
-- (BOOL)memoryLeakAlert{
-    return [_defaults boolForKey:kDoraemonMemoryLeakAlertKey];
-}
-
-- (void)saveKitManagerData:(NSArray *)dataArray{
-    NSMutableArray *mutableDataArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *dic in dataArray) {
-        NSString *moduleName = dic[@"moduleName"];
-        if (moduleName && ([moduleName isEqualToString:@"Common"] ||
-                           [moduleName isEqualToString:@"Performance"] ||
-                           [moduleName isEqualToString:@"UI"] ||
-                           [moduleName isEqualToString:@"Platform"])) {
-            NSArray *pluginArray = dic[@"pluginArray"];
-            NSMutableArray *mutablepluginArray = [[NSMutableArray alloc] init];
-            for (NSDictionary *subDic in pluginArray){
-                [mutablepluginArray addObject:subDic.mutableCopy];
-            }
-            NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] init];
-            [mutableDic setValue:dic[@"moduleName"] forKey:@"moduleName"];
-            [mutableDic setValue:mutablepluginArray forKey:@"pluginArray"];
-            
-            [mutableDataArray addObject:mutableDic];
-        }
-
-    }
-    [_defaults setObject:mutableDataArray forKey:kDoraemonKitManagerKey];
-    [_defaults synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:DoraemonKitManagerUpdateNotification object:nil userInfo:nil];
-}
-
-- (NSMutableArray *)kitManagerData{
-    NSArray *dataArray = [_defaults objectForKey:kDoraemonKitManagerKey];
-    NSMutableArray *mutableDataArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *dic in dataArray) {
-        NSArray *pluginArray = dic[@"pluginArray"];
-        NSMutableArray *mutablepluginArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *subDic in pluginArray){
-            [mutablepluginArray addObject:subDic.mutableCopy];
-        }
-        NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] init];
-        [mutableDic setValue:dic[@"moduleName"] forKey:@"moduleName"];
-        [mutableDic setValue:mutablepluginArray forKey:@"pluginArray"];
-        
-        [mutableDataArray addObject:mutableDic];
-    }
-    return mutableDataArray;
-}
-
-- (NSMutableArray *)kitShowManagerData{
-    NSArray *dataArray = [_defaults objectForKey:kDoraemonKitManagerKey];
-    NSMutableArray *mutableDataArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *dic in dataArray) {
-        NSArray *pluginArray = dic[@"pluginArray"];
-        NSMutableArray *mutablepluginArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *subDic in pluginArray){
-            BOOL show = [subDic[@"show"] boolValue];
-            if (show) {
-                [mutablepluginArray addObject:subDic.mutableCopy];
-            }
-        }
-        NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] init];
-        [mutableDic setValue:dic[@"moduleName"] forKey:@"moduleName"];
-        [mutableDic setValue:mutablepluginArray forKey:@"pluginArray"];
-        
-        [mutableDataArray addObject:mutableDic];
-    }
-    return mutableDataArray;
-}
-
-- (NSMutableArray *)allKitShowManagerData{
-     NSMutableArray *dataArray = [DoraemonManager shareInstance].dataArray;
-    NSMutableArray *mutableDataArray = [[NSMutableArray alloc] init];
-    if ([self kitShowManagerData].count>0) {
-        for (NSDictionary *dic in dataArray) {
-            NSString *moduleName = dic[@"moduleName"];
-            if (moduleName && ([moduleName isEqualToString:@"Common"] ||
-                               [moduleName isEqualToString:@"Performance"] ||
-                               [moduleName isEqualToString:@"UI"] ||
-                               [moduleName isEqualToString:@"Platform"])) {
-                continue;
-            }
-            
-            NSArray *pluginArray = dic[@"pluginArray"];
-            NSMutableArray *mutablepluginArray = [[NSMutableArray alloc] init];
-            for (NSDictionary *subDic in pluginArray){
-                [mutablepluginArray addObject:subDic.mutableCopy];
-            }
-            NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] init];
-            [mutableDic setValue:dic[@"moduleName"] forKey:@"moduleName"];
-            [mutableDic setValue:mutablepluginArray forKey:@"pluginArray"];
-            
-            [mutableDataArray addObject:mutableDic];
-
-        }
-        [mutableDataArray addObjectsFromArray:[self kitShowManagerData]];
-    }else{
-        NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] init];
-        for (NSDictionary *dic in dataArray) {
-            NSString *moduleName = dic[@"moduleName"];
-            if (moduleName && ([moduleName isEqualToString:@"Common"] ||
-                               [moduleName isEqualToString:@"Performance"] ||
-                               [moduleName isEqualToString:@"UI"] ||
-                               [moduleName isEqualToString:@"Platform"])) {
-                [mutableDataArray addObject:dic];
-                continue;
-            }
-            
-            NSArray *pluginArray = dic[@"pluginArray"];
-            NSMutableArray *mutablepluginArray = [[NSMutableArray alloc] init];
-            for (NSDictionary *subDic in pluginArray){
-                [mutablepluginArray addObject:subDic.mutableCopy];
-            }
-            [mutableDic setValue:dic[@"moduleName"] forKey:@"moduleName"];
-            [mutableDic setValue:mutablepluginArray forKey:@"pluginArray"];
-        }
-        if (mutableDic.allKeys.count) {
-            [mutableDataArray insertObject:mutableDic atIndex:0];
-        }
-    }
-    
-    return mutableDataArray;
-}
 @end

@@ -29,26 +29,10 @@
     if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
         [self.navigationController.navigationBar setShadowImage:[UIImage doraemon_imageWithColor:[UIColor doraemon_black_3] size:CGSizeMake(self.view.frame.size.width, 0.5)]];
     }
-
-    if ([self needBigTitleView]) {
-        _bigTitleView = [[DoraemonBaseBigTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(178))];
-        _bigTitleView.delegate = self;
-        [self.view addSubview:_bigTitleView];
-    } else {
-        UIImage *image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back"];
-
-        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-            image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back_dark"];
-        }
-
-        self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
-        [self setLeftNavBarItems:@[self.leftModel]];
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = [self needBigTitleView];
+    
+    UIImage *image = [UIImage systemImageNamed:@"chevron.backward"];
+    self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
+    [self setLeftNavBarItems:@[self.leftModel]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -60,34 +44,6 @@
         if (appWindow != keyWindow) {
             [appWindow makeKeyWindow];
         }
-    }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-            self.leftModel.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back_dark"];
-            [self.navigationController.navigationBar setShadowImage:[UIImage doraemon_imageWithColor:[UIColor doraemon_black_3] size:CGSizeMake(self.view.frame.size.width, 0.5)]];
-        } else {
-            self.leftModel.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_back"];
-        }
-        if (self.leftNavBarItemArray) {
-            [self setLeftNavBarItems:self.leftNavBarItemArray];
-        }
-    }
-}
-
-- (BOOL)needBigTitleView{
-    return NO;
-}
-
-- (void)setTitle:(NSString *)title{
-    if (_bigTitleView && !_bigTitleView.hidden) {
-        [_bigTitleView setTitle:title];
-    }else{
-        [super setTitle:title];
     }
 }
 

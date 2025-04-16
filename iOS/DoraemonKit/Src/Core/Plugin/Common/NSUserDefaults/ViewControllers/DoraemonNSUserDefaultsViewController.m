@@ -210,20 +210,14 @@
 
 #pragma mark
 #pragma mark - UITextFieldDelegate
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     if (![textField hasText]) {
-        
         [self cancelSearch];
-        
         return YES;
     }
     
     [textField resignFirstResponder];
-    
     [self searchWithKeyword:textField.text];
-    
     return YES;
 }
 

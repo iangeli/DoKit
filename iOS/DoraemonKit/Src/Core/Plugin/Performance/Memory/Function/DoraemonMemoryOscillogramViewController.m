@@ -22,27 +22,22 @@
 }
 
 - (NSString *)title{
-    return @"Memory monitor";
+    return @"Memory";
 }
 
 - (NSString *)lowValue{
-    return @"0";
+    return @"1";
 }
 
 - (NSString *)highValue{
-    return [NSString stringWithFormat:@"%zi",[self deviceMemory]];
-}
-
-- (void)closeBtnClick{
-    [[DoraemonCacheManager sharedInstance] saveMemorySwitch:NO];
-    [[DoraemonMemoryOscillogramWindow shareInstance] hide];
+    return @"600";
 }
 
 - (void)doSecondFunction{
     NSUInteger useMemoryForApp = [DoraemonMemoryUtil useMemoryForApp];
-    NSUInteger totalMemoryForDevice = [self deviceMemory];
-    
-    [self.oscillogramView addHeightValue:useMemoryForApp*self.oscillogramView.doraemon_height/totalMemoryForDevice andTipValue:[NSString stringWithFormat:@"%zi",useMemoryForApp]];
+    NSUInteger totalMemoryForDevice = [self.highValue floatValue]; // 1G
+    CGFloat ratio = MIN(useMemoryForApp / totalMemoryForDevice, 1);
+    [self.oscillogramView addHeightValue:ratio * self.oscillogramView.doraemon_height andTipValue:[NSString stringWithFormat:@"%zi", useMemoryForApp]];
 }
 
 - (NSUInteger)deviceMemory {

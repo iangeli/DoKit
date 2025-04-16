@@ -32,7 +32,7 @@
         [_searchBtn addTarget:self action:@selector(searchBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_searchBtn];
         
-        _lineView = [[UIView alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(32), _textField.doraemon_bottom+kDoraemonSizeFrom750_Landscape(19), self.doraemon_width-2*kDoraemonSizeFrom750_Landscape(32), kDoraemonSizeFrom750_Landscape(1))];
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(32), _textField.doraemon_bottom+kDoraemonSizeFrom750_Landscape(19), self.doraemon_width-2*kDoraemonSizeFrom750_Landscape(32), 1)];
         _lineView.backgroundColor = [UIColor doraemon_colorWithHexString:@"#EEEEEE"];
         [self addSubview:_lineView];
         

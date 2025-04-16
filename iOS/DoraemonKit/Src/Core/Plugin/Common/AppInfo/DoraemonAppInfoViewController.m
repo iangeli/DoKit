@@ -46,14 +46,9 @@
         _cellularData = nil;
 }
 
-- (BOOL)needBigTitleView{
-    return YES;
-}
-
 - (void)initUI
 {
     self.title = @"App Info";
-
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, self.view.doraemon_height-self.bigTitleView.doraemon_bottom) style:UITableViewStyleGrouped];
         self.tableView.backgroundColor = [UIColor systemBackgroundColor];
     self.tableView.delegate = self;

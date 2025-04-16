@@ -321,9 +321,9 @@ void printLoadAnalyzeInfo(void){
 @interface DoraemonLoadAnalyze : NSObject
 @end
 @implementation DoraemonLoadAnalyze
-+(void)load{
++ (void)load {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL needMethodUseTime = [defaults boolForKey:@"doraemon_method_use_time_key"];
+    BOOL needMethodUseTime = [defaults boolForKey:@"method_use_time_key"];
     if (!needMethodUseTime) {
         return;
     }

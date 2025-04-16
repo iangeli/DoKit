@@ -44,18 +44,18 @@
         _pointList = [NSMutableArray array];
         _pointLayerList = [NSMutableArray array];
         
-        _bottomLine = [[UIView alloc] initWithFrame:CGRectMake(_kStartX, self.doraemon_height-kDoraemonSizeFrom750_Landscape(1), self.doraemon_width, kDoraemonSizeFrom750_Landscape(1))];
+        _bottomLine = [[UIView alloc] initWithFrame:CGRectMake(_kStartX, self.doraemon_height-1, self.doraemon_width, 1)];
         _bottomLine.backgroundColor = [UIColor doraemon_colorWithString:@"#999999"];
         [self addSubview:_bottomLine];
         
-        _lowValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.doraemon_height-kDoraemonSizeFrom750_Landscape(28)/2, _kStartX, kDoraemonSizeFrom750_Landscape(28))];
+        _lowValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.doraemon_height-kDoraemonSizeFrom750_Landscape(28), _kStartX, kDoraemonSizeFrom750_Landscape(28))];
         _lowValueLabel.text = @"0";
         _lowValueLabel.textColor = [UIColor whiteColor];
         _lowValueLabel.textAlignment = NSTextAlignmentCenter;
         _lowValueLabel.font = [UIFont systemFontOfSize:10];
         [self addSubview:_lowValueLabel];
         
-        _highValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -kDoraemonSizeFrom750_Landscape(28)/2, _kStartX, kDoraemonSizeFrom750_Landscape(28))];
+        _highValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _kStartX, kDoraemonSizeFrom750_Landscape(28))];
         _highValueLabel.text = @"100";
         _highValueLabel.textColor = [UIColor whiteColor];
         _highValueLabel.textAlignment = NSTextAlignmentCenter;
@@ -71,6 +71,14 @@
     }
     
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    _bottomLine.frame = CGRectMake(_kStartX, self.doraemon_height-1, self.doraemon_width, 1);
+    _lowValueLabel.frame = CGRectMake(0, self.doraemon_height-kDoraemonSizeFrom750_Landscape(28), _kStartX, kDoraemonSizeFrom750_Landscape(28));
+    _highValueLabel.frame = CGRectMake(0, 0, _kStartX, kDoraemonSizeFrom750_Landscape(28));
 }
 
 - (void)setLowValue:(NSString *)value{
@@ -182,7 +190,8 @@
     }
     
     [_tipLabel sizeToFit];
-    _tipLabel.frame = CGRectMake(point.x, self.doraemon_height-point.y-_tipLabel.doraemon_height, _tipLabel.doraemon_width, _tipLabel.doraemon_height);
+    CGFloat x = MIN(self.doraemon_width - _tipLabel.doraemon_width, point.x);
+    _tipLabel.frame = CGRectMake(x, self.doraemon_height-point.y-_tipLabel.doraemon_height, _tipLabel.doraemon_width, _tipLabel.doraemon_height);
     //self.indicatorLayer.frame = CGRectMake(point.x, 0, 1, self.bottomLine.doraemon_bottom);
 }
 

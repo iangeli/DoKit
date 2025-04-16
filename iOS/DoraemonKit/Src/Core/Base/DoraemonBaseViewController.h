@@ -10,7 +10,6 @@
 #import "DoraemonBaseBigTitleView.h"
 
 @interface DoraemonBaseViewController : UIViewController
-- (BOOL)needBigTitleView;
 @property (nonatomic, strong) DoraemonBaseBigTitleView *bigTitleView;
 
 - (void)setLeftNavBarItems:(NSArray *)items;

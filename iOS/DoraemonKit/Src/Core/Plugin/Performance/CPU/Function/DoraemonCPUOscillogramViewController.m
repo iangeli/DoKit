@@ -21,29 +21,20 @@
 }
 
 - (NSString *)title{
-    return @"CPU monitor";
+    return @"CPU";
 }
 
 - (NSString *)lowValue{
-    return @"0";
+    return @"1";
 }
 
 - (NSString *)highValue{
     return @"100";
 }
 
-- (void)closeBtnClick{
-    [[DoraemonCacheManager sharedInstance] saveCpuSwitch:NO];
-    [[DoraemonCPUOscillogramWindow shareInstance] hide];
-}
-
-- (void)doSecondFunction{
+- (void)doSecondFunction {
     CGFloat cpuUsage = [DoraemonCPUUtil cpuUsageForApp];
-    if (cpuUsage * 100 > 100) {
-        cpuUsage = 100;
-    }else{
-        cpuUsage = cpuUsage * 100;
-    }
-    [self.oscillogramView addHeightValue:cpuUsage*self.oscillogramView.doraemon_height/100. andTipValue:[NSString stringWithFormat:@"%.f",cpuUsage]];
+    cpuUsage = MIN(MAX(cpuUsage, 0), 1);
+    [self.oscillogramView addHeightValue:cpuUsage * self.oscillogramView.doraemon_height andTipValue:[NSString stringWithFormat:@"%.f",cpuUsage]];
 }
 @end

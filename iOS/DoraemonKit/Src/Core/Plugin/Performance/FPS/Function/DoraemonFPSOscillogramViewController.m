@@ -22,20 +22,15 @@
 }
 
 - (NSString *)title{
-    return @"FPS monitor";
+    return @"FPS";
 }
 
 - (NSString *)lowValue{
-    return @"0";
+    return @"1";
 }
 
 - (NSString *)highValue{
     return @"60";
-}
-
-- (void)closeBtnClick{
-    [[DoraemonCacheManager sharedInstance] saveFpsSwitch:NO];
-    [[DoraemonFPSOscillogramWindow shareInstance] hide];
 }
 
 - (void)startRecord{

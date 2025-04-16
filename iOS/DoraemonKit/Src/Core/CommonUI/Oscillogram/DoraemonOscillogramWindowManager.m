@@ -37,29 +37,34 @@
 }
 
 - (void)resetLayout{
-    CGFloat offsetY = 0;
-    CGFloat width = 0;
-    CGFloat height = kDoraemonSizeFrom750_Landscape(240);
-    if (kInterfaceOrientationPortrait){
-        width = DoraemonScreenWidth;
-        offsetY = IPHONE_TOPSENSOR_HEIGHT;
-    }else{
-        width = DoraemonScreenHeight;
+    CGFloat offsetX = 0;
+    CGFloat offsetY = IS_IPHONE_X_Series ? 32 : 0;
+    CGFloat width = kInterfaceOrientationPortrait ? DoraemonScreenWidth:DoraemonScreenHeight;
+    CGFloat height = 60;
+
+    __block NSInteger count = 0;
+    [@[_fpsWindow, _cpuWindow, _memoryWindow] enumerateObjectsUsingBlock:^(UIView  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (!obj.isHidden) {
+            count += 1;
+        }
+    }];
+
+    if (count == 0) {
+        return;
     }
+    width = width / count;
     if (!_fpsWindow.hidden) {
-        _fpsWindow.frame = CGRectMake(0, offsetY, width, height);
-        offsetY += _fpsWindow.doraemon_height+kDoraemonSizeFrom750_Landscape(4);
+        _fpsWindow.frame = CGRectMake(offsetX, offsetY, width, height);
+        offsetX += width;
     }
     
     if (!_cpuWindow.hidden) {
-        _cpuWindow.frame = CGRectMake(0, offsetY, width, height);
-        offsetY += _cpuWindow.doraemon_height+kDoraemonSizeFrom750_Landscape(4);
+        _cpuWindow.frame = CGRectMake(offsetX, offsetY, width, height);
+        offsetX += width;
     }
     
     if (!_memoryWindow.hidden) {
-        _memoryWindow.frame = CGRectMake(0, offsetY, width, height);
-        offsetY += _memoryWindow.doraemon_height+kDoraemonSizeFrom750_Landscape(4);
+        _memoryWindow.frame = CGRectMake(offsetX, offsetY, width, height);
     }
-    
 }
 @end

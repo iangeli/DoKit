@@ -25,32 +25,19 @@
 - (UIButton *)entryBtn {
     if (!_entryBtn) {
         _entryBtn = [[UIButton alloc] initWithFrame:self.bounds];
-        _entryBtn.backgroundColor = [UIColor clearColor];
-        UIImage *image = [UIImage doraemon_xcassetImageNamed:@"doraemon_logo"];
-
+        UIImage *image = [[UIImage systemImageNamed:@"apple.logo"] imageWithTintColor:UIColor.systemBackgroundColor renderingMode:UIImageRenderingModeAlwaysOriginal];
         [_entryBtn setImage:image forState:UIControlStateNormal];
-        _entryBtn.layer.cornerRadius = 20.;
+        _entryBtn.backgroundColor = UIColor.separatorColor;
+        _entryBtn.layer.cornerRadius = CGRectGetWidth(self.bounds) / 2;
         [_entryBtn addTarget:self action:@selector(entryClick:) forControlEvents:UIControlEventTouchUpInside];
     }
 
     return _entryBtn;
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-        if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-            [self.entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_logo_dark"] forState:UIControlStateNormal];
-        } else {
-            [self.entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_logo"] forState:UIControlStateNormal];
-        }
-    }
-}
-
 - (instancetype)initWithStartPoint:(CGPoint)startingPosition{
     self.startingPosition = startingPosition;
-    _kEntryViewSize = 58;
+    _kEntryViewSize = 48;
     CGFloat x = self.startingPosition.x;
     CGFloat y = self.startingPosition.y;
     CGPoint defaultPosition = DoraemonStartingPosition;
@@ -84,18 +71,18 @@
     return self;
 }
 
-- (void)show{
+- (void)show {
     self.hidden = NO;
 }
 
 - (void)showClose:(NSNotification *)notification{
-    [_entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_close"] forState:UIControlStateNormal];
+    [_entryBtn setImage:[UIImage systemImageNamed:@"xmark"] forState:UIControlStateNormal];
     [_entryBtn removeTarget:self action:@selector(showClose:) forControlEvents:UIControlEventTouchUpInside];
     [_entryBtn addTarget:self action:@selector(closePluginClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)closePluginClick:(UIButton *)btn{
-    [_entryBtn setImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_logo"] forState:UIControlStateNormal];
+    [_entryBtn setImage:[UIImage systemImageNamed:@"xmark"] forState:UIControlStateNormal];
     [_entryBtn removeTarget:self action:@selector(closePluginClick:) forControlEvents:UIControlEventTouchUpInside];
     [_entryBtn addTarget:self action:@selector(entryClick:) forControlEvents:UIControlEventTouchUpInside];
 }

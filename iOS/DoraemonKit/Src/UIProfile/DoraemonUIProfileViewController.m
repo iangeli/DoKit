@@ -21,16 +21,12 @@
     
     self.title = @"UI Hierarchy";
     
-    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750(104))];
+    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFrom750(104))];
     [_switchView renderUIWithTitle:@"UI Hierarchy switch" switchOn:[DoraemonUIProfileManager sharedInstance].enable];
     [_switchView needTopLine];
     [_switchView needDownLine];
     _switchView.delegate = self;
     [self.view addSubview:_switchView];
-}
-
-- (BOOL)needBigTitleView{
-    return YES;
 }
 
 #pragma mark -- DoraemonSwitchViewDelegate

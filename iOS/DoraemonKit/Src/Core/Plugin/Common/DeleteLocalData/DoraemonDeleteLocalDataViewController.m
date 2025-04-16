@@ -19,16 +19,12 @@
     [super viewDidLoad];
     self.title = @"Clear Sanbox";
     
-    _cellBtn = [[DoraemonCellButton alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
+    _cellBtn = [[DoraemonCellButton alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
     [_cellBtn renderUIWithTitle:@"Clear Sanbox"];
     [_cellBtn renderUIWithRightContent:[self getHomeDirFileSize]];
     _cellBtn.delegate = self;
     [_cellBtn needDownLine];
     [self.view addSubview:_cellBtn];
-}
-
-- (BOOL)needBigTitleView{
-    return YES;
 }
 
 - (void)cellBtnClick:(id)sender{

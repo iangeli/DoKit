@@ -25,7 +25,7 @@
     [super viewDidLoad];
     self.title = @"ANR Check";
     
-    self.switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, 53)];
+    self.switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, 53)];
     [self.switchView renderUIWithTitle:@"ANR Switch" switchOn:[DoraemonANRManager sharedInstance].anrTrackOn];
     [self.switchView needTopLine];
     [self.switchView needDownLine];
@@ -43,10 +43,6 @@
     self.clearBtn.delegate = self;
     [self.clearBtn needDownLine];
     [self.view addSubview:self.clearBtn];
-}
-
-- (BOOL)needBigTitleView {
-    return YES;
 }
 
 #pragma mark -- DoraemonSwitchViewDelegate
