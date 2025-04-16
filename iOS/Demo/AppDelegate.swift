@@ -27,7 +27,7 @@ private class AppDelegate: UIResponder, UIApplicationDelegate {
         DoraemonManager.shareInstance().install()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            DoraemonManager.shareInstance().showDoraemon()
+            DoraemonManager.shareInstance().showDoraemon()
             DoraemonManager.shareInstance().checkStatus()
         }
 

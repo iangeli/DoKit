@@ -78,7 +78,10 @@
     [self resetLayout];
 }
 
-- (void)hide{
+- (void)hide {
+    if (self.hidden) {
+        return;
+    }
     [_vc endRecord];
     self.hidden = YES;
     [self resetLayout];

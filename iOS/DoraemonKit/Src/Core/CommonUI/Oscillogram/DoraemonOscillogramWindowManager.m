@@ -40,12 +40,18 @@
 - (void)checkStatus {
     if ([DoraemonCacheManager sharedInstance].fpsSwitch) {
         [[DoraemonFPSOscillogramWindow shareInstance] show];
+    } else {
+        [[DoraemonFPSOscillogramWindow shareInstance] hide];
     }
     if ([DoraemonCacheManager sharedInstance].cpuSwitch) {
         [[DoraemonCPUOscillogramWindow shareInstance] show];
+    } else {
+        [[DoraemonCPUOscillogramWindow shareInstance] hide];
     }
     if ([DoraemonCacheManager sharedInstance].memorySwitch) {
         [[DoraemonMemoryOscillogramWindow shareInstance] show];
+    } else {
+        [[DoraemonMemoryOscillogramWindow shareInstance] hide];
     }
 }
 
