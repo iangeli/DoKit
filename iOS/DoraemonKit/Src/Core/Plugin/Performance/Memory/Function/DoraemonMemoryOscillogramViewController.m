@@ -34,10 +34,15 @@
 }
 
 - (void)doSecondFunction{
-    NSUInteger useMemoryForApp = [DoraemonMemoryUtil useMemoryForApp];
-    NSUInteger totalMemoryForDevice = [self.highValue floatValue]; // 1G
+    CGFloat useMemoryForApp = (CGFloat)[DoraemonMemoryUtil useMemoryForApp];
+    CGFloat totalMemoryForDevice = (CGFloat)[self.highValue floatValue];
     CGFloat ratio = MIN(useMemoryForApp / totalMemoryForDevice, 1);
-    [self.oscillogramView addHeightValue:ratio * self.oscillogramView.doraemon_height andTipValue:[NSString stringWithFormat:@"%zi", useMemoryForApp]];
+    NSString *tip = [NSString stringWithFormat:@"%.0lfM", useMemoryForApp];
+    if (useMemoryForApp > 1000) {
+        tip = [NSString stringWithFormat:@"%.1lfG", useMemoryForApp / 1000];
+    }
+
+    [self.oscillogramView addHeightValue:ratio * self.oscillogramView.doraemon_height andTipValue:tip];
 }
 
 - (NSUInteger)deviceMemory {

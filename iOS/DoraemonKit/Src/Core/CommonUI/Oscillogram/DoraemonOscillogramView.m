@@ -101,7 +101,7 @@
         }
     }
     
-    _y = fabs(MIN(height, showHeight));
+    _y = fabs(MIN(height, round(showHeight)));
     DoraemonPoint *point = [[DoraemonPoint alloc] init];
     point.x = _x;
     point.y = _y;
