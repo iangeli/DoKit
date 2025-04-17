@@ -35,6 +35,7 @@
 - (void)doSecondFunction {
     CGFloat cpuUsage = [DoraemonCPUUtil cpuUsageForApp];
     cpuUsage = MIN(MAX(cpuUsage, 0), 1);
-    [self.oscillogramView addHeightValue:cpuUsage * self.oscillogramView.doraemon_height andTipValue:[NSString stringWithFormat:@"%.f",cpuUsage]];
+    [self.oscillogramView addHeightValue:cpuUsage * self.oscillogramView.doraemon_height
+                             andTipValue:[NSString stringWithFormat:@"%.f",cpuUsage * 100]];
 }
 @end
