@@ -314,12 +314,7 @@
 
 + (NSArray *)getWebViews {
     NSMutableArray *webViews = [NSMutableArray array];
-    
     [webViews addObjectsFromArray:[[self getKeyWindow] doraemon_findViewsForClass:WKWebView.class]];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    [webViews addObjectsFromArray:[[self getKeyWindow] doraemon_findViewsForClass:UIWebView.class]];
-#pragma clang diagnostic pop
     return webViews;
 }
 @end

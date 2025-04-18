@@ -698,6 +698,8 @@
             return @"Date and Time";
         case UIDatePickerModeCountDownTimer:
             return @"Count Down Timer";
+        case UIDatePickerModeYearAndMonth:
+            return @"Year And Month";
     }
     return nil;
 }
