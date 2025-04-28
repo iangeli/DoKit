@@ -108,16 +108,9 @@ static NSInteger const kPixelSkip = 1;
     CGRect selectedRect = CGRectMake(xyOffset, xyOffset, gridWidth, gridWidth);
     CGContextAddRect(ctx, selectedRect);
 
-        UIColor *dyColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull trainCollection) {
-            if ([trainCollection userInterfaceStyle] == UIUserInterfaceStyleLight) {
-                return [UIColor blackColor];
-            }
-            else {
-                return [UIColor whiteColor];
-            }
-        }];
-        CGContextSetStrokeColorWithColor(ctx, dyColor.CGColor);
-  
+    UIColor *dyColor =  [UIColor labelColor];
+    CGContextSetStrokeColorWithColor(ctx, dyColor.CGColor);
+    
     CGContextSetLineWidth(ctx, 1.0);
     CGContextStrokePath(ctx);
     

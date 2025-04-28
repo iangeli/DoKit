@@ -33,7 +33,6 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Home";
-    self.view.backgroundColor = [UIColor tertiarySystemBackgroundColor];
     _dataArray = [DoraemonManager shareInstance].dataArray;
     [self.view addSubview:self.collectionView];
 }
@@ -132,19 +131,7 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
         view = head;
     } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         DoraemonHomeFootCell *foot = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DoraemonHomeFootCellID forIndexPath:indexPath];
-        __weak typeof(self) weakSelf = self;
-        UIColor *dyColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-                return [UIColor doraemon_colorWithString:@"#F4F5F6"];
-            } else {
-                if (indexPath.section >= weakSelf.dataArray.count) {
-                    return [UIColor systemBackgroundColor];
-                } else {
-                    return [UIColor doraemon_colorWithString:@"#353537"];
-                }
-            }
-        }];
-        foot.backgroundColor = dyColor;
+        foot.backgroundColor = [UIColor secondarySystemBackgroundColor];
         view = foot;
     }else{
         view = [[UICollectionReusableView alloc] init];

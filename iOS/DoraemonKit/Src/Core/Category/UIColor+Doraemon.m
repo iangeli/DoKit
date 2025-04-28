@@ -155,10 +155,6 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
     }];
 }
 
-+ (UIColor *)doraemon_bg{
-    return [UIColor doraemon_colorWithString:@"#F4F5F6"];
-}
-
 + (UIColor *)doraemon_orange{
     return [UIColor doraemon_colorWithString:@"#FF8903"];
 }
@@ -171,13 +167,6 @@ CGFloat doraemonColorComponentFrom(NSString *string, NSUInteger start, NSUIntege
             return [UIColor doraemon_colorWithHex:0x68686B andAlpha:0.6];
         }
     }];
-}
-
-+ (UIColor *)doraemon_randomColor {
-    CGFloat red = ( arc4random() % 255 / 255.0 );
-    CGFloat green = ( arc4random() % 255 / 255.0 );
-    CGFloat blue = ( arc4random() % 255 / 255.0 );
-    return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
 
 @end

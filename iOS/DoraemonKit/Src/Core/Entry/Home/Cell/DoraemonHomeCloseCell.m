@@ -32,18 +32,8 @@
 - (UIButton *)closeButton {
     if (!_closeButton) {
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        UIColor *dyColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-                return [UIColor whiteColor];
-            } else {
-                return [UIColor doraemon_colorWithString:@"#C1C3BF"];
-            }
-        }];
-        _closeButton.backgroundColor = dyColor;
-        _closeButton.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(5.0);
-        _closeButton.layer.masksToBounds = YES;
         [_closeButton setTitle:@"Close" forState:UIControlStateNormal];
-        [_closeButton setTitleColor:[UIColor doraemon_colorWithString:@"#CC3A4B"] forState:UIControlStateNormal];
+        [_closeButton setTitleColor:[UIColor labelColor] forState:UIControlStateNormal];
         _closeButton.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(28)];
         [_closeButton addTarget:self action:@selector(closeButtonHandle) forControlEvents:UIControlEventTouchUpInside];
     }

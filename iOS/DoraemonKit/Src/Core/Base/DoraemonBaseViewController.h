@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DoraemonBaseBigTitleView.h"
 
 @interface DoraemonBaseViewController : UIViewController
-@property (nonatomic, strong) DoraemonBaseBigTitleView *bigTitleView;
 
 - (void)setLeftNavBarItems:(NSArray *)items;
 - (void)leftNavBackClick:(id)clickView;

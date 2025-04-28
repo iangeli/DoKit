@@ -199,7 +199,7 @@
 
 - (void)showHierarchyInfo:(UIView *)selectView {
     DoraemonHierarchyDetailViewController *vc = [[DoraemonHierarchyDetailViewController alloc] init];
-    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+//    vc.modalPresentationStyle = UIModalPresentationFullScreen;
     vc.selectView = selectView;
     [self presentViewController:vc animated:YES completion:nil];
 }

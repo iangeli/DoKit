@@ -26,13 +26,7 @@
 }
 
 - (void)commonInit {
-    self.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-                return [UIColor whiteColor];
-            } else {
-                return [UIColor secondarySystemBackgroundColor];
-            }
-        }];
+    self.backgroundColor = [UIColor systemBackgroundColor];
     self.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(8);
     self.layer.borderWidth = 1.;
     self.layer.borderColor = [UIColor doraemon_colorWithHex:0x999999 andAlpha:0.2].CGColor;

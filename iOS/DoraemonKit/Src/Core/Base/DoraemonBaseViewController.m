@@ -13,7 +13,7 @@
 #import "UIView+Doraemon.h"
 #import "DoraemonDefine.h"
 
-@interface DoraemonBaseViewController ()<DoraemonBaseBigTitleViewDelegate>
+@interface DoraemonBaseViewController ()
  
 @property (nonatomic, strong) DoraemonNavBarItemModel *leftModel;
 
@@ -25,11 +25,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor systemBackgroundColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor labelColor]}];
-    if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-        [self.navigationController.navigationBar setShadowImage:[UIImage doraemon_imageWithColor:[UIColor doraemon_black_3] size:CGSizeMake(self.view.frame.size.width, 0.5)]];
-    }
-    
+   
     UIImage *image = [UIImage systemImageNamed:@"chevron.backward"];
     self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
     [self setLeftNavBarItems:@[self.leftModel]];
@@ -116,11 +112,6 @@
 
     spacer.width = width;
     return spacer;
-}
-
-#pragma mark - DoraemonBaseBigTitleViewDelegate
-- (void)bigTitleCloseClick{
-    [self leftNavBackClick:nil];
 }
 
 - (void)rightNavTitleClick:(id)clickView{

@@ -42,24 +42,24 @@ static CGFloat const kColorPickWindowSize = 150;
     self = [super initWithFrame:CGRectMake(DoraemonScreenWidth/2-kColorPickWindowSize/2, DoraemonScreenHeight/2-kColorPickWindowSize/2, kColorPickWindowSize, kColorPickWindowSize)];
     if (self) {
 
-                for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-                    if (windowScene.activationState == UISceneActivationStateForegroundActive){
-                        self.windowScene = windowScene;
-                        break;
-                    }
-                }
-      
+        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
+            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+                self.windowScene = windowScene;
+                break;
+            }
+        }
+
         self.backgroundColor = [UIColor clearColor];
         self.windowLevel = UIWindowLevelStatusBar + 1.f;
         if (!self.rootViewController) {
             self.rootViewController = [[UIViewController alloc] init];
         }
-        
+
         //        DoraemonColorPickView *colorPickView = [[DoraemonColorPickView alloc] initWithFrame:self.bounds];
         //        colorPickView.backgroundColor = [UIColor clearColor];
         //        [self.rootViewController.view addSubview:colorPickView];
         //        self.colorPickView = colorPickView;
-        
+
         self.magnifyLayer.frame = self.bounds;
         __weak __typeof(self)weakSelf = self;
         self.magnifyLayer.pointColorBlock = ^(CGPoint currentPoint) {
@@ -146,7 +146,6 @@ static CGFloat const kColorPickWindowSize = 150;
 
 - (void)pan:(UIPanGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        
         [self updateScreeShotImage];
     }
     

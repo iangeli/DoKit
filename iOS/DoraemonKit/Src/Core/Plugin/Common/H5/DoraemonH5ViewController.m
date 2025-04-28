@@ -29,9 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Browser";
-        self.view.backgroundColor = [UIColor systemBackgroundColor];
+    self.view.backgroundColor = [UIColor systemBackgroundColor];
     
-    _h5UrlTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom + kDoraemonSizeFrom750_Landscape(32), self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(358))];
+    _h5UrlTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, kDoraemonSizeFrom750_Landscape(32), self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(358))];
     _h5UrlTextView.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(32)];
     [self.view addSubview:_h5UrlTextView];
     _h5UrlTextView.keyboardType = UIKeyboardTypeURL;

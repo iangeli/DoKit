@@ -25,7 +25,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor systemBackgroundColor];
         [self addSubview:self.title];
     }
     return self;

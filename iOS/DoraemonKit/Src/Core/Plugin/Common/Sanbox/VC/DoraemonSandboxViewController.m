@@ -42,7 +42,7 @@
 
 - (void)initUI {
     self.title = @"Sandbox";
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, self.view.doraemon_height-self.bigTitleView.doraemon_bottom) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.doraemon_width, self.view.doraemon_height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -57,15 +57,11 @@
         targetPath = _rootPath;
         model.name = @"Root Dir";
         model.type = DoraemonSandboxFileTypeRoot;
-        self.tableView.frame = CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, self.view.doraemon_height-self.bigTitleView.doraemon_bottom);
-        self.bigTitleView.hidden = NO;
-//        self.navigationController.navigationBarHidden = YES;
+        self.tableView.frame = CGRectMake(0, 0, self.view.doraemon_width, self.view.doraemon_height);
         [self setLeftNavBarItems:nil];
     }else{
         model.name = @"Back";
         model.type = DoraemonSandboxFileTypeBack;
-        self.bigTitleView.hidden = YES;
-//        self.navigationController.navigationBarHidden = NO;
         self.tableView.frame = CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, self.view.doraemon_height-IPHONE_NAVIGATIONBAR_HEIGHT);
         NSString *dirTitle =  [fm displayNameAtPath:targetPath];
         self.title = dirTitle;

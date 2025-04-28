@@ -20,13 +20,7 @@
 }
 
 - (void)initUI {
-    self.view.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
-        if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            return [UIColor whiteColor];
-        } else {
-            return [UIColor secondarySystemBackgroundColor];
-        }
-    }];
+    self.view.backgroundColor = [UIColor systemBackgroundColor];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         CGSize viewSize = self.view.window.bounds.size;
@@ -43,7 +37,7 @@
         
         self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(32), 0, viewSize.width - kDoraemonSizeFrom750_Landscape(32 + 16) - closeWidth , viewSize.height)];
         self.infoLabel.backgroundColor = [UIColor clearColor];
-        self.infoLabel.textColor = [UIColor doraemon_black_1];
+        self.infoLabel.textColor = [UIColor labelColor];
         self.infoLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)];
         self.infoLabel.numberOfLines = 0;
         [self.view addSubview:self.infoLabel];

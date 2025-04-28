@@ -28,9 +28,5 @@
 
 + (UIColor *)doraemon_line;
 
-+ (UIColor *)doraemon_randomColor;
-
-+ (UIColor *)doraemon_bg; 
-
 + (UIColor *)doraemon_orange; 
 @end

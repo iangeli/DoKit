@@ -25,9 +25,9 @@
 - (UIButton *)entryBtn {
     if (!_entryBtn) {
         _entryBtn = [[UIButton alloc] initWithFrame:self.bounds];
-        UIImage *image = [[UIImage systemImageNamed:@"apple.logo"] imageWithTintColor:UIColor.systemBackgroundColor renderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage *image = [[UIImage systemImageNamed:@"apple.logo"] imageWithTintColor:UIColor.whiteColor renderingMode:UIImageRenderingModeAlwaysOriginal];
         [_entryBtn setImage:image forState:UIControlStateNormal];
-        _entryBtn.backgroundColor = UIColor.separatorColor;
+        _entryBtn.backgroundColor = [UIColor.lightGrayColor colorWithAlphaComponent:0.5];
         _entryBtn.layer.cornerRadius = CGRectGetWidth(self.bounds) / 2;
         [_entryBtn addTarget:self action:@selector(entryClick:) forControlEvents:UIControlEventTouchUpInside];
     }

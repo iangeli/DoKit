@@ -44,7 +44,7 @@
 #pragma mark - Over write
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.tableView.frame = CGRectMake(0, self.bigTitleView.doraemon_bottom, self.view.doraemon_width, self.view.doraemon_height - self.bigTitleView.doraemon_bottom);
+    self.tableView.frame = CGRectMake(0, 0, self.view.doraemon_width, self.view.doraemon_height);
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
