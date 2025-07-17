@@ -21,6 +21,11 @@
 @property (nonatomic, copy) NSString *rootPath;
 
 @property (nonatomic, strong) DoraemonNavBarItemModel *leftModel;
+
+@property (nonatomic, assign) BOOL isEditingMode;
+@property (nonatomic, strong) NSMutableArray<NSIndexPath *> *selectedIndexPaths;
+@property (nonatomic, strong) UIButton *deleteButton;
+@property (nonatomic, strong) UIBarButtonItem *cancelEditButton;
 @end
 
 @implementation DoraemonSandboxViewController
@@ -40,12 +45,95 @@
     _rootPath = NSHomeDirectory();
 }
 
+- (UIButton *)deleteButton {
+    if (!_deleteButton) {
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+        _deleteButton.backgroundColor = [UIColor systemRedColor];
+        [_deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _deleteButton.frame = CGRectMake(0, self.view.doraemon_height, self.view.doraemon_width, 60);
+        [_deleteButton addTarget:self action:@selector(deleteSelectedItems) forControlEvents:UIControlEventTouchUpInside];
+        _deleteButton.hidden = YES;
+    }
+    return _deleteButton;
+}
+
+- (UIBarButtonItem *)cancelEditButton {
+    if (!_cancelEditButton) {
+        _cancelEditButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(exitEditingMode)];
+    }
+    return _cancelEditButton;
+}
+
 - (void)initUI {
     self.title = @"Sandbox";
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.doraemon_width, self.view.doraemon_height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    [self.tableView registerClass:DoraemonSandBoxCell.self forCellReuseIdentifier:DoraemonSandBoxCell.description];
     [self.view addSubview:self.tableView];
+    
+    // 长按手势
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [self.tableView addGestureRecognizer:longPress];
+    
+    self.selectedIndexPaths = [NSMutableArray array];
+  
+    [self.view addSubview:self.deleteButton];
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [gesture locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
+        if (indexPath) {
+            [self enterEditingMode];
+            [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+            if (![self.selectedIndexPaths containsObject:indexPath]) {
+                [self.selectedIndexPaths addObject:indexPath];
+            }
+        }
+    }
+}
+
+- (void)enterEditingMode {
+    if (!self.isEditingMode) {
+        self.isEditingMode = YES;
+        [self.tableView setEditing:YES animated:YES];
+        self.deleteButton.hidden = NO;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.deleteButton.frame = CGRectMake(0, self.view.doraemon_height - 60, self.view.doraemon_width, 60);
+        }];
+        self.navigationItem.rightBarButtonItem = self.cancelEditButton;
+    }
+}
+
+- (void)exitEditingMode {
+    if (self.isEditingMode) {
+        self.isEditingMode = NO;
+        [self.tableView setEditing:NO animated:YES];
+        [self.selectedIndexPaths removeAllObjects];
+        [UIView animateWithDuration:0.25 animations:^{
+            self.deleteButton.frame = CGRectMake(0, self.view.doraemon_height, self.view.doraemon_width, 60);
+        } completion:^(BOOL finished) {
+            self.deleteButton.hidden = YES;
+        }];
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+
+- (void)deleteSelectedItems {
+    NSMutableArray *modelsToDelete = [NSMutableArray array];
+    for (NSIndexPath *indexPath in self.selectedIndexPaths) {
+        DoraemonSandboxModel *model = self.dataArray[indexPath.row];
+        [modelsToDelete addObject:model];
+    }
+    for (DoraemonSandboxModel *model in modelsToDelete) {
+        [self deleteByDoraemonSandboxModel:model];
+    }
+    [self exitEditingMode];
+    [self loadPath:self.currentDirModel.path];
 }
 
 - (void)loadPath:(NSString *)filePath {
@@ -124,11 +212,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellId = @"cellId";
-    DoraemonSandBoxCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[DoraemonSandBoxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-    }
+    DoraemonSandBoxCell *cell = [tableView dequeueReusableCellWithIdentifier:DoraemonSandBoxCell.description forIndexPath:indexPath];
     DoraemonSandboxModel *model = _dataArray[indexPath.row];
     [cell renderUIWithData:model];
     return cell;
@@ -153,6 +237,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isEditingMode) {
+        if (![self.selectedIndexPaths containsObject:indexPath]) {
+            [self.selectedIndexPaths addObject:indexPath];
+        }
+        return;
+    }
     DoraemonSandboxModel *model = _dataArray[indexPath.row];
     if (model.type == DoraemonSandboxFileTypeFile) {
         [self handleFileWithPath:model.path];
@@ -161,7 +251,16 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isEditingMode) {
+        [self.selectedIndexPaths removeObject:indexPath];
+    }
+}
+
 - (void)leftNavBackClick:(id)clickView {
+    if (self.isEditingMode) {
+        [self exitEditingMode];
+    }
     if (_currentDirModel.type == DoraemonSandboxFileTypeRoot) {
         [super leftNavBackClick:clickView];
     } else {

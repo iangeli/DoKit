@@ -23,7 +23,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.multipleSelectionBackgroundView = [UIView new];
         
         self.fileTypeIcon = [[UIImageView alloc] init];
         [self.contentView addSubview:self.fileTypeIcon];

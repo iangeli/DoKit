@@ -45,7 +45,7 @@
     
     if (enable) {
         if (!self.metricsBorderLayer) {
-            UIColor *borderColor = DoraemonViewMetricsConfig.defaultConfig.borderColor ? DoraemonViewMetricsConfig.defaultConfig.borderColor : UIColor.doraemon_randomColor;
+            UIColor *borderColor = DoraemonViewMetricsConfig.defaultConfig.borderColor ? DoraemonViewMetricsConfig.defaultConfig.borderColor : UIColor.redColor;
             self.metricsBorderLayer = ({
                 CALayer *layer = CALayer.new;
                 layer.borderWidth = DoraemonViewMetricsConfig.defaultConfig.borderWidth;

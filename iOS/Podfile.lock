@@ -1,6 +1,6 @@
 PODS:
-  - DoraemonKit/Core (3.1.5)
-  - DoraemonKit/WithLoad (3.1.5):
+  - DoraemonKit/Core (3.2.3)
+  - DoraemonKit/WithLoad (3.2.3):
     - DoraemonKit/Core
 
 DEPENDENCIES:
@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
     :path: ".."
 
 SPEC CHECKSUMS:
-  DoraemonKit: 70d2c62735a4341b8c786272b445e323aef2681a
+  DoraemonKit: 5d0f24fbccc21f3fd54e6040bca179b3ed116813
 
 PODFILE CHECKSUM: d2cd26940f618edccb694e17dc9aa9afa53dbefb
 
