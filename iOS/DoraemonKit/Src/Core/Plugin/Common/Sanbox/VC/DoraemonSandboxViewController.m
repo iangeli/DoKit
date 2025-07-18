@@ -14,11 +14,19 @@
 #import "DoraemonSandboxCell.h"
 #import "DoraemonUtil.h"
 
-@interface DoraemonSandboxViewController () <UITableViewDelegate, UITableViewDataSource>
+typedef NS_ENUM(NSUInteger, SortBy) {
+    SortByDefault,
+    SortByName,
+    SortBySizeAscending,
+    SortBySizeDescending
+};
+
+@interface DoraemonSandboxViewController () <UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) DoraemonSandboxModel *currentDirModel;
 @property (nonatomic, copy) NSArray *dataArray;
 @property (nonatomic, copy) NSString *rootPath;
+@property (nonatomic, assign) SortBy sortType;
 
 @property (nonatomic, strong) DoraemonNavBarItemModel *leftModel;
 
@@ -26,6 +34,9 @@
 @property (nonatomic, strong) NSMutableArray<NSIndexPath *> *selectedIndexPaths;
 @property (nonatomic, strong) UIButton *deleteButton;
 @property (nonatomic, strong) UIBarButtonItem *cancelEditButton;
+@property (nonatomic, strong) UIBarButtonItem *sortButton;
+
+@property (nonatomic, strong) UITableViewDiffableDataSource<NSNumber *, DoraemonSandboxModel *> *dataSource;
 @end
 
 @implementation DoraemonSandboxViewController
@@ -41,6 +52,7 @@
 }
 
 - (void)initData {
+    _sortType = SortByDefault;
     _dataArray = @[];
     _rootPath = NSHomeDirectory();
 }
@@ -65,22 +77,34 @@
     return _cancelEditButton;
 }
 
+- (UIBarButtonItem *)sortButton {
+    if (!_sortButton) {
+        _sortButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self action:@selector(showSortMenu)];
+    }
+    return _sortButton;
+}
+
 - (void)initUI {
     self.title = @"Sandbox";
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.doraemon_width, self.view.doraemon_height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
-    self.tableView.dataSource = self;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     [self.tableView registerClass:DoraemonSandBoxCell.self forCellReuseIdentifier:DoraemonSandBoxCell.description];
     [self.view addSubview:self.tableView];
     
-    // 长按手势
+    self.dataSource = [[UITableViewDiffableDataSource<NSNumber *, DoraemonSandboxModel *> alloc] initWithTableView:self.tableView cellProvider:^UITableViewCell * _Nullable(UITableView *tableView, NSIndexPath *indexPath, DoraemonSandboxModel *item) {
+        DoraemonSandBoxCell *cell = [tableView dequeueReusableCellWithIdentifier:DoraemonSandBoxCell.description forIndexPath:indexPath];
+        [cell renderUIWithData:item];
+        return cell;
+    }];
+    self.dataSource.defaultRowAnimation = UITableViewRowAnimationFade;
+    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     [self.tableView addGestureRecognizer:longPress];
-    
     self.selectedIndexPaths = [NSMutableArray array];
-  
     [self.view addSubview:self.deleteButton];
+    
+    self.navigationItem.rightBarButtonItem = self.sortButton;
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
@@ -119,7 +143,7 @@
         } completion:^(BOOL finished) {
             self.deleteButton.hidden = YES;
         }];
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem = self.sortButton;
     }
 }
 
@@ -155,12 +179,11 @@
         self.title = dirTitle;
         UIImage *image = [UIImage systemImageNamed:@"chevron.backward"];
         self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
-        
         [self setLeftNavBarItems:@[self.leftModel]];
     }
     model.path = filePath;
     _currentDirModel = model;
-
+    
     NSMutableArray *files = @[].mutableCopy;
     NSError *error = nil;
     NSArray *paths = [fm contentsOfDirectoryAtPath:targetPath error:&error];
@@ -180,44 +203,11 @@
         
         [files addObject:model];
     }
-    
-    //_dataArray = files.copy;
-
-    _dataArray = [files sortedArrayUsingComparator:^NSComparisonResult(DoraemonSandboxModel * _Nonnull obj1, DoraemonSandboxModel * _Nonnull obj2) {
-        
-        BOOL isObj1Directory = (obj1.type == DoraemonSandboxFileTypeDirectory);
-        BOOL isObj2Directory = (obj2.type == DoraemonSandboxFileTypeDirectory);
-
-        BOOL isSameType = ((isObj1Directory && isObj2Directory) || (!isObj1Directory && !isObj2Directory));
-        
-        if (isSameType) {
-
-            return [obj1.name.lowercaseString compare:obj2.name.lowercaseString];
-        }
-
-        if (isObj1Directory) {
-
-            return NSOrderedAscending;
-        }
-        
-        return NSOrderedDescending;
-    }];
-    
-    [self.tableView reloadData];
+    _dataArray = files;
+    [self sortWithType:self.sortType];
 }
 
 #pragma mark- UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DoraemonSandBoxCell *cell = [tableView dequeueReusableCellWithIdentifier:DoraemonSandBoxCell.description forIndexPath:indexPath];
-    DoraemonSandboxModel *model = _dataArray[indexPath.row];
-    [cell renderUIWithData:model];
-    return cell;
-}
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
 }
@@ -231,7 +221,6 @@
     [self deleteByDoraemonSandboxModel:model];
 }
 
-#pragma mark- UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [DoraemonSandBoxCell cellHeight];
 }
@@ -310,4 +299,95 @@
     [fm removeItemAtPath:model.path error:nil];
     [self loadPath:_currentDirModel.path];
 }
+
+- (void)applySnapshot {
+    NSDiffableDataSourceSnapshot<NSNumber *, DoraemonSandboxModel *> *snapshot = [[NSDiffableDataSourceSnapshot alloc] init];
+    [snapshot appendSectionsWithIdentifiers:@[@0]];
+    [snapshot appendItemsWithIdentifiers:self.dataArray];
+    [self.dataSource applySnapshot:snapshot animatingDifferences:YES];
+}
+
+#pragma mark - Sort Menu
+- (void)showSortMenu {
+    if (self.isEditingMode) return;
+    UIAlertController *menu = [UIAlertController alertControllerWithTitle:@"Sort by" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    __weak typeof(self) weakSelf = self;
+    void (^sortAction)(SortBy, NSString *) = ^(SortBy type, NSString *name) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:name style:self.sortType == type ? UIAlertActionStyleDestructive:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            __strong typeof(self) strongSelf = weakSelf;
+            [strongSelf sortWithType:type];
+            strongSelf.sortButton.title = name;
+        }];
+        [menu addAction:action];
+    };
+    
+    sortAction(SortByDefault, @"Default");
+    sortAction(SortByName, @"Name");
+    sortAction(SortBySizeAscending, @"Ascending");
+    sortAction(SortBySizeDescending, @"Descending");
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [menu addAction:cancel];
+    
+    [self presentViewController:menu animated:YES completion:nil];
+}
+
+- (void)sortWithType:(SortBy)type {
+    switch (type) {
+        case SortByDefault:
+            self.dataArray = [self sortDataDefault:self.dataArray];
+            break;
+        case SortByName:
+            self.dataArray = [self sortDataByName:self.dataArray];
+            break;
+        case SortBySizeAscending:
+            self.dataArray = [self sortDataBySize:self.dataArray asecending:YES];
+            break;
+        case SortBySizeDescending:
+            self.dataArray = [self sortDataBySize:self.dataArray asecending:NO];
+            break;
+    }
+    self.sortType = type;
+    [self applySnapshot];
+}
+
+- (NSArray<DoraemonSandboxModel *> *)sortDataDefault:(NSArray<DoraemonSandboxModel *> *)arr {
+    return [arr sortedArrayUsingComparator:^NSComparisonResult(DoraemonSandboxModel * _Nonnull obj1, DoraemonSandboxModel * _Nonnull obj2) {
+        BOOL isObj1Directory = (obj1.type == DoraemonSandboxFileTypeDirectory);
+        BOOL isObj2Directory = (obj2.type == DoraemonSandboxFileTypeDirectory);
+        
+        BOOL isSameType = ((isObj1Directory && isObj2Directory) || (!isObj1Directory && !isObj2Directory));
+        
+        if (isSameType) {
+            return [obj1.name.lowercaseString compare:obj2.name.lowercaseString];
+        }
+        
+        if (isObj1Directory) {
+            return NSOrderedAscending;
+        }
+        
+        return NSOrderedDescending;
+    }];
+}
+
+- (NSArray<DoraemonSandboxModel *> *)sortDataByName:(NSArray<DoraemonSandboxModel *> *)arr {
+    return [arr sortedArrayUsingComparator:^NSComparisonResult(DoraemonSandboxModel * _Nonnull obj1, DoraemonSandboxModel * _Nonnull obj2) {
+        return [obj1.name.lowercaseString compare:obj2.name.lowercaseString];
+    }];
+}
+
+- (NSArray<DoraemonSandboxModel *> *)sortDataBySize:(NSArray<DoraemonSandboxModel *> *)arr asecending:(BOOL)ascending {
+    return [arr sortedArrayUsingComparator:^NSComparisonResult(DoraemonSandboxModel * _Nonnull obj1, DoraemonSandboxModel * _Nonnull obj2) {
+        NSInteger size1 = obj1.fileSize;
+        NSInteger size2 = obj2.fileSize;
+        if (size1 == size2) return NSOrderedSame;
+        if (ascending) {
+            return size1 < size2 ? NSOrderedAscending : NSOrderedDescending;
+        } else {
+            return size1 > size2 ? NSOrderedAscending : NSOrderedDescending;
+        }
+    }];
+}
+
 @end

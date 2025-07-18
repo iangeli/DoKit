@@ -18,4 +18,5 @@ typedef NS_ENUM(NSInteger, DoraemonSandboxFileType) {
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *path;
 @property (nonatomic, assign) DoraemonSandboxFileType type;
+@property (nonatomic, assign) NSInteger fileSize;
 @end

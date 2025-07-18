@@ -7,7 +7,6 @@
 
 #import "DoraemonSandboxCell.h"
 #import "DoraemonSandboxModel.h"
-#import "DoraemonUtil.h"
 #import "UIView+Doraemon.h"
 #import "DoraemonDefine.h"
 #import "UIImage+Doraemon.h"
@@ -57,10 +56,7 @@
     [self.fileTitleLabel sizeToFit];
     self.fileTitleLabel.frame = CGRectMake(self.fileTypeIcon.doraemon_right+kDoraemonSizeFrom750_Landscape(32), [[self class] cellHeight]/2-self.fileTitleLabel.doraemon_height/2, DoraemonScreenWidth-150, self.fileTitleLabel.doraemon_height);
 
-    DoraemonUtil *util = [[DoraemonUtil alloc] init];
-    [util getFileSizeWithPath:model.path];
-    NSInteger fileSize = util.fileSize;
-    
+    NSInteger fileSize = model.fileSize;
     NSString *fileSizeStr = nil;
     if (fileSize > 1024 * 1024){
         fileSizeStr = [NSString stringWithFormat:@"%.2fM",fileSize / 1024.00f /1024.00f];
