@@ -22,7 +22,8 @@
 
 - (CGRect) fullscreen {
     CGRect screen = self.view.frame;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    UIInterfaceOrientation orientation = self.view.windowOrientation;
+    
     switch (orientation) {
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:

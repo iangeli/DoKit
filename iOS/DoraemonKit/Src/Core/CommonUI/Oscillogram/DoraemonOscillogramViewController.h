@@ -14,7 +14,6 @@
 - (NSString *)title;
 - (NSString *)lowValue;
 - (NSString *)highValue;
-- (void)closeBtnClick;
 - (void)startRecord;
 - (void)endRecord;
 - (void)doSecondFunction;

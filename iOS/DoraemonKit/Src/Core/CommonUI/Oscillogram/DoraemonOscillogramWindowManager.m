@@ -11,6 +11,7 @@
 #import "DoraemonMemoryOscillogramWindow.h"
 #import "DoraemonDefine.h"
 #import "DoraemonCacheManager.h"
+#import "UIApplication+Doraemon.h"
 
 @interface DoraemonOscillogramWindowManager()
 @property (nonatomic, strong) DoraemonFPSOscillogramWindow *fpsWindow;
@@ -58,7 +59,7 @@
 - (void)resetLayout{
     CGFloat offsetX = 0;
     CGFloat offsetY = IS_IPHONE_X_Series ? 32 : 0;
-    CGFloat width = kInterfaceOrientationPortrait ? DoraemonScreenWidth:DoraemonScreenHeight;
+    CGFloat width = [UIApplication sharedApplication].fetchKeyWindow.windowOrientation ? DoraemonScreenWidth:DoraemonScreenHeight;
     CGFloat height = 60;
 
     __block NSInteger count = 0;

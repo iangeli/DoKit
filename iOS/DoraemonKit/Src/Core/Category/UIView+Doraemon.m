@@ -10,6 +10,16 @@
 #define Doraemon_SCREEN_SCALE                    ([[UIScreen mainScreen] scale])
 #define Doraemon_PIXEL_INTEGRAL(pointValue)      (round(pointValue * Doraemon_SCREEN_SCALE) / Doraemon_SCREEN_SCALE)
 
+@implementation UIWindow (Doraemon)
+- (UIInterfaceOrientation)windowOrientation {
+    UIInterfaceOrientation orientation = UIInterfaceOrientationUnknown;
+    if ([self respondsToSelector:@selector(windowScene)] && self.windowScene) {
+        orientation = self.windowScene.interfaceOrientation;
+    }
+    return orientation;
+}
+@end
+
 @implementation UIView (Doraemon)
 @dynamic doraemon_x, doraemon_y, doraemon_width, doraemon_height, doraemon_origin, doraemon_size;
 
@@ -133,4 +143,17 @@
     }
     return result;
 }
+
+- (UIInterfaceOrientation)windowOrientation {
+    return self.window.windowOrientation;
+}
+
+- (BOOL)orientationIsPortrait {
+    return UIInterfaceOrientationIsPortrait(self.windowOrientation);
+}
+
+- (BOOL)orientationIsLandscape {
+    return UIInterfaceOrientationIsLandscape(self.windowOrientation);
+}
+
 @end

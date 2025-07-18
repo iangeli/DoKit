@@ -9,6 +9,7 @@
 #import "DoraemonBaseViewController.h"
 #import "DoraemonNavBarItemModel.h"
 #import "UIImage+Doraemon.h"
+#import "UIApplication+Doraemon.h"
 #import "DoraemonHomeWindow.h"
 #import "UIView+Doraemon.h"
 #import "DoraemonDefine.h"
@@ -36,7 +37,7 @@
     
     if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(window)]) {
         UIWindow *appWindow = [[UIApplication sharedApplication].delegate window];
-        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        UIWindow *keyWindow = [UIApplication sharedApplication].fetchKeyWindow;
         if (appWindow != keyWindow) {
             [appWindow makeKeyWindow];
         }

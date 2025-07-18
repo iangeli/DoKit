@@ -142,7 +142,7 @@
             CGPoint location = panView.center;
             CGFloat centerX;
             CGFloat safeBottom = self.safeAreaInsets.bottom;
-            CGFloat centerY = MAX(MIN(location.y, CGRectGetMaxY([UIScreen mainScreen].bounds)-safeBottom), [UIApplication sharedApplication].statusBarFrame.size.height);
+            CGFloat centerY = MAX(MIN(location.y, CGRectGetMaxY([UIScreen mainScreen].bounds)-safeBottom), [UIApplication sharedApplication].fetchKeyWindowScene.statusBarManager.statusBarFrame.size.height);
             if(location.x > CGRectGetWidth([UIScreen mainScreen].bounds)/2.f)
             {
                 centerX = CGRectGetWidth([UIScreen mainScreen].bounds)-_kEntryViewSize/2;

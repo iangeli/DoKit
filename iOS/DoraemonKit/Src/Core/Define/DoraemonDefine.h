@@ -13,6 +13,7 @@
 #import "UIColor+Doraemon.h"
 #import "UIView+Doraemon.h"
 #import "UIImage+Doraemon.h"
+#import "UIApplication+Doraemon.h"
 #import "DoraemonToastUtil.h"
 #import "DoraemonAlertUtil.h"
 #import "DoraemonUtil.h"
@@ -34,11 +35,7 @@
 
 #define kDoraemonSizeFrom750(x) ((x)*DoraemonScreenWidth/750)
 
-#define kDoraemonSizeFrom750_Landscape(x) (kInterfaceOrientationLandscape ? ((x)*DoraemonScreenHeight/750) : kDoraemonSizeFrom750(x))
-
-#define kInterfaceOrientationPortrait UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)
-
-#define kInterfaceOrientationLandscape UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)
+#define kDoraemonSizeFrom750_Landscape(x) ([UIApplication sharedApplication].fetchKeyWindow.orientationIsLandscape ? ((x)*DoraemonScreenHeight/750) : kDoraemonSizeFrom750(x))
 
 #define IS_IPHONE_X_Series [DoraemonAppInfoUtil isIPhoneXSeries]
 #define IPHONE_NAVIGATIONBAR_HEIGHT  (IS_IPHONE_X_Series ? 88 : 64)

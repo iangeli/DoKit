@@ -40,7 +40,7 @@ typedef struct {
     bool is_main_thread;
 } thread_call_stack;
 
-static inline thread_call_stack *get_thread_call_stack() {
+static inline thread_call_stack *get_thread_call_stack(void) {
     thread_call_stack *cs = (thread_call_stack *)pthread_getspecific(_thread_key);
     if (cs == NULL) {
         cs = (thread_call_stack *)malloc(sizeof(thread_call_stack));
@@ -81,7 +81,7 @@ static inline void push_call_record(id _self, Class _cls, SEL _cmd, uintptr_t lr
     }
 }
 
-static inline uintptr_t pop_call_record() {
+static inline uintptr_t pop_call_record(void) {
     thread_call_stack *cs = get_thread_call_stack();
     int curIndex = cs->index;
     int nextIndex = cs->index--;
@@ -119,7 +119,7 @@ void before_objc_msgSend(id self, SEL _cmd, uintptr_t lr) {
     push_call_record(self, object_getClass(self), _cmd, lr);
 }
 
-uintptr_t after_objc_msgSend() {
+uintptr_t after_objc_msgSend(void) {
     return pop_call_record();
 }
 
@@ -155,7 +155,7 @@ uintptr_t after_objc_msgSend() {
 #define ret() __asm volatile ("ret\n");
 
 __attribute__((__naked__))
-static void hook_objc_msgSend() {
+static void hook_objc_msgSend(void) {
     save()
 
     __asm volatile ("mov x2, lr\n");
