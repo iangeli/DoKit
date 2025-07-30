@@ -191,7 +191,7 @@
              
              NSDictionary *dict = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
              NSInteger size = [dict[@"NSFileSize"] integerValue];
-             if (size > 1024 * 1014) { 
+             if (size > 1024 * 1014) {
                  [_bigFileArray addObject:path];
              }
          }
@@ -283,16 +283,11 @@
     }
 }
 
-+ (UIWindow *)getKeyWindow{
++ (UIWindow *)getKeyWindow {
     __block UIWindow *keyWindow = nil;
-
     for (UIWindowScene *scene in UIApplication.sharedApplication.connectedScenes) {
         if ([scene isKindOfClass:UIWindowScene.class] && scene.activationState == UISceneActivationStateForegroundActive) {
-            if (@available(iOS 15.0, *)) {
-                keyWindow = scene.keyWindow;
-            } else {
-                keyWindow = scene.windows.firstObject;
-            }
+            keyWindow = scene.windows.firstObject;
             break;
         }
     }
@@ -300,11 +295,7 @@
     if (keyWindow == nil) {
         [[UIApplication sharedApplication].connectedScenes enumerateObjectsUsingBlock:^(UIScene * _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:UIWindowScene.class]) {
-                if (@available(iOS 15.0, *)) {
-                    keyWindow = ((UIWindowScene *)obj).keyWindow;
-                } else {
-                    keyWindow = ((UIWindowScene *)obj).windows.firstObject;
-                }
+                keyWindow = ((UIWindowScene *)obj).windows.firstObject;
                 *stop = true;
             }
         }];
