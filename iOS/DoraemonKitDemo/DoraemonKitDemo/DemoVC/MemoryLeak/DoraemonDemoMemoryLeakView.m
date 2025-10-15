@@ -9,18 +9,17 @@
 #import "DoraemonDemoMemoryLeakView.h"
 #import "DoraemonDemoMemoryLeakModel.h"
 
-@interface DoraemonDemoMemoryLeakView()
+@interface DoraemonDemoMemoryLeakView ()
 @property (nonatomic, strong) DoraemonDemoMemoryLeakModel *model;
 
 @end
 
 @implementation DoraemonDemoMemoryLeakView
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor redColor];
-    
+
         _model = [[DoraemonDemoMemoryLeakModel alloc] init];
         [_model addBlock:^{
             [self printXX];

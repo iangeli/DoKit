@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonUIProfilePlugin.h"
-#import "DoraemonUIProfileViewController.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonUIProfileViewController.h"
 
 @implementation DoraemonUIProfilePlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonUIProfileViewController *vc = [[DoraemonUIProfileViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

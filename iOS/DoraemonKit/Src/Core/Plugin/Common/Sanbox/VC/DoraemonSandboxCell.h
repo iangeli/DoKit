@@ -9,7 +9,7 @@
 @class DoraemonSandboxModel;
 
 @interface DoraemonSandBoxCell : UITableViewCell
-- (void)renderUIWithData : (DoraemonSandboxModel *)model;
+- (void)renderUIWithData:(DoraemonSandboxModel *)model;
 
 + (CGFloat)cellHeight;
 @end

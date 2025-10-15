@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonFPSOscillogramViewController.h"
-#import "DoraemonOscillogramView.h"
-#import "DoraemonDefine.h"
 #import "DoraemonCacheManager.h"
+#import "DoraemonDefine.h"
 #import "DoraemonFPSOscillogramWindow.h"
 #import "DoraemonFPSUtil.h"
+#import "DoraemonOscillogramView.h"
 
 @interface DoraemonFPSOscillogramViewController ()
 @property (nonatomic, strong) DoraemonFPSUtil *fpsUtil;
@@ -21,30 +21,30 @@
     [super viewDidLoad];
 }
 
-- (NSString *)title{
+- (NSString *)title {
     return @"FPS";
 }
 
-- (NSString *)lowValue{
+- (NSString *)lowValue {
     return @"1";
 }
 
-- (NSString *)highValue{
+- (NSString *)highValue {
     return @"60";
 }
 
-- (void)startRecord{
+- (void)startRecord {
     if (!_fpsUtil) {
         _fpsUtil = [[DoraemonFPSUtil alloc] init];
         __weak typeof(self) weakSelf = self;
         [_fpsUtil addFPSBlock:^(NSInteger fps) {
-            [weakSelf.oscillogramView addHeightValue:fps*weakSelf.oscillogramView.doraemon_height/60. andTipValue:[NSString stringWithFormat:@"%zi",fps]];
+            [weakSelf.oscillogramView addHeightValue:fps * weakSelf.oscillogramView.doraemon_height / 60. andTipValue:[NSString stringWithFormat:@"%zi", fps]];
         }];
     }
     [_fpsUtil start];
 }
 
-- (void)endRecord{
+- (void)endRecord {
     if (_fpsUtil) {
         [_fpsUtil end];
     }

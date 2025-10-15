@@ -20,30 +20,29 @@
     [super viewDidLoad];
     self.title = @"ANR Detail";
     [self setRightNavTitle:@"export"];
-    
+
     self.anrInfo = [NSDictionary dictionaryWithContentsOfFile:self.filePath];
-    
+
     _contentLabel = [[UILabel alloc] init];
     _contentLabel.textColor = [UIColor doraemon_black_2];
     _contentLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(16)];
     _contentLabel.numberOfLines = 0;
     _contentLabel.text = _anrInfo[@"content"];
-    
-    CGSize fontSize = [_contentLabel sizeThatFits:CGSizeMake(self.view.doraemon_width-40, MAXFLOAT)];
+
+    CGSize fontSize = [_contentLabel sizeThatFits:CGSizeMake(self.view.doraemon_width - 40, MAXFLOAT)];
     _contentLabel.frame = CGRectMake(20, IPHONE_NAVIGATIONBAR_HEIGHT, fontSize.width, fontSize.height);
     [self.view addSubview:_contentLabel];
-    
+
     _anrTimeLabel = [[UILabel alloc] init];
     _anrTimeLabel.textColor = [UIColor doraemon_black_1];
     _anrTimeLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(16)];
-    _anrTimeLabel.text = [NSString stringWithFormat:@"anr time : %@ms",_anrInfo[@"duration"]];
+    _anrTimeLabel.text = [NSString stringWithFormat:@"anr time : %@ms", _anrInfo[@"duration"]];
     [_anrTimeLabel sizeToFit];
-    _anrTimeLabel.frame = CGRectMake(20, _contentLabel.doraemon_bottom+20, _anrTimeLabel.doraemon_width, _anrTimeLabel.doraemon_height);
+    _anrTimeLabel.frame = CGRectMake(20, _contentLabel.doraemon_bottom + 20, _anrTimeLabel.doraemon_width, _anrTimeLabel.doraemon_height);
     [self.view addSubview:_anrTimeLabel];
-
 }
 
-- (void)rightNavTitleClick:(id)clickView{
+- (void)rightNavTitleClick:(id)clickView {
     [DoraemonUtil shareURL:[NSURL fileURLWithPath:self.filePath] formVC:self];
 }
 @end

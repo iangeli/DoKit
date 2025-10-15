@@ -6,20 +6,20 @@
 //
 
 #import "DoraemonJavaScriptDetailViewController.h"
-#import "DoraemonKit.h"
-#import "DoraemonDefine.h"
-#import "DoraemonToastUtil.h"
 #import "DoraemonCacheManager.h"
+#import "DoraemonDefine.h"
 #import "DoraemonJavaScriptManager.h"
+#import "DoraemonKit.h"
+#import "DoraemonToastUtil.h"
 
 @interface DoraemonJavaScriptDetailViewController ()
-@property (nonatomic, weak) UITextView  *textView;
+@property (nonatomic, weak) UITextView *textView;
 @end
 
 @implementation DoraemonJavaScriptDetailViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.title = @"Execute Script";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(runScript)];
     UIEdgeInsets edge = UIEdgeInsetsMake(10, 10, 0, 10);
@@ -27,18 +27,18 @@
     CGFloat height = self.view.bounds.size.height - edge.top - edge.bottom;
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(edge.left, edge.top + IPHONE_NAVIGATIONBAR_HEIGHT, width, 30)];
     titleLabel.text = @"JS Code";
-    
+
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(edge.left, CGRectGetMaxY(titleLabel.frame) + edge.top, width, height - 200)];
     textView.layer.borderWidth = 1 / UIScreen.mainScreen.scale;
     textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     textView.layer.cornerRadius = 6;
     textView.font = [UIFont systemFontOfSize:16];
     textView.textContainerInset = UIEdgeInsetsMake(8, 3, 8, 3);
-    
+
     [self.view addSubview:titleLabel];
     [self.view addSubview:textView];
     self.textView = textView;
-    
+
     if (self.key.length > 0) {
         self.textView.text = [DoraemonCacheManager.sharedInstance jsHistoricalRecordForKey:self.key];
     }

@@ -6,25 +6,24 @@
 //
 
 #import "DoraemonHierarchyTableViewController.h"
+#import "DoraemonDefine.h"
 #import "DoraemonHierarchyCategoryModel.h"
+#import "DoraemonHierarchyCellModel.h"
+#import "DoraemonHierarchyHeaderView.h"
 #import "DoraemonHierarchySelectorCell.h"
 #import "DoraemonHierarchySwitchCell.h"
-#import "DoraemonHierarchyHeaderView.h"
-#import "DoraemonHierarchyCellModel.h"
-#import "DoraemonDefine.h"
 
 @interface DoraemonHierarchyTableViewController ()
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, assign) UITableViewStyle style;
 
-@property (nonatomic, strong) NSMutableArray <DoraemonHierarchyCategoryModel *>*dataArray;
+@property (nonatomic, strong) NSMutableArray<DoraemonHierarchyCategoryModel *> *dataArray;
 @end
 
 @implementation DoraemonHierarchyTableViewController
 #pragma mark - Life cycle
-- (instancetype)init
-{
+- (instancetype)init {
     return [self initWithStyle:UITableViewStyleGrouped];
 }
 
@@ -37,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self.view addSubview:self.tableView];
 }
 

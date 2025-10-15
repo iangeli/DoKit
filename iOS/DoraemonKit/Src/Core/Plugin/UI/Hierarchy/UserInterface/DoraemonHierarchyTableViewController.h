@@ -11,10 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DoraemonHierarchyTableViewController : DoraemonBaseViewController <UITableViewDelegate, UITableViewDataSource>
+@interface DoraemonHierarchyTableViewController : DoraemonBaseViewController<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong, readonly) UITableView *tableView;
 
-@property (nonatomic, strong, readonly) NSMutableArray <DoraemonHierarchyCategoryModel *>*dataArray;
+@property (nonatomic, strong, readonly) NSMutableArray<DoraemonHierarchyCategoryModel *> *dataArray;
 @end
 
 NS_ASSUME_NONNULL_END

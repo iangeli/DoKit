@@ -9,7 +9,7 @@
 #import "DoraemonCPUOscillogramViewController.h"
 
 @implementation DoraemonCPUOscillogramWindow
-+ (DoraemonCPUOscillogramWindow *)shareInstance{
++ (DoraemonCPUOscillogramWindow *)shareInstance {
     static dispatch_once_t once;
     static DoraemonCPUOscillogramWindow *instance;
     dispatch_once(&once, ^{
@@ -18,7 +18,7 @@
     return instance;
 }
 
-- (void)addRootVc{
+- (void)addRootVc {
     DoraemonCPUOscillogramViewController *vc = [[DoraemonCPUOscillogramViewController alloc] init];
     self.rootViewController = vc;
     self.vc = vc;

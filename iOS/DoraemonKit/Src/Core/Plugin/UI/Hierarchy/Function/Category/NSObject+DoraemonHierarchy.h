@@ -15,7 +15,7 @@ FOUNDATION_EXPORT NSNotificationName _Nonnull const DoraemonHierarchyChangeNotif
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (DoraemonHierarchy)
-- (NSArray <DoraemonHierarchyCategoryModel *>*)doraemon_hierarchyCategoryModels;
+- (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_hierarchyCategoryModels;
 
 - (void)doraemon_showIntAlertAndAutomicSetWithKeyPath:(NSString *)keyPath;
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface UIView (DoraemonHierarchy)
-- (NSArray <DoraemonHierarchyCategoryModel *>*)doraemon_sizeHierarchyCategoryModels;
+- (NSArray<DoraemonHierarchyCategoryModel *> *)doraemon_sizeHierarchyCategoryModels;
 @end
 
 NS_ASSUME_NONNULL_END

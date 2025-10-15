@@ -6,8 +6,8 @@
 //
 
 #import "DoraemonDefaultWebViewController.h"
-#import <WebKit/WebKit.h>
 #import "DoraemonDefine.h"
+#import <WebKit/WebKit.h>
 
 @interface DoraemonDefaultWebViewController ()
 @property (nonatomic, strong) WKWebView *webView;
@@ -21,7 +21,7 @@
 
     [self.view addSubview:self.webView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.h5Url]]];
-    
+
     [self.view addSubview:self.progressView];
     [self.view bringSubviewToFront:self.progressView];
 
@@ -32,20 +32,24 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context {
+
     if ([@"estimatedProgress" isEqualToString:keyPath]) {
         self.progressView.alpha = 1.0;
         NSLog(@"loding Progress: %lf", self.webView.estimatedProgress);
-        
+
         [self.progressView setProgress:self.webView.estimatedProgress animated:YES];
-        
+
         if (self.webView.estimatedProgress >= 1.0) {
-            [UIView animateWithDuration:0.3f delay:0.1f options:UIViewAnimationOptionCurveEaseOut animations:^{
-                self.progressView.alpha = 0;
-            } completion:^(BOOL finished) {
-                [self.progressView setProgress:0.0 animated:NO];
-            }];
+            [UIView animateWithDuration:0.3f
+                delay:0.1f
+                options:UIViewAnimationOptionCurveEaseOut
+                animations:^{
+                    self.progressView.alpha = 0;
+                }
+                completion:^(BOOL finished) {
+                    [self.progressView setProgress:0.0 animated:NO];
+                }];
         }
     }
 }
@@ -61,8 +65,8 @@
 - (UIProgressView *)progressView {
     if (!_progressView) {
         _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0.0, IPHONE_NAVIGATIONBAR_HEIGHT, DoraemonWindowWidth, 1.0)];
-        _progressView.tintColor = [UIColor doraemon_blue];      
-        _progressView.trackTintColor = [UIColor whiteColor];    
+        _progressView.tintColor = [UIColor doraemon_blue];
+        _progressView.trackTintColor = [UIColor whiteColor];
     }
     return _progressView;
 }

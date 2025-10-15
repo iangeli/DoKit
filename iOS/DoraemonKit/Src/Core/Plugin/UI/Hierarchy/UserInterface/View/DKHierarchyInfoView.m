@@ -1,9 +1,9 @@
 #import "DKHierarchyInfoView.h"
+#import "DoraemonDefine.h"
+#import "DoraemonHierarchyFormatterTool.h"
+#import "NSObject+DoraemonHierarchy.h"
 #import "UIColor+DoraemonHierarchy.h"
 #import "UIView+Doraemon.h"
-#import "DoraemonDefine.h"
-#import "NSObject+DoraemonHierarchy.h"
-#import "DoraemonHierarchyFormatterTool.h"
 
 @interface DKHierarchyInfoView ()
 @property (nonatomic, strong, nullable) UIView *selectedView;
@@ -54,8 +54,8 @@
 
     self.selectedView = view;
 
-    NSDictionary *boldAttri = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17]};
-    NSDictionary *attri = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+    NSDictionary *boldAttri = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:17]};
+    NSDictionary *attri = @{NSFontAttributeName : [UIFont systemFontOfSize:14]};
 
     NSMutableAttributedString *name = [[NSMutableAttributedString alloc] initWithString:@"Name: " attributes:boldAttri];
     [name appendAttributedString:[[NSAttributedString alloc] initWithString:NSStringFromClass(view.class) attributes:attri]];
@@ -76,7 +76,7 @@
     }
 
     if ([view isKindOfClass:[UILabel class]]) {
-        UILabel *label = (UILabel *) view;
+        UILabel *label = (UILabel *)view;
         NSMutableAttributedString *textColor = [[NSMutableAttributedString alloc] initWithString:@"Text Color: " attributes:boldAttri];
         [textColor appendAttributedString:[[NSAttributedString alloc] initWithString:[label.textColor doraemon_description] attributes:attri]];
         self.textColorLabel.attributedText = textColor;
@@ -91,7 +91,7 @@
 
     if (view.tag != 0) {
         NSMutableAttributedString *tag = [[NSMutableAttributedString alloc] initWithString:@"Tag: " attributes:boldAttri];
-        [tag appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long) view.tag] attributes:attri]];
+        [tag appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long)view.tag] attributes:attri]];
         self.tagLabel.attributedText = tag;
     } else {
         self.tagLabel.attributedText = nil;
@@ -206,7 +206,7 @@
 
 - (void)updateHeightIfNeeded {
     CGFloat contentHeight = self.contentLabel.doraemon_height + self.frameLabel.doraemon_height + self.backgroundColorLabel.doraemon_height + self.textColorLabel.doraemon_height + self.fontLabel.doraemon_height + self.tagLabel.doraemon_height;
-    CGFloat height = 10 + MAX(contentHeight, 10 + 30/*self.closeButton.doraemon_height*/) + 10 + self.actionContentViewHeight + 10;
+    CGFloat height = 10 + MAX(contentHeight, 10 + 30 /*self.closeButton.doraemon_height*/) + 10 + self.actionContentViewHeight + 10;
     if (height != self.doraemon_height) {
         self.doraemon_height = height;
         if (!self.isMoved) {

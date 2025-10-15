@@ -6,8 +6,8 @@
 //
 
 #import "DoraemonJavaScriptPlugin.h"
-#import "DoraemonJavaScriptManager.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonJavaScriptManager.h"
 
 @implementation DoraemonJavaScriptPlugin
 - (void)pluginDidLoad {

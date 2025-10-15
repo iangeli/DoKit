@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonViewAlignPlugin.h"
-#import "DoraemonViewAlignManager.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonViewAlignManager.h"
 
 @implementation DoraemonViewAlignPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     [[DoraemonViewAlignManager shareInstance] show];
     [[DoraemonHomeWindow shareInstance] hide];
 }

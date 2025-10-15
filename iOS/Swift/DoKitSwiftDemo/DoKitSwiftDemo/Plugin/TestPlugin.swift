@@ -10,8 +10,8 @@ import UIKit
 import DoraemonKit
 
 @objc(TestPlugin)
-class TestPlugin: NSObject,DoraemonPluginProtocol {
-    @objc func pluginDidLoad(){
+class TestPlugin: NSObject, DoraemonPluginProtocol {
+    @objc func pluginDidLoad() {
         print("pluginDidLoad")
     }
 }

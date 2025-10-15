@@ -9,7 +9,7 @@
 #import "DoraemonFPSOscillogramViewController.h"
 
 @implementation DoraemonFPSOscillogramWindow
-+ (DoraemonFPSOscillogramWindow *)shareInstance{
++ (DoraemonFPSOscillogramWindow *)shareInstance {
     static dispatch_once_t once;
     static DoraemonFPSOscillogramWindow *instance;
     dispatch_once(&once, ^{
@@ -18,7 +18,7 @@
     return instance;
 }
 
-- (void)addRootVc{
+- (void)addRootVc {
     DoraemonFPSOscillogramViewController *vc = [[DoraemonFPSOscillogramViewController alloc] init];
     self.rootViewController = vc;
     self.vc = vc;

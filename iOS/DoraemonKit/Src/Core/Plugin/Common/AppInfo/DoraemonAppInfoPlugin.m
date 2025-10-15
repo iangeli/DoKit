@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonAppInfoPlugin.h"
-#import "DoraemonHomeWindow.h"
 #import "DoraemonAppInfoViewController.h"
+#import "DoraemonHomeWindow.h"
 
 @implementation DoraemonAppInfoPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonAppInfoViewController *vc = [[DoraemonAppInfoViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

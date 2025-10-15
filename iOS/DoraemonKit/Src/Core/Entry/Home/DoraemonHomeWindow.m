@@ -7,16 +7,16 @@
 
 #import "DoraemonHomeWindow.h"
 #import "DoraemonDefine.h"
-#import "UIColor+Doraemon.h"
 #import "DoraemonHomeViewController.h"
 #import "DoraemonNavigationController.h"
+#import "UIColor+Doraemon.h"
 
-@interface DoraemonHomeWindow()
+@interface DoraemonHomeWindow ()
 - (void)openPlugin:(UIViewController *)vc;
 @end
 
 @implementation DoraemonHomeWindow
-+ (DoraemonHomeWindow *)shareInstance{
++ (DoraemonHomeWindow *)shareInstance {
     static dispatch_once_t once;
     static DoraemonHomeWindow *instance;
     dispatch_once(&once, ^{
@@ -25,14 +25,14 @@
     return instance;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.windowLevel = UIWindowLevelStatusBar - 1.f;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;
-        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive) {
                 self.windowScene = windowScene;
                 break;
             }
@@ -41,46 +41,45 @@
     return self;
 }
 
-- (void)openPlugin:(UIViewController *)vc{
+- (void)openPlugin:(UIViewController *)vc {
     [self setRootVc:vc];
-     self.hidden = NO;
-}
-
-- (void)show{
-    DoraemonHomeViewController *vc = [[DoraemonHomeViewController alloc] init];
-    [self setRootVc:vc];
-    
     self.hidden = NO;
 }
 
-- (void)hide{
+- (void)show {
+    DoraemonHomeViewController *vc = [[DoraemonHomeViewController alloc] init];
+    [self setRootVc:vc];
+
+    self.hidden = NO;
+}
+
+- (void)hide {
     if (self.rootViewController.presentedViewController) {
         [self.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
     }
     [self setRootVc:nil];
-    
+
     self.hidden = YES;
 }
 
-- (void)setRootVc:(UIViewController *)rootVc{
+- (void)setRootVc:(UIViewController *)rootVc {
     if (rootVc) {
         DoraemonNavigationController *nav = [[DoraemonNavigationController alloc] initWithRootViewController:rootVc];
         NSDictionary *attributesDic = @{
-                                        NSForegroundColorAttributeName:[UIColor blackColor],
-                                        NSFontAttributeName:[UIFont systemFontOfSize:18]
-                                        };
+            NSForegroundColorAttributeName : [UIColor blackColor],
+            NSFontAttributeName : [UIFont systemFontOfSize:18]
+        };
         [nav.navigationBar setTitleTextAttributes:attributesDic];
         _nav = nav;
-        
+
         self.rootViewController = nav;
-    }else{
+    } else {
         self.rootViewController = nil;
         _nav = nil;
     }
-
 }
 
-+ (void)openPlugin:(UIViewController *)vc{
++ (void)openPlugin:(UIViewController *)vc {
     [[self shareInstance] openPlugin:vc];
 }
 @end

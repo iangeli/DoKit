@@ -10,4 +10,3 @@
 @interface UIView (DoraemonViewMetrics)
 - (void)doraemonMetricsRecursiveEnable:(BOOL)enable;
 @end
-

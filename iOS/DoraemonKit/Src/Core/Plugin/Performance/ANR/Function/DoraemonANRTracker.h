@@ -5,12 +5,12 @@
 //  Created by yixiang on 2018/6/14.
 //
 
-#import <Foundation/Foundation.h>
 #import "DoraemonPingThread.h"
+#import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, DoraemonANRTrackerStatus) {
-    DoraemonANRTrackerStatusStart, 
-    DoraemonANRTrackerStatusStop,  
+    DoraemonANRTrackerStatusStart,
+    DoraemonANRTrackerStatusStop,
 };
 
 @interface DoraemonANRTracker : NSObject

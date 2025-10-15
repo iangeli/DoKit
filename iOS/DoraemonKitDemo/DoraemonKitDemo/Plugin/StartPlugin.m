@@ -9,7 +9,7 @@
 #import "StartPlugin.h"
 
 @implementation StartPlugin
-- (void)startPluginDidLoad{
+- (void)startPluginDidLoad {
     NSLog(@"start pluginDidLoad");
 }
 

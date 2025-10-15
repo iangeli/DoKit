@@ -4,8 +4,8 @@
 //
 //  Created by lijiahuan on 2019/11/2.
 //
-#import <UIKit/UIKit.h>
 #import "DoraemonHierarchyFormatterTool.h"
+#import <UIKit/UIKit.h>
 
 static DoraemonHierarchyFormatterTool *_instance = nil;
 
@@ -30,7 +30,7 @@ static DoraemonHierarchyFormatterTool *_instance = nil;
 }
 
 + (NSString *)stringFromFrame:(CGRect)frame {
-    return [NSString stringWithFormat:@"{{%@, %@}, {%@, %@}}",[self formatNumber:@(frame.origin.x)],[self formatNumber:@(frame.origin.y)],[self formatNumber:@(frame.size.width)],[self formatNumber:@(frame.size.height)]];
+    return [NSString stringWithFormat:@"{{%@, %@}, {%@, %@}}", [self formatNumber:@(frame.origin.x)], [self formatNumber:@(frame.origin.y)], [self formatNumber:@(frame.size.width)], [self formatNumber:@(frame.size.height)]];
 }
 
 #pragma mark - Primary

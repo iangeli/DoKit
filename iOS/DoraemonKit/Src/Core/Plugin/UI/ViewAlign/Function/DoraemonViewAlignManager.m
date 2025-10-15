@@ -9,12 +9,12 @@
 #import "DoraemonDefine.h"
 #import "DoraemonViewAlignView.h"
 
-@interface DoraemonViewAlignManager()
+@interface DoraemonViewAlignManager ()
 @property (nonatomic, strong) DoraemonViewAlignView *alignView;
 @end
 
 @implementation DoraemonViewAlignManager
-+ (DoraemonViewAlignManager *)shareInstance{
++ (DoraemonViewAlignManager *)shareInstance {
     static dispatch_once_t once;
     static DoraemonViewAlignManager *instance;
     dispatch_once(&once, ^{
@@ -23,7 +23,7 @@
     return instance;
 }
 
-- (instancetype)init{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closePlugin:) name:DoraemonClosePluginNotification object:nil];
@@ -33,30 +33,30 @@
 }
 
 - (void)dealloc {
-     [[DoraemonUtil getKeyWindow] removeObserver:self forKeyPath:@"rootViewController"];
+    [[DoraemonUtil getKeyWindow] removeObserver:self forKeyPath:@"rootViewController"];
 }
 
-- (void)show{
+- (void)show {
     if (!_alignView) {
         _alignView = [[DoraemonViewAlignView alloc] init];
-//        _alignView.hidden = YES;
+        //        _alignView.hidden = YES;
         [_alignView hide];
         [[DoraemonUtil getKeyWindow] addSubview:_alignView];
     }
-//    _alignView.hidden = NO;
+    //    _alignView.hidden = NO;
     [_alignView show];
 }
 
-- (void)hidden{
-//    _alignView.hidden = YES;
+- (void)hidden {
+    //    _alignView.hidden = YES;
     [_alignView hide];
 }
 
-- (void)closePlugin:(NSNotification *)notification{
+- (void)closePlugin:(NSNotification *)notification {
     [self hidden];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context {
     [[DoraemonUtil getKeyWindow] bringSubviewToFront:self.alignView];
 }
 @end

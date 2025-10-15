@@ -8,16 +8,15 @@
 #import "DoraemonThreadSafeMutableArray.h"
 #import <pthread/pthread.h>
 
-@interface DoraemonThreadSafeMutableArray(){
-    NSMutableArray* _array;
+@interface DoraemonThreadSafeMutableArray () {
+    NSMutableArray *_array;
     pthread_mutex_t _safeThreadArrayMutex;
     pthread_mutexattr_t _safeThreadArrayMutexAttr;
 }
 @end
 
 @implementation DoraemonThreadSafeMutableArray
-- (instancetype)initCommon
-{
+- (instancetype)initCommon {
     self = [super init];
     if (self) {
         pthread_mutexattr_init(&(_safeThreadArrayMutexAttr));
@@ -27,8 +26,7 @@
     return self;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [self initCommon];
     if (self) {
         _array = [NSMutableArray array];
@@ -36,8 +34,7 @@
     return self;
 }
 
-- (instancetype)initWithCapacity:(NSUInteger)numItems
-{
+- (instancetype)initWithCapacity:(NSUInteger)numItems {
     self = [self initCommon];
     if (self) {
         _array = [NSMutableArray arrayWithCapacity:numItems];
@@ -45,8 +42,7 @@
     return self;
 }
 
-- (instancetype)initWithArray:(NSArray *)array
-{
+- (instancetype)initWithArray:(NSArray *)array {
     self = [self initCommon];
     if (self) {
         _array = [NSMutableArray arrayWithArray:array];
@@ -54,8 +50,7 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [self initCommon];
     if (self) {
         _array = [[NSMutableArray alloc] initWithCoder:aDecoder];
@@ -63,8 +58,7 @@
     return self;
 }
 
-- (instancetype)initWithObjects:(const id [])objects count:(NSUInteger)cnt
-{
+- (instancetype)initWithObjects:(const id[])objects count:(NSUInteger)cnt {
     self = [self initCommon];
     if (self) {
         _array = [NSMutableArray array];
@@ -75,8 +69,7 @@
     return self;
 }
 
-- (NSUInteger)count
-{
+- (NSUInteger)count {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array count];
@@ -86,8 +79,7 @@
     }
 }
 
-- (id)objectAtIndex:(NSUInteger)index
-{
+- (id)objectAtIndex:(NSUInteger)index {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array objectAtIndex:index];
@@ -97,8 +89,7 @@
     }
 }
 
-- (id)objectAtIndexedSubscript:(NSUInteger)index
-{
+- (id)objectAtIndexedSubscript:(NSUInteger)index {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array objectAtIndexedSubscript:index];
@@ -108,8 +99,7 @@
     }
 }
 
-- (id)firstObject
-{
+- (id)firstObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array firstObject];
@@ -119,8 +109,7 @@
     }
 }
 
-- (id)lastObject
-{
+- (id)lastObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array lastObject];
@@ -130,8 +119,7 @@
     }
 }
 
-- (BOOL)containsObject:(id)anObject
-{
+- (BOOL)containsObject:(id)anObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array containsObject:anObject];
@@ -141,8 +129,7 @@
     }
 }
 
-- (NSEnumerator *)objectEnumerator
-{
+- (NSEnumerator *)objectEnumerator {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array objectEnumerator];
@@ -152,8 +139,7 @@
     }
 }
 
-- (NSEnumerator *)reverseObjectEnumerator
-{
+- (NSEnumerator *)reverseObjectEnumerator {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array reverseObjectEnumerator];
@@ -163,8 +149,7 @@
     }
 }
 
-- (void)insertObject:(id)anObject atIndex:(NSUInteger)index
-{
+- (void)insertObject:(id)anObject atIndex:(NSUInteger)index {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array insertObject:anObject atIndex:index];
@@ -174,8 +159,7 @@
     }
 }
 
-- (void)setObject:(id)anObject atIndexedSubscript:(NSUInteger)index
-{
+- (void)setObject:(id)anObject atIndexedSubscript:(NSUInteger)index {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array setObject:anObject atIndexedSubscript:index];
@@ -185,8 +169,7 @@
     }
 }
 
-- (void)addObject:(id)anObject
-{
+- (void)addObject:(id)anObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array addObject:anObject];
@@ -196,8 +179,7 @@
     }
 }
 
-- (void)removeObject:(id)anObject
-{
+- (void)removeObject:(id)anObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array removeObject:anObject];
@@ -207,8 +189,7 @@
     }
 }
 
-- (void)removeObjectAtIndex:(NSUInteger)index
-{
+- (void)removeObjectAtIndex:(NSUInteger)index {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array removeObjectAtIndex:index];
@@ -218,8 +199,7 @@
     }
 }
 
-- (void)removeLastObject
-{
+- (void)removeLastObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array removeLastObject];
@@ -229,8 +209,7 @@
     }
 }
 
-- (void)removeAllObjects
-{
+- (void)removeAllObjects {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array removeAllObjects];
@@ -240,8 +219,7 @@
     }
 }
 
-- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
-{
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         [_array replaceObjectAtIndex:index withObject:anObject];
@@ -251,8 +229,7 @@
     }
 }
 
-- (NSUInteger)indexOfObject:(id)anObject
-{
+- (NSUInteger)indexOfObject:(id)anObject {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array indexOfObject:anObject];
@@ -262,8 +239,7 @@
     }
 }
 
-- (id)copy
-{
+- (id)copy {
     @try {
         pthread_mutex_lock(&_safeThreadArrayMutex);
         return [_array copy];
@@ -273,8 +249,7 @@
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     pthread_mutex_destroy(&_safeThreadArrayMutex);
     pthread_mutexattr_destroy(&_safeThreadArrayMutexAttr);
 }

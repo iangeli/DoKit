@@ -5,8 +5,8 @@
 //  Created by yixiang on 2018/1/12.
 //
 
-#import <Foundation/Foundation.h>
 #import "DoraemonPluginProtocol.h"
+#import <Foundation/Foundation.h>
 
 @interface DoraemonCPUPlugin : NSObject<DoraemonPluginProtocol>
 @end

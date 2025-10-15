@@ -6,8 +6,8 @@
 //
 
 #import "DoraemonHierarchyWindow.h"
-#import "DoraemonHierarchyViewController.h"
 #import "DoraemonDefine.h"
+#import "DoraemonHierarchyViewController.h"
 
 @interface DoraemonHierarchyWindow ()
 @end
@@ -19,8 +19,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive) {
                 self.windowScene = windowScene;
                 break;
             }

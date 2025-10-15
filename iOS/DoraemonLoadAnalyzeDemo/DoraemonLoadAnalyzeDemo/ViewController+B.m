@@ -9,7 +9,7 @@
 #import "ViewController+B.h"
 
 @implementation ViewController (B)
-+ (void)load{
++ (void)load {
     NSLog(@"ViewController(B) call load");
 }
 

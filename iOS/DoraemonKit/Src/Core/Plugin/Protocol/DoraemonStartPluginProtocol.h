@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DoraemonStartPluginProtocol <NSObject>
+@protocol DoraemonStartPluginProtocol<NSObject>
 @optional
 - (void)startPluginDidLoad;
 @end

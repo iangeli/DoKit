@@ -6,27 +6,25 @@
 //
 
 #import "DoraemonUIProfileManager.h"
-#import "UIViewController+DoraemonUIProfile.h"
 #import "DoraemonUIProfileWindow.h"
 #import "UIViewController+Doraemon.h"
+#import "UIViewController+DoraemonUIProfile.h"
 
 @interface DoraemonUIProfileManager ()
 @end
 
 @implementation DoraemonUIProfileManager
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static DoraemonUIProfileManager *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [DoraemonUIProfileManager new];
     });
-    
+
     return sharedInstance;
 }
 
-- (void)setEnable:(BOOL)enable
-{
+- (void)setEnable:(BOOL)enable {
     _enable = enable;
     if (enable) {
         [[UIViewController topViewControllerForKeyWindow] profileViewDepth];

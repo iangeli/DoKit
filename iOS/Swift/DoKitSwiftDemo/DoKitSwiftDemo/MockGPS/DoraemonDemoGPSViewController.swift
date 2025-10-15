@@ -13,16 +13,16 @@ class DoraemonDemoGPSViewController: DoraemonDemoBaseViewController, MKMapViewDe
     var mapView: MKMapView!
     var lcManager: CLLocationManager?
     var annotation: DoraemonDemoGPSAnnotation?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = DoraemonDemoLocalizedString("模拟位置")
-        
+
         mapView = MKMapView(frame: CGRect(x: 0, y: kIphoneNavBarHeight, width: view.width, height: view.height))
         mapView.mapType = .standard
         mapView.delegate = self
         view.addSubview(mapView)
-        
+
         if CLLocationManager.locationServicesEnabled() {
             lcManager = CLLocationManager()
             lcManager?.delegate = self
@@ -31,30 +31,30 @@ class DoraemonDemoGPSViewController: DoraemonDemoBaseViewController, MKMapViewDe
             lcManager?.startUpdatingLocation()
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let l = locations[0]
         print("location at \(l.coordinate.longitude) \(l.coordinate.latitude)")
         self.refreshAnnotation(location: l)
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("location failure")
     }
-    
-    func refreshAnnotation(location loc:CLLocation) {
+
+    func refreshAnnotation(location loc: CLLocation) {
         mapView.centerCoordinate = loc.coordinate
         mapView.setRegion(MKCoordinateRegion(center: loc.coordinate, span: MKCoordinateSpan(latitudeDelta: 40, longitudeDelta: 40)), animated: true)
-        
+
         if annotation == nil {
             annotation = DoraemonDemoGPSAnnotation(coordinate: loc.coordinate, title: "title", subtitle: "subtitle", icon: UIImage(named: "AppIcon"))
-        }else{
+        } else {
             mapView.removeAnnotation(annotation!)
         }
         annotation?.coordinate = loc.coordinate
         mapView.addAnnotation(annotation!)
     }
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is DoraemonDemoGPSAnnotation {
             let annotation = annotation as! DoraemonDemoGPSAnnotation
@@ -68,9 +68,8 @@ class DoraemonDemoGPSViewController: DoraemonDemoBaseViewController, MKMapViewDe
             view?.image = annotation.icon
             return view
         }
-        
+
         return nil
     }
-
 
 }

@@ -6,12 +6,12 @@
 //
 
 #import "DoraemonOscillogramWindow.h"
-#import "DoraemonOscillogramViewController.h"
-#import "UIColor+Doraemon.h"
 #import "DoraemonDefine.h"
+#import "DoraemonOscillogramViewController.h"
 #import "DoraemonOscillogramWindowManager.h"
+#import "UIColor+Doraemon.h"
 
-@interface DoraemonOscillogramWindow()
+@interface DoraemonOscillogramWindow ()
 @property (nonatomic, strong) NSHashTable *delegates;
 @end
 
@@ -23,7 +23,7 @@
     return _delegates;
 }
 
-- (void)addDelegate:(id<DoraemonOscillogramWindowDelegate>) delegate {
+- (void)addDelegate:(id<DoraemonOscillogramWindowDelegate>)delegate {
     [self.delegates addObject:delegate];
 }
 
@@ -31,7 +31,7 @@
     [self.delegates removeObject:delegate];
 }
 
-+ (DoraemonOscillogramWindow *)shareInstance{
++ (DoraemonOscillogramWindow *)shareInstance {
     static dispatch_once_t once;
     static DoraemonOscillogramWindow *instance;
     dispatch_once(&once, ^{
@@ -40,7 +40,7 @@
     return instance;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = false;
@@ -48,8 +48,8 @@
         self.backgroundColor = [UIColor doraemon_colorWithHex:0x000000 andAlpha:0.33];
         self.layer.masksToBounds = YES;
 
-        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive) {
                 self.windowScene = windowScene;
                 break;
             }
@@ -67,12 +67,10 @@
     self.vc.oscillogramView.frame = CGRectMake(pt.x, pt.y, sz.width, sz.height - pt.y);
 }
 
-
-- (void)addRootVc{
-   
+- (void)addRootVc {
 }
 
-- (void)show{
+- (void)show {
     self.hidden = NO;
     [_vc startRecord];
     [self resetLayout];
@@ -85,13 +83,13 @@
     [_vc endRecord];
     self.hidden = YES;
     [self resetLayout];
-    
+
     for (id<DoraemonOscillogramWindowDelegate> delegate in self.delegates) {
         [delegate doraemonOscillogramWindowClosed];
     }
 }
 
-- (void)resetLayout{
+- (void)resetLayout {
     [[DoraemonOscillogramWindowManager shareInstance] resetLayout];
 }
 @end

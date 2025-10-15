@@ -8,13 +8,12 @@
 #import "DoraemonANRTracker.h"
 #import "sys/utsname.h"
 
-@interface DoraemonANRTracker()
+@interface DoraemonANRTracker ()
 @property (nonatomic, strong) DoraemonPingThread *pingThread;
 @end
 
 @implementation DoraemonANRTracker
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
     }
@@ -23,12 +22,12 @@
 
 - (void)startWithThreshold:(double)threshold
                    handler:(DoraemonANRTrackerBlock)handler {
-    
+
     self.pingThread = [[DoraemonPingThread alloc] initWithThreshold:threshold
                                                             handler:^(NSDictionary *info) {
                                                                 handler(info);
                                                             }];
-    
+
     [self.pingThread start];
 }
 
@@ -42,13 +41,12 @@
 - (DoraemonANRTrackerStatus)status {
     if (self.pingThread != nil && self.pingThread.isCancelled != YES) {
         return DoraemonANRTrackerStatusStart;
-    }else {
+    } else {
         return DoraemonANRTrackerStatusStop;
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self.pingThread cancel];
 }
 @end

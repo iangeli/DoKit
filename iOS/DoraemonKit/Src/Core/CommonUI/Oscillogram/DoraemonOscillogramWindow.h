@@ -5,11 +5,11 @@
 //  Created by yixiang on 2018/1/3.
 //
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import "DoraemonOscillogramViewController.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@protocol DoraemonOscillogramWindowDelegate <NSObject>
+@protocol DoraemonOscillogramWindowDelegate<NSObject>
 - (void)doraemonOscillogramWindowClosed;
 @end
 
@@ -24,7 +24,7 @@
 
 - (void)hide;
 
-- (void)addDelegate:(id<DoraemonOscillogramWindowDelegate>) delegate;
+- (void)addDelegate:(id<DoraemonOscillogramWindowDelegate>)delegate;
 
 - (void)removeDelegate:(id<DoraemonOscillogramWindowDelegate>)delegate;
 @end

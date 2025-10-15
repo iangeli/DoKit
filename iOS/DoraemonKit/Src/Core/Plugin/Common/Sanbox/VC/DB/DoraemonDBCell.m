@@ -8,11 +8,11 @@
 #import "DoraemonDBCell.h"
 #import "DoraemonDBRowView.h"
 
-@interface DoraemonDBCell()
+@interface DoraemonDBCell ()
 @end
 
 @implementation DoraemonDBCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _rowView = [[DoraemonDBRowView alloc] init];
@@ -21,12 +21,12 @@
     return self;
 }
 
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
     _rowView.frame = self.contentView.bounds;
 }
 
-- (void)renderCellWithArray:(NSArray *)array{
+- (void)renderCellWithArray:(NSArray *)array {
     _rowView.dataArray = array;
 }
 @end

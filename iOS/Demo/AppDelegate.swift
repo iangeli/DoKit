@@ -35,4 +35,3 @@ private class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

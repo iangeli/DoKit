@@ -6,8 +6,8 @@
 //  Copyright © 2017年 yixiang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <DoraemonKit/DoraemonPluginProtocol.h>
+#import <Foundation/Foundation.h>
 
 @interface TestPlugin : NSObject<DoraemonPluginProtocol>
 @end

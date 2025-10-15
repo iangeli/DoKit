@@ -30,7 +30,7 @@
     self.layer.cornerRadius = kDoraemonSizeFromLandscape(8);
     self.layer.borderWidth = 1.;
     self.layer.borderColor = [UIColor doraemon_colorWithHex:0x999999 andAlpha:0.2].CGColor;
-    
+
     [self addSubview:self.colorView];
     [self addSubview:self.colorValueLbl];
     [self addSubview:self.closeBtn];
@@ -40,14 +40,14 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     CGFloat colorWidth = kDoraemonSizeFromLandscape(28);
     CGFloat colorHeight = kDoraemonSizeFromLandscape(28);
     self.colorView.frame = CGRectMake(kDoraemonSizeFromLandscape(32), (self.doraemon_height - colorHeight) / 2.0, colorWidth, colorHeight);
-    
+
     CGFloat colorValueWidth = kDoraemonSizeFromLandscape(150);
     self.colorValueLbl.frame = CGRectMake(self.colorView.doraemon_right + kDoraemonSizeFromLandscape(20), 0, colorValueWidth, self.doraemon_height);
-    
+
     CGFloat closeWidth = kDoraemonSizeFromLandscape(44);
     CGFloat closeHeight = kDoraemonSizeFromLandscape(44);
     self.closeBtn.frame = CGRectMake(self.doraemon_width - closeWidth - kDoraemonSizeFromLandscape(32), (self.doraemon_height - closeHeight) / 2.0, closeWidth, closeHeight);
@@ -55,7 +55,7 @@
 
 #pragma mark - Public
 
-- (void)setCurrentColor:(NSString *)hexColor{
+- (void)setCurrentColor:(NSString *)hexColor {
     self.colorView.backgroundColor = [UIColor doraemon_colorWithHexString:hexColor];
     self.colorValueLbl.text = hexColor;
 }
@@ -70,11 +70,11 @@
 
 #pragma mark - Private
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+
     UITouch *touch = [touches anyObject];
-    
+
     CGPoint currentPoint = [touch locationInView:self];
-    
+
     CGPoint prePoint = [touch previousLocationInView:self];
     CGFloat offsetX = currentPoint.x - prePoint.x;
     CGFloat offsetY = currentPoint.y - prePoint.y;

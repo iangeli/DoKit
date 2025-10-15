@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonPingThread.h"
-#import <UIKit/UIKit.h>
-#import "DoraemonUtil.h"
 #import "DoraemonBacktraceLogger.h"
+#import "DoraemonUtil.h"
+#import <UIKit/UIKit.h>
 
-@interface DoraemonPingThread()
+@interface DoraemonPingThread ()
 @property (nonatomic, assign) BOOL isApplicationInActive;
 
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
@@ -19,7 +19,7 @@
 
 @property (nonatomic, copy) DoraemonANRTrackerBlock handler;
 
-@property (nonatomic, assign,getter=isMainThreadBlock) BOOL mainThreadBlock;
+@property (nonatomic, assign, getter=isMainThreadBlock) BOOL mainThreadBlock;
 
 @property (nonatomic, copy) NSString *reportInfo;
 
@@ -32,40 +32,40 @@
     self = [super init];
     if (self) {
         self.semaphore = dispatch_semaphore_create(0);
-        
+
         self.threshold = threshold;
         self.handler = handler;
         _isApplicationInActive = YES;
-        
-        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(applicationDidBecomeActive) name: UIApplicationDidBecomeActiveNotification object: nil];
-        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(applicationDidEnterBackground) name: UIApplicationDidEnterBackgroundNotification object: nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     return self;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)main {
-    
+
     __weak typeof(self) weakSelf = self;
-    void (^ verifyReport)(void) = ^() {
+    void (^verifyReport)(void) = ^() {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.reportInfo.length > 0) {
             if (strongSelf.handler) {
                 double responseTimeValue = [[NSDate date] timeIntervalSince1970];
-                double duration = (responseTimeValue - strongSelf.startTimeValue)*1000;
+                double duration = (responseTimeValue - strongSelf.startTimeValue) * 1000;
                 strongSelf.handler(@{
-                                     @"title": [DoraemonUtil dateFormatNow].length > 0 ? [DoraemonUtil dateFormatNow] : @"",
-                                     @"duration": [NSString stringWithFormat:@"%.0f",duration],
-                                     @"content": strongSelf.reportInfo
-                                     });
+                    @"title" : [DoraemonUtil dateFormatNow].length > 0 ? [DoraemonUtil dateFormatNow] : @"",
+                    @"duration" : [NSString stringWithFormat:@"%.0f", duration],
+                    @"content" : strongSelf.reportInfo
+                });
             }
             strongSelf.reportInfo = @"";
         }
     };
-    
+
     while (!self.cancelled) {
         if (_isApplicationInActive) {
             self.mainThreadBlock = YES;
@@ -82,7 +82,7 @@
             }
             dispatch_semaphore_wait(self.semaphore, dispatch_time(DISPATCH_TIME_NOW, 5.0 * NSEC_PER_SEC));
             {
-                
+
                 verifyReport();
             }
         } else {

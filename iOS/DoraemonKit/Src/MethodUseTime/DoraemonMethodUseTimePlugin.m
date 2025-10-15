@@ -10,7 +10,7 @@
 #import "DoraemonMethodUseTimeViewController.h"
 
 @implementation DoraemonMethodUseTimePlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonMethodUseTimeViewController *vc = [[DoraemonMethodUseTimeViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

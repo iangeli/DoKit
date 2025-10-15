@@ -7,10 +7,10 @@
 
 #import "DoraemonMemoryViewController.h"
 #import "DoraemonCacheManager.h"
-#import "DoraemonMemoryOscillogramWindow.h"
-#import "DoraemonMemoryOscillogramViewController.h"
 #import "DoraemonCellSwitch.h"
 #import "DoraemonDefine.h"
+#import "DoraemonMemoryOscillogramViewController.h"
+#import "DoraemonMemoryOscillogramWindow.h"
 
 @interface DoraemonMemoryViewController ()<DoraemonSwitchViewDelegate, DoraemonOscillogramWindowDelegate>
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Memory monitor";
-    
+
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFromLandscape(104))];
     [_switchView renderUIWithTitle:@"Memory monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] memorySwitch]];
     [_switchView needTopLine];
@@ -30,17 +30,17 @@
     [[DoraemonMemoryOscillogramWindow shareInstance] addDelegate:self];
 }
 
-#pragma mark -- DoraemonSwitchViewDelegate
-- (void)changeSwitchOn:(BOOL)on sender:(id)sender{
+#pragma mark-- DoraemonSwitchViewDelegate
+- (void)changeSwitchOn:(BOOL)on sender:(id)sender {
     [[DoraemonCacheManager sharedInstance] saveMemorySwitch:on];
-    if(on){
+    if (on) {
         [[DoraemonMemoryOscillogramWindow shareInstance] show];
-    }else{
+    } else {
         [[DoraemonMemoryOscillogramWindow shareInstance] hide];
     }
 }
 
-#pragma mark -- DoraemonOscillogramWindowDelegate
+#pragma mark-- DoraemonOscillogramWindowDelegate
 - (void)doraemonOscillogramWindowClosed {
     [_switchView renderUIWithTitle:@"Memory monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] memorySwitch]];
 }

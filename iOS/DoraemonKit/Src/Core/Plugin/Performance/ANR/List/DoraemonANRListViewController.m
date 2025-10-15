@@ -6,14 +6,14 @@
 //
 
 #import "DoraemonANRListViewController.h"
-#import "DoraemonANRManager.h"
-#import "DoraemonANRListCell.h"
 #import "DoraemonANRDetailViewController.h"
-#import "DoraemonSandboxModel.h"
+#import "DoraemonANRListCell.h"
+#import "DoraemonANRManager.h"
 #import "DoraemonANRTool.h"
 #import "DoraemonDefine.h"
+#import "DoraemonSandboxModel.h"
 
-@interface DoraemonANRListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DoraemonANRListViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray *anrArray;
 @end
@@ -22,11 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"ANR List";
-    
+
     [self loadANRData];
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, self.view.doraemon_height-IPHONE_NAVIGATIONBAR_HEIGHT) style:UITableViewStylePlain];
-//    self.tableView.backgroundColor = [UIColor whiteColor];
+
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, self.view.doraemon_height - IPHONE_NAVIGATIONBAR_HEIGHT) style:UITableViewStylePlain];
+    //    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -34,10 +34,10 @@
 
 #pragma mark ANRData
 - (void)loadANRData {
-    
+
     NSFileManager *manager = [NSFileManager defaultManager];
     NSString *anrDirectory = [DoraemonANRTool anrDirectory];
-    
+
     if (anrDirectory && [manager fileExistsAtPath:anrDirectory]) {
         [self loadPath:anrDirectory];
     }
@@ -53,9 +53,9 @@
     NSError *error = nil;
     NSArray *paths = [fm contentsOfDirectoryAtPath:targetPath error:&error];
 
-    NSArray *sortedPaths = [paths sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    NSArray *sortedPaths = [paths sortedArrayUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
         if ([obj1 isKindOfClass:[NSString class]] && [obj2 isKindOfClass:[NSString class]]) {
-            
+
             NSString *firstPath = [targetPath stringByAppendingPathComponent:obj1];
             NSString *secondPath = [targetPath stringByAppendingPathComponent:obj2];
 
@@ -71,14 +71,14 @@
     }];
 
     NSMutableArray *files = [NSMutableArray array];
-    [sortedPaths enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [sortedPaths enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         if ([obj isKindOfClass:[NSString class]]) {
             NSString *sortedPath = obj;
-            
+
             BOOL isDir = NO;
             NSString *fullPath = [targetPath stringByAppendingPathComponent:sortedPath];
             [fm fileExistsAtPath:fullPath isDirectory:&isDir];
-            
+
             DoraemonSandboxModel *model = [[DoraemonSandboxModel alloc] init];
             model.path = fullPath;
             if (isDir) {
@@ -87,19 +87,19 @@
                 model.type = DoraemonSandboxFileTypeFile;
             }
             model.name = sortedPath;
-            
+
             [files addObject:model];
         }
     }];
     self.anrArray = files.copy;
-    
+
     [self.tableView reloadData];
 }
 
 - (void)deleteByDoraemonSandboxModel:(DoraemonSandboxModel *)model {
     NSFileManager *fm = [NSFileManager defaultManager];
     [fm removeItemAtPath:model.path error:nil];
-    
+
     [self loadANRData];
 }
 
@@ -129,13 +129,13 @@
     DoraemonANRListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     if (!cell) {
         cell = [[DoraemonANRListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
-    } 
-    
+    }
+
     if (indexPath.row < self.anrArray.count) {
         DoraemonSandboxModel *model = [self.anrArray objectAtIndex:indexPath.row];
         [cell renderCellWithData:model];
     }
-    
+
     return cell;
 }
 
@@ -153,15 +153,15 @@
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"Delete";
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.anrArray.count) {
         DoraemonSandboxModel *model = self.anrArray[indexPath.row];
         [self deleteByDoraemonSandboxModel:model];

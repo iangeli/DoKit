@@ -10,7 +10,7 @@
 #import "DoraemonMethodUseTimeListCell.h"
 #import "DoraemonMethodUseTimeManager.h"
 
-@interface DoraemonMethodUseTimeListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DoraemonMethodUseTimeListViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray *loadModelArray;
 @property (nonatomic, strong) UITableView *tableView;
 @end
@@ -18,12 +18,12 @@
 @implementation DoraemonMethodUseTimeListViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Load Results" ;
-    
+    self.title = @"Load Results";
+
     _loadModelArray = [[DoraemonMethodUseTimeManager sharedInstance] fixLoadModelArray];
-    
+
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.doraemon_width, self.view.doraemon_height) style:UITableViewStylePlain];
-//    self.tableView.backgroundColor = [UIColor whiteColor];
+    //    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -56,7 +56,7 @@
     if (!cell) {
         cell = [[DoraemonMethodUseTimeListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
     }
-    NSDictionary* dic = [_loadModelArray objectAtIndex:indexPath.row];
+    NSDictionary *dic = [_loadModelArray objectAtIndex:indexPath.row];
     [cell renderCellWithData:dic];
     return cell;
 }

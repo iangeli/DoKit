@@ -15,26 +15,26 @@ typedef void (^DoraemonAlertCancleActionBlock)(void);
 
 @interface DoraemonAlertUtil : NSObject
 + (void)handleAlertActionWithVC:(UIViewController *)vc
-                     okBlock:(DoraemonAlertOKActionBlock)okBlock
-                      cancleBlock:(DoraemonAlertCancleActionBlock)cancleBlock;
+                        okBlock:(DoraemonAlertOKActionBlock)okBlock
+                    cancleBlock:(DoraemonAlertCancleActionBlock)cancleBlock;
 
 + (void)handleAlertActionWithVC:(UIViewController *)vc
-                             text:(NSString *)text
-                     okBlock:(DoraemonAlertOKActionBlock)okBlock
-                      cancleBlock:(DoraemonAlertCancleActionBlock)cancleBlock;
+                           text:(NSString *)text
+                        okBlock:(DoraemonAlertOKActionBlock)okBlock
+                    cancleBlock:(DoraemonAlertCancleActionBlock)cancleBlock;
 
 + (void)handleAlertActionWithVC:(UIViewController *)vc
                            text:(NSString *)text
                         okBlock:(DoraemonAlertOKActionBlock)okBlock;
 
 + (void)handleAlertActionWithVC:(UIViewController *)vc
-                          title: (NSString *)title
+                          title:(NSString *)title
                            text:(NSString *)text
                              ok:(NSString *)ok
                         okBlock:(DoraemonAlertOKActionBlock)okBlock;
 
 + (void)handleAlertActionWithVC:(UIViewController *)vc
-                          title: (NSString *)title
+                          title:(NSString *)title
                            text:(NSString *)text
                              ok:(NSString *)ok
                          cancel:(NSString *)cancel

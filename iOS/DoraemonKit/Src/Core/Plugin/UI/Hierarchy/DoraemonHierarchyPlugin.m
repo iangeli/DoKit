@@ -6,8 +6,8 @@
 //
 
 #import "DoraemonHierarchyPlugin.h"
-#import "DoraemonHierarchyWindow.h"
 #import "DoraemonHierarchyHelper.h"
+#import "DoraemonHierarchyWindow.h"
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonHierarchyPlugin

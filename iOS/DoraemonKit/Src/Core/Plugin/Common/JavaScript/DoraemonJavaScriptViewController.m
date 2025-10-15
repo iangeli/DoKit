@@ -6,9 +6,9 @@
 //
 
 #import "DoraemonJavaScriptViewController.h"
-#import "DoraemonJavaScriptDetailViewController.h"
 #import "DoraemonCacheManager.h"
 #import "DoraemonDefine.h"
+#import "DoraemonJavaScriptDetailViewController.h"
 
 @interface DoraemonJavaScriptViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) UITableView *tableView;
@@ -19,10 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Script List";
-    
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewScript)];
     self.items = [NSMutableArray array];
-    
+
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -82,10 +82,10 @@
 
 - (void)loadScriptData {
     [self.items removeAllObjects];
-    
+
     NSArray *scriptItems = [DoraemonCacheManager.sharedInstance jsHistoricalRecord];
     if (!scriptItems) {
-        
+
         [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//isntall vConsole\nimport('https://unpkg.com/vconsole').then(() => {\n    new window.VConsole()\n})" forKey:@"vConsole"];
         [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//reload \nlocation.reload()" forKey:@"Reload"];
         [DoraemonCacheManager.sharedInstance saveJsHistoricalRecordWithText:@"//back \nhistory.go(-1)" forKey:@"Back"];

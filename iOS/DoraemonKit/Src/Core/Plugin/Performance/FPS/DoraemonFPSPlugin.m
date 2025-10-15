@@ -10,7 +10,7 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonFPSPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonFPSViewController *vc = [[DoraemonFPSViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

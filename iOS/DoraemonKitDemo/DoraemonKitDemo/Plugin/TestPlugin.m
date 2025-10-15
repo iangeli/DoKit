@@ -8,14 +8,13 @@
 
 #import "TestPlugin.h"
 
-
 @implementation TestPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     NSLog(@"TestPlugin pluginDidLoad");
 }
 
-- (void)pluginDidLoad:(NSDictionary *)itemData{
-    NSLog(@"TestPlugin pluginDidLoad:itemData = %@",itemData);
+- (void)pluginDidLoad:(NSDictionary *)itemData {
+    NSLog(@"TestPlugin pluginDidLoad:itemData = %@", itemData);
 }
 
 @end

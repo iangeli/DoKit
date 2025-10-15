@@ -8,7 +8,7 @@
 #import "DoraemonHomeCell.h"
 #import "DoraemonDefine.h"
 
-@interface DoraemonHomeCell()
+@interface DoraemonHomeCell ()
 @property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UILabel *name;
 @end
@@ -19,7 +19,7 @@
         CGFloat size = kDoraemonSizeFromLandscape(68);
         _icon = [[UIImageView alloc] initWithFrame:CGRectMake((self.doraemon_width - size) / 2.0, 4, size, size)];
     }
-    
+
     return _icon;
 }
 
@@ -32,7 +32,7 @@
         _name.adjustsFontSizeToFitWidth = YES;
         _name.textColor = [UIColor labelColor];
     }
-    
+
     return _name;
 }
 

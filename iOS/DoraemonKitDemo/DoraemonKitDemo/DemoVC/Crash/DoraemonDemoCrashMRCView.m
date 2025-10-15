@@ -12,10 +12,10 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        UIView *tempView = [[UIView alloc]init];
+        UIView *tempView = [[UIView alloc] init];
         //[tempView release];
-        
-        //对象已经被释放，内存不合法，此块内存地址又没被覆盖，所以此内存内垃圾内存，所以调用方法的时候会导致SIGSEGV的错误
+
+        // 对象已经被释放，内存不合法，此块内存地址又没被覆盖，所以此内存内垃圾内存，所以调用方法的时候会导致SIGSEGV的错误
         [tempView setNeedsDisplay];
     }
     return self;

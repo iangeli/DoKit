@@ -6,15 +6,15 @@
 //
 
 #import "DoraemonViewCheckManager.h"
-#import "DoraemonViewCheckView.h"
 #import "DoraemonDefine.h"
+#import "DoraemonViewCheckView.h"
 
-@interface DoraemonViewCheckManager()
+@interface DoraemonViewCheckManager ()
 @property (nonatomic, strong) DoraemonViewCheckView *viewCheckView;
 @end
 
 @implementation DoraemonViewCheckManager
-+ (DoraemonViewCheckManager *)shareInstance{
++ (DoraemonViewCheckManager *)shareInstance {
     static dispatch_once_t once;
     static DoraemonViewCheckManager *instance;
     dispatch_once(&once, ^{
@@ -23,7 +23,7 @@
     return instance;
 }
 
-- (instancetype)init{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closePlugin:) name:DoraemonClosePluginNotification object:nil];
@@ -36,7 +36,7 @@
     [[DoraemonUtil getKeyWindow] removeObserver:self forKeyPath:@"rootViewController"];
 }
 
-- (void)show{
+- (void)show {
     if (!_viewCheckView) {
         _viewCheckView = [[DoraemonViewCheckView alloc] init];
         _viewCheckView.hidden = YES;
@@ -45,15 +45,15 @@
     [_viewCheckView show];
 }
 
-- (void)hidden{
+- (void)hidden {
     [_viewCheckView hide];
 }
 
-- (void)closePlugin:(NSNotification *)notification{
+- (void)closePlugin:(NSNotification *)notification {
     [self hidden];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context {
     [[DoraemonUtil getKeyWindow] bringSubviewToFront:self.viewCheckView];
 }
 @end

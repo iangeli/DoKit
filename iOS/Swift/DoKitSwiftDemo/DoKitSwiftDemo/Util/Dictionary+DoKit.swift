@@ -17,7 +17,7 @@ extension Dictionary {
         }
         return nil
     }
-    
+
     public static func constructFromJson (json: String) -> Dictionary? {
         let data = json.data(using: String.Encoding.utf8, allowLossyConversion: true)
         let obj = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)

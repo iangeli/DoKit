@@ -8,16 +8,15 @@
 #import "DoraemonThreadSafeMutableDictionary.h"
 #import <pthread/pthread.h>
 
-@interface DoraemonThreadSafeMutableDictionary(){
-    NSMutableDictionary* _dict;
+@interface DoraemonThreadSafeMutableDictionary () {
+    NSMutableDictionary *_dict;
     pthread_mutex_t _safeThreadDictionaryMutex;
     pthread_mutexattr_t _safeThreadDictionaryMutexAttr;
 }
 @end
 
 @implementation DoraemonThreadSafeMutableDictionary
-- (instancetype)initCommon
-{
+- (instancetype)initCommon {
     self = [super init];
     if (self) {
         pthread_mutexattr_init(&(_safeThreadDictionaryMutexAttr));
@@ -27,8 +26,7 @@
     return self;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [self initCommon];
     if (self) {
         _dict = [NSMutableDictionary dictionary];
@@ -36,8 +34,7 @@
     return self;
 }
 
-- (instancetype)initWithCapacity:(NSUInteger)numItems
-{
+- (instancetype)initWithCapacity:(NSUInteger)numItems {
     self = [self initCommon];
     if (self) {
         _dict = [NSMutableDictionary dictionaryWithCapacity:numItems];
@@ -45,8 +42,7 @@
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
-{
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [self initCommon];
     if (self) {
         _dict = [NSMutableDictionary dictionaryWithDictionary:dictionary];
@@ -54,8 +50,7 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [self initCommon];
     if (self) {
         _dict = [[NSMutableDictionary alloc] initWithCoder:aDecoder];
@@ -63,21 +58,18 @@
     return self;
 }
 
-- (instancetype)initWithObjects:(const id [])objects forKeys:(const id<NSCopying> [])keys count:(NSUInteger)cnt
-{
+- (instancetype)initWithObjects:(const id[])objects forKeys:(const id<NSCopying>[])keys count:(NSUInteger)cnt {
     self = [self initCommon];
     if (self) {
         _dict = [NSMutableDictionary dictionary];
         for (NSUInteger i = 0; i < cnt; ++i) {
             _dict[keys[i]] = objects[i];
         }
-        
     }
     return self;
 }
 
-- (NSUInteger)count
-{
+- (NSUInteger)count {
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         return [_dict count];
@@ -87,12 +79,11 @@
     }
 }
 
-- (id)objectForKey:(id)key
-{
+- (id)objectForKey:(id)key {
     if (nil == key) {
         return nil;
     }
-    
+
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         return [_dict objectForKey:key];
@@ -102,12 +93,11 @@
     }
 }
 
-- (id)objectForKeyedSubscript:(id)key
-{
+- (id)objectForKeyedSubscript:(id)key {
     if (nil == key) {
         return nil;
     }
-    
+
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         return [_dict objectForKeyedSubscript:key];
@@ -117,8 +107,7 @@
     }
 }
 
-- (NSEnumerator *)keyEnumerator
-{
+- (NSEnumerator *)keyEnumerator {
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         return [_dict keyEnumerator];
@@ -128,8 +117,7 @@
     }
 }
 
-- (void)setObject:(id)anObject forKey:(id<NSCopying>)aKey
-{
+- (void)setObject:(id)anObject forKey:(id<NSCopying>)aKey {
     id originalObject = nil; // make sure that object is not released in lock
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
@@ -142,8 +130,7 @@
     originalObject = nil;
 }
 
-- (void)setObject:(id)anObject forKeyedSubscript:(id <NSCopying>)key
-{
+- (void)setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)key {
     id originalObject = nil; // make sure that object is not released in lock
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
@@ -156,8 +143,7 @@
     originalObject = nil;
 }
 
-- (NSArray *)allKeys
-{
+- (NSArray *)allKeys {
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         return [_dict allKeys];
@@ -167,8 +153,7 @@
     }
 }
 
-- (NSArray *)allValues
-{
+- (NSArray *)allValues {
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         return [_dict allValues];
@@ -178,8 +163,7 @@
     }
 }
 
-- (void)removeObjectForKey:(id)aKey
-{
+- (void)removeObjectForKey:(id)aKey {
     id originalObject = nil; // make sure that object is not released in lock
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
@@ -194,9 +178,8 @@
     originalObject = nil;
 }
 
-- (void)removeAllObjects
-{
-    NSArray* allValues = nil; // make sure that objects are not released in lock
+- (void)removeAllObjects {
+    NSArray *allValues = nil; // make sure that objects are not released in lock
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         allValues = [_dict allValues];
@@ -208,8 +191,7 @@
     allValues = nil;
 }
 
-- (id)copy
-{
+- (id)copy {
     @try {
         pthread_mutex_lock(&_safeThreadDictionaryMutex);
         return [_dict copy];
@@ -219,8 +201,7 @@
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     pthread_mutex_destroy(&_safeThreadDictionaryMutex);
     pthread_mutexattr_destroy(&_safeThreadDictionaryMutexAttr);
 }

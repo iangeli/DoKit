@@ -23,9 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGRect scanRect;
 
-@property(nonatomic,copy) void(^forbidCameraAuth)(void);
+@property (nonatomic, copy) void (^forbidCameraAuth)(void);
 
-@property(nonatomic,copy) void(^unopenCameraAuth)(void);
+@property (nonatomic, copy) void (^unopenCameraAuth)(void);
 
 - (void)startScanning;
 

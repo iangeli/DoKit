@@ -15,8 +15,7 @@
 @end
 
 @implementation DoraemonNSUserDefaultsEditViewController
-- (instancetype)initWithModel: (DoraemonNSUserDefaultsModel *)model
-{
+- (instancetype)initWithModel:(DoraemonNSUserDefaultsModel *)model {
     self = [super init];
     if (self) {
         self.model = model;
@@ -26,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.keyTextView = [[UITextView alloc] init];
     self.keyTextView.editable = NO;
     self.keyTextView.font = [UIFont systemFontOfSize:18];
@@ -36,7 +35,7 @@
     CGFloat keyMaxHeight = 100;
     CGSize keySize = [self.keyTextView sizeThatFits:CGSizeMake(keyMaxWidth, keyMaxHeight)];
     self.keyTextView.frame = CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT + 10, keyMaxWidth, keySize.height + 1);
-    
+
     self.valueTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.keyTextView.frame) + 10, self.view.doraemon_width, 300)];
     self.valueTextView.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:self.valueTextView];
@@ -44,9 +43,9 @@
     self.valueTextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.title = self.model.key;
     self.valueTextView.text = [self.model.value description];
-    
+
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(submit)];
-    self.navigationItem.rightBarButtonItems = @[item];
+    self.navigationItem.rightBarButtonItems = @[ item ];
     self.title = @"Edit";
 }
 

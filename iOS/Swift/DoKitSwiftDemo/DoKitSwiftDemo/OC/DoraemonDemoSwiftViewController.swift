@@ -12,8 +12,8 @@ class DoraemonDemoSwiftViewController: DoraemonDemoBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Call Swift";
-        
+        self.title = "Call Swift"
+
     }
 
 }

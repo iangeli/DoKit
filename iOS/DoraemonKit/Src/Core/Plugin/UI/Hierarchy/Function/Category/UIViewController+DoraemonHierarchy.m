@@ -5,12 +5,12 @@
 //  Created by lijiahuan on 2019/11/2.
 //
 
-#import "UIViewController+DoraemonHierarchy.h"
 #import "DoraemonDefine.h"
+#import "UIViewController+DoraemonHierarchy.h"
 
 @implementation UIViewController (DoraemonHierarchy)
 - (UIViewController *)doraemon_currentShowingViewController {
-    
+
     UIViewController *vc = self;
     if ([self presentedViewController]) {
         vc = [[self presentedViewController] doraemon_currentShowingViewController];
@@ -26,16 +26,20 @@
 
 - (void)doraemon_showAlertControllerWithMessage:(NSString *)message handler:(void (^)(NSInteger action))handler {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Note" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        if (handler) {
-            handler(0);
-        }
-    }];
-    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
-        if (handler) {
-            handler(1);
-        }
-    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:^(UIAlertAction *action) {
+                                                       if (handler) {
+                                                           handler(0);
+                                                       }
+                                                   }];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"Confirm"
+                                                      style:UIAlertActionStyleDestructive
+                                                    handler:^(UIAlertAction *action) {
+                                                        if (handler) {
+                                                            handler(1);
+                                                        }
+                                                    }];
     [alert addAction:cancel];
     [alert addAction:confirm];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -44,16 +48,18 @@
 }
 
 - (void)doraemon_showActionSheetWithTitle:(NSString *)title actions:(NSArray *)actions currentAction:(NSString *)currentAction completion:(void (^)(NSInteger index))completion {
-    UIAlertControllerStyle style = [DoraemonAppInfoUtil isIpad] ? UIAlertControllerStyleAlert: UIAlertControllerStyleActionSheet;
+    UIAlertControllerStyle style = [DoraemonAppInfoUtil isIpad] ? UIAlertControllerStyleAlert : UIAlertControllerStyleActionSheet;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:title preferredStyle:style];
     for (NSInteger i = 0; i < actions.count; i++) {
         NSString *actionTitle = actions[i];
         __block NSInteger index = i;
-        UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (completion) {
-                completion(index);
-            }
-        }];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *_Nonnull action) {
+                                                           if (completion) {
+                                                               completion(index);
+                                                           }
+                                                       }];
         if (currentAction && [actionTitle isEqualToString:currentAction]) {
             action.enabled = NO;
             [action setValue:[UIImage doraemon_xcassetImageNamed:@"doraemon_hierarchy_select"] forKey:@"image"];
@@ -66,17 +72,19 @@
     });
 }
 
-- (void)doraemon_showTextFieldAlertControllerWithMessage:(NSString *)message text:(nullable NSString *)text handler:(nullable void (^)(NSString * _Nullable))handler {
+- (void)doraemon_showTextFieldAlertControllerWithMessage:(NSString *)message text:(nullable NSString *)text handler:(nullable void (^)(NSString *_Nullable))handler {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *_Nonnull textField) {
         textField.text = text;
     }];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        if (handler) {
-            handler(alert.textFields.firstObject.text);
-        }
-    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Confirm"
+                                              style:UIAlertActionStyleDestructive
+                                            handler:^(UIAlertAction *_Nonnull action) {
+                                                if (handler) {
+                                                    handler(alert.textFields.firstObject.text);
+                                                }
+                                            }]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:alert animated:YES completion:nil];
     });

@@ -6,15 +6,15 @@
 //
 
 #import "DoraemonHierarchyViewController.h"
-#import "DoraemonHierarchyDetailViewController.h"
-#import "UIViewController+DoraemonHierarchy.h"
-#import "DKHierarchyPickerView.h"
-#import "NSObject+DoraemonHierarchy.h"
 #import "DKHierarchyInfoView.h"
+#import "DKHierarchyPickerView.h"
+#import "DoraemonDefine.h"
+#import "DoraemonHierarchyDetailViewController.h"
 #import "DoraemonHierarchyHelper.h"
 #import "DoraemonHierarchyWindow.h"
+#import "NSObject+DoraemonHierarchy.h"
 #import "UIView+Doraemon.h"
-#import "DoraemonDefine.h"
+#import "UIViewController+DoraemonHierarchy.h"
 
 @interface DoraemonHierarchyViewController ()<DKHierarchyViewDelegate, DKHierarchyInfoViewDelegate>
 @property (nonatomic, strong) UIView *borderView;
@@ -34,14 +34,14 @@
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
     self.observeViews = [NSMutableSet set];
     self.borderViews = [[NSMutableDictionary alloc] init];
-    
+
     CGFloat height = 100;
     self.infoView = [[DKHierarchyInfoView alloc] initWithFrame:CGRectMake(10, DoraemonWindowHeight - 10 * 2 - height, DoraemonWindowWidth - 10 * 2, height)];
     self.infoView.delegate = self;
     [self.view addSubview:self.infoView];
-    
+
     [self.view addSubview:self.borderView];
-    
+
     self.pickerView = [[DKHierarchyPickerView alloc] initWithFrame:CGRectMake((self.view.doraemon_width - 60) / 2.0, (self.view.doraemon_height - 60) / 2.0, 60, 60)];
     self.pickerView.delegate = self;
     [self.view addSubview:self.pickerView];
@@ -59,7 +59,7 @@
     if ([self.observeViews containsObject:view]) {
         return;
     }
-    
+
     UIView *borderView = [[UIView alloc] init];
     borderView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:borderView];
@@ -76,7 +76,7 @@
     if (![self.observeViews containsObject:view]) {
         return;
     }
-    
+
     UIView *borderView = self.borderViews[@(view.hash)];
     [borderView removeFromSuperview];
     [view removeObserver:self forKeyPath:@"frame"];
@@ -117,7 +117,7 @@
     }
 }
 
-- (NSArray <UIView *>*)findParentViewsBySelectedView:(UIView *)selectedView {
+- (NSArray<UIView *> *)findParentViewsBySelectedView:(UIView *)selectedView {
     NSMutableArray *views = [[NSMutableArray alloc] init];
     UIView *view = [selectedView superview];
     while (view) {
@@ -133,7 +133,7 @@
     return [views copy];
 }
 
-- (NSArray <UIView *>*)findSubviewsBySelectedView:(UIView *)selectedView {
+- (NSArray<UIView *> *)findSubviewsBySelectedView:(UIView *)selectedView {
     NSMutableArray *views = [[NSMutableArray alloc] init];
     for (UIView *view in selectedView.subviews) {
         if ([DoraemonHierarchyHelper shared].isHierarchyIgnorePrivateClass) {
@@ -148,14 +148,14 @@
 }
 
 #pragma mark - LLHierarchyPickerViewDelegate
-- (void)hierarchyView:(DKHierarchyPickerView *)view didMoveTo:(NSArray <UIView *>*)selectedViews {
-    
-    @synchronized (self) {
+- (void)hierarchyView:(DKHierarchyPickerView *)view didMoveTo:(NSArray<UIView *> *)selectedViews {
+
+    @synchronized(self) {
         for (UIView *view in self.observeViews) {
             [self stopObserveView:view];
         }
         [self.observeViews removeAllObjects];
-        
+
         for (NSInteger i = selectedViews.count - 1; i >= 0; i--) {
             UIView *view = selectedViews[i];
             CGFloat borderWidth = 1;
@@ -177,18 +177,15 @@
         return;
     }
     switch (action) {
-        case DKHierarchyInfoViewActionShowMoreInfo:{
-            [self showHierarchyInfo:selectView];
-        }
-            break;
-        case DKHierarchyInfoViewActionShowParent: {
-            [self showParentSheet:selectView];
-        }
-            break;
-        case DKHierarchyInfoViewActionShowSubview: {
-            [self showSubviewSheet:selectView];
-        }
-            break;
+    case DKHierarchyInfoViewActionShowMoreInfo: {
+        [self showHierarchyInfo:selectView];
+    } break;
+    case DKHierarchyInfoViewActionShowParent: {
+        [self showParentSheet:selectView];
+    } break;
+    case DKHierarchyInfoViewActionShowSubview: {
+        [self showSubviewSheet:selectView];
+    } break;
     }
 }
 
@@ -199,7 +196,7 @@
 
 - (void)showHierarchyInfo:(UIView *)selectView {
     DoraemonHierarchyDetailViewController *vc = [[DoraemonHierarchyDetailViewController alloc] init];
-//    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    //    vc.modalPresentationStyle = UIModalPresentationFullScreen;
     vc.selectView = selectView;
     [self presentViewController:vc animated:YES completion:nil];
 }
@@ -211,9 +208,12 @@
         [actions addObject:NSStringFromClass(view.class)];
     }
     __weak typeof(self) weakSelf = self;
-    [self doraemon_showActionSheetWithTitle:@"Parent Views" actions:actions currentAction:nil completion:^(NSInteger index) {
-        [weakSelf setNewSelectView:parentViews[index]];
-    }];
+    [self doraemon_showActionSheetWithTitle:@"Parent Views"
+                                    actions:actions
+                              currentAction:nil
+                                 completion:^(NSInteger index) {
+                                     [weakSelf setNewSelectView:parentViews[index]];
+                                 }];
 }
 
 - (void)showSubviewSheet:(UIView *)selectView {
@@ -223,13 +223,16 @@
         [actions addObject:NSStringFromClass(view.class)];
     }
     __weak typeof(self) weakSelf = self;
-    [self doraemon_showActionSheetWithTitle:@"Subviews" actions:actions currentAction:nil completion:^(NSInteger index) {
-        [weakSelf setNewSelectView:subviews[index]];
-    }];
+    [self doraemon_showActionSheetWithTitle:@"Subviews"
+                                    actions:actions
+                              currentAction:nil
+                                 completion:^(NSInteger index) {
+                                     [weakSelf setNewSelectView:subviews[index]];
+                                 }];
 }
 
 - (void)setNewSelectView:(UIView *)view {
-    [self hierarchyView:self.pickerView didMoveTo:@[view]];
+    [self hierarchyView:self.pickerView didMoveTo:@[ view ]];
 }
 
 #pragma mark - Getters and setters

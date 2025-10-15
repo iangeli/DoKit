@@ -10,14 +10,13 @@
 
 #import <DoraemonKit/UIView+Doraemon.h>
 
-#import "DoraemonDemoCrashMRCView.h"
 #import "DoraemonDefine.h"
+#import "DoraemonDemoCrashMRCView.h"
 
-typedef struct Test
-{
+typedef struct Test {
     int a;
     int b;
-}Test;
+} Test;
 
 @interface DoraemonDemoCrashViewController ()
 @property (nonatomic, strong) UIButton *uncaughtExceptionBtn;
@@ -31,9 +30,9 @@ typedef struct Test
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     self.title = @"Crash";
-    
+
     [self.view addSubview:self.uncaughtExceptionBtn];
     [self.view addSubview:self.signalExceptionBtn];
 }
@@ -42,9 +41,9 @@ typedef struct Test
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    
+
     self.uncaughtExceptionBtn.frame = CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, 60);
-    
+
     self.signalExceptionBtn.frame = CGRectMake(0, self.uncaughtExceptionBtn.doraemon_bottom + 20, self.view.doraemon_width, 60);
 }
 
@@ -52,21 +51,21 @@ typedef struct Test
 
 - (void)uncaughtExceptionBtnClicked:(id)sender {
     // ios崩溃
-    NSArray *array= @[@"tom",@"xxx",@"ooo"];
+    NSArray *array = @[ @"tom", @"xxx", @"ooo" ];
     [array objectAtIndex:5];
 }
 
 - (void)signalExceptionBtnClicked:(id)sender {
     // 导致SIGABRT的错误，因为内存中根本就没有这个空间，哪来的free，就在栈中的对象而已
-//    Test *pTest = {1,2};
-//    free(pTest);
-//    pTest->a = 5;
-    
+    //    Test *pTest = {1,2};
+    //    free(pTest);
+    //    pTest->a = 5;
+
     // 导致SIGSEGV的错误
-//    DoraemonDemoCrashMRCView *view = [[DoraemonDemoCrashMRCView alloc] init];
-    
-    //SIGBUS，内存地址未对齐
-    //EXC_BAD_ACCESS(code=1,address=0x1000dba58)
+    //    DoraemonDemoCrashMRCView *view = [[DoraemonDemoCrashMRCView alloc] init];
+
+    // SIGBUS，内存地址未对齐
+    // EXC_BAD_ACCESS(code=1,address=0x1000dba58)
     char *s = "hello world";
     *s = 'H';
 }

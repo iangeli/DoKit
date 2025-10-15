@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonSandboxPlugin.h"
-#import "DoraemonSandboxViewController.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonSandboxViewController.h"
 
 @implementation DoraemonSandboxPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonSandboxViewController *vc = [[DoraemonSandboxViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

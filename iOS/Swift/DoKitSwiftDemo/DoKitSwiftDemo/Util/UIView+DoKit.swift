@@ -11,60 +11,59 @@ import UIKit
 
 extension UIView {
     public var left: CGFloat {
-        get{
+        get {
             return self.frame.origin.x
         }
-        set(value){
+        set(value) {
             var rect = self.frame
             rect.origin.x = value
             self.frame = rect
         }
     }
     public var top: CGFloat {
-        get{
+        get {
             return self.frame.origin.y
         }
-        set(value){
+        set(value) {
             var rect = self.frame
             rect.origin.y = value
             self.frame = rect
         }
     }
     public var width: CGFloat {
-        get{
+        get {
             return self.frame.size.width
         }
-        set(value){
+        set(value) {
             var rect = self.frame
             rect.size.width = value
             self.frame = rect
         }
     }
     public var height: CGFloat {
-        get{
+        get {
             return self.frame.size.height
         }
-        set(value){
+        set(value) {
             var rect = self.frame
             rect.size.height = value
             self.frame = rect
         }
     }
     public var bottom: CGFloat {
-        get{
+        get {
             return self.top + self.height
         }
-        set(value){
+        set(value) {
             self.top = value - self.height
         }
     }
     public var right: CGFloat {
-        get{
+        get {
             return self.left + self.width
         }
-        set(value){
+        set(value) {
             self.left = value - self.width
         }
     }
 }
-

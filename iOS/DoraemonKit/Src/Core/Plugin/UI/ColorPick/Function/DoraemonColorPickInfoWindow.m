@@ -9,7 +9,7 @@
 #import "DoraemonColorPickInfoView.h"
 #import "DoraemonDefine.h"
 
-@interface DoraemonColorPickInfoController: UIViewController
+@interface DoraemonColorPickInfoController : UIViewController
 @end
 
 @implementation DoraemonColorPickInfoController
@@ -21,14 +21,14 @@
 }
 @end
 
-@interface DoraemonColorPickInfoWindow () <DoraemonColorPickInfoViewDelegate>
+@interface DoraemonColorPickInfoWindow ()<DoraemonColorPickInfoViewDelegate>
 @property (nonatomic, strong) DoraemonColorPickInfoView *pickInfoView;
 @end
 
 @implementation DoraemonColorPickInfoWindow
 #pragma mark - Lifecycle
 
-+ (DoraemonColorPickInfoWindow *)shareInstance{
++ (DoraemonColorPickInfoWindow *)shareInstance {
     static dispatch_once_t once;
     static DoraemonColorPickInfoWindow *instance;
     dispatch_once(&once, ^{
@@ -38,34 +38,34 @@
 }
 
 - (instancetype)init {
-    
+
     if (self.orientationIsLandscape) {
-        self = [super initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonWindowHeight - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100))];
+        self = [super initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonWindowHeight - 2 * kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100))];
     } else {
-        self = [super initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonWindowWidth - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100))];
+        self = [super initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonWindowWidth - 2 * kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100))];
     }
-    
+
     if (self) {
-                for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-                    if (windowScene.activationState == UISceneActivationStateForegroundActive){
-                        self.windowScene = windowScene;
-                        break;
-                    }
-                }
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive) {
+                self.windowScene = windowScene;
+                break;
+            }
+        }
         self.backgroundColor = [UIColor clearColor];
         self.windowLevel = UIWindowLevelAlert;
         if (!self.rootViewController) {
             self.rootViewController = [[DoraemonColorPickInfoController alloc] init];
         }
-        
+
         DoraemonColorPickInfoView *pickInfoView = [[DoraemonColorPickInfoView alloc] initWithFrame:self.bounds];
         pickInfoView.delegate = self;
         [self.rootViewController.view addSubview:pickInfoView];
         self.pickInfoView = pickInfoView;
-        
+
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
         [self addGestureRecognizer:pan];
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closePlugin:) name:DoraemonClosePluginNotification object:nil];
     }
     return self;
@@ -73,11 +73,11 @@
 
 #pragma mark - Public
 
-- (void)show{
+- (void)show {
     self.hidden = NO;
 }
 
-- (void)hide{
+- (void)hide {
     self.hidden = YES;
 }
 
@@ -87,17 +87,17 @@
 
 #pragma mark - Actions
 
-- (void)pan:(UIPanGestureRecognizer *)sender{
+- (void)pan:(UIPanGestureRecognizer *)sender {
     CGPoint offsetPoint = [sender translationInView:sender.view];
     [sender setTranslation:CGPointZero inView:sender.view];
     UIView *panView = sender.view;
-    CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
-    CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
-   
+    CGFloat newX = panView.doraemon_centerX + offsetPoint.x;
+    CGFloat newY = panView.doraemon_centerY + offsetPoint.y;
+
     CGPoint centerPoint = CGPointMake(newX, newY);
     panView.center = centerPoint;
 }
- 
+
 #pragma mark DoraemonColorPickInfoViewDelegate
 
 - (void)closeBtnClicked:(id)sender onColorPickInfoView:(DoraemonColorPickInfoView *)colorPickInfoView {
@@ -106,7 +106,7 @@
 
 #pragma mark - Notification
 
-- (void)closePlugin:(NSNotification *)notification{
+- (void)closePlugin:(NSNotification *)notification {
     [self hide];
 }
 @end

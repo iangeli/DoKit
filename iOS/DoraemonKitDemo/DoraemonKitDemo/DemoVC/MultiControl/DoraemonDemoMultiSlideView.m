@@ -7,9 +7,9 @@
 //
 
 #import "DoraemonDemoMultiSlideView.h"
-#import <Masonry/Masonry.h>
 #import "DoraemonMCCommandGenerator.h"
-typedef void(^CommonActionBlock)(id);
+#import <Masonry/Masonry.h>
+typedef void (^CommonActionBlock)(id);
 @interface DoraemonDemoMultiSlideView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UIView *slideView;
@@ -21,12 +21,11 @@ typedef void(^CommonActionBlock)(id);
 @end
 
 @implementation DoraemonDemoMultiSlideView
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
-        _nUnlockScale = 70;    // 默认百分之七十
-        
+    if (self) {
+        _nUnlockScale = 70; // 默认百分之七十
+
         _bgView = [UIView new];
         [_bgView setBackgroundColor:[UIColor redColor]];
         _bgView.layer.cornerRadius = 12;
@@ -66,65 +65,59 @@ typedef void(^CommonActionBlock)(id);
             make.height.equalTo(@(80));
             make.center.equalTo(self.slideView);
         }];
-        
+
         UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(performPanGestureRecognizer:)];
         panGestureRecognizer.delegate = self;
         [_slideButton addGestureRecognizer:panGestureRecognizer];
     }
-    
+
     return self;
 }
 
-
-- (void)setNUnlockScale:(int)nUnlockScale
-{
-    if(nUnlockScale < 0 ){
+- (void)setNUnlockScale:(int)nUnlockScale {
+    if (nUnlockScale < 0) {
         nUnlockScale = 0;
-    }else if(nUnlockScale > 100){
+    } else if (nUnlockScale > 100) {
         nUnlockScale = 100;
     }
     _nUnlockScale = nUnlockScale;
 }
 
-
-
-- (void)performPanGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer
-{
+- (void)performPanGestureRecognizer:(UIPanGestureRecognizer *)panGestureRecognizer {
     _fMaxSlideValue = _bgView.frame.size.width - _slideButton.frame.size.width;
     CGPoint translation = [panGestureRecognizer translationInView:_bgView];
-    if(panGestureRecognizer.state == UIGestureRecognizerStateBegan){
+    if (panGestureRecognizer.state == UIGestureRecognizerStateBegan) {
         _lbLockName.hidden = YES;
-    }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
+    } else if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
         if (translation.x == 1) {
-            [DoraemonMCCommandGenerator sendCustomMessageWithView:self eventInfo:@{@"eventInfo":@"customType1"} messageType:@"customType1"];
+            [DoraemonMCCommandGenerator sendCustomMessageWithView:self eventInfo:@{@"eventInfo" : @"customType1"} messageType:@"customType1"];
         }
-        if(translation.x > 0){
+        if (translation.x > 0) {
             _lbLockName.hidden = YES;
             CGFloat offset = translation.x;
-            if(offset > _fMaxSlideValue){
+            if (offset > _fMaxSlideValue) {
                 offset = _fMaxSlideValue;
             }
             [_slideView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.leading.equalTo(self.bgView).offset(offset);
                 make.top.bottom.trailing.equalTo(self.bgView);
             }];
-        }else{
-            
+        } else {
         }
-    }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded || panGestureRecognizer.state == UIGestureRecognizerStateCancelled){
-        if(panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
-            [DoraemonMCCommandGenerator sendCustomMessageWithView:self eventInfo:@{@"eventInfo":@"customType2"} messageType:@"customType2"];
+    } else if (panGestureRecognizer.state == UIGestureRecognizerStateEnded || panGestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+        if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
+            [DoraemonMCCommandGenerator sendCustomMessageWithView:self eventInfo:@{@"eventInfo" : @"customType2"} messageType:@"customType2"];
         }
-        if(translation.x > _fMaxSlideValue * self.nUnlockScale/100.0){
+        if (translation.x > _fMaxSlideValue * self.nUnlockScale / 100.0) {
             [_slideView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.bottom.trailing.equalTo(self.bgView);
                 make.leading.equalTo(self.bgView).offset(self.fMaxSlideValue);
             }];
             _lbLockName.hidden = YES;
-            if(self.unLockBlock){
+            if (self.unLockBlock) {
                 self.unLockBlock(@(YES));
             }
-        }else{
+        } else {
             [_slideView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self.bgView);
             }];

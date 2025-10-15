@@ -9,19 +9,19 @@
 import Foundation
 import UIKit
 
-func DoraemonDemoLocalizedString(_ key: String) -> String{
+func DoraemonDemoLocalizedString(_ key: String) -> String {
     return  DoraemonDemoi18Util.localizedString(key)
 }
 
 class DoraemonDemoi18Util: NSObject {
-    class func localizedString(_ key : String) -> String {
+    class func localizedString(_ key: String) -> String {
         let language = Locale.preferredLanguages.first
         if let language = language {
             var fileNamePrefix = "zh-Hans"
             if language.hasPrefix("en") {
                 fileNamePrefix = "en"
             }
-            
+
             let path: String? = Bundle.main.path(forResource: fileNamePrefix, ofType: "lproj")
             if let path = path {
                 let bundle = Bundle.init(path: path)
@@ -30,11 +30,11 @@ class DoraemonDemoi18Util: NSObject {
                     localizedString = key
                 }
                 return localizedString!
-            }else{
+            } else {
                 return key
             }
-            
-        }else{
+
+        } else {
             return key
         }
     }

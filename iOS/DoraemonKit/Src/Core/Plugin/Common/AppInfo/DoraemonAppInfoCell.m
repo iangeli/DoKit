@@ -6,26 +6,25 @@
 //
 
 #import "DoraemonAppInfoCell.h"
-#import "UIView+Doraemon.h"
 #import "DoraemonDefine.h"
 #import "UIColor+Doraemon.h"
-#import "DoraemonDefine.h"
+#import "UIView+Doraemon.h"
 
-@interface DoraemonAppInfoCell()
+@interface DoraemonAppInfoCell ()
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *valueLabel;
 @end
 
 @implementation DoraemonAppInfoCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-            self.backgroundColor = [UIColor systemBackgroundColor];
+        self.backgroundColor = [UIColor systemBackgroundColor];
         self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.textColor = [UIColor doraemon_black_1];
         self.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(32)];
         [self.contentView addSubview:self.titleLabel];
-        
+
         self.valueLabel = [[UILabel alloc] init];
         self.valueLabel.textColor = [UIColor doraemon_black_2];
         self.valueLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(32)];
@@ -34,35 +33,35 @@
     return self;
 }
 
-- (void)renderUIWithData:(NSDictionary *)data{
+- (void)renderUIWithData:(NSDictionary *)data {
     NSString *title = data[@"title"];
     NSString *value = data[@"value"];
-    
+
     self.titleLabel.text = title;
-    
+
     NSString *cnValue = nil;
-    if([value isEqualToString:@"NotDetermined"]){
+    if ([value isEqualToString:@"NotDetermined"]) {
         cnValue = @"Not Determined";
-    }else if([value isEqualToString:@"Restricted"]){
+    } else if ([value isEqualToString:@"Restricted"]) {
         cnValue = @"Restricted";
-    }else if([value isEqualToString:@"Denied"]){
+    } else if ([value isEqualToString:@"Denied"]) {
         cnValue = @"Denied";
-    }else if([value isEqualToString:@"Authorized"]){
+    } else if ([value isEqualToString:@"Authorized"]) {
         cnValue = @"Authorized";
-    }else{
+    } else {
         cnValue = value;
     }
-    
+
     self.valueLabel.text = cnValue;
-    
+
     [self.titleLabel sizeToFit];
     [self.valueLabel sizeToFit];
-    
+
     self.titleLabel.frame = CGRectMake(kDoraemonSizeFromLandscape(32), 0, self.titleLabel.doraemon_width, [[self class] cellHeight]);
-    self.valueLabel.frame = CGRectMake(DoraemonWindowWidth-kDoraemonSizeFromLandscape(32)-self.valueLabel.doraemon_width, 0, self.valueLabel.doraemon_width, [[self class] cellHeight]);
+    self.valueLabel.frame = CGRectMake(DoraemonWindowWidth - kDoraemonSizeFromLandscape(32) - self.valueLabel.doraemon_width, 0, self.valueLabel.doraemon_width, [[self class] cellHeight]);
 }
 
-+ (CGFloat)cellHeight{
++ (CGFloat)cellHeight {
     return kDoraemonSizeFromLandscape(104);
 }
 @end

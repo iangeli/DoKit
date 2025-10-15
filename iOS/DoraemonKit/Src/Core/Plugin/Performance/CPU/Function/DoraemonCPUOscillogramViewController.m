@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonCPUOscillogramViewController.h"
-#import "DoraemonOscillogramView.h"
-#import "DoraemonCPUUtil.h"
-#import "DoraemonDefine.h"
-#import "DoraemonCacheManager.h"
 #import "DoraemonCPUOscillogramWindow.h"
+#import "DoraemonCPUUtil.h"
+#import "DoraemonCacheManager.h"
+#import "DoraemonDefine.h"
+#import "DoraemonOscillogramView.h"
 
 @interface DoraemonCPUOscillogramViewController ()
 @end
@@ -20,15 +20,15 @@
     [super viewDidLoad];
 }
 
-- (NSString *)title{
+- (NSString *)title {
     return @"CPU";
 }
 
-- (NSString *)lowValue{
+- (NSString *)lowValue {
     return @"1";
 }
 
-- (NSString *)highValue{
+- (NSString *)highValue {
     return @"100";
 }
 
@@ -36,6 +36,6 @@
     CGFloat cpuUsage = [DoraemonCPUUtil cpuUsageForApp];
     cpuUsage = MIN(MAX(cpuUsage, 0), 1);
     [self.oscillogramView addHeightValue:cpuUsage * self.oscillogramView.doraemon_height
-                             andTipValue:[NSString stringWithFormat:@"%.f",cpuUsage * 100]];
+                             andTipValue:[NSString stringWithFormat:@"%.f", cpuUsage * 100]];
 }
 @end

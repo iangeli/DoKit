@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonDeleteLocalDataPlugin.h"
-#import "DoraemonHomeWindow.h"
 #import "DoraemonDeleteLocalDataViewController.h"
+#import "DoraemonHomeWindow.h"
 
 @implementation DoraemonDeleteLocalDataPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonDeleteLocalDataViewController *vc = [[DoraemonDeleteLocalDataViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

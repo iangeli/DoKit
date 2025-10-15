@@ -24,24 +24,24 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         CGSize viewSize = self.view.window.bounds.size;
-        
+
         CGFloat closeWidth = kDoraemonSizeFromLandscape(44);
         CGFloat closeHeight = kDoraemonSizeFromLandscape(44);
         self.closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(viewSize.width - closeWidth - kDoraemonSizeFromLandscape(16), kDoraemonSizeFromLandscape(16), closeWidth, closeHeight)];
-        
+
         UIImage *closeImage = [UIImage systemImageNamed:@"xmark"];
 
         [self.closeBtn setBackgroundImage:closeImage forState:UIControlStateNormal];
         [self.closeBtn addTarget:self action:@selector(closeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.closeBtn];
-        
-        self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(32), 0, viewSize.width - kDoraemonSizeFromLandscape(32 + 16) - closeWidth , viewSize.height)];
+
+        self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(32), 0, viewSize.width - kDoraemonSizeFromLandscape(32 + 16) - closeWidth, viewSize.height)];
         self.infoLabel.backgroundColor = [UIColor clearColor];
         self.infoLabel.textColor = [UIColor labelColor];
         self.infoLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(24)];
         self.infoLabel.numberOfLines = 0;
         [self.view addSubview:self.infoLabel];
-        
+
         [(id)self.view.window setInfoLabel:self.infoLabel];
     });
 }
@@ -86,8 +86,8 @@
 }
 
 - (void)commonInit {
-    for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-        if (windowScene.activationState == UISceneActivationStateForegroundActive){
+    for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+        if (windowScene.activationState == UISceneActivationStateForegroundActive) {
             self.windowScene = windowScene;
             break;
         }
@@ -99,22 +99,22 @@
     self.layer.borderColor = [UIColor doraemon_colorWithHex:0x999999 andAlpha:0.2].CGColor;
     self.windowLevel = UIWindowLevelAlert;
     self.rootViewController = [[DoraemonVisualInfoViewController alloc] init];
-    
+
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [self addGestureRecognizer:pan];
 }
 
 #pragma mark - Actions
 
-- (void)pan:(UIPanGestureRecognizer *)sender{
+- (void)pan:(UIPanGestureRecognizer *)sender {
     UIView *panView = sender.view;
-    
+
     if (!panView.hidden) {
         CGPoint offsetPoint = [sender translationInView:sender.view];
         [sender setTranslation:CGPointZero inView:sender.view];
-        CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
-        CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
-        
+        CGFloat newX = panView.doraemon_centerX + offsetPoint.x;
+        CGFloat newY = panView.doraemon_centerY + offsetPoint.y;
+
         CGPoint centerPoint = CGPointMake(newX, newY);
         panView.center = centerPoint;
     }

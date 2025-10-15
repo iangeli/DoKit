@@ -6,17 +6,17 @@
 //
 
 #import "DoraemonCPUUtil.h"
-#import <mach/mach.h>
 #import <UIKit/UIKit.h>
-//#import <sys/sysctl.h>
+#import <mach/mach.h>
+// #import <sys/sysctl.h>
 
 @implementation DoraemonCPUUtil
 
 + (CGFloat)cpuUsageForApp {
     kern_return_t kr;
-    thread_array_t         thread_list;
+    thread_array_t thread_list;
     mach_msg_type_number_t thread_count;
-    thread_info_data_t     thinfo;
+    thread_info_data_t thinfo;
     mach_msg_type_number_t thread_info_count;
     thread_basic_info_t basic_info_th;
 

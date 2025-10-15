@@ -8,17 +8,17 @@
 
 #import "DoraemonDemoMemoryLeakModel.h"
 
-@interface DoraemonDemoMemoryLeakModel()
+@interface DoraemonDemoMemoryLeakModel ()
 @property (nonatomic, copy) DoraemonDemoMemoryLeakModelBlock block;
 
 @end
 
 @implementation DoraemonDemoMemoryLeakModel
-- (void)addBlock:(DoraemonDemoMemoryLeakModelBlock)block{
+- (void)addBlock:(DoraemonDemoMemoryLeakModelBlock)block {
     self.block = block;
 }
 
-- (void)install{
+- (void)install {
     self.block();
 }
 

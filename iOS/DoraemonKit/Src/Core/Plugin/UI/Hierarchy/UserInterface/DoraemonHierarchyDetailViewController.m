@@ -6,14 +6,14 @@
 //
 
 #import "DoraemonHierarchyDetailViewController.h"
-#import "UIViewController+DoraemonHierarchy.h"
+#import "DoraemonDefine.h"
+#import "DoraemonHierarchyCategoryModel.h"
+#import "DoraemonHierarchyCellModel.h"
 #import "DoraemonHierarchyDetailTitleCell.h"
 #import "DoraemonHierarchyFormatterTool.h"
-#import "DoraemonHierarchyCategoryModel.h"
 #import "NSObject+DoraemonHierarchy.h"
-#import "DoraemonHierarchyCellModel.h"
 #import "UIView+Doraemon.h"
-#import "DoraemonDefine.h"
+#import "UIViewController+DoraemonHierarchy.h"
 
 @interface DoraemonHierarchyDetailViewController ()
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
@@ -27,22 +27,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSAssert(self.selectView, @"SelectView can't be nil");
-    
+
     [self setTitle:@"UI Structure"];
     self.objectDatas = [[NSMutableArray alloc] init];
     self.sizeDatas = [[NSMutableArray alloc] init];
-    
+
     UIView *headerView = ({
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DoraemonWindowWidth, 30 + 10 * 2)];
         view;
     });
-    
+
     [headerView addSubview:self.segmentedControl];
-    
+
     self.tableView.tableHeaderView = headerView;
-    
+
     [self loadData];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveDoraemonHierarchyChangeNotification:) name:DoraemonHierarchyChangeNotificationName object:nil];
 }
 
@@ -78,11 +78,11 @@
     [self.objectDatas removeAllObjects];
     NSArray *models = [self.selectView doraemon_hierarchyCategoryModels];
     [self.objectDatas addObjectsFromArray:models];
-    
+
     [self.sizeDatas removeAllObjects];
     NSArray *sizeModels = [self.selectView doraemon_sizeHierarchyCategoryModels];
     [self.sizeDatas addObjectsFromArray:sizeModels];
-    
+
     [self reloadTableView];
 }
 
@@ -99,7 +99,7 @@
 #pragma mark - Getters and setters
 - (UISegmentedControl *)segmentedControl {
     if (!_segmentedControl) {
-        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Object", @"Size"]];
+        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[ @"Object", @"Size" ]];
         _segmentedControl.frame = CGRectMake(10, 10, self.view.doraemon_width - 10 * 2, 30);
         [_segmentedControl addTarget:self action:@selector(segmentedControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         _segmentedControl.selectedSegmentIndex = 0;

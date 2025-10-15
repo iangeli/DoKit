@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonViewCheckPlugin.h"
-#import "DoraemonViewCheckManager.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonViewCheckManager.h"
 
 @implementation DoraemonViewCheckPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     [[DoraemonViewCheckManager shareInstance] show];
     [[DoraemonHomeWindow shareInstance] hide];
 }

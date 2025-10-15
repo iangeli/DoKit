@@ -8,7 +8,7 @@
 #import "DoraemonFPSUtil.h"
 #import <UIKit/UIKit.h>
 
-@interface DoraemonFPSUtil()
+@interface DoraemonFPSUtil ()
 @property (nonatomic, strong) CADisplayLink *link;
 @property (nonatomic, assign) NSUInteger count;
 @property (nonatomic, assign) NSTimeInterval lastTime;
@@ -18,7 +18,7 @@
 @end
 
 @implementation DoraemonFPSUtil
-- (instancetype)init{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _isStart = NO;
@@ -28,16 +28,16 @@
     return self;
 }
 
-- (void)start{
+- (void)start {
     if (_link) {
         _link.paused = NO;
-    }else{
+    } else {
         _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(trigger:)];
         [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
 }
 
-- (void)end{
+- (void)end {
     if (_link) {
         _link.paused = YES;
         [_link invalidate];
@@ -47,27 +47,28 @@
     }
 }
 
-- (void)trigger:(CADisplayLink *)link{
+- (void)trigger:(CADisplayLink *)link {
     if (_lastTime == 0) {
         _lastTime = link.timestamp;
         return;
     }
-    
+
     _count++;
     NSTimeInterval delta = link.timestamp - _lastTime;
-    if (delta < 1) return;
+    if (delta < 1)
+        return;
     _lastTime = link.timestamp;
     CGFloat fps = _count / delta;
     _count = 0;
-    
-    NSInteger intFps = (NSInteger)(fps+0.5);
+
+    NSInteger intFps = (NSInteger)(fps + 0.5);
     self.fps = intFps;
     if (self.block) {
         self.block(self.fps);
     }
 }
 
-- (void)addFPSBlock:(void(^)(NSInteger fps))block{
+- (void)addFPSBlock:(void (^)(NSInteger fps))block {
     self.block = block;
 }
 @end

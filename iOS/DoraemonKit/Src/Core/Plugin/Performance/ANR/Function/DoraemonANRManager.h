@@ -4,15 +4,15 @@
 //
 //  Created by yixiang on 2018/6/14.
 //
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void (^DoraemonANRManagerBlock)(NSDictionary *anrInfo);
 
 @interface DoraemonANRManager : NSObject
 + (instancetype)sharedInstance;
 
-@property (nonatomic, assign) BOOL anrTrackOn; 
+@property (nonatomic, assign) BOOL anrTrackOn;
 
 @property (nonatomic, assign) CGFloat timeOut;
 

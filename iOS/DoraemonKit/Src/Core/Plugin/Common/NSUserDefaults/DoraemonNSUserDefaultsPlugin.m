@@ -6,11 +6,11 @@
 //
 
 #import "DoraemonNSUserDefaultsPlugin.h"
-#import "DoraemonNSUserDefaultsViewController.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonNSUserDefaultsViewController.h"
 
 @implementation DoraemonNSUserDefaultsPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonNSUserDefaultsViewController *vc = [[DoraemonNSUserDefaultsViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

@@ -9,7 +9,6 @@
 #import "DoraemonDemoOCViewController.h"
 #import "DoKitSwiftDemo-Swift.h"
 
-
 @interface DoraemonDemoOCViewController ()
 @end
 
@@ -19,7 +18,7 @@
     // Do any additional setup after loading the view.
     self.title = @"Call OC";
     self.view.backgroundColor = [UIColor whiteColor];
-    
+
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, 60)];
     btn.backgroundColor = [UIColor orangeColor];
     [btn setTitle:@"Call Swift" forState:UIControlStateNormal];
@@ -27,7 +26,7 @@
     [self.view addSubview:btn];
 }
 
-- (void)callSwift{
+- (void)callSwift {
     DoraemonDemoSwiftViewController *vc = [[DoraemonDemoSwiftViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

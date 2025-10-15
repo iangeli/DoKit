@@ -6,19 +6,19 @@
 //
 
 #import "DoraemonOscillogramViewController.h"
-#import "DoraemonOscillogramWindowManager.h"
 #import "DoraemonDefine.h"
+#import "DoraemonOscillogramWindowManager.h"
 
 @interface DoraemonOscillogramViewController ()
 @property (nonatomic, strong) NSTimer *secondTimer;
 @end
 
 @implementation DoraemonOscillogramViewController
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
-    
+
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.text = [self title];
@@ -35,31 +35,30 @@
     [self.view addSubview:_oscillogramView];
 }
 
-- (NSString *)title{
+- (NSString *)title {
     return @"";
 }
 
-- (NSString *)lowValue{
+- (NSString *)lowValue {
     return @"0";
 }
 
-- (NSString *)highValue{
+- (NSString *)highValue {
     return @"100";
 }
 
-- (void)startRecord{
-    if(!_secondTimer){
+- (void)startRecord {
+    if (!_secondTimer) {
         _secondTimer = [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(doSecondFunction) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_secondTimer forMode:NSRunLoopCommonModes];
     }
 }
 
-- (void)doSecondFunction{
-    
+- (void)doSecondFunction {
 }
 
-- (void)endRecord{
-    if(_secondTimer){
+- (void)endRecord {
+    if (_secondTimer) {
         [_secondTimer invalidate];
         _secondTimer = nil;
         [self.oscillogramView clear];

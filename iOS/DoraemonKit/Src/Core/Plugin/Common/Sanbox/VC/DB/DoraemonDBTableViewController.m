@@ -6,12 +6,12 @@
 //
 
 #import "DoraemonDBTableViewController.h"
+#import "DoraemonDBCell.h"
 #import "DoraemonDBManager.h"
 #import "DoraemonDBRowView.h"
-#import "DoraemonDBCell.h"
 #import "DoraemonDBShowView.h"
 
-@interface DoraemonDBTableViewController ()<UITableViewDelegate , UITableViewDataSource , DoraemonDBRowViewTypeDelegate>
+@interface DoraemonDBTableViewController ()<UITableViewDelegate, UITableViewDataSource, DoraemonDBRowViewTypeDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray *dataAtTable;
@@ -22,29 +22,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [DoraemonDBManager shareManager].tableName;
-    
+
     NSArray *dataAtTable = [[DoraemonDBManager shareManager] dataAtTable];
     self.dataAtTable = dataAtTable;
-    
+
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-//    scrollView.backgroundColor = [UIColor whiteColor];
-    scrollView.bounces  = NO;
+    //    scrollView.backgroundColor = [UIColor whiteColor];
+    scrollView.bounces = NO;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
-    
+
     UITableView *tableView = [[UITableView alloc] init];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    tableView.backgroundColor = [UIColor whiteColor];
+    //    tableView.backgroundColor = [UIColor whiteColor];
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.scrollView addSubview:tableView];
     self.tableView = tableView;
-    
 }
 
-- (void)viewWillLayoutSubviews{
+- (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    
+
     if (self.dataAtTable.count) {
         NSDictionary *dict = self.dataAtTable.firstObject;
         NSUInteger num = [dict allKeys].count;
@@ -54,31 +53,31 @@
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataAtTable.count == 0 ? 0 : 1;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     DoraemonDBRowView *headerView = nil;
     if (headerView == nil) {
         headerView = [[DoraemonDBRowView alloc] init];
     }
-    
+
     NSDictionary *dict = self.dataAtTable.firstObject;
     headerView.dataArray = [dict allKeys];
-    
+
     return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 44;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataAtTable.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifer = @"db_data";
     DoraemonDBCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     if (cell == nil) {
@@ -86,22 +85,22 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.rowView.delegate = self;
     }
-    
+
     cell.rowView.type = (indexPath.row % 2 == 0) ? DoraemonDBRowViewTypeForOne : DoraemonDBRowViewTypeForTwo;
     NSDictionary *dict = self.dataAtTable[indexPath.row];
     [cell renderCellWithArray:[dict allValues]];
-    
+
     return cell;
 }
 
-#pragma mark -- DoraemonDBRowViewTypeDelegate
-- (void)rowView:(DoraemonDBRowView *)rowView didLabelTaped:(UILabel *)label{
+#pragma mark-- DoraemonDBRowViewTypeDelegate
+- (void)rowView:(DoraemonDBRowView *)rowView didLabelTaped:(UILabel *)label {
     NSString *content = label.text;
     [self showText:content];
 }
 
-#pragma mark 
-- (void)showText:(NSString *)content{
+#pragma mark
+- (void)showText:(NSString *)content {
     if (self.showView) {
         [self.showView removeFromSuperview];
     }
@@ -110,11 +109,11 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissView)];
     self.showView.userInteractionEnabled = YES;
     [self.showView addGestureRecognizer:tap];
-    
+
     [self.showView showText:content];
 }
 
-- (void)dismissView{
+- (void)dismissView {
     if (self.showView) {
         [self.showView removeFromSuperview];
     }

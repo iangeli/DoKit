@@ -9,14 +9,13 @@
 #import "DoraemonDefine.h"
 
 @implementation DoraemonDBRowView
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        
     }
     return self;
 }
 
-- (void)setDataArray:(NSArray *)dataArray{
+- (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
     for (UIView *sub in self.subviews) {
         [sub removeFromSuperview];
@@ -26,13 +25,13 @@
         UILabel *label = [[UILabel alloc] init];
         UIColor *color = [UIColor doraemon_colorWithString:@"#dcdcdc"];
 
-            color = [UIColor doraemon_black_2];
-            if (self.type == DoraemonDBRowViewTypeForOne) {
-                color = [UIColor secondarySystemBackgroundColor];
-            }
-            if (self.type == DoraemonDBRowViewTypeForTwo) {
-                color = [UIColor tertiarySystemBackgroundColor];
-            }
+        color = [UIColor doraemon_black_2];
+        if (self.type == DoraemonDBRowViewTypeForOne) {
+            color = [UIColor secondarySystemBackgroundColor];
+        }
+        if (self.type == DoraemonDBRowViewTypeForTwo) {
+            color = [UIColor tertiarySystemBackgroundColor];
+        }
         label.backgroundColor = color;
         label.text = content;
         label.textAlignment = NSTextAlignmentCenter;
@@ -43,9 +42,9 @@
     }
 }
 
-- (void)layoutSubviews{
+- (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     for (UIView *subView in self.subviews) {
         if ([subView isKindOfClass:UILabel.class]) {
             CGFloat width = (self.bounds.size.width - (self.dataArray.count - 1)) / self.dataArray.count;
@@ -54,7 +53,7 @@
     }
 }
 
-- (void)tapLabel:(UITapGestureRecognizer *)tap{
+- (void)tapLabel:(UITapGestureRecognizer *)tap {
     UILabel *label = (UILabel *)tap.view;
     if ([self.delegate respondsToSelector:@selector(rowView:didLabelTaped:)]) {
         [self.delegate rowView:self didLabelTaped:label];

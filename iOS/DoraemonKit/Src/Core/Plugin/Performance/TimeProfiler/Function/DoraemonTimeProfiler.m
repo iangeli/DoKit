@@ -19,24 +19,24 @@ static NSTimeInterval stopTime;
 + (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
-    
+
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
     });
     return instance;
 }
 
-- (instancetype)init{
+- (instancetype)init {
     if (self = [super init]) {
         _on = NO;
     }
     return self;
 }
 
-- (void)setOn:(BOOL)on{
+- (void)setOn:(BOOL)on {
     if (on) {
         [[self class] startRecord];
-    }else{
+    } else {
         [[self class] stopRecord];
     }
 }
@@ -64,24 +64,24 @@ static NSTimeInterval stopTime;
 
 + (void)printRecords {
     NSString *result = [self getRecordsResult];
-    NSLog(@"%@",result);
+    NSLog(@"%@", result);
 }
 
 + (NSString *)getRecordsResult {
     NSMutableString *str = [NSMutableString new];
     [str appendFormat:@"\n\ntime profile result : \n"];
     NSTimeInterval totalRecord = 0;
-    NSArray<DoraemonTimeProfilerRecord *>*arr = [self getRecords];
+    NSArray<DoraemonTimeProfilerRecord *> *arr = [self getRecords];
     for (DoraemonTimeProfilerRecord *r in arr) {
         [self appendRecord:r to:str];
         totalRecord += r.timeCost;
     }
-    
+
     [str appendFormat:@"\n"];
-    [str appendFormat:@"totalTimeInRecord:%.2f\n",totalRecord * 1000];
-    
+    [str appendFormat:@"totalTimeInRecord:%.2f\n", totalRecord * 1000];
+
     [str appendFormat:@"\ntime profile end\n"];
-    
+
     return str;
 }
 
@@ -92,13 +92,13 @@ static NSTimeInterval stopTime;
     }
 }
 
-+ (NSArray<DoraemonTimeProfilerRecord *>*)getRecords {
++ (NSArray<DoraemonTimeProfilerRecord *> *)getRecords {
     NSMutableArray<DoraemonTimeProfilerRecord *> *arr = [NSMutableArray new];
     int record_num = 0;
     dtp_call_record *records = dtp_get_call_records(&record_num);
     for (int i = 0; i < record_num; i++) {
         dtp_call_record *rec = &records[i];
-        
+
         DoraemonTimeProfilerRecord *r = [DoraemonTimeProfilerRecord new];
         r.className = NSStringFromClass(rec->cls);
         r.methodName = NSStringFromSelector(rec->sel);
@@ -107,7 +107,7 @@ static NSTimeInterval stopTime;
         r.callDepth = rec->depth;
         [arr addObject:r];
     }
-    
+
     for (int i = 0, max = (int)arr.count; i < max; i++) {
         DoraemonTimeProfilerRecord *r = arr[i];
         if (r.callDepth > 0) {
@@ -123,7 +123,8 @@ static NSTimeInterval stopTime;
                     break;
                 }
             }
-            i--; max--;
+            i--;
+            max--;
         }
     }
     return arr;
@@ -134,7 +135,8 @@ static NSTimeInterval stopTime;
 }
 
 + (void)setMaxCallDepth:(int)depth {
-    if (depth < 0) depth = 0;
+    if (depth < 0)
+        depth = 0;
     dtp_set_max_depth(depth);
 }
 

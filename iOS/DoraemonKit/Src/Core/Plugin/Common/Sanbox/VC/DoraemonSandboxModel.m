@@ -8,7 +8,7 @@
 #import "DoraemonSandboxModel.h"
 #import "DoraemonUtil.h"
 
-@interface DoraemonSandboxModel()
+@interface DoraemonSandboxModel ()
 @property (nonatomic, assign) NSInteger internalFileSize;
 @end
 

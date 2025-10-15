@@ -20,31 +20,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        self.view.backgroundColor = [UIColor systemBackgroundColor];
+    self.view.backgroundColor = [UIColor systemBackgroundColor];
     self.title = @"QR Scanning";
-    
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     DoraemonQRScanView *scaner = [[DoraemonQRScanView alloc] initWithFrame:self.view.bounds];
     scaner.delegate = self;
     scaner.showScanLine = YES;
     scaner.showBorderLine = YES;
     scaner.showCornerLine = YES;
-    scaner.scanRect = CGRectMake(scaner.doraemon_width/2-kDoraemonSizeFromWidth(480)/2, kDoraemonSizeFromWidth(195), kDoraemonSizeFromWidth(480), kDoraemonSizeFromWidth(480));
+    scaner.scanRect = CGRectMake(scaner.doraemon_width / 2 - kDoraemonSizeFromWidth(480) / 2, kDoraemonSizeFromWidth(195), kDoraemonSizeFromWidth(480), kDoraemonSizeFromWidth(480));
     [self.view addSubview:scaner];
     self.scanView = scaner;
     [scaner startScanning];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self removeScanView];
 }
 
-- (void)removeScanView{
+- (void)removeScanView {
     if (self.scanView) {
         [self.scanView stopScanning];
         [self.scanView removeFromSuperview];
@@ -52,18 +51,18 @@
     }
 }
 
-#pragma mark -- DoraemonQRScanDelegate
-- (void)scanView:(DoraemonQRScanView *)scanView pickUpMessage:(NSString *)message{
-    if(message.length>0){
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (self.QRCodeBlock) {
-                self.QRCodeBlock(message);
-            }
-        }];
+#pragma mark-- DoraemonQRScanDelegate
+- (void)scanView:(DoraemonQRScanView *)scanView pickUpMessage:(NSString *)message {
+    if (message.length > 0) {
+        [self dismissViewControllerAnimated:YES
+                                 completion:^{
+                                     if (self.QRCodeBlock) {
+                                         self.QRCodeBlock(message);
+                                     }
+                                 }];
     }
 }
 
-- (void)scanView:(DoraemonQRScanView *)scanView aroundBrightness:(NSString *)brightnessValue{
-    
+- (void)scanView:(DoraemonQRScanView *)scanView aroundBrightness:(NSString *)brightnessValue {
 }
 @end

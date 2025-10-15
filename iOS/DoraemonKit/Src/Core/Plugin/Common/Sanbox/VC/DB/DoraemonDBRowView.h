@@ -9,21 +9,20 @@
 @class DoraemonDBRowView;
 
 typedef NS_ENUM(NSInteger, DoraemonDBRowViewType) {
-    DoraemonDBRowViewTypeForTitle  = 0,
-    DoraemonDBRowViewTypeForOne   = 1,
-    DoraemonDBRowViewTypeForTwo   = 2
-    
+    DoraemonDBRowViewTypeForTitle = 0,
+    DoraemonDBRowViewTypeForOne = 1,
+    DoraemonDBRowViewTypeForTwo = 2
+
 };
 
-@protocol DoraemonDBRowViewTypeDelegate <NSObject>
+@protocol DoraemonDBRowViewTypeDelegate<NSObject>
 - (void)rowView:(DoraemonDBRowView *)rowView didLabelTaped:(UILabel *)label;
 @end
 
 @interface DoraemonDBRowView : UIView
-@property(nonatomic, copy) NSArray *dataArray;
+@property (nonatomic, copy) NSArray *dataArray;
 
-@property(nonatomic, assign) DoraemonDBRowViewType type;
+@property (nonatomic, assign) DoraemonDBRowViewType type;
 
-@property(nonatomic, weak) id<DoraemonDBRowViewTypeDelegate> delegate;
+@property (nonatomic, weak) id<DoraemonDBRowViewTypeDelegate> delegate;
 @end
-

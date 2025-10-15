@@ -18,5 +18,4 @@
 /* 自定义的属性 */
 @property (nonatomic, strong) UIImage *icon;
 
-
 @end

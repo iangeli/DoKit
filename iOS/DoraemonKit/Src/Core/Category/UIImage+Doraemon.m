@@ -9,20 +9,21 @@
 
 @class DoraemonManager;
 @implementation UIImage (Doraemon)
-+ (nullable UIImage *)doraemon_imageNamed:(NSString *)name{
-    if(name &&
-       ![name isEqualToString:@""]){
++ (nullable UIImage *)doraemon_imageNamed:(NSString *)name {
+    if (name &&
+        ![name isEqualToString:@""]) {
         NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"DoraemonManager")];
         NSURL *url = [bundle URLForResource:@"DoraemonKit" withExtension:@"bundle"];
-        if(!url) return [UIImage new];
+        if (!url)
+            return [UIImage new];
         NSBundle *imageBundle = [NSBundle bundleWithURL:url];
-        
+
         NSString *imageName = nil;
         CGFloat scale = [UIScreen mainScreen].scale;
-        if (ABS(scale-3) <= 0.001) {
-            imageName = [NSString stringWithFormat:@"%@@3x",name];
+        if (ABS(scale - 3) <= 0.001) {
+            imageName = [NSString stringWithFormat:@"%@@3x", name];
         } else {
-            imageName = [NSString stringWithFormat:@"%@@2x",name];
+            imageName = [NSString stringWithFormat:@"%@@2x", name];
         }
         UIImage *image = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:imageName ofType:@"png"]];
         if (!image) {
@@ -33,25 +34,26 @@
         }
         return image;
     }
-    
+
     return nil;
 }
 
 + (nullable UIImage *)doraemon_xcassetImageNamed:(NSString *)name {
-    if(name &&
-       ![name isEqualToString:@""]){
+    if (name &&
+        ![name isEqualToString:@""]) {
         NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"DoraemonManager")];
         NSURL *url = [bundle URLForResource:@"DoraemonKit" withExtension:@"bundle"];
-        if(!url) return [UIImage new];
+        if (!url)
+            return [UIImage new];
         NSBundle *imageBundle = [NSBundle bundleWithURL:url];
         UIImage *image = [UIImage imageNamed:name inBundle:imageBundle compatibleWithTraitCollection:nil];
         return image;
     }
-    
+
     return nil;
 }
 
-- (nullable UIImage*)doraemon_scaledToSize:(CGSize)newSize{
+- (nullable UIImage *)doraemon_scaledToSize:(CGSize)newSize {
     UIImage *sourceImage = self;
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
@@ -62,39 +64,35 @@
     CGFloat scaleFactor = 0.0;
     CGFloat scaledWidth = targetWidth;
     CGFloat scaledHeight = targetHeight;
-    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
-    
-    if (CGSizeEqualToSize(imageSize, newSize) == NO)
-    {
+    CGPoint thumbnailPoint = CGPointMake(0.0, 0.0);
+
+    if (CGSizeEqualToSize(imageSize, newSize) == NO) {
         CGFloat widthFactor = targetWidth / width;
         CGFloat heightFactor = targetHeight / height;
         if (widthFactor > heightFactor)
             scaleFactor = widthFactor;
         else
             scaleFactor = heightFactor;
-        
-        scaledWidth= width * scaleFactor;
+
+        scaledWidth = width * scaleFactor;
         scaledHeight = height * scaleFactor;
 
-        if (widthFactor > heightFactor)
-        {
+        if (widthFactor > heightFactor) {
             thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
-        }
-        else if (widthFactor < heightFactor)
-        {
+        } else if (widthFactor < heightFactor) {
             thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
         }
     }
-    
+
     UIGraphicsBeginImageContextWithOptions(newSize, NO, [UIScreen mainScreen].scale);
     CGRect thumbnailRect = CGRectZero;
     thumbnailRect.origin = thumbnailPoint;
-    thumbnailRect.size.width= scaledWidth;
+    thumbnailRect.size.width = scaledWidth;
     thumbnailRect.size.height = scaledHeight;
     [sourceImage drawInRect:thumbnailRect];
     newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+
     return newImage;
 }
 
@@ -103,7 +101,8 @@
 }
 
 + (UIImage *)doraemon_imageWithColor:(UIColor *)color size:(CGSize)size {
-    if (!color || size.width <= 0 || size.height <= 0) return [[UIImage alloc] init];
+    if (!color || size.width <= 0 || size.height <= 0)
+        return [[UIImage alloc] init];
     CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();

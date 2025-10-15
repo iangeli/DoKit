@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define DoraemonDemoLocalizedString(key)   [DoraemonKitDemoi18Util localizedString:key]
+#define DoraemonDemoLocalizedString(key) [DoraemonKitDemoi18Util localizedString:key]
 
 NS_ASSUME_NONNULL_BEGIN
 

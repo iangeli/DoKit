@@ -7,62 +7,62 @@
 
 #import "DoraemonMethodUseTimeManager.h"
 #import "DoraemonCacheManager.h"
-#import "DoraemonLoadAnalyze.h"
 #import "DoraemonDefine.h"
+#import "DoraemonLoadAnalyze.h"
 
 @implementation DoraemonMethodUseTimeManager
 + (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
-    
+
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
     });
     return instance;
 }
 
-- (void)setOn:(BOOL)on{
+- (void)setOn:(BOOL)on {
     [[DoraemonCacheManager sharedInstance] saveMethodUseTimeSwitch:on];
 }
 
-- (BOOL)on{
+- (BOOL)on {
     return [[DoraemonCacheManager sharedInstance] methodUseTimeSwitch];
 }
 
-- (NSArray *)fixLoadModelArray{
+- (NSArray *)fixLoadModelArray {
     NSMutableArray *loadModelArray = [NSMutableArray arrayWithArray:dlaLoadModels];
-    [loadModelArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    [loadModelArray sortUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
         CGFloat costA = [obj1[@"cost"] floatValue];
         CGFloat costB = [obj2[@"cost"] floatValue];
         if (costA < costB) {
             return NSOrderedDescending;
-        }else{
+        } else {
             return NSOrderedAscending;
         }
     }];
     CGFloat allCost = 0.f;
-    if(loadModelArray && loadModelArray.count>0){
+    if (loadModelArray && loadModelArray.count > 0) {
         for (NSDictionary *dic in loadModelArray) {
             CGFloat cost = [dic[@"cost"] floatValue];
             allCost += cost;
         }
         NSDictionary *allDic = @{
-                                 @"name":@"Total cost",
-                                 @"cost":@(allCost)
-                                 };
+            @"name" : @"Total cost",
+            @"cost" : @(allCost)
+        };
         [loadModelArray insertObject:allDic atIndex:0];
     }
     return [NSArray arrayWithArray:loadModelArray];
 }
 
-- (NSArray *)fixLoadModelArrayForHealth{
+- (NSArray *)fixLoadModelArrayForHealth {
     NSMutableArray *loadModelArray = [NSMutableArray arrayWithArray:dlaLoadModels];
-    [loadModelArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    [loadModelArray sortUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
         CGFloat costA = [obj1[@"cost"] floatValue];
         CGFloat costB = [obj2[@"cost"] floatValue];
         if (costA < costB) {
             return NSOrderedDescending;
-        }else{
+        } else {
             return NSOrderedAscending;
         }
     }];

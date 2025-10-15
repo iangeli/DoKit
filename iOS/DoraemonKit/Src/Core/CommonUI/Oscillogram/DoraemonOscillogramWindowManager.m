@@ -6,21 +6,21 @@
 //
 
 #import "DoraemonOscillogramWindowManager.h"
-#import "DoraemonFPSOscillogramWindow.h"
 #import "DoraemonCPUOscillogramWindow.h"
-#import "DoraemonMemoryOscillogramWindow.h"
-#import "DoraemonDefine.h"
 #import "DoraemonCacheManager.h"
+#import "DoraemonDefine.h"
+#import "DoraemonFPSOscillogramWindow.h"
+#import "DoraemonMemoryOscillogramWindow.h"
 #import "UIApplication+Doraemon.h"
 
-@interface DoraemonOscillogramWindowManager()
+@interface DoraemonOscillogramWindowManager ()
 @property (nonatomic, strong) DoraemonFPSOscillogramWindow *fpsWindow;
 @property (nonatomic, strong) DoraemonCPUOscillogramWindow *cpuWindow;
 @property (nonatomic, strong) DoraemonMemoryOscillogramWindow *memoryWindow;
 @end
 
 @implementation DoraemonOscillogramWindowManager
-+ (DoraemonOscillogramWindowManager *)shareInstance{
++ (DoraemonOscillogramWindowManager *)shareInstance {
     static dispatch_once_t once;
     static DoraemonOscillogramWindowManager *instance;
     dispatch_once(&once, ^{
@@ -29,7 +29,7 @@
     return instance;
 }
 
-- (instancetype)init{
+- (instancetype)init {
     if (self = [super init]) {
         _fpsWindow = [DoraemonFPSOscillogramWindow shareInstance];
         _cpuWindow = [DoraemonCPUOscillogramWindow shareInstance];
@@ -56,15 +56,15 @@
     }
 }
 
-- (void)resetLayout{
+- (void)resetLayout {
     CGFloat offsetX = 0;
     CGFloat offsetY = IS_IPHONE_X_Series ? 32 : 0;
     UIWindow *window = [UIApplication sharedApplication].fetchKeyWindow;
-    CGFloat width = window.windowOrientation ? CGRectGetWidth(window.frame):CGRectGetHeight(window.frame);
+    CGFloat width = window.windowOrientation ? CGRectGetWidth(window.frame) : CGRectGetHeight(window.frame);
     CGFloat height = 60;
 
     __block NSInteger count = 0;
-    [@[_fpsWindow, _cpuWindow, _memoryWindow] enumerateObjectsUsingBlock:^(UIView  *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [@[ _fpsWindow, _cpuWindow, _memoryWindow ] enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *_Nonnull stop) {
         if (!obj.isHidden) {
             count += 1;
         }
@@ -78,12 +78,12 @@
         _fpsWindow.frame = CGRectMake(offsetX, offsetY, width, height);
         offsetX += width;
     }
-    
+
     if (!_cpuWindow.hidden) {
         _cpuWindow.frame = CGRectMake(offsetX, offsetY, width, height);
         offsetX += width;
     }
-    
+
     if (!_memoryWindow.hidden) {
         _memoryWindow.frame = CGRectMake(offsetX, offsetY, width, height);
     }

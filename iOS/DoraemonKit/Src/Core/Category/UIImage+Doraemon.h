@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable UIImage *)doraemon_xcassetImageNamed:(NSString *)name;
 
-- (nullable UIImage*)doraemon_scaledToSize:(CGSize)newSize;
+- (nullable UIImage *)doraemon_scaledToSize:(CGSize)newSize;
 
 /**
 Create and return a 1x1 point size image with the given color.
@@ -25,7 +25,7 @@ Create and return a 1x1 point size image with the given color.
 
 /**
  Create and return a pure color image with the given color and size.
- 
+
  @param color  The color.
  @param size   New image's type.
  */

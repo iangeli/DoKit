@@ -6,18 +6,18 @@
 //
 
 #import "DoraemonJavaScriptManager.h"
-#import <WebKit/WebKit.h>
 #import "DoraemonDefine.h"
 #import "DoraemonHomeWindow.h"
-#import "UIViewController+Doraemon.h"
 #import "DoraemonJavaScriptViewController.h"
+#import "UIViewController+Doraemon.h"
+#import <WebKit/WebKit.h>
 
 @interface DoraemonJavaScriptManager ()
-@property (nonatomic, weak) id  webView;
+@property (nonatomic, weak) id webView;
 @end
 
 @implementation DoraemonJavaScriptManager
-+ (DoraemonJavaScriptManager *)shareInstance{
++ (DoraemonJavaScriptManager *)shareInstance {
     static dispatch_once_t once;
     static DoraemonJavaScriptManager *instance;
     dispatch_once(&once, ^{
@@ -28,15 +28,17 @@
 
 - (void)show {
     NSArray *webViews = [DoraemonUtil getWebViews];
-    
+
     NSString *title = @"Select WebView";
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:title preferredStyle:UIAlertControllerStyleActionSheet];
     for (NSInteger i = 0; i < webViews.count; i++) {
         WKWebView *webView = webViews[i];
         NSString *actionTitle = webView.description;
-        UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self selectWebView:webView];
-        }];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *_Nonnull action) {
+                                                           [self selectWebView:webView];
+                                                       }];
         [alert addAction:action];
     }
     if (webViews.count == 0) {
@@ -45,7 +47,7 @@
         [alert addAction:action];
     }
     if (webViews.count == 1) {
-        
+
         [self selectWebView:webViews.firstObject];
         return;
     }
@@ -68,11 +70,12 @@
     }
     if ([currentWebView isKindOfClass:WKWebView.class]) {
         WKWebView *webView = currentWebView;
-        [webView evaluateJavaScript:script completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"js error: %@", error);
-            }
-        }];
+        [webView evaluateJavaScript:script
+                  completionHandler:^(id _Nullable result, NSError *_Nullable error) {
+                      if (error) {
+                          NSLog(@"js error: %@", error);
+                      }
+                  }];
     }
 }
 @end

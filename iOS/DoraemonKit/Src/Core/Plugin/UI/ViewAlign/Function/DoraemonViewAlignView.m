@@ -13,7 +13,7 @@
 
 static CGFloat const kViewCheckSize = 62;
 
-@interface DoraemonViewAlignView()
+@interface DoraemonViewAlignView ()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIView *horizontalLine;
 @property (nonatomic, strong) UIView *verticalLine;
@@ -21,116 +21,116 @@ static CGFloat const kViewCheckSize = 62;
 @property (nonatomic, strong) UILabel *topLabel;
 @property (nonatomic, strong) UILabel *rightLabel;
 @property (nonatomic, strong) UILabel *bottomLabel;
-@property (nonatomic, strong) DoraemonVisualInfoWindow *infoWindow; 
+@property (nonatomic, strong) DoraemonVisualInfoWindow *infoWindow;
 @end
 
 @implementation DoraemonViewAlignView
--(instancetype)init{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.frame = CGRectMake(0, 0, DoraemonWindowWidth, DoraemonWindowHeight);
         self.backgroundColor = [UIColor clearColor];
         self.layer.zPosition = FLT_MAX;
-        //self.userInteractionEnabled = NO;
+        // self.userInteractionEnabled = NO;
 
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(DoraemonWindowWidth/2-kViewCheckSize/2, DoraemonWindowHeight/2-kViewCheckSize/2, kViewCheckSize, kViewCheckSize)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(DoraemonWindowWidth / 2 - kViewCheckSize / 2, DoraemonWindowHeight / 2 - kViewCheckSize / 2, kViewCheckSize, kViewCheckSize)];
         imageView.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_visual"];
         [self addSubview:imageView];
         _imageView = imageView;
-        
+
         imageView.userInteractionEnabled = YES;
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
         [imageView addGestureRecognizer:pan];
-        
-        _horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, imageView.doraemon_centerY-0.25, self.doraemon_width, 0.5)];
+
+        _horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, imageView.doraemon_centerY - 0.25, self.doraemon_width, 0.5)];
         _horizontalLine.backgroundColor = [UIColor doraemon_colorWithHexString:ALIGN_COLOR];
         [self addSubview:_horizontalLine];
-        
-        _verticalLine = [[UIView alloc] initWithFrame:CGRectMake(imageView.doraemon_centerX-0.25, 0, 0.5, self.doraemon_height)];
+
+        _verticalLine = [[UIView alloc] initWithFrame:CGRectMake(imageView.doraemon_centerX - 0.25, 0, 0.5, self.doraemon_height)];
         _verticalLine.backgroundColor = [UIColor doraemon_colorWithHexString:ALIGN_COLOR];
         [self addSubview:_verticalLine];
-        
+
         [self bringSubviewToFront:_imageView];
-        
+
         _leftLabel = [[UILabel alloc] init];
         _leftLabel.font = [UIFont systemFontOfSize:12];
         _leftLabel.textColor = [UIColor doraemon_colorWithHexString:ALIGN_COLOR];
-        _leftLabel.text = [NSString stringWithFormat:@"%.1f",imageView.doraemon_centerX];
+        _leftLabel.text = [NSString stringWithFormat:@"%.1f", imageView.doraemon_centerX];
         [self addSubview:_leftLabel];
         [_leftLabel sizeToFit];
-        _leftLabel.frame = CGRectMake(imageView.doraemon_centerX/2, imageView.doraemon_centerY-_leftLabel.doraemon_height, _leftLabel.doraemon_width, _leftLabel.doraemon_height);
-        
+        _leftLabel.frame = CGRectMake(imageView.doraemon_centerX / 2, imageView.doraemon_centerY - _leftLabel.doraemon_height, _leftLabel.doraemon_width, _leftLabel.doraemon_height);
+
         _topLabel = [[UILabel alloc] init];
         _topLabel.font = [UIFont systemFontOfSize:12];
         _topLabel.textColor = [UIColor doraemon_colorWithHexString:ALIGN_COLOR];
-        _topLabel.text = [NSString stringWithFormat:@"%.1f",imageView.doraemon_centerY];
+        _topLabel.text = [NSString stringWithFormat:@"%.1f", imageView.doraemon_centerY];
         [self addSubview:_topLabel];
         [_topLabel sizeToFit];
-        _topLabel.frame = CGRectMake(imageView.doraemon_centerX-_topLabel.doraemon_width, imageView.doraemon_centerY/2, _topLabel.doraemon_width, _topLabel.doraemon_height);
-        
+        _topLabel.frame = CGRectMake(imageView.doraemon_centerX - _topLabel.doraemon_width, imageView.doraemon_centerY / 2, _topLabel.doraemon_width, _topLabel.doraemon_height);
+
         _rightLabel = [[UILabel alloc] init];
         _rightLabel.font = [UIFont systemFontOfSize:12];
         _rightLabel.textColor = [UIColor doraemon_colorWithHexString:ALIGN_COLOR];
-        _rightLabel.text = [NSString stringWithFormat:@"%.1f",self.doraemon_width-imageView.doraemon_centerX];
+        _rightLabel.text = [NSString stringWithFormat:@"%.1f", self.doraemon_width - imageView.doraemon_centerX];
         [self addSubview:_rightLabel];
         [_rightLabel sizeToFit];
-        _rightLabel.frame = CGRectMake(imageView.doraemon_centerX+(self.doraemon_width-imageView.doraemon_centerX)/2, imageView.doraemon_centerY-_rightLabel.doraemon_height, _rightLabel.doraemon_width, _rightLabel.doraemon_height);
-        
+        _rightLabel.frame = CGRectMake(imageView.doraemon_centerX + (self.doraemon_width - imageView.doraemon_centerX) / 2, imageView.doraemon_centerY - _rightLabel.doraemon_height, _rightLabel.doraemon_width, _rightLabel.doraemon_height);
+
         _bottomLabel = [[UILabel alloc] init];
         _bottomLabel.font = [UIFont systemFontOfSize:12];
         _bottomLabel.textColor = [UIColor doraemon_colorWithHexString:ALIGN_COLOR];
-        _bottomLabel.text = [NSString stringWithFormat:@"%.1f",self.doraemon_height - imageView.doraemon_centerY];
+        _bottomLabel.text = [NSString stringWithFormat:@"%.1f", self.doraemon_height - imageView.doraemon_centerY];
         [self addSubview:_bottomLabel];
         [_bottomLabel sizeToFit];
-        _bottomLabel.frame = CGRectMake(imageView.doraemon_centerX-_bottomLabel.doraemon_width, imageView.doraemon_centerY+(self.doraemon_height - imageView.doraemon_centerY)/2, _bottomLabel.doraemon_width, _bottomLabel.doraemon_height);
-        
+        _bottomLabel.frame = CGRectMake(imageView.doraemon_centerX - _bottomLabel.doraemon_width, imageView.doraemon_centerY + (self.doraemon_height - imageView.doraemon_centerY) / 2, _bottomLabel.doraemon_width, _bottomLabel.doraemon_height);
+
         CGRect infoWindowFrame = CGRectZero;
         if (self.orientationIsLandscape) {
-            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100));
+            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - 2 * kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100));
         } else {
-            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30), DoraemonWindowWidth - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100));
-        } 
+            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30), DoraemonWindowWidth - 2 * kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100));
+        }
         _infoWindow = [[DoraemonVisualInfoWindow alloc] initWithFrame:infoWindowFrame];
 
-         [self configInfoLblText];
+        [self configInfoLblText];
     }
     return self;
 }
 
-- (void)pan:(UIPanGestureRecognizer *)sender{
+- (void)pan:(UIPanGestureRecognizer *)sender {
     CGPoint offsetPoint = [sender translationInView:sender.view];
     [sender setTranslation:CGPointZero inView:sender.view];
     UIView *panView = sender.view;
-    CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
-    CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
+    CGFloat newX = panView.doraemon_centerX + offsetPoint.x;
+    CGFloat newY = panView.doraemon_centerY + offsetPoint.y;
 
     CGPoint centerPoint = CGPointMake(newX, newY);
     panView.center = centerPoint;
-    
-    _horizontalLine.frame = CGRectMake(0, _imageView.doraemon_centerY-0.25, self.doraemon_width, 0.5);
-    _verticalLine.frame = CGRectMake(_imageView.doraemon_centerX-0.25, 0, 0.5, self.doraemon_height);
-    
-    _leftLabel.text = [NSString stringWithFormat:@"%.1f",_imageView.doraemon_centerX];
+
+    _horizontalLine.frame = CGRectMake(0, _imageView.doraemon_centerY - 0.25, self.doraemon_width, 0.5);
+    _verticalLine.frame = CGRectMake(_imageView.doraemon_centerX - 0.25, 0, 0.5, self.doraemon_height);
+
+    _leftLabel.text = [NSString stringWithFormat:@"%.1f", _imageView.doraemon_centerX];
     [_leftLabel sizeToFit];
-    _leftLabel.frame = CGRectMake(_imageView.doraemon_centerX/2, _imageView.doraemon_centerY-_leftLabel.doraemon_height, _leftLabel.doraemon_width, _leftLabel.doraemon_height);
-    
-    _topLabel.text = [NSString stringWithFormat:@"%.1f",_imageView.doraemon_centerY];
+    _leftLabel.frame = CGRectMake(_imageView.doraemon_centerX / 2, _imageView.doraemon_centerY - _leftLabel.doraemon_height, _leftLabel.doraemon_width, _leftLabel.doraemon_height);
+
+    _topLabel.text = [NSString stringWithFormat:@"%.1f", _imageView.doraemon_centerY];
     [_topLabel sizeToFit];
-    _topLabel.frame = CGRectMake(_imageView.doraemon_centerX-_topLabel.doraemon_width, _imageView.doraemon_centerY/2, _topLabel.doraemon_width, _topLabel.doraemon_height);
-    
-    _rightLabel.text = [NSString stringWithFormat:@"%.1f",self.doraemon_width-_imageView.doraemon_centerX];
+    _topLabel.frame = CGRectMake(_imageView.doraemon_centerX - _topLabel.doraemon_width, _imageView.doraemon_centerY / 2, _topLabel.doraemon_width, _topLabel.doraemon_height);
+
+    _rightLabel.text = [NSString stringWithFormat:@"%.1f", self.doraemon_width - _imageView.doraemon_centerX];
     [_rightLabel sizeToFit];
-    _rightLabel.frame = CGRectMake(_imageView.doraemon_centerX+(self.doraemon_width-_imageView.doraemon_centerX)/2, _imageView.doraemon_centerY-_rightLabel.doraemon_height, _rightLabel.doraemon_width, _rightLabel.doraemon_height);
-    
-    _bottomLabel.text = [NSString stringWithFormat:@"%.1f",self.doraemon_height - _imageView.doraemon_centerY];
+    _rightLabel.frame = CGRectMake(_imageView.doraemon_centerX + (self.doraemon_width - _imageView.doraemon_centerX) / 2, _imageView.doraemon_centerY - _rightLabel.doraemon_height, _rightLabel.doraemon_width, _rightLabel.doraemon_height);
+
+    _bottomLabel.text = [NSString stringWithFormat:@"%.1f", self.doraemon_height - _imageView.doraemon_centerY];
     [_bottomLabel sizeToFit];
-    _bottomLabel.frame = CGRectMake(_imageView.doraemon_centerX-_bottomLabel.doraemon_width, _imageView.doraemon_centerY+(self.doraemon_height - _imageView.doraemon_centerY)/2, _bottomLabel.doraemon_width, _bottomLabel.doraemon_height);
-    
+    _bottomLabel.frame = CGRectMake(_imageView.doraemon_centerX - _bottomLabel.doraemon_width, _imageView.doraemon_centerY + (self.doraemon_height - _imageView.doraemon_centerY) / 2, _bottomLabel.doraemon_width, _bottomLabel.doraemon_height);
+
     [self configInfoLblText];
 }
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-    if(CGRectContainsPoint(_imageView.frame, point)){
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (CGRectContainsPoint(_imageView.frame, point)) {
         return YES;
     }
     return NO;

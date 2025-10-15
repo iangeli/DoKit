@@ -7,10 +7,10 @@
 
 #import "DoraemonFPSViewController.h"
 #import "DoraemonCacheManager.h"
-#import "DoraemonFPSOscillogramWindow.h"
-#import "DoraemonFPSOscillogramViewController.h"
 #import "DoraemonCellSwitch.h"
 #import "DoraemonDefine.h"
+#import "DoraemonFPSOscillogramViewController.h"
+#import "DoraemonFPSOscillogramWindow.h"
 
 @interface DoraemonFPSViewController ()<DoraemonSwitchViewDelegate, DoraemonOscillogramWindowDelegate>
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"FPS monitor";
-    
+
     _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFromLandscape(104))];
     [_switchView renderUIWithTitle:@"FPS monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] fpsSwitch]];
     [_switchView needTopLine];
@@ -30,17 +30,17 @@
     [[DoraemonFPSOscillogramWindow shareInstance] addDelegate:self];
 }
 
-#pragma mark -- DoraemonSwitchViewDelegate
-- (void)changeSwitchOn:(BOOL)on sender:(id)sender{
+#pragma mark-- DoraemonSwitchViewDelegate
+- (void)changeSwitchOn:(BOOL)on sender:(id)sender {
     [[DoraemonCacheManager sharedInstance] saveFpsSwitch:on];
-    if(on){
+    if (on) {
         [[DoraemonFPSOscillogramWindow shareInstance] show];
-    }else{
+    } else {
         [[DoraemonFPSOscillogramWindow shareInstance] hide];
     }
 }
 
-#pragma mark -- DoraemonOscillogramWindowDelegate
+#pragma mark-- DoraemonOscillogramWindowDelegate
 - (void)doraemonOscillogramWindowClosed {
     [_switchView renderUIWithTitle:@"FPS monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] fpsSwitch]];
 }

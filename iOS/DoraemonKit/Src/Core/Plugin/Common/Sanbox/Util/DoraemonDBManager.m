@@ -8,12 +8,12 @@
 #import "DoraemonDBManager.h"
 #import <sqlite3.h>
 
-@interface DoraemonDBManager()
+@interface DoraemonDBManager ()
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @end
 
 @implementation DoraemonDBManager
-+ (DoraemonDBManager *)shareManager{
++ (DoraemonDBManager *)shareManager {
     static dispatch_once_t once;
     static DoraemonDBManager *instance;
     dispatch_once(&once, ^{
@@ -22,19 +22,19 @@
     return instance;
 }
 
-- (sqlite3 *)openDB{
+- (sqlite3 *)openDB {
     sqlite3 *db = nil;
     sqlite3_open([self.dbPath UTF8String], &db);
     return db;
 }
 
-- (NSArray *)tablesAtDB{
+- (NSArray *)tablesAtDB {
     sqlite3 *db = [self openDB];
     if (db == nil) {
         return @[];
     }
     NSMutableArray *tableNameArray = [NSMutableArray array];
-    
+
     NSString *sql = @"select type, tbl_name from sqlite_master";
     sqlite3_stmt *stmt = NULL;
     if (sqlite3_prepare_v2(db, sql.UTF8String, -1, &stmt, NULL) == SQLITE_OK) {
@@ -51,33 +51,32 @@
     return tableNameArray;
 }
 
-- (NSArray *)dataAtTable{
+- (NSArray *)dataAtTable {
     sqlite3 *db = [self openDB];
     if (db == nil) {
         return @[];
     }
-    
-    NSString *sql = [NSString stringWithFormat:@"select * from %@",self.tableName];
-    
+
+    NSString *sql = [NSString stringWithFormat:@"select * from %@", self.tableName];
+
     char *errmsg = nil;
     sqlite3_exec(db, [sql UTF8String], selectCallback, nil, &errmsg);
 
     NSMutableArray *arrayM = [NSMutableArray arrayWithArray:self.dataArray];
     [self.dataArray removeAllObjects];
-    
+
     return arrayM;
 }
 
-int selectCallback(void *firstValue,int columnCount, char **columnValues, char **columnNames)
-{
+int selectCallback(void *firstValue, int columnCount, char **columnValues, char **columnNames) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for (int i = 0; i < columnCount; i++) {
-        
+
         char *columnName = columnNames[i];
         NSString *nameStr = nil;
         if (columnName == NULL) {
             nameStr = nil;
-        }else{
+        } else {
             nameStr = [NSString stringWithUTF8String:columnName];
         }
 
@@ -85,11 +84,11 @@ int selectCallback(void *firstValue,int columnCount, char **columnValues, char *
         NSString *valueStr = nil;
         if (columnValue == NULL) {
             valueStr = nil;
-        }else{
+        } else {
             valueStr = [NSString stringWithUTF8String:columnValue];
         }
-        
-        if (nameStr.length>0) {
+
+        if (nameStr.length > 0) {
             [dict setValue:valueStr forKey:nameStr];
         }
     }
@@ -97,7 +96,7 @@ int selectCallback(void *firstValue,int columnCount, char **columnValues, char *
     return 0;
 }
 
-- (NSMutableArray *)dataArray{
+- (NSMutableArray *)dataArray {
     if (_dataArray == nil) {
         _dataArray = [NSMutableArray array];
     }

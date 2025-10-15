@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_END
 #pragma mark - Over write
 
 - (void)viewDidUpdateOffset:(UIPanGestureRecognizer *)sender offset:(CGPoint)offsetPoint {
-    NSArray <UIView *> *views = [self viewForSelectionAtPoint:self.center];
+    NSArray<UIView *> *views = [self viewForSelectionAtPoint:self.center];
     [self.delegate hierarchyView:self didMoveTo:views];
 }
 
@@ -46,12 +46,12 @@ NS_ASSUME_NONNULL_END
         if (skipHidden && isHidden) {
             continue;
         }
-        
+
         BOOL subviewContainsPoint = CGRectContainsPoint(subview.frame, pointInView);
         if (subviewContainsPoint) {
             [subviewsAtPoint addObject:subview];
         }
-        
+
         // If this view doesn't clip to its bounds, we need to check its subviews even if it doesn't contain the selection point.
         // They may be visible and contain the selection point.
         if (subviewContainsPoint || !subview.clipsToBounds) {
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_END
             break;
         }
     }
-    
+
     return subviewsAtPoint;
 }
 @end

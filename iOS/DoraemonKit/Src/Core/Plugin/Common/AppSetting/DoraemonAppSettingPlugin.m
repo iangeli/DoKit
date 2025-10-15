@@ -6,8 +6,8 @@
 //
 
 #import "DoraemonAppSettingPlugin.h"
-#import "DoraemonUtil.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonUtil.h"
 
 @implementation DoraemonAppSettingPlugin
 - (void)pluginDidLoad {

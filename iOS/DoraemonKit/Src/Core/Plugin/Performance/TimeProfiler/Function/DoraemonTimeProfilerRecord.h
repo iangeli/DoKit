@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isClassMethod;
 @property (nonatomic, assign) NSTimeInterval timeCost;
 @property (nonatomic, assign) NSUInteger callDepth;
-@property (nonatomic, strong) NSArray <DoraemonTimeProfilerRecord *>*subRecords;
+@property (nonatomic, strong) NSArray<DoraemonTimeProfilerRecord *> *subRecords;
 
-- (NSString *)descriptionWithDepth ;
+- (NSString *)descriptionWithDepth;
 @end
 
 NS_ASSUME_NONNULL_END

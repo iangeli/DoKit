@@ -9,15 +9,15 @@
 #import "DoraemonDemoNetTableViewCell.h"
 #import "DoraemonDefine.h"
 
-@interface DoraemonDemoNetTableViewCell()
+@interface DoraemonDemoNetTableViewCell ()
 @property (nonatomic, strong) UIButton *button;
 
 @end
 
 @implementation DoraemonDemoNetTableViewCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if(self){
+    if (self) {
         _button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, DoraemonScreenWidth, kDoraemonSizeFrom750_Landscape(104))];
         _button.backgroundColor = [UIColor orangeColor];
         _button.userInteractionEnabled = NO;
@@ -27,11 +27,10 @@
     return self;
 }
 
-- (void)renderUIWithTitle:(NSString *)title{
-    if(!title)
+- (void)renderUIWithTitle:(NSString *)title {
+    if (!title)
         title = @"Button";
     [_button setTitle:title forState:UIControlStateNormal];
 }
-
 
 @end

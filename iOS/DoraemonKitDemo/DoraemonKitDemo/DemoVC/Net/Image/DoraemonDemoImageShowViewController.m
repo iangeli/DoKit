@@ -27,18 +27,18 @@
     CGFloat viewHeight = self.view.doraemon_height;
     CGFloat imageWidth = originalImage.size.width;
     CGFloat imageHeight = originalImage.size.height;
-    imageHeight = imageHeight ? : 1;
+    imageHeight = imageHeight ?: 1;
     BOOL isPortrait = imageHeight / viewHeight > imageWidth / viewWidth;
     CGFloat scaledImageWidth, scaledImageHeight;
-    CGFloat x,y;
+    CGFloat x, y;
     CGFloat imageScale;
-    if (isPortrait) {//图片竖屏分量比较大
+    if (isPortrait) { // 图片竖屏分量比较大
         imageScale = imageHeight / viewHeight;
         scaledImageHeight = viewHeight;
         scaledImageWidth = imageWidth / imageScale;
         x = (viewWidth - scaledImageWidth) / 2;
         y = 0;
-    } else {//图片横屏分量比较大
+    } else { // 图片横屏分量比较大
         imageScale = imageWidth / viewWidth;
         scaledImageWidth = viewWidth;
         scaledImageHeight = imageHeight / imageScale;
@@ -50,6 +50,5 @@
     _imageView.userInteractionEnabled = YES;
     [self.view addSubview:_imageView];
 }
-
 
 @end

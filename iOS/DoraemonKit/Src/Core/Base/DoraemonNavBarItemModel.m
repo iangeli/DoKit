@@ -8,7 +8,7 @@
 #import "DoraemonNavBarItemModel.h"
 
 @implementation DoraemonNavBarItemModel
-- (instancetype)initWithText:(NSString *)text color:(UIColor *)color selector:(SEL)selector{
+- (instancetype)initWithText:(NSString *)text color:(UIColor *)color selector:(SEL)selector {
     self = [[DoraemonNavBarItemModel alloc] init];
     self.type = DoraemonNavBarItemTypeText;
     self.text = text;
@@ -16,7 +16,7 @@
     self.selector = selector;
     return self;
 }
-- (instancetype)initWithImage:(UIImage *)image selector:(SEL)selector{
+- (instancetype)initWithImage:(UIImage *)image selector:(SEL)selector {
     self = [[DoraemonNavBarItemModel alloc] init];
     self.type = DoraemonNavBarItemTypeImage;
     self.image = image;

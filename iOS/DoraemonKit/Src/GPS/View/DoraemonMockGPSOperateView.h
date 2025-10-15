@@ -10,4 +10,3 @@
 @interface DoraemonMockGPSOperateView : UIView
 @property (nonatomic, strong) UISwitch *switchView;
 @end
-

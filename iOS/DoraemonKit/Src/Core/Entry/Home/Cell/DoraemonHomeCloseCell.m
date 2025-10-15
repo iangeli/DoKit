@@ -6,9 +6,9 @@
 //
 
 #import "DoraemonHomeCloseCell.h"
-#import "DoraemonManager.h"
-#import "DoraemonHomeWindow.h"
 #import "DoraemonDefine.h"
+#import "DoraemonHomeWindow.h"
+#import "DoraemonManager.h"
 #import "UIViewController+Doraemon.h"
 
 @interface DoraemonHomeCloseCell ()
@@ -16,12 +16,14 @@
 @end
 
 @implementation DoraemonHomeCloseCell
-- (void)closeButtonHandle{
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"Tip" message:@"Reboot to open Doraemon" preferredStyle:UIAlertControllerStyleAlert];
+- (void)closeButtonHandle {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Tip" message:@"Reboot to open Doraemon" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[DoraemonManager shareInstance] hiddenDoraemon];
-    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction *_Nonnull action) {
+                                                         [[DoraemonManager shareInstance] hiddenDoraemon];
+                                                     }];
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
     [[UIViewController rootViewControllerForKeyWindow] presentViewController:alertController animated:YES completion:nil];
@@ -37,7 +39,7 @@
         _closeButton.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(28)];
         [_closeButton addTarget:self action:@selector(closeButtonHandle) forControlEvents:UIControlEventTouchUpInside];
     }
-    
+
     return _closeButton;
 }
 
@@ -51,7 +53,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     CGFloat x = kDoraemonSizeFromLandscape(10);
 
     self.closeButton.frame = CGRectMake(x, 0, self.doraemon_width - x * 2, kDoraemonSizeFromLandscape(100));

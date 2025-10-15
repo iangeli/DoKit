@@ -8,19 +8,19 @@
 #import "DoraemonVisualMagnifierWindow.h"
 
 @implementation DoraemonVisualMagnifierWindow
--(instancetype)init{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.magnifierSize = 90;
         self.magnification = 2.0;
-        
-        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive) {
                 self.windowScene = windowScene;
                 break;
             }
         }
-        
+
         self.frame = CGRectMake(0, 0, self.magnifierSize, self.magnifierSize);
         self.layer.delegate = self;
         self.layer.borderWidth = 1;
@@ -37,7 +37,7 @@
     CGContextTranslateCTM(ctx, self.frame.size.width * 0.5, self.frame.size.height * 0.5);
     CGContextScaleCTM(ctx, _magnification, _magnification);
     CGContextTranslateCTM(ctx, -1 * self.targetPoint.x, -1 * self.targetPoint.y);
-    
+
     [self.targetWindow.layer renderInContext:ctx];
 }
 
@@ -52,13 +52,12 @@
 - (void)setTargetWindow:(UIView *)targetWindow {
     _targetWindow = targetWindow;
     [self setTargetPoint:self.targetPoint];
-    
 }
 
 - (void)setMagnifierSize:(CGFloat)magnifierSize {
     _magnifierSize = magnifierSize;
     self.frame = CGRectMake(0, 0, _magnifierSize, _magnifierSize);
-    self.layer.cornerRadius = self.magnifierSize/2;
+    self.layer.cornerRadius = self.magnifierSize / 2;
     self.layer.masksToBounds = YES;
 }
 

@@ -6,10 +6,10 @@
 //  Copyright © 2017年 yixiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "DoKitAppDelegate.h"
+#import <UIKit/UIKit.h>
 
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([DoKitAppDelegate class]));
     }

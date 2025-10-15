@@ -9,12 +9,12 @@
 import UIKit
 
 class DoraemonDemoMemoryLeakModel: NSObject {
-    var closure: (()->Void)?
-    
+    var closure: (() -> Void)?
+
     func callClosure() {
         closure?()
     }
-    
+
     deinit {
         print("model deinit")
     }

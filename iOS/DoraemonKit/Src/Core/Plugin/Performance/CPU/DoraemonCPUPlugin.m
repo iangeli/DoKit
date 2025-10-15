@@ -10,7 +10,7 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonCPUPlugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonCPUViewController *vc = [[DoraemonCPUViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

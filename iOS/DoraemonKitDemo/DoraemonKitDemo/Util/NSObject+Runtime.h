@@ -11,7 +11,7 @@
 @interface NSObject (Runtime)
 /**
  swizzle 类方法
- 
+
  @param oriSel 原有的方法
  @param swiSel swizzle的方法
  */
@@ -19,7 +19,7 @@
 
 /**
  swizzle 实例方法
- 
+
  @param oriSel 原有的方法
  @param swiSel swizzle的方法
  */

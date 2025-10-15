@@ -10,7 +10,7 @@
 #import "DoraemonHomeWindow.h"
 
 @implementation DoraemonH5Plugin
-- (void)pluginDidLoad{
+- (void)pluginDidLoad {
     DoraemonH5ViewController *vc = [[DoraemonH5ViewController alloc] init];
     [DoraemonHomeWindow openPlugin:vc];
 }

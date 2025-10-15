@@ -28,13 +28,13 @@
 }
 
 #pragma mark - Primary
-- (void)initUI {    
+- (void)initUI {
     [self addSubview:self.titleLabel];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     self.titleLabel.frame = CGRectMake(10, 0, self.doraemon_width - 10 * 2, self.doraemon_height);
 }
 

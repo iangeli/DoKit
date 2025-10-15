@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isHierarchyIgnorePrivateClass;
 
-- (NSArray <UIWindow *>*)allWindows;
+- (NSArray<UIWindow *> *)allWindows;
 
-- (NSArray <UIWindow *>*)allWindowsIgnorePrefix:(NSString *_Nullable)prefix;
+- (NSArray<UIWindow *> *)allWindowsIgnorePrefix:(NSString *_Nullable)prefix;
 @end
 
 NS_ASSUME_NONNULL_END

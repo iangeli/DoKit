@@ -6,9 +6,9 @@
 //
 
 #import "DoraemonColorPickPlugin.h"
+#import "DoraemonColorPickInfoWindow.h"
 #import "DoraemonColorPickWindow.h"
 #import "DoraemonHomeWindow.h"
-#import "DoraemonColorPickInfoWindow.h"
 
 @implementation DoraemonColorPickPlugin
 - (void)pluginDidLoad {

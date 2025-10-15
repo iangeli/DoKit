@@ -6,12 +6,12 @@
 //
 
 #import "DoraemonMemoryOscillogramViewController.h"
+#import "DoraemonCacheManager.h"
+#import "DoraemonDefine.h"
+#import "DoraemonMemoryOscillogramWindow.h"
+#import "DoraemonMemoryUtil.h"
 #import "DoraemonOscillogramView.h"
 #import "UIView+Doraemon.h"
-#import "DoraemonMemoryUtil.h"
-#import "DoraemonDefine.h"
-#import "DoraemonCacheManager.h"
-#import "DoraemonMemoryOscillogramWindow.h"
 
 @interface DoraemonMemoryOscillogramViewController ()
 @end
@@ -21,19 +21,19 @@
     [super viewDidLoad];
 }
 
-- (NSString *)title{
+- (NSString *)title {
     return @"Memory";
 }
 
-- (NSString *)lowValue{
+- (NSString *)lowValue {
     return @"1";
 }
 
-- (NSString *)highValue{
+- (NSString *)highValue {
     return @"600";
 }
 
-- (void)doSecondFunction{
+- (void)doSecondFunction {
     CGFloat useMemoryForApp = (CGFloat)[DoraemonMemoryUtil useMemoryForApp];
     CGFloat totalMemoryForDevice = (CGFloat)[self.highValue floatValue];
     CGFloat ratio = MIN(useMemoryForApp / totalMemoryForDevice, 1);

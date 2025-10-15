@@ -12,7 +12,7 @@
 @end
 
 @implementation ViewController
-+ (void)load{
++ (void)load {
     NSLog(@"ViewController call load");
 }
 
@@ -20,6 +20,5 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
-
 
 @end

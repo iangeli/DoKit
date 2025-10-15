@@ -8,10 +8,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (Doraemon)
-@property (nonatomic, readonly) CGFloat red; 
-@property (nonatomic, readonly) CGFloat green; 
-@property (nonatomic, readonly) CGFloat blue; 
-@property (nonatomic, readonly) CGFloat white; 
+@property (nonatomic, readonly) CGFloat red;
+@property (nonatomic, readonly) CGFloat green;
+@property (nonatomic, readonly) CGFloat blue;
+@property (nonatomic, readonly) CGFloat white;
 @property (nonatomic, readonly) CGFloat alpha;
 
 + (UIColor *)doraemon_colorWithHex:(UInt32)hex;
@@ -28,5 +28,5 @@
 
 + (UIColor *)doraemon_line;
 
-+ (UIColor *)doraemon_orange; 
++ (UIColor *)doraemon_orange;
 @end

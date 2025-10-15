@@ -8,7 +8,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NSString* _Nullable (^DoraemonColorPickMagnifyLayerPointColorBlock) (CGPoint point);
+typedef NSString *_Nullable (^DoraemonColorPickMagnifyLayerPointColorBlock)(CGPoint point);
 
 @interface DoraemonColorPickMagnifyLayer : CALayer
 @property (nonatomic, copy) DoraemonColorPickMagnifyLayerPointColorBlock pointColorBlock;

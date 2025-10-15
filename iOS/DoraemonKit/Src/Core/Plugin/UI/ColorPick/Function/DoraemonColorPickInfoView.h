@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class DoraemonColorPickInfoView;
 
-@protocol DoraemonColorPickInfoViewDelegate <NSObject>
+@protocol DoraemonColorPickInfoViewDelegate<NSObject>
 @optional
 
 - (void)closeBtnClicked:(id)sender onColorPickInfoView:(DoraemonColorPickInfoView *)colorPickInfoView;

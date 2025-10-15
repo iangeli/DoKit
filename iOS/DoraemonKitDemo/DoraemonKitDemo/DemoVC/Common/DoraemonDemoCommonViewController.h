@@ -10,4 +10,3 @@
 
 @interface DoraemonDemoCommonViewController : DoraemonDemoBaseViewController
 @end
-

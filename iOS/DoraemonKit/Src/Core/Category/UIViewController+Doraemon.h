@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 // safe area inset
 - (UIEdgeInsets)safeAreaInset;
 
-- (CGRect) fullscreen;
+- (CGRect)fullscreen;
 
 // key window root vc
 + (UIViewController *)rootViewControllerForKeyWindow;

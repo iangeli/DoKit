@@ -6,10 +6,10 @@
 //
 
 #import "DoraemonHierarchyCellModel.h"
+#import "DoraemonDefine.h"
 #import "DoraemonHierarchyDetailTitleCell.h"
 #import "DoraemonHierarchySelectorCell.h"
 #import "DoraemonHierarchySwitchCell.h"
-#import "DoraemonDefine.h"
 
 @implementation DoraemonHierarchyCellModel
 - (instancetype)initWithTitle:(NSString *)title flag:(BOOL)flag {

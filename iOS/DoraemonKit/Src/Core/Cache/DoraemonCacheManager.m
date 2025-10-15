@@ -6,28 +6,27 @@
 //
 
 #import "DoraemonCacheManager.h"
-#import "DoraemonManager.h"
 #import "DoraemonDefine.h"
 #import "DoraemonManager.h"
 
-static NSString * const kDoraemonMockGPSSwitchKey = @"ud_mock_gps_key";
-static NSString * const kDoraemonMockCoordinateKey = @"ud_mock_coordinate_key";
-static NSString * const kDoraemonFpsKey = @"ud_fps_key";
-static NSString * const kDoraemonCpuKey = @"ud_cpu_key";
-static NSString * const kDoraemonMemoryKey = @"ud_memory_key";
-static NSString * const kDoraemonMethodUseTimeKey = @"ud_method_use_time_key";
-static NSString * const kDoraemonH5historicalRecord = @"ud_historical_record";
-static NSString * const kDoraemonJsHistoricalRecord = @"ud_js_historical_record";
-static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
+static NSString *const kDoraemonMockGPSSwitchKey = @"ud_mock_gps_key";
+static NSString *const kDoraemonMockCoordinateKey = @"ud_mock_coordinate_key";
+static NSString *const kDoraemonFpsKey = @"ud_fps_key";
+static NSString *const kDoraemonCpuKey = @"ud_cpu_key";
+static NSString *const kDoraemonMemoryKey = @"ud_memory_key";
+static NSString *const kDoraemonMethodUseTimeKey = @"ud_method_use_time_key";
+static NSString *const kDoraemonH5historicalRecord = @"ud_historical_record";
+static NSString *const kDoraemonJsHistoricalRecord = @"ud_js_historical_record";
+static NSString *const kDoraemonANRTrackKey = @"ud_anr_track_key";
 
-@interface DoraemonCacheManager()
+@interface DoraemonCacheManager ()
 @property (nonatomic, strong) NSUserDefaults *defaults;
 @property (nonatomic, assign) BOOL memoryLeakOn;
 @property (nonatomic, assign) BOOL firstReadMemoryLeakOn;
 @end
 
 @implementation DoraemonCacheManager
-+ (DoraemonCacheManager *)sharedInstance{
++ (DoraemonCacheManager *)sharedInstance {
     static dispatch_once_t once;
     static DoraemonCacheManager *instance;
     dispatch_once(&once, ^{
@@ -37,81 +36,81 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
 }
 
 - (instancetype)init {
-    self  = [super init];
+    self = [super init];
     if (self) {
         _defaults = [NSUserDefaults standardUserDefaults];
     }
     return self;
 }
 
-- (void)saveMockGPSSwitch:(BOOL)on{
+- (void)saveMockGPSSwitch:(BOOL)on {
     [_defaults setBool:on forKey:kDoraemonMockGPSSwitchKey];
     [_defaults synchronize];
 }
 
-- (BOOL)mockGPSSwitch{
+- (BOOL)mockGPSSwitch {
     return [_defaults boolForKey:kDoraemonMockGPSSwitchKey];
 }
 
-- (void)saveMockCoordinate:(CLLocationCoordinate2D)coordinate{
+- (void)saveMockCoordinate:(CLLocationCoordinate2D)coordinate {
     NSDictionary *dic = @{
-                          @"longitude":@(coordinate.longitude),
-                          @"latitude":@(coordinate.latitude)
-                          };
+        @"longitude" : @(coordinate.longitude),
+        @"latitude" : @(coordinate.latitude)
+    };
     [_defaults setObject:dic forKey:kDoraemonMockCoordinateKey];
     [_defaults synchronize];
 }
 
-- (CLLocationCoordinate2D)mockCoordinate{
+- (CLLocationCoordinate2D)mockCoordinate {
     NSDictionary *dic = [_defaults valueForKey:kDoraemonMockCoordinateKey];
-    CLLocationCoordinate2D coordinate ;
+    CLLocationCoordinate2D coordinate;
     if (dic[@"longitude"]) {
         coordinate.longitude = [dic[@"longitude"] doubleValue];
-    }else{
+    } else {
         coordinate.longitude = 0.;
     }
     if (dic[@"latitude"]) {
         coordinate.latitude = [dic[@"latitude"] doubleValue];
-    }else{
+    } else {
         coordinate.latitude = 0.;
     }
-    
+
     return coordinate;
 }
 
-- (void)saveFpsSwitch:(BOOL)on{
+- (void)saveFpsSwitch:(BOOL)on {
     [_defaults setBool:on forKey:kDoraemonFpsKey];
     [_defaults synchronize];
 }
 
-- (BOOL)fpsSwitch{
+- (BOOL)fpsSwitch {
     return [_defaults boolForKey:kDoraemonFpsKey];
 }
 
-- (void)saveCpuSwitch:(BOOL)on{
+- (void)saveCpuSwitch:(BOOL)on {
     [_defaults setBool:on forKey:kDoraemonCpuKey];
     [_defaults synchronize];
 }
 
-- (BOOL)cpuSwitch{
+- (BOOL)cpuSwitch {
     return [_defaults boolForKey:kDoraemonCpuKey];
 }
 
-- (void)saveMemorySwitch:(BOOL)on{
+- (void)saveMemorySwitch:(BOOL)on {
     [_defaults setBool:on forKey:kDoraemonMemoryKey];
     [_defaults synchronize];
 }
 
-- (BOOL)memorySwitch{
+- (BOOL)memorySwitch {
     return [_defaults boolForKey:kDoraemonMemoryKey];
 }
 
-- (void)saveMethodUseTimeSwitch:(BOOL)on{
+- (void)saveMethodUseTimeSwitch:(BOOL)on {
     [_defaults setBool:on forKey:kDoraemonMethodUseTimeKey];
     [_defaults synchronize];
 }
 
-- (BOOL)methodUseTimeSwitch{
+- (BOOL)methodUseTimeSwitch {
     return [_defaults boolForKey:kDoraemonMethodUseTimeKey];
 }
 
@@ -129,11 +128,13 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
 }
 
 - (void)saveH5historicalRecordWithText:(NSString *)text {
-    
-    if (!text || text.length <= 0) { return; }
-    
+
+    if (!text || text.length <= 0) {
+        return;
+    }
+
     NSArray *records = [self h5historicalRecord];
-    
+
     NSMutableArray *muarr = [NSMutableArray arrayWithArray:records];
 
     if ([muarr containsObject:text]) {
@@ -144,8 +145,10 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
     }
     [muarr insertObject:text atIndex:0];
 
-    if (muarr.count > 10) { [muarr removeLastObject]; }
-    
+    if (muarr.count > 10) {
+        [muarr removeLastObject];
+    }
+
     [_defaults setObject:muarr.copy forKey:kDoraemonH5historicalRecord];
     [_defaults synchronize];
 }
@@ -156,13 +159,19 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
 }
 
 - (void)clearH5historicalRecordWithText:(NSString *)text {
-    
-    if (!text || text.length <= 0) { return; }
+
+    if (!text || text.length <= 0) {
+        return;
+    }
     NSArray *records = [self h5historicalRecord];
-    
-    if (![records containsObject:text]) { return; }
+
+    if (![records containsObject:text]) {
+        return;
+    }
     NSMutableArray *muarr = [NSMutableArray array];
-    if (records && records.count > 0) { [muarr addObjectsFromArray:records]; }
+    if (records && records.count > 0) {
+        [muarr addObjectsFromArray:records];
+    }
     [muarr removeObject:text];
 
     if (muarr.count > 0) {
@@ -180,7 +189,7 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
 - (NSString *)jsHistoricalRecordForKey:(NSString *)key {
     NSArray *history = [self jsHistoricalRecord] ?: @[];
     for (NSDictionary *dict in history) {
-        
+
         if ([[dict objectForKey:@"key"] isEqualToString:key]) {
             return [dict objectForKey:@"value"];
         }
@@ -197,11 +206,11 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
     BOOL matched = NO;
     NSArray *history = [self jsHistoricalRecord] ?: @[];
     for (NSDictionary *dict in history) {
-        
+
         if ([[dict objectForKey:@"key"] isEqualToString:saveKey]) {
             [list addObject:@{
-                @"key": saveKey,
-                @"value": text
+                @"key" : saveKey,
+                @"value" : text
             }];
             matched = YES;
             continue;
@@ -210,9 +219,10 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
     }
     if (!matched) {
         [list insertObject:@{
-            @"key": saveKey,
-            @"value": text
-        } atIndex:0];
+            @"key" : saveKey,
+            @"value" : text
+        }
+                   atIndex:0];
     }
     [_defaults setObject:list forKey:kDoraemonJsHistoricalRecord];
     [_defaults synchronize];
@@ -225,7 +235,7 @@ static NSString * const kDoraemonANRTrackKey = @"ud_anr_track_key";
     NSMutableArray *list = [NSMutableArray array];
     NSArray *history = [self jsHistoricalRecord] ?: @[];
     for (NSDictionary *dict in history) {
-        
+
         if ([[dict objectForKey:@"key"] isEqualToString:key]) {
             continue;
         }

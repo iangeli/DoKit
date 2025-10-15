@@ -43,9 +43,9 @@
 
 + (void)clearLocalDatas;
 
-+ (void)shareText:(NSString *)text formVC:(UIViewController *)vc;//share text
-+ (void)shareImage:(UIImage *)image formVC:(UIViewController *)vc;//share image
-+ (void)shareURL:(NSURL *)url formVC:(UIViewController *)vc;//share url
++ (void)shareText:(NSString *)text formVC:(UIViewController *)vc;  // share text
++ (void)shareImage:(UIImage *)image formVC:(UIViewController *)vc; // share image
++ (void)shareURL:(NSURL *)url formVC:(UIViewController *)vc;       // share url
 
 + (void)openAppSetting;
 

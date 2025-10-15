@@ -93,11 +93,9 @@ NS_ASSUME_NONNULL_END
 }
 
 - (void)viewWillUpdateOffset:(UIPanGestureRecognizer *)sender offset:(CGPoint)offsetPoint {
-
 }
 
 - (void)viewDidUpdateOffset:(UIPanGestureRecognizer *)sender offset:(CGPoint)offsetPoint {
-
 }
 
 - (void)setMovable:(BOOL)movable {
