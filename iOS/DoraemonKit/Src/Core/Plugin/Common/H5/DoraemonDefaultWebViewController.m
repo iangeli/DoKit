@@ -60,7 +60,7 @@
 
 - (UIProgressView *)progressView {
     if (!_progressView) {
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0.0, IPHONE_NAVIGATIONBAR_HEIGHT, DoraemonScreenWidth, 1.0)];
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0.0, IPHONE_NAVIGATIONBAR_HEIGHT, DoraemonWindowWidth, 1.0)];
         _progressView.tintColor = [UIColor doraemon_blue];      
         _progressView.trackTintColor = [UIColor whiteColor];    
     }

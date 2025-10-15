@@ -22,11 +22,11 @@
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor doraemon_black_1];
-        _titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(32)];
+        _titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(32)];
         [self.contentView addSubview:_titleLabel];
         
         _arrowImageView = [[UIImageView alloc] initWithImage:[UIImage doraemon_xcassetImageNamed:@"doraemon_more"]];
-        _arrowImageView.frame = CGRectMake(DoraemonScreenWidth-kDoraemonSizeFrom750_Landscape(32)-_arrowImageView.doraemon_width, [[self class] cellHeight]/2-_arrowImageView.doraemon_height/2, _arrowImageView.doraemon_width, _arrowImageView.doraemon_height);
+        _arrowImageView.frame = CGRectMake(DoraemonWindowWidth-kDoraemonSizeFromLandscape(32)-_arrowImageView.doraemon_width, [[self class] cellHeight]/2-_arrowImageView.doraemon_height/2, _arrowImageView.doraemon_width, _arrowImageView.doraemon_height);
         [self.contentView addSubview:_arrowImageView];
     }
     return self;
@@ -38,14 +38,14 @@
         self.titleLabel.text = model.name;
         [self.titleLabel sizeToFit];
         CGFloat w = self.titleLabel.doraemon_width;
-        if (w > DoraemonScreenWidth-kDoraemonSizeFrom750_Landscape(120)) {
-            w = DoraemonScreenWidth-kDoraemonSizeFrom750_Landscape(120);
+        if (w > DoraemonWindowWidth-kDoraemonSizeFromLandscape(120)) {
+            w = DoraemonWindowWidth-kDoraemonSizeFromLandscape(120);
         }
-        self.titleLabel.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(32), [[self class] cellHeight]/2-self.titleLabel.doraemon_height/2, w, self.titleLabel.doraemon_height);
+        self.titleLabel.frame = CGRectMake(kDoraemonSizeFromLandscape(32), [[self class] cellHeight]/2-self.titleLabel.doraemon_height/2, w, self.titleLabel.doraemon_height);
     } 
 }
 
 + (CGFloat)cellHeight{
-    return kDoraemonSizeFrom750_Landscape(104);
+    return kDoraemonSizeFromLandscape(104);
 }
 @end

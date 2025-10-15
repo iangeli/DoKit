@@ -38,7 +38,7 @@
     [self.checkBtn needDownLine];
     [self.view addSubview:self.checkBtn];
     
-    self.clearBtn = [[DoraemonCellButton alloc] initWithFrame:CGRectMake(0, self.checkBtn.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
+    self.clearBtn = [[DoraemonCellButton alloc] initWithFrame:CGRectMake(0, self.checkBtn.doraemon_bottom, self.view.doraemon_width, kDoraemonSizeFromLandscape(104))];
     [self.clearBtn renderUIWithTitle:@"Delete ANR track"];
     self.clearBtn.delegate = self;
     [self.clearBtn needDownLine];

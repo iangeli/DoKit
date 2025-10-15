@@ -33,7 +33,7 @@
     self.sizeDatas = [[NSMutableArray alloc] init];
     
     UIView *headerView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DoraemonScreenWidth, 30 + 10 * 2)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DoraemonWindowWidth, 30 + 10 * 2)];
         view;
     });
     

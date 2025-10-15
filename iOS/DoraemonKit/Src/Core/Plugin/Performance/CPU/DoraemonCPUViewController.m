@@ -21,7 +21,7 @@
     [super viewDidLoad];
     self.title = @"CPU monitor";
     
-    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
+    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFromLandscape(104))];
     [_switchView renderUIWithTitle:@"CPU monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] cpuSwitch]];
     [_switchView needTopLine];
     [_switchView needDownLine];

@@ -68,7 +68,7 @@
     if (!model.title) {
         return nil;
     }
-    DoraemonHierarchyHeaderView *view = [[DoraemonHierarchyHeaderView alloc] initWithFrame:CGRectMake(0, 0, DoraemonScreenWidth, 40)];
+    DoraemonHierarchyHeaderView *view = [[DoraemonHierarchyHeaderView alloc] initWithFrame:CGRectMake(0, 0, DoraemonWindowWidth, 40)];
     view.titleLabel.text = model.title;
     return view;
 }

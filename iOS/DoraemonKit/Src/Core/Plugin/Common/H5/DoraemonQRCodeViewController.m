@@ -33,7 +33,7 @@
     scaner.showScanLine = YES;
     scaner.showBorderLine = YES;
     scaner.showCornerLine = YES;
-    scaner.scanRect = CGRectMake(scaner.doraemon_width/2-kDoraemonSizeFrom750(480)/2, kDoraemonSizeFrom750(195), kDoraemonSizeFrom750(480), kDoraemonSizeFrom750(480));
+    scaner.scanRect = CGRectMake(scaner.doraemon_width/2-kDoraemonSizeFromWidth(480)/2, kDoraemonSizeFromWidth(195), kDoraemonSizeFromWidth(480), kDoraemonSizeFromWidth(480));
     [self.view addSubview:scaner];
     self.scanView = scaner;
     [scaner startScanning];

@@ -27,7 +27,7 @@
 
 - (void)commonInit {
     self.backgroundColor = [UIColor systemBackgroundColor];
-    self.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(8);
+    self.layer.cornerRadius = kDoraemonSizeFromLandscape(8);
     self.layer.borderWidth = 1.;
     self.layer.borderColor = [UIColor doraemon_colorWithHex:0x999999 andAlpha:0.2].CGColor;
     
@@ -41,16 +41,16 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat colorWidth = kDoraemonSizeFrom750_Landscape(28);
-    CGFloat colorHeight = kDoraemonSizeFrom750_Landscape(28);
-    self.colorView.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(32), (self.doraemon_height - colorHeight) / 2.0, colorWidth, colorHeight);
+    CGFloat colorWidth = kDoraemonSizeFromLandscape(28);
+    CGFloat colorHeight = kDoraemonSizeFromLandscape(28);
+    self.colorView.frame = CGRectMake(kDoraemonSizeFromLandscape(32), (self.doraemon_height - colorHeight) / 2.0, colorWidth, colorHeight);
     
-    CGFloat colorValueWidth = kDoraemonSizeFrom750_Landscape(150);
-    self.colorValueLbl.frame = CGRectMake(self.colorView.doraemon_right + kDoraemonSizeFrom750_Landscape(20), 0, colorValueWidth, self.doraemon_height);
+    CGFloat colorValueWidth = kDoraemonSizeFromLandscape(150);
+    self.colorValueLbl.frame = CGRectMake(self.colorView.doraemon_right + kDoraemonSizeFromLandscape(20), 0, colorValueWidth, self.doraemon_height);
     
-    CGFloat closeWidth = kDoraemonSizeFrom750_Landscape(44);
-    CGFloat closeHeight = kDoraemonSizeFrom750_Landscape(44);
-    self.closeBtn.frame = CGRectMake(self.doraemon_width - closeWidth - kDoraemonSizeFrom750_Landscape(32), (self.doraemon_height - closeHeight) / 2.0, closeWidth, closeHeight);
+    CGFloat closeWidth = kDoraemonSizeFromLandscape(44);
+    CGFloat closeHeight = kDoraemonSizeFromLandscape(44);
+    self.closeBtn.frame = CGRectMake(self.doraemon_width - closeWidth - kDoraemonSizeFromLandscape(32), (self.doraemon_height - closeHeight) / 2.0, closeWidth, closeHeight);
 }
 
 #pragma mark - Public
@@ -97,7 +97,7 @@
     if (!_colorValueLbl) {
         _colorValueLbl = [[UILabel alloc] init];
         _colorValueLbl.textColor = [UIColor doraemon_black_1];
-        _colorValueLbl.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(28)];
+        _colorValueLbl.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(28)];
     }
     return _colorValueLbl;
 }

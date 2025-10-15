@@ -63,22 +63,22 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section < _dataArray.count) {
-        return CGSizeMake(kDoraemonSizeFrom750_Landscape(160), kDoraemonSizeFrom750_Landscape(128));
+        return CGSizeMake(kDoraemonSizeFromLandscape(160), kDoraemonSizeFromLandscape(128));
     } else {
-        return CGSizeMake(DoraemonScreenWidth, kDoraemonSizeFrom750_Landscape(100));
+        return CGSizeMake(DoraemonWindowWidth, kDoraemonSizeFromLandscape(100));
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section < _dataArray.count) {
-        return CGSizeMake(DoraemonScreenWidth, kDoraemonSizeFrom750_Landscape(88));
+        return CGSizeMake(DoraemonWindowWidth, kDoraemonSizeFromLandscape(88));
     } else {
-        return CGSizeMake(DoraemonScreenWidth, 0);
+        return CGSizeMake(DoraemonWindowWidth, 0);
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(DoraemonScreenWidth, kDoraemonSizeFrom750_Landscape(24));
+    return CGSizeMake(DoraemonWindowWidth, kDoraemonSizeFromLandscape(24));
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
@@ -142,7 +142,7 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     if (section < _dataArray.count)
-        return UIEdgeInsetsMake(0, kDoraemonSizeFrom750_Landscape(24), kDoraemonSizeFrom750_Landscape(24), kDoraemonSizeFrom750_Landscape(24));
+        return UIEdgeInsetsMake(0, kDoraemonSizeFromLandscape(24), kDoraemonSizeFromLandscape(24), kDoraemonSizeFromLandscape(24));
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 

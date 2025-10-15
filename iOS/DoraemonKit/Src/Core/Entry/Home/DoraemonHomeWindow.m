@@ -20,7 +20,7 @@
     static dispatch_once_t once;
     static DoraemonHomeWindow *instance;
     dispatch_once(&once, ^{
-        instance = [[DoraemonHomeWindow alloc] initWithFrame:CGRectMake(0, 0, DoraemonScreenWidth, DoraemonScreenHeight)];
+        instance = [[DoraemonHomeWindow alloc] initWithFrame:CGRectMake(0, 0, DoraemonWindowWidth, DoraemonWindowHeight)];
     });
     return instance;
 }

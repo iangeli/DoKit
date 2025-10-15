@@ -36,7 +36,7 @@
     self.borderViews = [[NSMutableDictionary alloc] init];
     
     CGFloat height = 100;
-    self.infoView = [[DKHierarchyInfoView alloc] initWithFrame:CGRectMake(10, DoraemonScreenHeight - 10 * 2 - height, DoraemonScreenWidth - 10 * 2, height)];
+    self.infoView = [[DKHierarchyInfoView alloc] initWithFrame:CGRectMake(10, DoraemonWindowHeight - 10 * 2 - height, DoraemonWindowWidth - 10 * 2, height)];
     self.infoView.delegate = self;
     [self.view addSubview:self.infoView];
     

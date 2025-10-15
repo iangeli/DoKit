@@ -6,12 +6,12 @@
 //
 
 #import "DoraemonUIProfileWindow.h"
-#import "UIView+Doraemon.h"
 #import "DoraemonDefine.h"
+#import "UIView+Doraemon.h"
 
-#define kWindowWidth        220
-#define kExpandHeight       250
-#define kTextHeight         30
+#define kWindowWidth 220
+#define kExpandHeight 250
+#define kTextHeight 30
 
 @interface DoraemonUIProfileWindow ()
 @property (nonatomic, strong) UILabel *lbText;
@@ -20,23 +20,21 @@
 @end
 
 @implementation DoraemonUIProfileWindow
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static DoraemonUIProfileWindow *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [DoraemonUIProfileWindow new];
     });
-    
+
     return sharedInstance;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
-        for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){
-            if (windowScene.activationState == UISceneActivationStateForegroundActive){
+        for (UIWindowScene *windowScene in [UIApplication sharedApplication].connectedScenes) {
+            if (windowScene.activationState == UISceneActivationStateForegroundActive) {
                 self.windowScene = windowScene;
                 break;
             }
@@ -47,18 +45,17 @@
         self.windowLevel = UIWindowLevelStatusBar + 50.f;
         self.frame = CGRectMake(10, 65, kWindowWidth, kTextHeight);
         self.clipsToBounds = YES;
-        
+
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
         [self addGestureRecognizer:pan];
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                 action:@selector(tap)]];
+                                                                           action:@selector(tap)]];
     }
     return self;
 }
 
 - (void)showWithDepthText:(NSString *)text
-               detailInfo:(NSString *)detail
-{
+               detailInfo:(NSString *)detail {
     self.lbText.text = text;
     self.textView.text = detail;
     [self addSubview:self.lbText];
@@ -66,50 +63,48 @@
     self.hidden = NO;
 }
 
-- (void)hide
-{
+- (void)hide {
     [self.lbText removeFromSuperview];
     [self.textView removeFromSuperview];
     self.hidden = YES;
 }
 
-- (void)pan:(UIPanGestureRecognizer *)sender{
+- (void)pan:(UIPanGestureRecognizer *)sender {
     CGPoint offsetPoint = [sender translationInView:sender.view];
     [sender setTranslation:CGPointZero inView:sender.view];
     UIView *panView = sender.view;
-    CGFloat newX = panView.doraemon_centerX+offsetPoint.x;
-    CGFloat newY = panView.doraemon_centerY+offsetPoint.y;
-    if (newX < kWindowWidth/2) {
-        newX = kWindowWidth/2;
+    CGFloat newX = panView.doraemon_centerX + offsetPoint.x;
+    CGFloat newY = panView.doraemon_centerY + offsetPoint.y;
+    if (newX < kWindowWidth / 2) {
+        newX = kWindowWidth / 2;
     }
-    if (newX > DoraemonScreenWidth - kWindowWidth/2) {
-        newX = DoraemonScreenWidth - kWindowWidth/2;
+    if (newX > DoraemonWindowWidth - kWindowWidth / 2) {
+        newX = DoraemonWindowWidth - kWindowWidth / 2;
     }
-    if (newY < self.doraemon_height/2) {
-        newY = self.doraemon_height/2;
+    if (newY < self.doraemon_height / 2) {
+        newY = self.doraemon_height / 2;
     }
-    if (newY > DoraemonScreenHeight - self.doraemon_height/2) {
-        newY = DoraemonScreenHeight - self.doraemon_height/2;
+    if (newY > DoraemonWindowHeight - self.doraemon_height / 2) {
+        newY = DoraemonWindowHeight - self.doraemon_height / 2;
     }
     panView.center = CGPointMake(newX, newY);
 }
 
-- (void)tap
-{
+- (void)tap {
     if (CGRectIsEmpty(self.storedFrame)) {
         self.storedFrame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 180);
     }
-    
-    [UIView animateWithDuration:.25 animations:^{
-        CGRect tmp = self.frame;
-        self.frame = self.storedFrame;
-        self.storedFrame = tmp;
-    }];
+
+    [UIView animateWithDuration:.25
+                     animations:^{
+                         CGRect tmp = self.frame;
+                         self.frame = self.storedFrame;
+                         self.storedFrame = tmp;
+                     }];
 }
 
 #pragma mark - getters
-- (UILabel *)lbText
-{
+- (UILabel *)lbText {
     if (!_lbText) {
         _lbText = [UILabel new];
         _lbText.frame = CGRectMake(0, 0, kWindowWidth, kTextHeight);
@@ -119,11 +114,10 @@
     return _lbText;
 }
 
-- (UITextView *)textView
-{
+- (UITextView *)textView {
     if (!_textView) {
         _textView = [UITextView new];
-        _textView.frame = CGRectMake(0, kTextHeight, kWindowWidth, kExpandHeight-kTextHeight);
+        _textView.frame = CGRectMake(0, kTextHeight, kWindowWidth, kExpandHeight - kTextHeight);
         _textView.textAlignment = NSTextAlignmentCenter;
         _textView.editable = NO;
         _textView.userInteractionEnabled = NO;

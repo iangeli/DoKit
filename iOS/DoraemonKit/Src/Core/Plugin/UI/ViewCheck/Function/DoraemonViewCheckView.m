@@ -26,7 +26,7 @@ static CGFloat const kViewCheckSize = 62;
 -(instancetype)init{
     self = [super init];
     if (self) {
-        self.frame = CGRectMake(DoraemonScreenWidth/2-kViewCheckSize/2, DoraemonScreenHeight/2-kViewCheckSize/2, kViewCheckSize, kViewCheckSize);
+        self.frame = CGRectMake(DoraemonWindowWidth/2-kViewCheckSize/2, DoraemonWindowHeight/2-kViewCheckSize/2, kViewCheckSize, kViewCheckSize);
         self.backgroundColor = [UIColor clearColor];
         self.layer.zPosition = FLT_MAX;
         
@@ -44,9 +44,9 @@ static CGFloat const kViewCheckSize = 62;
         
         CGRect infoWindowFrame = CGRectZero;
         if (self.orientationIsLandscape) {
-            infoWindowFrame = CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - kDoraemonSizeFrom750_Landscape(180) - kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - 2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(180));
+            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(180) - kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(180));
         } else {
-            infoWindowFrame = CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - kDoraemonSizeFrom750_Landscape(180) - kDoraemonSizeFrom750_Landscape(30), DoraemonScreenWidth - 2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(180));
+            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(180) - kDoraemonSizeFromLandscape(30), DoraemonWindowWidth - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(180));
         }
         _infoWindow = [[DoraemonVisualInfoWindow alloc] initWithFrame:infoWindowFrame];
         
@@ -187,14 +187,14 @@ static CGFloat const kViewCheckSize = 62;
         NSString *string = [NSString stringWithFormat:@"%@",showString];
         
         NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
-        style.lineSpacing = kDoraemonSizeFrom750_Landscape(12);
+        style.lineSpacing = kDoraemonSizeFromLandscape(12);
 
         style.lineBreakMode = NSLineBreakByTruncatingTail;
         
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:string];
         [attrString addAttributes:@{
                                     NSParagraphStyleAttributeName : style,
-                                    NSFontAttributeName : [UIFont systemFontOfSize: kDoraemonSizeFrom750_Landscape(24)],
+                                    NSFontAttributeName : [UIFont systemFontOfSize: kDoraemonSizeFromLandscape(24)],
                                     NSForegroundColorAttributeName : [UIColor doraemon_black_1]
                                     }
                             range:NSMakeRange(0, string.length)];

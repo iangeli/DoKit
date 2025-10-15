@@ -16,7 +16,7 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.view.window.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - (size.height < size.width ? size.height : size.width) - kDoraemonSizeFrom750_Landscape(30), size.height, size.width);
+        self.view.window.frame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - (size.height < size.width ? size.height : size.width) - kDoraemonSizeFromLandscape(30), size.height, size.width);
     });
 }
 @end
@@ -40,9 +40,9 @@
 - (instancetype)init {
     
     if (self.orientationIsLandscape) {
-        self = [super initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - kDoraemonSizeFrom750_Landscape(100) - kDoraemonSizeFrom750_Landscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonScreenHeight - 2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(100))];
+        self = [super initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonWindowHeight - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100))];
     } else {
-        self = [super initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - kDoraemonSizeFrom750_Landscape(100) - kDoraemonSizeFrom750_Landscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonScreenWidth - 2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(100))];
+        self = [super initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30) - IPHONE_SAFEBOTTOMAREA_HEIGHT, DoraemonWindowWidth - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100))];
     }
     
     if (self) {

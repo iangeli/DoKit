@@ -8,20 +8,20 @@
 #import "DoraemonUIProfileViewController.h"
 #import "DoraemonCellSwitch.h"
 #import "DoraemonDefine.h"
-#import "DoraemonUIProfileManager.h"
 #import "DoraemonHomeWindow.h"
+#import "DoraemonUIProfileManager.h"
 
-@interface DoraemonUIProfileViewController () <DoraemonSwitchViewDelegate>
+@interface DoraemonUIProfileViewController ()<DoraemonSwitchViewDelegate>
 @property (nonatomic, strong) DoraemonCellSwitch *switchView;
 @end
 
 @implementation DoraemonUIProfileViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.title = @"UI Hierarchy";
-    
-    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFrom750(104))];
+
+    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFromWidth(104))];
     [_switchView renderUIWithTitle:@"UI Hierarchy switch" switchOn:[DoraemonUIProfileManager sharedInstance].enable];
     [_switchView needTopLine];
     [_switchView needDownLine];
@@ -29,8 +29,8 @@
     [self.view addSubview:_switchView];
 }
 
-#pragma mark -- DoraemonSwitchViewDelegate
-- (void)changeSwitchOn:(BOOL)on sender:(id)sender{
+#pragma mark-- DoraemonSwitchViewDelegate
+- (void)changeSwitchOn:(BOOL)on sender:(id)sender {
     [DoraemonUIProfileManager sharedInstance].enable = on;
     [[DoraemonHomeWindow shareInstance] hide];
 }

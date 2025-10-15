@@ -17,7 +17,7 @@
     }
     
     UILabel *label = [[UILabel alloc] init];
-    label.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(14)];
+    label.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(14)];
     label.text = text;
     [label sizeToFit];
     label.textColor = [UIColor labelColor];
@@ -36,9 +36,9 @@
     }
     
     UILabel *label = [[UILabel alloc] init];
-    label.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(28)];
+    label.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(28)];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineSpacing = kDoraemonSizeFrom750_Landscape(8);
+    paragraphStyle.lineSpacing = kDoraemonSizeFromLandscape(8);
     paragraphStyle.alignment = NSTextAlignmentCenter;
     NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
     [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
@@ -47,9 +47,9 @@
     CGSize size = [label sizeThatFits:CGSizeMake(superView.doraemon_width-50, CGFLOAT_MAX)];
     label.backgroundColor = [UIColor labelColor];
 
-    CGFloat padding = kDoraemonSizeFrom750_Landscape(37);
+    CGFloat padding = kDoraemonSizeFromLandscape(37);
     label.frame = CGRectMake(superView.doraemon_width/2-size.width/2 - padding, superView.doraemon_height/2-size.height/2 - padding, size.width + padding*2, size.height + padding*2);
-    label.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(8);
+    label.layer.cornerRadius = kDoraemonSizeFromLandscape(8);
     [label.layer setMasksToBounds:YES];
     label.textColor = [UIColor whiteColor];
     [superView addSubview:label];

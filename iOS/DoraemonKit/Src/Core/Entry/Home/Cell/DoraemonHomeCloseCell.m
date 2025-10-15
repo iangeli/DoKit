@@ -34,7 +34,7 @@
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_closeButton setTitle:@"Close" forState:UIControlStateNormal];
         [_closeButton setTitleColor:[UIColor labelColor] forState:UIControlStateNormal];
-        _closeButton.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(28)];
+        _closeButton.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(28)];
         [_closeButton addTarget:self action:@selector(closeButtonHandle) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -52,8 +52,8 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat x = kDoraemonSizeFrom750_Landscape(10);
+    CGFloat x = kDoraemonSizeFromLandscape(10);
 
-    self.closeButton.frame = CGRectMake(x, 0, self.doraemon_width - x * 2, kDoraemonSizeFrom750_Landscape(100));
+    self.closeButton.frame = CGRectMake(x, 0, self.doraemon_width - x * 2, kDoraemonSizeFromLandscape(100));
 }
 @end

@@ -39,7 +39,7 @@ static CGFloat const kColorPickWindowSize = 150;
 }
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectMake(DoraemonScreenWidth/2-kColorPickWindowSize/2, DoraemonScreenHeight/2-kColorPickWindowSize/2, kColorPickWindowSize, kColorPickWindowSize)];
+    self = [super initWithFrame:CGRectMake(DoraemonWindowWidth/2-kColorPickWindowSize/2, DoraemonWindowHeight/2-kColorPickWindowSize/2, kColorPickWindowSize, kColorPickWindowSize)];
     if (self) {
 
         for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes){

@@ -41,11 +41,11 @@
     CGFloat x = self.startingPosition.x;
     CGFloat y = self.startingPosition.y;
     CGPoint defaultPosition = DoraemonStartingPosition;
-    if (x < 0 || x > (DoraemonScreenWidth - _kEntryViewSize)) {
+    if (x < 0 || x > (DoraemonWindowWidth - _kEntryViewSize)) {
         x = defaultPosition.x;
     }
     
-    if (y < 0 || y > (DoraemonScreenHeight - _kEntryViewSize)) {
+    if (y < 0 || y > (DoraemonWindowHeight - _kEntryViewSize)) {
         y = defaultPosition.y;
     }
     
@@ -113,14 +113,14 @@
     if (newX < _kEntryViewSize/2) {
         newX = _kEntryViewSize/2;
     }
-    if (newX > DoraemonScreenWidth - _kEntryViewSize/2) {
-        newX = DoraemonScreenWidth - _kEntryViewSize/2;
+    if (newX > DoraemonWindowWidth - _kEntryViewSize/2) {
+        newX = DoraemonWindowWidth - _kEntryViewSize/2;
     }
     if (newY < _kEntryViewSize/2) {
         newY = _kEntryViewSize/2;
     }
-    if (newY > DoraemonScreenHeight - _kEntryViewSize/2) {
-        newY = DoraemonScreenHeight - _kEntryViewSize/2;
+    if (newY > DoraemonWindowHeight - _kEntryViewSize/2) {
+        newY = DoraemonWindowHeight - _kEntryViewSize/2;
     }
     panView.center = CGPointMake(newX, newY);
 }

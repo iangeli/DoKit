@@ -31,7 +31,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        _kStartX = kDoraemonSizeFrom750_Landscape(52);
+        _kStartX = kDoraemonSizeFromLandscape(52);
         
         self.backgroundColor = [UIColor clearColor];
         self.showsVerticalScrollIndicator = NO;
@@ -48,14 +48,14 @@
         _bottomLine.backgroundColor = [UIColor doraemon_colorWithString:@"#999999"];
         [self addSubview:_bottomLine];
         
-        _lowValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.doraemon_height-kDoraemonSizeFrom750_Landscape(28), _kStartX, kDoraemonSizeFrom750_Landscape(28))];
+        _lowValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.doraemon_height-kDoraemonSizeFromLandscape(28), _kStartX, kDoraemonSizeFromLandscape(28))];
         _lowValueLabel.text = @"0";
         _lowValueLabel.textColor = [UIColor whiteColor];
         _lowValueLabel.textAlignment = NSTextAlignmentCenter;
         _lowValueLabel.font = [UIFont systemFontOfSize:10];
         [self addSubview:_lowValueLabel];
         
-        _highValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _kStartX, kDoraemonSizeFrom750_Landscape(28))];
+        _highValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _kStartX, kDoraemonSizeFromLandscape(28))];
         _highValueLabel.text = @"100";
         _highValueLabel.textColor = [UIColor whiteColor];
         _highValueLabel.textAlignment = NSTextAlignmentCenter;
@@ -65,7 +65,7 @@
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.textColor = [UIColor doraemon_colorWithString:@"#00DFDD"];
         _tipLabel.textAlignment = NSTextAlignmentCenter;
-        _tipLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(20)];
+        _tipLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(20)];
         _tipLabel.lineBreakMode = NSLineBreakByClipping;
         [self addSubview:_tipLabel];
     }
@@ -77,8 +77,8 @@
     [super layoutSubviews];
 
     _bottomLine.frame = CGRectMake(_kStartX, self.doraemon_height-1, self.doraemon_width, 1);
-    _lowValueLabel.frame = CGRectMake(0, self.doraemon_height-kDoraemonSizeFrom750_Landscape(28), _kStartX, kDoraemonSizeFrom750_Landscape(28));
-    _highValueLabel.frame = CGRectMake(0, 0, _kStartX, kDoraemonSizeFrom750_Landscape(28));
+    _lowValueLabel.frame = CGRectMake(0, self.doraemon_height-kDoraemonSizeFromLandscape(28), _kStartX, kDoraemonSizeFromLandscape(28));
+    _highValueLabel.frame = CGRectMake(0, 0, _kStartX, kDoraemonSizeFromLandscape(28));
 }
 
 - (void)setLowValue:(NSString *)value{
@@ -172,7 +172,7 @@
     CALayer *pointLayer = [CALayer layer];
     pointLayer.backgroundColor = [UIColor doraemon_colorWithString:@"#00DFDD"].CGColor;
     pointLayer.cornerRadius = 2;
-    pointLayer.frame = CGRectMake(point.x-kDoraemonSizeFrom750_Landscape(8)/2, point.y-kDoraemonSizeFrom750_Landscape(8)/2, kDoraemonSizeFrom750_Landscape(8), kDoraemonSizeFrom750_Landscape(8));
+    pointLayer.frame = CGRectMake(point.x-kDoraemonSizeFromLandscape(8)/2, point.y-kDoraemonSizeFromLandscape(8)/2, kDoraemonSizeFromLandscape(8), kDoraemonSizeFromLandscape(8));
     [_pointLayerList addObject:pointLayer];
 }
 

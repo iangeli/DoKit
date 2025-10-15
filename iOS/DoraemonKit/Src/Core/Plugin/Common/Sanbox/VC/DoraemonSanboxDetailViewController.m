@@ -14,6 +14,7 @@
 #import "DoraemonDBManager.h"
 #import "DoraemonDBTableViewController.h"
 #import "DoraemonManager.h"
+#import "DoraemonDefine.h"
 
 @interface DoraemonSanboxDetailViewController ()<QLPreviewControllerDelegate,QLPreviewControllerDataSource,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UIImageView *imageView;

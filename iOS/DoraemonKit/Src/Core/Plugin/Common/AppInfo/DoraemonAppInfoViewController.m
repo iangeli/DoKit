@@ -70,7 +70,7 @@
 
     NSString *iphoneType = [DoraemonAppInfoUtil iphoneType];
 
-    NSString *iphoneSize = [NSString stringWithFormat:@"%.0f * %.0f",DoraemonScreenWidth,DoraemonScreenHeight];
+    NSString *iphoneSize = [NSString stringWithFormat:@"%.0f * %.0f",DoraemonWindowWidth,DoraemonWindowHeight];
 
     NSString *ipv4String = [DoraemonAppInfoUtil getIPAddress:YES];
 
@@ -218,15 +218,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kDoraemonSizeFrom750_Landscape(120);
+    return kDoraemonSizeFromLandscape(120);
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(120))];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(32), 0, DoraemonScreenWidth-kDoraemonSizeFrom750_Landscape(32), kDoraemonSizeFrom750_Landscape(120))];
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.doraemon_width, kDoraemonSizeFromLandscape(120))];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(32), 0, DoraemonWindowWidth-kDoraemonSizeFromLandscape(32), kDoraemonSizeFromLandscape(120))];
     NSDictionary *dic = _dataArray[section];
     titleLabel.text = dic[@"title"];
-    titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(28)];
+    titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(28)];
     titleLabel.textColor = [UIColor doraemon_black_3];
     [sectionView addSubview:titleLabel];
     return sectionView;

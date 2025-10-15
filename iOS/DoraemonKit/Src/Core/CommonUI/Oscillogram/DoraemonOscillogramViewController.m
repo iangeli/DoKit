@@ -22,11 +22,11 @@
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.text = [self title];
-    titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(20)];
+    titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(20)];
     titleLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:titleLabel];
     [titleLabel sizeToFit];
-    titleLabel.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(20), kDoraemonSizeFrom750_Landscape(10), titleLabel.doraemon_width, titleLabel.doraemon_height);
+    titleLabel.frame = CGRectMake(kDoraemonSizeFromLandscape(20), kDoraemonSizeFromLandscape(10), titleLabel.doraemon_width, titleLabel.doraemon_height);
 
     _oscillogramView = [[DoraemonOscillogramView alloc] initWithFrame:CGRectMake(0, titleLabel.doraemon_bottom, CGRectGetWidth(self.view.frame), 60 - titleLabel.doraemon_bottom)];
     _oscillogramView.backgroundColor = [UIColor clearColor];

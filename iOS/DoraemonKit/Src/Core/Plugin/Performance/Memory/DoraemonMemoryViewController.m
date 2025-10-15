@@ -21,7 +21,7 @@
     [super viewDidLoad];
     self.title = @"Memory monitor";
     
-    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
+    _switchView = [[DoraemonCellSwitch alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFromLandscape(104))];
     [_switchView renderUIWithTitle:@"Memory monitor switch" switchOn:[[DoraemonCacheManager sharedInstance] memorySwitch]];
     [_switchView needTopLine];
     [_switchView needDownLine];

@@ -28,12 +28,12 @@ static CGFloat const kViewCheckSize = 62;
 -(instancetype)init{
     self = [super init];
     if (self) {
-        self.frame = CGRectMake(0, 0, DoraemonScreenWidth, DoraemonScreenHeight);
+        self.frame = CGRectMake(0, 0, DoraemonWindowWidth, DoraemonWindowHeight);
         self.backgroundColor = [UIColor clearColor];
         self.layer.zPosition = FLT_MAX;
         //self.userInteractionEnabled = NO;
 
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(DoraemonScreenWidth/2-kViewCheckSize/2, DoraemonScreenHeight/2-kViewCheckSize/2, kViewCheckSize, kViewCheckSize)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(DoraemonWindowWidth/2-kViewCheckSize/2, DoraemonWindowHeight/2-kViewCheckSize/2, kViewCheckSize, kViewCheckSize)];
         imageView.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_visual"];
         [self addSubview:imageView];
         _imageView = imageView;
@@ -86,9 +86,9 @@ static CGFloat const kViewCheckSize = 62;
         
         CGRect infoWindowFrame = CGRectZero;
         if (self.orientationIsLandscape) {
-            infoWindowFrame = CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - kDoraemonSizeFrom750_Landscape(100) - kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - 2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(100));
+            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100));
         } else {
-            infoWindowFrame = CGRectMake(kDoraemonSizeFrom750_Landscape(30), DoraemonScreenHeight - kDoraemonSizeFrom750_Landscape(100) - kDoraemonSizeFrom750_Landscape(30), DoraemonScreenWidth - 2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(100));
+            infoWindowFrame = CGRectMake(kDoraemonSizeFromLandscape(30), DoraemonWindowHeight - kDoraemonSizeFromLandscape(100) - kDoraemonSizeFromLandscape(30), DoraemonWindowWidth - 2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100));
         } 
         _infoWindow = [[DoraemonVisualInfoWindow alloc] initWithFrame:infoWindowFrame];
 

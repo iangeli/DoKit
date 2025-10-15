@@ -43,7 +43,7 @@
 }
 
 - (DoraemonHierarchyCellModel *)noneInsets {
-    self.separatorInsets = UIEdgeInsetsMake(0, DoraemonScreenWidth, 0, 0);
+    self.separatorInsets = UIEdgeInsetsMake(0, DoraemonWindowWidth, 0, 0);
     return self;
 }
 

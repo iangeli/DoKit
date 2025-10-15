@@ -210,8 +210,8 @@
     if (height != self.doraemon_height) {
         self.doraemon_height = height;
         if (!self.isMoved) {
-            if (self.doraemon_bottom != DoraemonScreenHeight - 10 * 2) {
-                self.doraemon_bottom = DoraemonScreenHeight - 10 * 2;
+            if (self.doraemon_bottom != DoraemonWindowHeight - 10 * 2) {
+                self.doraemon_bottom = DoraemonWindowHeight - 10 * 2;
             }
         }
     }

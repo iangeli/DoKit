@@ -22,7 +22,7 @@
 
     _contentLabel = [[UILabel alloc] init];
     _contentLabel.textColor = [UIColor doraemon_black_2];
-    _contentLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)];
+    _contentLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(24)];
     _contentLabel.numberOfLines = 0;
     [self.view addSubview:_contentLabel];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:contet];

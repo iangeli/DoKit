@@ -59,7 +59,8 @@
 - (void)resetLayout{
     CGFloat offsetX = 0;
     CGFloat offsetY = IS_IPHONE_X_Series ? 32 : 0;
-    CGFloat width = [UIApplication sharedApplication].fetchKeyWindow.windowOrientation ? DoraemonScreenWidth:DoraemonScreenHeight;
+    UIWindow *window = [UIApplication sharedApplication].fetchKeyWindow;
+    CGFloat width = window.windowOrientation ? CGRectGetWidth(window.frame):CGRectGetHeight(window.frame);
     CGFloat height = 60;
 
     __block NSInteger count = 0;

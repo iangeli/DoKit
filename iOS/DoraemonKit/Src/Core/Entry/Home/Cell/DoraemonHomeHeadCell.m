@@ -32,7 +32,7 @@
 
 - (void)renderUIWithTitle:(NSString *)title{
     _title.text = title;
-    _title.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)];
+    _title.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(24)];
     [self setNeedsLayout];
 }
 
@@ -40,10 +40,10 @@
     [super layoutSubviews];
     
     [self.title sizeToFit];
-    self.title.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(32), self.doraemon_height/2-self.title.doraemon_height/2, self.title.doraemon_width, self.title.doraemon_height);
+    self.title.frame = CGRectMake(kDoraemonSizeFromLandscape(32), self.doraemon_height/2-self.title.doraemon_height/2, self.title.doraemon_width, self.title.doraemon_height);
     if (self.subTitleLabel) {
         [self.subTitleLabel sizeToFit];
-        self.subTitleLabel.frame = CGRectMake(self.title.doraemon_right+kDoraemonSizeFrom750_Landscape(2), self.doraemon_height/2-self.subTitleLabel.doraemon_height/2, self.subTitleLabel.doraemon_width, self.subTitleLabel.doraemon_height);
+        self.subTitleLabel.frame = CGRectMake(self.title.doraemon_right+kDoraemonSizeFromLandscape(2), self.doraemon_height/2-self.subTitleLabel.doraemon_height/2, self.subTitleLabel.doraemon_width, self.subTitleLabel.doraemon_height);
     }
 }
 @end

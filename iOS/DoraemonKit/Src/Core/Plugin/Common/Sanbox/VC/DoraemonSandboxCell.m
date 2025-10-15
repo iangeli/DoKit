@@ -28,12 +28,12 @@
         [self.contentView addSubview:self.fileTypeIcon];
         
         self.fileTitleLabel = [[UILabel alloc] init];
-        self.fileTitleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(32)];
+        self.fileTitleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(32)];
         self.fileSizeLabel.textColor = [UIColor doraemon_black_1];
         [self.contentView addSubview:self.fileTitleLabel];
         
         self.fileSizeLabel = [[UILabel alloc] init];
-        self.fileSizeLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(32)];
+        self.fileSizeLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(32)];
         self.fileSizeLabel.textColor = [UIColor doraemon_black_2];
         [self.contentView addSubview:self.fileSizeLabel];
     }
@@ -49,12 +49,12 @@
     }
     self.fileTypeIcon.image = [UIImage doraemon_xcassetImageNamed:iconName];
     [self.fileTypeIcon sizeToFit];
-    self.fileTypeIcon.frame = CGRectMake(kDoraemonSizeFrom750_Landscape(32), [[self class] cellHeight]/2-self.fileTypeIcon.doraemon_height/2, self.fileTypeIcon.doraemon_width, self.fileTypeIcon.doraemon_height);
+    self.fileTypeIcon.frame = CGRectMake(kDoraemonSizeFromLandscape(32), [[self class] cellHeight]/2-self.fileTypeIcon.doraemon_height/2, self.fileTypeIcon.doraemon_width, self.fileTypeIcon.doraemon_height);
     
     self.fileTitleLabel.text = model.name;
     self.fileTitleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [self.fileTitleLabel sizeToFit];
-    self.fileTitleLabel.frame = CGRectMake(self.fileTypeIcon.doraemon_right+kDoraemonSizeFrom750_Landscape(32), [[self class] cellHeight]/2-self.fileTitleLabel.doraemon_height/2, DoraemonScreenWidth-150, self.fileTitleLabel.doraemon_height);
+    self.fileTitleLabel.frame = CGRectMake(self.fileTypeIcon.doraemon_right+kDoraemonSizeFromLandscape(32), [[self class] cellHeight]/2-self.fileTitleLabel.doraemon_height/2, DoraemonWindowWidth-150, self.fileTitleLabel.doraemon_height);
 
     NSInteger fileSize = model.fileSize;
     NSString *fileSizeStr = nil;
@@ -70,10 +70,10 @@
     
     self.fileSizeLabel.text = fileSizeStr;
     [self.fileSizeLabel sizeToFit];
-    self.fileSizeLabel.frame = CGRectMake(DoraemonScreenWidth-15-self.fileSizeLabel.doraemon_width, [[self class] cellHeight]/2-self.fileSizeLabel.doraemon_height/2, self.fileSizeLabel.doraemon_width, self.fileSizeLabel.doraemon_height);
+    self.fileSizeLabel.frame = CGRectMake(DoraemonWindowWidth-15-self.fileSizeLabel.doraemon_width, [[self class] cellHeight]/2-self.fileSizeLabel.doraemon_height/2, self.fileSizeLabel.doraemon_width, self.fileSizeLabel.doraemon_height);
 }
 
 + (CGFloat)cellHeight{
-    return 48.;
+    return kDoraemonSizeFromLandscape(104);
 }
 @end

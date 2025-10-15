@@ -31,8 +31,8 @@
     self.title = @"Browser";
     self.view.backgroundColor = [UIColor systemBackgroundColor];
     
-    _h5UrlTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, kDoraemonSizeFrom750_Landscape(32), self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(358))];
-    _h5UrlTextView.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(32)];
+    _h5UrlTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, kDoraemonSizeFromLandscape(32), self.view.doraemon_width, kDoraemonSizeFromLandscape(358))];
+    _h5UrlTextView.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(32)];
     [self.view addSubview:_h5UrlTextView];
     _h5UrlTextView.keyboardType = UIKeyboardTypeURL;
     _h5UrlTextView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -43,16 +43,16 @@
     _lineView.backgroundColor = [UIColor doraemon_line];
     [self.view addSubview:_lineView];
     
-    _jumpBtn = [[UIButton alloc] initWithFrame:CGRectMake(kDoraemonSizeFrom750_Landscape(30), self.view.doraemon_height-kDoraemonSizeFrom750_Landscape(30 + 100), self.view.doraemon_width-2*kDoraemonSizeFrom750_Landscape(30), kDoraemonSizeFrom750_Landscape(100))];
+    _jumpBtn = [[UIButton alloc] initWithFrame:CGRectMake(kDoraemonSizeFromLandscape(30), self.view.doraemon_height-kDoraemonSizeFromLandscape(30 + 100), self.view.doraemon_width-2*kDoraemonSizeFromLandscape(30), kDoraemonSizeFromLandscape(100))];
     _jumpBtn.backgroundColor = [UIColor doraemon_colorWithHexString:@"#337CC4"];
     [_jumpBtn setTitle:@"Click to jump" forState:UIControlStateNormal];
     [_jumpBtn addTarget:self action:@selector(jump) forControlEvents:UIControlEventTouchUpInside];
-    _jumpBtn.layer.cornerRadius = kDoraemonSizeFrom750_Landscape(8);
+    _jumpBtn.layer.cornerRadius = kDoraemonSizeFromLandscape(8);
     [self.view addSubview:_jumpBtn];
     
-    self.scanJumpBtn.frame = CGRectMake(self.view.doraemon_width - kDoraemonSizeFrom750_Landscape(38.6 + 33.2), _lineView.doraemon_top - kDoraemonSizeFrom750_Landscape(38.6 + 33.2), kDoraemonSizeFrom750_Landscape(38.6), kDoraemonSizeFrom750_Landscape(38.6));
+    self.scanJumpBtn.frame = CGRectMake(self.view.doraemon_width - kDoraemonSizeFromLandscape(38.6 + 33.2), _lineView.doraemon_top - kDoraemonSizeFromLandscape(38.6 + 33.2), kDoraemonSizeFromLandscape(38.6), kDoraemonSizeFromLandscape(38.6));
     
-    self.tableView.frame = CGRectMake(0, _lineView.doraemon_bottom + kDoraemonSizeFrom750_Landscape(32), self.view.doraemon_width, _jumpBtn.doraemon_top - _lineView.doraemon_bottom - kDoraemonSizeFrom750_Landscape(32));
+    self.tableView.frame = CGRectMake(0, _lineView.doraemon_bottom + kDoraemonSizeFromLandscape(32), self.view.doraemon_width, _jumpBtn.doraemon_top - _lineView.doraemon_bottom - kDoraemonSizeFromLandscape(32));
     
     [self.view bringSubviewToFront:_jumpBtn];
 
@@ -122,7 +122,7 @@
     
     CGRect frame = self.jumpBtn.frame;
 
-    CGFloat offset = height - (DoraemonScreenHeight - CGRectGetMaxY(frame));
+    CGFloat offset = height - (DoraemonWindowHeight - CGRectGetMaxY(frame));
 
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
@@ -137,7 +137,7 @@
     NSDictionary *userInfo = [aNotification userInfo];
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
-        self.jumpBtn.doraemon_y = self.view.doraemon_height - kDoraemonSizeFrom750_Landscape(30 + 100);
+        self.jumpBtn.doraemon_y = self.view.doraemon_height - kDoraemonSizeFromLandscape(30 + 100);
         [self.view layoutIfNeeded];
     }];
 }
@@ -156,7 +156,7 @@
         cell.textLabel.text = @"default value";
     }
     cell.textLabel.textColor = [UIColor doraemon_colorWithHex:0x333333 andAlpha:1];
-    cell.textLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(30)];
+    cell.textLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(30)];
     cell.imageView.image = [UIImage doraemon_xcassetImageNamed:@"doraemon_search"];
     return cell;
 }
@@ -169,20 +169,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return kDoraemonSizeFrom750_Landscape(40 + 33);
+    return kDoraemonSizeFromLandscape(40 + 33);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *footerView = [[UIView alloc] init];
-    footerView.frame = CGRectMake(0, 0, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(40 + 33));
+    footerView.frame = CGRectMake(0, 0, self.view.doraemon_width, kDoraemonSizeFromLandscape(40 + 33));
 //    footerView.backgroundColor = [UIColor redColor];
     
     UIButton *clearButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    clearButton.frame = CGRectMake((self.view.doraemon_width - kDoraemonSizeFrom750_Landscape(300))/2, kDoraemonSizeFrom750_Landscape(40), kDoraemonSizeFrom750_Landscape(300), kDoraemonSizeFrom750_Landscape(33));
+    clearButton.frame = CGRectMake((self.view.doraemon_width - kDoraemonSizeFromLandscape(300))/2, kDoraemonSizeFromLandscape(40), kDoraemonSizeFromLandscape(300), kDoraemonSizeFromLandscape(33));
 //    clearButton.backgroundColor = [UIColor orangeColor];
     [clearButton setTitle:@"Clear search history" forState:(UIControlStateNormal)];
     [clearButton setTitleColor:[UIColor doraemon_colorWithHex:0x999999 andAlpha:1] forState:UIControlStateNormal];
-    clearButton.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFrom750_Landscape(24)];
+    clearButton.titleLabel.font = [UIFont systemFontOfSize:kDoraemonSizeFromLandscape(24)];
     [clearButton addTarget:self action:@selector(clearRecord) forControlEvents:(UIControlEventTouchUpInside)];
     [footerView addSubview:clearButton];
     

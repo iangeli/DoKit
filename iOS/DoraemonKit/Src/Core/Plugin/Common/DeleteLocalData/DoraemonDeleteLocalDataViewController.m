@@ -19,7 +19,7 @@
     [super viewDidLoad];
     self.title = @"Clear Sanbox";
     
-    _cellBtn = [[DoraemonCellButton alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFrom750_Landscape(104))];
+    _cellBtn = [[DoraemonCellButton alloc] initWithFrame:CGRectMake(0, IPHONE_NAVIGATIONBAR_HEIGHT, self.view.doraemon_width, kDoraemonSizeFromLandscape(104))];
     [_cellBtn renderUIWithTitle:@"Clear Sanbox"];
     [_cellBtn renderUIWithRightContent:[self getHomeDirFileSize]];
     _cellBtn.delegate = self;

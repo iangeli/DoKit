@@ -26,16 +26,17 @@
 
 #define WEAKSELF(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
-#define DoraemonScreenWidth [UIScreen mainScreen].bounds.size.width
-#define DoraemonScreenHeight [UIScreen mainScreen].bounds.size.height
+#define DoraemonWindowWidth [UIApplication sharedApplication].fetchKeyWindow.frame.size.width
+#define DoraemonWindowHeight [UIApplication sharedApplication].fetchKeyWindow.frame.size.height
 
-#define DoraemonStartingPosition            CGPointMake(0, DoraemonScreenHeight/3.0)
+#define DoraemonStartingPosition            CGPointMake(0, DoraemonWindowHeight/3.0)
 
 #define DoraemonFullScreenStartingPosition  CGPointZero
 
-#define kDoraemonSizeFrom750(x) ((x)*DoraemonScreenWidth/750)
+#define kDoraemonSizeFromWidth(x) ((x)*MIN(DoraemonWindowWidth, 750)/750)
+#define kDoraemonSizeFromHeight(x) ((x)*MIN(DoraemonWindowHeight, 750)/750)
 
-#define kDoraemonSizeFrom750_Landscape(x) ([UIApplication sharedApplication].fetchKeyWindow.orientationIsLandscape ? ((x)*DoraemonScreenHeight/750) : kDoraemonSizeFrom750(x))
+#define kDoraemonSizeFromLandscape(x) ([UIApplication sharedApplication].fetchKeyWindow.orientationIsLandscape ? kDoraemonSizeFromHeight(x) : kDoraemonSizeFromWidth(x))
 
 #define IS_IPHONE_X_Series [DoraemonAppInfoUtil isIPhoneXSeries]
 #define IPHONE_NAVIGATIONBAR_HEIGHT  (IS_IPHONE_X_Series ? 88 : 64)
