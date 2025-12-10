@@ -35,10 +35,16 @@
             temp = (UIWindowScene *)scene;
             if (scene.activationState == UISceneActivationStateForegroundActive) {
                 UIWindowScene *windowScene = (UIWindowScene *)scene;
+                UIWindow *win = nil;
                 for (UIWindow *window in windowScene.windows) {
-                    if (window.isKeyWindow) {
-                        return window;
+                    if (win && win.windowLevel < window.windowLevel) {
+                        continue;
+                    } else if (window.windowLevel >= 0) {
+                        win = window;
                     }
+                }
+                if (win) {
+                    return win;
                 }
             }
         }
