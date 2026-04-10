@@ -50,16 +50,23 @@
     DoraemonHomeViewController *vc = [[DoraemonHomeViewController alloc] init];
     [self setRootVc:vc];
 
+    self.alpha = 0;
     self.hidden = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.alpha = 1.0;
+    }];
 }
 
 - (void)hide {
-    if (self.rootViewController.presentedViewController) {
-        [self.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-    }
-    [self setRootVc:nil];
-
-    self.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (self.rootViewController.presentedViewController) {
+            [self.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+        }
+        [self setRootVc:nil];
+        self.hidden = YES;
+    }];
 }
 
 - (void)setRootVc:(UIViewController *)rootVc {

@@ -30,6 +30,11 @@ static NSString *DoraemonHomeCloseCellID = @"DoraemonHomeCloseCellID";
 @end
 
 @implementation DoraemonHomeViewController
+
+- (UIImage *)leftNavImage {
+    return nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Home";

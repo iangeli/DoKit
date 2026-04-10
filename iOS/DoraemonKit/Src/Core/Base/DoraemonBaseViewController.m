@@ -22,14 +22,20 @@
 @end
 
 @implementation DoraemonBaseViewController
+
+- (UIImage *)leftNavImage {
+    return [UIImage systemImageNamed:@"chevron.backward"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor systemBackgroundColor];
 
-    UIImage *image = [UIImage systemImageNamed:@"chevron.backward"];
-    self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:image selector:@selector(leftNavBackClick:)];
-    [self setLeftNavBarItems:@[ self.leftModel ]];
+    if (self.leftNavImage) {
+        self.leftModel = [[DoraemonNavBarItemModel alloc] initWithImage:self.leftNavImage selector:@selector(leftNavBackClick:)];
+        [self setLeftNavBarItems:@[ self.leftModel ]];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

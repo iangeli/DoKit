@@ -15,7 +15,6 @@
 #import "DoraemonUtil.h"
 
 typedef NS_ENUM(NSUInteger, SortBy) {
-    SortByDefault,
     SortByName,
     SortBySizeAscending,
     SortBySizeDescending
@@ -52,7 +51,7 @@ typedef NS_ENUM(NSUInteger, SortBy) {
 }
 
 - (void)initData {
-    _sortType = SortByDefault;
+    _sortType = SortByName;
     _dataArray = @[];
     _rootPath = NSHomeDirectory();
 }
@@ -79,7 +78,8 @@ typedef NS_ENUM(NSUInteger, SortBy) {
 
 - (UIBarButtonItem *)sortButton {
     if (!_sortButton) {
-        _sortButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self action:@selector(showSortMenu)];
+        NSString *title = [self sortMenuTitleForType:self.sortType];
+        _sortButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(showSortMenu)];
     }
     return _sortButton;
 }
@@ -94,10 +94,10 @@ typedef NS_ENUM(NSUInteger, SortBy) {
 
     self.dataSource = [[UITableViewDiffableDataSource<NSNumber *, DoraemonSandboxModel *> alloc] initWithTableView:self.tableView
                                                                                                       cellProvider:^UITableViewCell *_Nullable(UITableView *tableView, NSIndexPath *indexPath, DoraemonSandboxModel *item) {
-                                                                                                          DoraemonSandBoxCell *cell = [tableView dequeueReusableCellWithIdentifier:DoraemonSandBoxCell.description forIndexPath:indexPath];
-                                                                                                          [cell renderUIWithData:item];
-                                                                                                          return cell;
-                                                                                                      }];
+        DoraemonSandBoxCell *cell = [tableView dequeueReusableCellWithIdentifier:DoraemonSandBoxCell.description forIndexPath:indexPath];
+        [cell renderUIWithData:item];
+        return cell;
+    }];
     self.dataSource.defaultRowAnimation = UITableViewRowAnimationFade;
 
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -127,10 +127,12 @@ typedef NS_ENUM(NSUInteger, SortBy) {
         self.isEditingMode = YES;
         [self.tableView setEditing:YES animated:YES];
         self.deleteButton.hidden = NO;
+        UIEdgeInsets inset = self.view.safeAreaInsets;
+        self.deleteButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, inset.bottom, 0);
         [UIView animateWithDuration:0.25
                          animations:^{
-                             self.deleteButton.frame = CGRectMake(0, self.view.doraemon_height - 60, self.view.doraemon_width, 60);
-                         }];
+            self.deleteButton.frame = CGRectMake(0, self.view.doraemon_height - 60 - inset.bottom, self.view.doraemon_width, 60 + inset.bottom);
+        }];
         self.navigationItem.rightBarButtonItem = self.cancelEditButton;
     }
 }
@@ -141,12 +143,12 @@ typedef NS_ENUM(NSUInteger, SortBy) {
         [self.tableView setEditing:NO animated:YES];
         [self.selectedIndexPaths removeAllObjects];
         [UIView animateWithDuration:0.25
-            animations:^{
-                self.deleteButton.frame = CGRectMake(0, self.view.doraemon_height, self.view.doraemon_width, 60);
-            }
-            completion:^(BOOL finished) {
-                self.deleteButton.hidden = YES;
-            }];
+                         animations:^{
+            self.deleteButton.frame = CGRectMake(0, self.view.doraemon_height, self.deleteButton.frame.size.width, self.deleteButton.frame.size.height);
+        }
+                         completion:^(BOOL finished) {
+            self.deleteButton.hidden = YES;
+        }];
         self.navigationItem.rightBarButtonItem = self.sortButton;
     }
 }
@@ -157,9 +159,7 @@ typedef NS_ENUM(NSUInteger, SortBy) {
         DoraemonSandboxModel *model = self.dataArray[indexPath.row];
         [modelsToDelete addObject:model];
     }
-    for (DoraemonSandboxModel *model in modelsToDelete) {
-        [self deleteByDoraemonSandboxModel:model];
-    }
+    [self deleteFileWithPaths:[modelsToDelete valueForKeyPath:@"path"]];
     [self exitEditingMode];
     [self loadPath:self.currentDirModel.path];
 }
@@ -216,15 +216,6 @@ typedef NS_ENUM(NSUInteger, SortBy) {
     return YES;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return @"Delete";
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    DoraemonSandboxModel *model = _dataArray[indexPath.row];
-    [self deleteByDoraemonSandboxModel:model];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [DoraemonSandBoxCell cellHeight];
 }
@@ -248,6 +239,40 @@ typedef NS_ENUM(NSUInteger, SortBy) {
     if (self.isEditingMode) {
         [self.selectedIndexPaths removeObject:indexPath];
     }
+}
+
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    __weak typeof(self) weakSelf = self;
+    DoraemonSandboxModel *model = self.dataArray[indexPath.row];
+
+    UIContextualAction *shareAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"Share" handler:^(UIContextualAction *_Nonnull action, UIView *_Nonnull sourceView, void (^_Nonnull completionHandler)(BOOL)) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf shareFileWithPath:model.path];
+        completionHandler(YES);
+    }];
+    shareAction.backgroundColor = [UIColor systemPurpleColor];
+
+    UIContextualAction *previewAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"Preview" handler:^(UIContextualAction *_Nonnull action, UIView *_Nonnull sourceView, void (^_Nonnull completionHandler)(BOOL)) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf previewFile:model.path];
+        completionHandler(YES);
+    }];
+    previewAction.backgroundColor = [UIColor systemOrangeColor];
+
+    return [UISwipeActionsConfiguration configurationWithActions:@[ shareAction, previewAction ]];
+}
+
+- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak typeof(self) weakSelf = self;
+    DoraemonSandboxModel *model = self.dataArray[indexPath.row];
+    return [UISwipeActionsConfiguration configurationWithActions:@[
+        [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Delete" handler:^(UIContextualAction *_Nonnull action, UIView *_Nonnull sourceView, void (^_Nonnull completionHandler)(BOOL)) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [tableView setEditing:NO animated:YES];
+        [strongSelf deleteFileWithPath:model.path];
+        completionHandler(YES);
+    }]
+    ]];
 }
 
 - (void)leftNavBackClick:(id)clickView {
@@ -274,19 +299,25 @@ typedef NS_ENUM(NSUInteger, SortBy) {
     UIAlertAction *previewAction = [UIAlertAction actionWithTitle:@"Preview"
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *_Nonnull action) {
-                                                              __strong typeof(self) strongSelf = weakSelf;
-                                                              [strongSelf previewFile:filePath];
-                                                          }];
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf previewFile:filePath];
+    }];
     UIAlertAction *shareAction = [UIAlertAction actionWithTitle:@"Share"
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction *_Nonnull action) {
-                                                            __strong typeof(self) strongSelf = weakSelf;
-                                                            [strongSelf shareFileWithPath:filePath];
-                                                        }];
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf shareFileWithPath:filePath];
+    }];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *_Nonnull action) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf deleteFileWithPath:filePath];
+    }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
                                                            style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction *_Nonnull action){
-                                                         }];
+    }];
     [alertVc addAction:previewAction];
     [alertVc addAction:shareAction];
     [alertVc addAction:cancelAction];
@@ -304,9 +335,17 @@ typedef NS_ENUM(NSUInteger, SortBy) {
     [DoraemonUtil shareURL:[NSURL fileURLWithPath:filePath] formVC:self];
 }
 
-- (void)deleteByDoraemonSandboxModel:(DoraemonSandboxModel *)model {
+- (void)deleteFileWithPath:(NSString *)filePath {
     NSFileManager *fm = [NSFileManager defaultManager];
-    [fm removeItemAtPath:model.path error:nil];
+    [fm removeItemAtPath:filePath error:nil];
+    [self loadPath:_currentDirModel.path];
+}
+
+- (void)deleteFileWithPaths:(NSArray<NSString *> *)filePaths {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    for (NSString *path in filePaths) {
+        [fm removeItemAtPath:path error:nil];
+    }
     [self loadPath:_currentDirModel.path];
 }
 
@@ -318,13 +357,25 @@ typedef NS_ENUM(NSUInteger, SortBy) {
 }
 
 #pragma mark - Sort Menu
+- (NSString *)sortMenuTitleForType:(SortBy)type {
+    switch (type) {
+        case SortByName:
+            return @"Name";
+        case SortBySizeAscending:
+            return @"Ascending";
+        case SortBySizeDescending:
+            return @"Descending";
+    }
+}
+
 - (void)showSortMenu {
     if (self.isEditingMode)
         return;
     UIAlertController *menu = [UIAlertController alertControllerWithTitle:@"Sort by" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     __weak typeof(self) weakSelf = self;
-    void (^sortAction)(SortBy, NSString *) = ^(SortBy type, NSString *name) {
+    void (^sortAction)(SortBy) = ^(SortBy type) {
+        NSString *name = [self sortMenuTitleForType:type];
         UIAlertAction *action = [UIAlertAction actionWithTitle:name
                                                          style:self.sortType == type ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *_Nonnull action) {
@@ -335,12 +386,11 @@ typedef NS_ENUM(NSUInteger, SortBy) {
         [menu addAction:action];
     };
 
-    sortAction(SortByDefault, @"Default");
-    sortAction(SortByName, @"Name");
-    sortAction(SortBySizeAscending, @"Ascending");
-    sortAction(SortBySizeDescending, @"Descending");
+    sortAction(SortByName);
+    sortAction(SortBySizeAscending);
+    sortAction(SortBySizeDescending);
 
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [menu addAction:cancel];
 
     [self presentViewController:menu animated:YES completion:nil];
@@ -348,9 +398,6 @@ typedef NS_ENUM(NSUInteger, SortBy) {
 
 - (void)sortWithType:(SortBy)type {
     switch (type) {
-    case SortByDefault:
-        self.dataArray = [self sortDataDefault:self.dataArray];
-        break;
     case SortByName:
         self.dataArray = [self sortDataByName:self.dataArray];
         break;

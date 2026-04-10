@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DoraemonBaseViewController : UIViewController
-
+- (UIImage *)leftNavImage;
 - (void)setLeftNavBarItems:(NSArray *)items;
 - (void)leftNavBackClick:(id)clickView;
 - (void)setRightNavTitle:(NSString *)title;
