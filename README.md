@@ -66,15 +66,15 @@ DoKit is rich in functions, easy to access, and easy to expand. Everyone is welc
 #### Cocoapods
 ```
     source 'https://github.com/iangeli/Specs.git'
-    pod 'DoraemonKit/Core', '~> 3.0.2', :configurations => ['Debug'] #Required
-    pod 'DoraemonKit/WithGPS', '~> 3.0.2', :configurations => ['Debug'] #Optional
-    pod 'DoraemonKit/WithLoad', '~> 3.0.2', :configurations => ['Debug'] #Optional
+    pod 'dokit/Core', '~> 3.0.2', :configurations => ['Debug'] #Required
+    pod 'dokit/WithGPS', '~> 3.0.2', :configurations => ['Debug'] #Optional
+    pod 'dokit/WithLoad', '~> 3.0.2', :configurations => ['Debug'] #Optional
 ```
 #### Example Usage
 
 ```
 #ifdef DEBUG
-#import <DoraemonKit/DoraemonManager.h>
+#import <dokit/DoraemonManager.h>
 #endif
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

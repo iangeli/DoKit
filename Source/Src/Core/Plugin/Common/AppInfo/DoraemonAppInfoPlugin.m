@@ -1,0 +1,17 @@
+//
+//  DoraemonAppInfoPlugin.m
+//  dokit
+//
+//  Created by yixiang on 2018/4/13.
+//
+
+#import "DoraemonAppInfoPlugin.h"
+#import "DoraemonAppInfoViewController.h"
+#import "DoraemonHomeWindow.h"
+
+@implementation DoraemonAppInfoPlugin
+- (void)pluginDidLoad {
+    DoraemonAppInfoViewController *vc = [[DoraemonAppInfoViewController alloc] init];
+    [DoraemonHomeWindow openPlugin:vc];
+}
+@end

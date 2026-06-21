@@ -1,0 +1,416 @@
+//
+//  DoraemonAppInfoUtil.m
+//  dokit
+//
+//  Created by yixiang on 2018/4/15.
+//
+
+#import "DoraemonAppInfoUtil.h"
+#import "DoraemonUtil.h"
+#import <AVFoundation/AVFoundation.h>
+#import <UserNotifications/UserNotifications.h>
+#import <AddressBook/AddressBook.h>
+#import <Contacts/Contacts.h>
+#import <CoreLocation/CLLocationManager.h>
+#import <EventKit/EventKit.h>
+#import <Photos/Photos.h>
+#import <UIKit/UIKit.h>
+#include <arpa/inet.h>
+#include <ifaddrs.h>
+#include <net/if.h>
+#import <sys/utsname.h>
+
+#define IOS_CELLULAR @"pdp_ip0"
+#define IOS_WIFI @"en0"
+#define IP_ADDR_IPv4 @"ipv4"
+#define IP_ADDR_IPv6 @"ipv6"
+
+#define IOS8 ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 8.0 ? YES : NO)
+
+@implementation DoraemonAppInfoUtil
++ (NSString *)appName {
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    if (!appName) {
+        appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    }
+    return appName;
+}
+
++ (NSString *)iphoneName {
+    return [UIDevice currentDevice].name;
+}
+
++ (NSString *)iphoneSystemVersion {
+    return [UIDevice currentDevice].systemVersion;
+}
+
++ (NSString *)bundleIdentifier {
+    return [[NSBundle mainBundle] bundleIdentifier];
+}
+
++ (NSString *)bundleVersion {
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
++ (NSString *)bundleShortVersionString {
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+}
+
++ (NSString *)iphoneType {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+
+    // iPhone
+    if ([platform isEqualToString:@"iPhone1,1"])
+        return @"iPhone 1G";
+    if ([platform isEqualToString:@"iPhone1,2"])
+        return @"iPhone 3G";
+    if ([platform isEqualToString:@"iPhone2,1"])
+        return @"iPhone 3GS";
+    if ([platform isEqualToString:@"iPhone3,1"])
+        return @"iPhone 4";
+    if ([platform isEqualToString:@"iPhone3,2"])
+        return @"iPhone 4";
+    if ([platform isEqualToString:@"iPhone4,1"])
+        return @"iPhone 4S";
+    if ([platform isEqualToString:@"iPhone5,1"])
+        return @"iPhone 5";
+    if ([platform isEqualToString:@"iPhone5,2"])
+        return @"iPhone 5";
+    if ([platform isEqualToString:@"iPhone5,3"])
+        return @"iPhone 5C";
+    if ([platform isEqualToString:@"iPhone5,4"])
+        return @"iPhone 5C";
+    if ([platform isEqualToString:@"iPhone6,1"])
+        return @"iPhone 5S";
+    if ([platform isEqualToString:@"iPhone6,2"])
+        return @"iPhone 5S";
+    if ([platform isEqualToString:@"iPhone7,1"])
+        return @"iPhone 6 Plus";
+    if ([platform isEqualToString:@"iPhone7,2"])
+        return @"iPhone 6";
+    if ([platform isEqualToString:@"iPhone8,1"])
+        return @"iPhone 6S";
+    if ([platform isEqualToString:@"iPhone8,2"])
+        return @"iPhone 6S Plus";
+    if ([platform isEqualToString:@"iPhone8,4"])
+        return @"iPhone SE";
+    if ([platform isEqualToString:@"iPhone9,1"])
+        return @"iPhone 7";
+    if ([platform isEqualToString:@"iPhone9,3"])
+        return @"iPhone 7";
+    if ([platform isEqualToString:@"iPhone9,2"])
+        return @"iPhone 7 Plus";
+    if ([platform isEqualToString:@"iPhone9,4"])
+        return @"iPhone 7 Plus";
+    if ([platform isEqualToString:@"iPhone10,1"])
+        return @"iPhone 8";
+    if ([platform isEqualToString:@"iPhone10,4"])
+        return @"iPhone 8";
+    if ([platform isEqualToString:@"iPhone10,2"])
+        return @"iPhone 8 Plus";
+    if ([platform isEqualToString:@"iPhone10,5"])
+        return @"iPhone 8 Plus";
+    if ([platform isEqualToString:@"iPhone10,3"])
+        return @"iPhone X";
+    if ([platform isEqualToString:@"iPhone10,6"])
+        return @"iPhone X";
+    if ([platform isEqualToString:@"iPhone11,8"])
+        return @"iPhone XR";
+    if ([platform isEqualToString:@"iPhone11,2"])
+        return @"iPhone XS";
+    if ([platform isEqualToString:@"iPhone11,4"])
+        return @"iPhone XS Max";
+    if ([platform isEqualToString:@"iPhone11,6"])
+        return @"iPhone XS Max";
+    if ([platform isEqualToString:@"iPhone12,1"])
+        return @"iPhone 11";
+    if ([platform isEqualToString:@"iPhone12,3"])
+        return @"iPhone 11 Pro";
+    if ([platform isEqualToString:@"iPhone12,5"])
+        return @"iPhone 11 Pro Max";
+    if ([platform isEqualToString:@"iPhone12,8"])
+        return @"iPhone SE 2";
+    if ([platform isEqualToString:@"iPhone13,1"])
+        return @"iPhone 12 mini";
+    if ([platform isEqualToString:@"iPhone13,2"])
+        return @"iPhone 12";
+    if ([platform isEqualToString:@"iPhone13,3"])
+        return @"iPhone 12 Pro";
+    if ([platform isEqualToString:@"iPhone13,4"])
+        return @"iPhone 12 Pro Max";
+
+    return platform;
+}
+
++ (BOOL)isIPhoneXSeries {
+    BOOL iPhoneXSeries = NO;
+    if (UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPhone) {
+        return iPhoneXSeries;
+    }
+
+    UIWindow *mainWindow = [DoraemonUtil getKeyWindow];
+    if (mainWindow.safeAreaInsets.bottom > 0.0) {
+        iPhoneXSeries = YES;
+    }
+
+    return iPhoneXSeries;
+}
+
++ (BOOL)isIpad {
+    NSString *deviceType = [UIDevice currentDevice].model;
+    if ([deviceType isEqualToString:@"iPad"]) {
+        return YES;
+    }
+    return NO;
+}
+
++ (NSString *)locationAuthority {
+    NSString *authority = @"";
+    if ([CLLocationManager locationServicesEnabled]) {
+        CLAuthorizationStatus state = [CLLocationManager authorizationStatus];
+        if (state == kCLAuthorizationStatusNotDetermined) {
+            authority = @"NotDetermined";
+        } else if (state == kCLAuthorizationStatusRestricted) {
+            authority = @"Restricted";
+        } else if (state == kCLAuthorizationStatusDenied) {
+            authority = @"Denied";
+        } else if (state == kCLAuthorizationStatusAuthorizedAlways) {
+            authority = @"Always";
+        } else if (state == kCLAuthorizationStatusAuthorizedWhenInUse) {
+            authority = @"WhenInUse";
+        }
+    } else {
+        authority = @"NoEnabled";
+    }
+    return authority;
+}
+
++ (NSString *)pushAuthority {
+    __block NSString *authority = @"NO";
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
+        if (settings.authorizationStatus == UNAuthorizationStatusAuthorized ||
+            settings.authorizationStatus == UNAuthorizationStatusProvisional) {
+            authority = @"YES";
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC));
+    return authority;
+}
+
++ (NSString *)cameraAuthority {
+    NSString *authority = @"";
+    NSString *mediaType = AVMediaTypeVideo;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    switch (authStatus) {
+    case AVAuthorizationStatusNotDetermined:
+        authority = @"NotDetermined";
+        break;
+    case AVAuthorizationStatusRestricted:
+        authority = @"Restricted";
+        break;
+    case AVAuthorizationStatusDenied:
+        authority = @"Denied";
+        break;
+    case AVAuthorizationStatusAuthorized:
+        authority = @"Authorized";
+        break;
+    default:
+        break;
+    }
+    return authority;
+}
+
++ (NSString *)audioAuthority {
+    NSString *authority = @"";
+    NSString *mediaType = AVMediaTypeAudio;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    switch (authStatus) {
+    case AVAuthorizationStatusNotDetermined:
+        authority = @"NotDetermined";
+        break;
+    case AVAuthorizationStatusRestricted:
+        authority = @"Restricted";
+        break;
+    case AVAuthorizationStatusDenied:
+        authority = @"Denied";
+        break;
+    case AVAuthorizationStatusAuthorized:
+        authority = @"Authorized";
+        break;
+    default:
+        break;
+    }
+    return authority;
+}
+
++ (NSString *)photoAuthority {
+    NSString *authority = @"";
+    PHAuthorizationStatus current = [PHPhotoLibrary authorizationStatus];
+    switch (current) {
+    case PHAuthorizationStatusNotDetermined: {
+        authority = @"NotDetermined";
+    } break;
+    case PHAuthorizationStatusRestricted: {
+        authority = @"Restricted";
+    } break;
+    case PHAuthorizationStatusDenied: {
+        authority = @"Denied";
+    } break;
+    case PHAuthorizationStatusAuthorized: {
+        authority = @"Authorized";
+    } break;
+    default:
+        break;
+    }
+    return authority;
+}
+
++ (NSString *)addressAuthority {
+    NSString *authority = @"";
+    CNAuthorizationStatus authStatus = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    switch (authStatus) {
+    case CNAuthorizationStatusAuthorized:
+        authority = @"Authorized";
+        break;
+    case CNAuthorizationStatusDenied:
+        authority = @"Denied";
+        break;
+    case CNAuthorizationStatusNotDetermined:
+        authority = @"NotDetermined";
+        break;
+    case CNAuthorizationStatusRestricted:
+        authority = @"Restricted";
+        break;
+    case CNAuthorizationStatusLimited:
+        authority = @"Limited";
+        break;
+    }
+    return authority;
+}
+
++ (NSString *)calendarAuthority {
+    NSString *authority = @"";
+    EKAuthorizationStatus status = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
+    switch (status) {
+    case EKAuthorizationStatusNotDetermined:
+        authority = @"NotDetermined";
+        break;
+    case EKAuthorizationStatusRestricted:
+        authority = @"Restricted";
+        break;
+    case EKAuthorizationStatusDenied:
+        authority = @"Denied";
+        break;
+    case EKAuthorizationStatusAuthorized:
+        authority = @"Authorized";
+        break;
+    default:
+        break;
+    }
+    return authority;
+}
+
++ (NSString *)remindAuthority {
+    NSString *authority = @"";
+    EKAuthorizationStatus status = [EKEventStore authorizationStatusForEntityType:EKEntityTypeReminder];
+    switch (status) {
+    case EKAuthorizationStatusNotDetermined:
+        authority = @"NotDetermined";
+        break;
+    case EKAuthorizationStatusRestricted:
+        authority = @"Restricted";
+        break;
+    case EKAuthorizationStatusDenied:
+        authority = @"Denied";
+        break;
+    case EKAuthorizationStatusAuthorized:
+        authority = @"Authorized";
+        break;
+    default:
+        break;
+    }
+    return authority;
+}
+
++ (NSString *)bluetoothAuthority {
+    return @"";
+}
+
++ (NSString *)deviceIdentifier {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
+
++ (BOOL)isSimulator {
+    NSString *identifier = [self deviceIdentifier];
+    return [identifier isEqualToString:@"i386"] || [identifier isEqualToString:@"x86_64"];
+}
+
++ (NSString *)getIPAddress:(BOOL)preferIPv4 {
+    NSArray *searchArray = preferIPv4 ? @[ /*IOS_VPN @"/" IP_ADDR_IPv4, IOS_VPN @"/" IP_ADDR_IPv6,*/ IOS_WIFI @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6 ] : @[ /*IOS_VPN @"/" IP_ADDR_IPv6, IOS_VPN @"/" IP_ADDR_IPv4,*/ IOS_WIFI @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4 ];
+
+    NSDictionary *addresses = [[self class] getIPAddresses];
+    __block NSString *address;
+    [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+        address = addresses[key];
+        if (address)
+            *stop = YES;
+    }];
+    return address ? address : @"0.0.0.0";
+}
+
++ (NSDictionary *)getIPAddresses {
+    NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];
+
+    // retrieve the current interfaces - returns 0 on success
+    struct ifaddrs *interfaces;
+    if (!getifaddrs(&interfaces)) {
+        // Loop through linked list of interfaces
+        struct ifaddrs *interface;
+        for (interface = interfaces; interface; interface = interface->ifa_next) {
+            if (!(interface->ifa_flags & IFF_UP) /* || (interface->ifa_flags & IFF_LOOPBACK) */) {
+                continue; // deeply nested code harder to read
+            }
+            const struct sockaddr_in *addr = (const struct sockaddr_in *)interface->ifa_addr;
+            char addrBuf[MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN)];
+            if (addr && (addr->sin_family == AF_INET || addr->sin_family == AF_INET6)) {
+                NSString *name = [NSString stringWithUTF8String:interface->ifa_name];
+                NSString *type;
+                if (addr->sin_family == AF_INET) {
+                    if (inet_ntop(AF_INET, &addr->sin_addr, addrBuf, INET_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv4;
+                    }
+                } else {
+                    const struct sockaddr_in6 *addr6 = (const struct sockaddr_in6 *)interface->ifa_addr;
+                    if (inet_ntop(AF_INET6, &addr6->sin6_addr, addrBuf, INET6_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv6;
+                    }
+                }
+                if (type) {
+                    NSString *key = [NSString stringWithFormat:@"%@/%@", name, type];
+                    addresses[key] = [NSString stringWithUTF8String:addrBuf];
+                }
+            }
+        }
+        // Free memory
+        freeifaddrs(interfaces);
+    }
+    return [addresses count] ? addresses : nil;
+}
+
++ (NSString *)uuid {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *uuid = [ud objectForKey:@"UUID"];
+    if (!uuid) {
+        uuid = [[NSUUID UUID] UUIDString];
+        [ud setObject:uuid forKey:@"UUID"];
+        [ud synchronize];
+    }
+    return uuid;
+}
+@end

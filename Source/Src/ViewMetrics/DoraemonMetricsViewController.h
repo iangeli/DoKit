@@ -1,0 +1,16 @@
+//
+//  DoraemonMetricsViewController.h
+//  dokit
+//
+//  Created by xgb on 2019/1/10.
+//
+
+#import "DoraemonBaseViewController.h"
+#import <dokit/DoraemonKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface DoraemonMetricsViewController : DoraemonBaseViewController
+@end
+
+NS_ASSUME_NONNULL_END

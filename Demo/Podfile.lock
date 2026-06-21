@@ -1,0 +1,28 @@
+PODS:
+  - dokit/Core (3.2.9)
+  - dokit/WithGPS (3.2.9):
+    - dokit/Core
+  - dokit/WithLoad (3.2.9):
+    - dokit/Core
+  - dokit/WithUIProfile (3.2.9):
+    - dokit/Core
+  - dokit/WithViewMetrics (3.2.9):
+    - dokit/Core
+
+DEPENDENCIES:
+  - dokit/Core (from `..`)
+  - dokit/WithGPS (from `..`)
+  - dokit/WithLoad (from `..`)
+  - dokit/WithUIProfile (from `..`)
+  - dokit/WithViewMetrics (from `..`)
+
+EXTERNAL SOURCES:
+  dokit:
+    :path: ".."
+
+SPEC CHECKSUMS:
+  dokit: 33861d72116cf476d9c12fb022269daa024dcb19
+
+PODFILE CHECKSUM: 0406d3c6d6c464ad2bb0e87a6aabdc2a574df88e
+
+COCOAPODS: 1.16.2

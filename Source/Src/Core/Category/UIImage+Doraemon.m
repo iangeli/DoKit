@@ -1,0 +1,85 @@
+//
+//  UIImage+Doraemon.m
+//  dokit
+//
+//  Created by yixiang on 2017/12/11.
+//
+
+#import "UIImage+Doraemon.h"
+
+@implementation UIImage (Doraemon)
++ (nullable UIImage *)doraemon_xcassetImageNamed:(NSString *)name {
+    if (name &&
+        ![name isEqualToString:@""]) {
+        NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"DoraemonManager")];
+        NSURL *url = [bundle URLForResource:@"dokit" withExtension:@"bundle"];
+        if (!url)
+            return [UIImage new];
+        NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+        UIImage *image = [UIImage imageNamed:name inBundle:imageBundle compatibleWithTraitCollection:nil];
+        return image;
+    }
+
+    return nil;
+}
+
+- (nullable UIImage *)doraemon_scaledToSize:(CGSize)newSize {
+    UIImage *sourceImage = self;
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = newSize.width;
+    CGFloat targetHeight = newSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0, 0.0);
+
+    if (CGSizeEqualToSize(imageSize, newSize) == NO) {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        if (widthFactor > heightFactor)
+            scaleFactor = widthFactor;
+        else
+            scaleFactor = heightFactor;
+
+        scaledWidth = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+
+        if (widthFactor > heightFactor) {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        } else if (widthFactor < heightFactor) {
+            thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+        }
+    }
+
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, [UIScreen mainScreen].scale);
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    [sourceImage drawInRect:thumbnailRect];
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return newImage;
+}
+
++ (UIImage *)doraemon_imageWithColor:(UIColor *)color {
+    return [self doraemon_imageWithColor:color size:CGSizeMake(1, 1)];
+}
+
++ (UIImage *)doraemon_imageWithColor:(UIColor *)color size:(CGSize)size {
+    if (!color || size.width <= 0 || size.height <= 0)
+        return [[UIImage alloc] init];
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+@end

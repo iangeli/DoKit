@@ -1,0 +1,12 @@
+//
+//  DoraemonHomeFootCell.m
+//  dokit
+//
+//  Created by dengyouhua on 2019/9/4.
+//
+
+#import "DoraemonHomeFootCell.h"
+
+@implementation DoraemonHomeFootCell
+
+@end

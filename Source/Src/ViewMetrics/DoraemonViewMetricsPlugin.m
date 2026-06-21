@@ -1,0 +1,17 @@
+//
+//  DoraemonViewMetricsPlugin.m
+//  dokit
+//
+//  Created by xgb on 2018/12/11.
+//
+
+#import "DoraemonViewMetricsPlugin.h"
+#import "DoraemonHomeWindow.h"
+#import "DoraemonMetricsViewController.h"
+
+@implementation DoraemonViewMetricsPlugin
+- (void)pluginDidLoad {
+    DoraemonMetricsViewController *vc = [[DoraemonMetricsViewController alloc] init];
+    [DoraemonHomeWindow openPlugin:vc];
+}
+@end

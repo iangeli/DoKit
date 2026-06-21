@@ -1,7 +1,0 @@
-# Uncomment the next line to define a global platform for your project
-platform :ios, '13.0'
-
-target 'Demo' do
-  # pod 'DoraemonKit', :path => '..', :subspecs => ['Core', 'WithLoad']
- pod 'DoraemonKit', :path => '..', :subspecs => ['Core', 'WithLoad', 'WithGPS', 'WithUIProfile', 'WithViewMetrics']
-end
